@@ -12,6 +12,16 @@ class Matchmaking
 public:
     Matchmaking();
 
+    void findMatch(preferences p);
+    //cout the 10 most relavent
+
+
+private:
+    vector<pair<int, int>> dbResults;
+
+
+
+
     //search pet database once
     //vector<pair<int, int>> database searching results.
     //first int id , second int match score
