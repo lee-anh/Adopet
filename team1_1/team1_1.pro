@@ -2,4 +2,5 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     Adopter \
-    AdopterTests
+    AdopterTests \
+    Owner
