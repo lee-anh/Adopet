@@ -5,3 +5,7 @@ create table pets (
       age           CHAR NOT NULL,
       temperament   CHAR NOT NULL,
       gender        CHAR NOT NULL);
+      
+.separator ","
+.mode csv
+.import "pets.csv" pets
