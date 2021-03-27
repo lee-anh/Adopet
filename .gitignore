@@ -127,3 +127,6 @@ compile_commands.json
 
 *_qmlcache.qrc
 
+#Google Test
+gtest/
+
