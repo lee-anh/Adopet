@@ -4,4 +4,5 @@ SUBDIRS += \
     Adopter \
     AdopterTests \
     Matchmaking \
-    Owner
+    Owner \
+    Pets
