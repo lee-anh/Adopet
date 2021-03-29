@@ -2,10 +2,12 @@
 #include "gtest/gtest.h"
 #include "../Owner/owner.h"
 
+
 // The fixture for testing class Foo.
 class FooTest : public ::testing::Test{
 
 protected:
+    /*
     FooTest(){
         // You can do set-up work for each test here.
     }
@@ -26,24 +28,34 @@ protected:
     }
     // Objects declared here can be used by all tests in the test case for Foo.
 
-    /** replace with your own **/
-    Configuration s1;
-    Configuration s2;
+    */
 };
 
-TEST(general, TESTSIMPLE){
-    /** replace with your own **/
-    Configuration s1;
-    Configuration s2("test");
-    ASSERT_EQ(s1.get_filename(), s2.get_filename()) << s1.get_filename()
-                                                    << " and "
-                                                    << s2.get_filename()
-                                                    << " should match!";
+//Testing the creation of the object
+TEST(unitTest, ownerTypes){
+    Owner o1("Shelter Owner");
+    Owner o2("Foster Parent");
+    Owner o3("Invalid Owner");
+    ASSERT_EQ(o1.getType(), "Shelter Owner") << o1.getType() << " should be Shelter Owner";
+    ASSERT_EQ(o2.getType(), "Foster Parent") << o2.getType() << " should be Foster Parent";
+    ASSERT_NE(o1.getType(), o2.getType()) << o1.getType() << " and " << o2.getType() << " should not match";
+    ASSERT_EQ(o3.getType(), "") << o3.getType() << " should not exist";
 }
-TEST_F(FooTest, TESTFIXTURE){ //TEST_F allows you to access objects from the shared FooTest Class
-            /** replace with your own **/
-            ASSERT_EQ(s1.get_filename(), s2.get_filename())
-            << "These should match!";
+
+//Testing object setters and getters
+TEST(unitTest, settersAndGetters){
+    Owner o1("Shelter Owner");
+    o1.setAddress("111 Quad Drive");
+    o1.setEmail("example@gmail.com");
+    o1.setName("John Doe");
+    o1.setPhoneNumber(1234567890);
+    o1.setZipCode(12345);
+
+    ASSERT_EQ(o1.getAddress(), "111 Quad Drive") << o1.getAddress() << " should be 111 Quad Drive";
+    ASSERT_EQ(o1.getEmail(), "example@gmail.com") << o1.getEmail() << " should be example@gmail.com";
+    ASSERT_EQ(o1.getName(), "John Doe") << o1.getName() << " should be John Doe";
+    ASSERT_EQ(o1.getPhoneNumber(), 1234567890) << o1.getPhoneNumber() << " should be 1234567890";
+    ASSERT_EQ(o1.getZipCode(), 12345) << o1.getZipCode() << " should be 12345";
 }
 
 int main(int argc, char **argv){
