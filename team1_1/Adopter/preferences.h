@@ -7,11 +7,11 @@
 
 using namespace std;
 
-class preferences
+class Preferences
 {
 public:
-    preferences();
-    ~preferences();
+    Preferences();
+    ~Preferences();
 
     //could be multiple types
     //could be all except
@@ -61,9 +61,9 @@ private:
 
 
     //optional?
-    string goodWith;
+    vector<string> goodWith;
 
 
 };
 
-#endif // PREFERENCES_H
+#endif //PREFERENCES_H

@@ -14,7 +14,7 @@ public:
     Matchmaking();
     ~Matchmaking();
 
-    void findMatch(preferences *p);
+    void findMatch(Preferences *p);
     //cout the 10 most relavent
     void openDB();
     void showResults();

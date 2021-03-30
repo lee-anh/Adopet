@@ -24,7 +24,7 @@ void Matchmaking::openDB(){
     }
 }
 
-void Matchmaking::findMatch(preferences *p){
+void Matchmaking::findMatch(Preferences *p){
     if(db.open()){
         QSqlQuery query = QSqlQuery();
         QString s = "SELECT rowid, * from pets";
@@ -39,28 +39,28 @@ void Matchmaking::findMatch(preferences *p){
             string temperament = query.value(5).toString().toStdString();
             string gender = query.value(6).toString().toStdString();
 
-            for(int i = 0; i < p->getSpecies().size(); i++){
+            for(int i = 0; i < (int) p->getSpecies().size(); i++){
                 if(p->getSpecies().at(i) == species){
                     currScore++;
                     break;
                 }
             }
 
-            for(int j = 0; j < p->getBreed().size(); j++){
+            for(int j = 0; j < (int) p->getBreed().size(); j++){
                 if(p->getBreed().at(j) == breed) {
                     currScore++;
                     break;
                 }
             }
 
-            for(int k = 0; k < p->getAge().size(); k++){
+            for(int k = 0; k < (int) p->getAge().size(); k++){
                 if(p->getAge().at(k) == age) {
                     currScore++;
                     break;
                 }
             }
 
-            for(int l = 0; l < p->getTemperament().size(); l++){
+            for(int l = 0; l < (int) p->getTemperament().size(); l++){
                 if(p->getTemperament().at(l) == temperament) {
                     currScore++;
                     break;
@@ -81,7 +81,7 @@ bool Matchmaking::customSort(const pair<int,int> &a, const pair<int,int> &b){
 
 void Matchmaking::showResults(){
     sort(dbResults.begin(), dbResults.end(), customSort);
-    for(int i = 0; i < dbResults.size(); i++){
+    for(int i = 0; i < (int) dbResults.size(); i++){
          cout << "Id: " << dbResults[i].first << ", Score: " << dbResults[i].second << endl;
     }
 }

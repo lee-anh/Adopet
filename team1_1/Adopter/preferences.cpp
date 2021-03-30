@@ -1,6 +1,6 @@
 #include "preferences.h"
 
-preferences::preferences()
+Preferences::Preferences()
 {
     //default setting will be all the different pets
     //so if the array is empty, then it's all of them?
@@ -16,20 +16,21 @@ preferences::preferences()
 
 }
 
-preferences::~preferences(){
+Preferences::~Preferences(){
 
 }
 
 //Species
-vector<string> preferences::getSpecies(){
+vector<string> Preferences::getSpecies(){
     return species;
 }
 
-void preferences::addSpecies(string s){
+void Preferences::addSpecies(string s){
+   // transform(s.begin(), s.end(), s.begin(), ::tolower);
     species.push_back(s);
 }
 
-bool preferences::removeSpecies(string s){
+bool Preferences::removeSpecies(string s){
     int speciesSize = (int) species.size();
     for(int i = 0; i < speciesSize; i++){
         if(species.at(i) == s){
@@ -44,15 +45,16 @@ bool preferences::removeSpecies(string s){
 
 
 //Breed
-vector<string> preferences::getBreed(){
+vector<string> Preferences::getBreed(){
     return breed;
 }
 
-void preferences::addBreed(string b){
+void Preferences::addBreed(string b){
+    //transform(b.begin(), b.end(), b.begin(), ::tolower);
     breed.push_back(b);
 }
 
-bool preferences::removeBreed(string b){
+bool Preferences::removeBreed(string b){
     int breedSize = (int) breed.size();
     for(int i = 0; i < breedSize; i++){
         if(breed.at(i) == b){
@@ -65,15 +67,16 @@ bool preferences::removeBreed(string b){
 }
 
 //Age
-vector<string> preferences::getAge(){
+vector<string> Preferences::getAge(){
     return age;
 }
 
-void preferences::addAge(string a){
+void Preferences::addAge(string a){
+  //  transform(a.begin(), a.end(), a.begin(), ::tolower);
     age.push_back(a);
 }
 
-bool preferences::removeAge(string a){
+bool Preferences::removeAge(string a){
     int ageSize = (int) age.size();
     for(int i = 0; i < ageSize; i++){
         if(age.at(i) == a){
@@ -86,16 +89,17 @@ bool preferences::removeAge(string a){
 }
 
 //Size
-vector<string> preferences::getSize(){
+vector<string> Preferences::getSize(){
     return animalSize;
 }
 
-void preferences::addSize(string sz){
+void Preferences::addSize(string sz){
+   // transform(sz.begin(), sz.end(), sz.begin(), ::tolower);
     animalSize.push_back(sz);
 
 }
 
-bool preferences::removeSize(string sz){
+bool Preferences::removeSize(string sz){
     int animalSizeSize = (int) animalSize.size();
     for(int i = 0; i < animalSizeSize; i++){
         if(animalSize.at(i) == sz){
@@ -109,16 +113,17 @@ bool preferences::removeSize(string sz){
 
 
 //Temperament
-vector<string> preferences::getTemperament(){
+vector<string> Preferences::getTemperament(){
     return temperament;
 }
 
-void preferences::addTemperament(string temper){
+void Preferences::addTemperament(string temper){
+  //  transform(temper.begin(), temper.end(), temper.begin(), ::tolower);
     temperament.push_back(temper);
 
 }
 
-bool preferences::removeTemperament(string temper){
+bool Preferences::removeTemperament(string temper){
     int temperamentSize = (int) temperament.size();
     for(int i = 0; i < temperamentSize; i++){
         if(temperament.at(i) == temper){
@@ -132,11 +137,12 @@ bool preferences::removeTemperament(string temper){
 
 
 //Gender
-string preferences::getGender(){
+string Preferences::getGender(){
     return gender;
 }
 
-void preferences::setGender(string g){
+void Preferences::setGender(string g){
+    //transform(g.begin(), g.end(), g.begin(), ::tolower);
     gender = g;
 }
 

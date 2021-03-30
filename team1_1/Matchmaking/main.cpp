@@ -4,7 +4,7 @@
 using namespace std;
 
 int main(){
-    preferences* p = new preferences();
+    Preferences* p = new Preferences();
     p->addAge("Young");
     p->addAge("Adult");
     p->addBreed("Golden Retriever");

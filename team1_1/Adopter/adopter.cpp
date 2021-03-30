@@ -1,7 +1,7 @@
 #include "adopter.h"
 
 //constructor
-adopter::adopter()
+Adopter::Adopter()
 {
     username = "null";
     password = "null";
@@ -9,50 +9,59 @@ adopter::adopter()
     lastName = "null";
     emailAddress = "null";
     zipcode = -1;
+    preferenceList = new Preferences();
 }
 
 //destructor
-adopter::~adopter(){
-
+Adopter::~Adopter(){
+    delete preferenceList;
 }
 
 
-string adopter::getUsername(){
+string Adopter::getUsername(){
     return username;
 }
 
-void adopter::setUsername(string uName){
+void Adopter::setUsername(string uName){
     username = uName;
 }
 
-string adopter::getFirstName(){
+string Adopter::getPassword(){
+    return password;
+}
+
+void Adopter::setPassword(string pwd){
+    password = pwd;
+}
+
+string Adopter::getFirstName(){
     return firstName;
 }
 
-void adopter::setFirstName(string fName){
+void Adopter::setFirstName(string fName){
     firstName = fName;
 }
 
-string adopter::getLastName(){
+string Adopter::getLastName(){
     return lastName;
 }
 
-void adopter::setLastName(string lName){
+void Adopter::setLastName(string lName){
     lastName = lName;
 }
 
-string adopter::getEmailAddress(){
+string Adopter::getEmailAddress(){
     return emailAddress;
 }
 
-void adopter::setEmailAddress(string email){
+void Adopter::setEmailAddress(string email){
     emailAddress = email;
 }
 
-int adopter::getZipCode(){
+int Adopter::getZipCode(){
     return zipcode;
 }
 
-void adopter::setZipCode(int zip){
+void Adopter::setZipCode(int zip){
     zipcode = zip;
 }
