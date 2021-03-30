@@ -7,7 +7,9 @@ QT += sql
 
 SOURCES += \
         main.cpp \
-        matchmaking.cpp
+        matchmaking.cpp \
+        ../Adopter/preferences.cpp
 
 HEADERS += \
-    matchmaking.h
+    matchmaking.h \
+    ../Adopter/preferences.h

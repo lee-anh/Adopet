@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 //include animal/pets
 
@@ -12,12 +13,13 @@ class Owner{
 
 public:
     Owner(string t);
+    string getType();               //Accessor function for type
     void setName(string n);         //Mutator function for name
     string getName();               //Accessor function for name
     void setAddress(string a);      //Mutator function for address
     string getAddress();            //Accessor function for address
-    void setZip(int z);             //Mutator function for zip
-    int getZip();                   //Accessor function for zip
+    void setZipCode(int z);             //Mutator function for zip code
+    int getZipCode();                   //Accessor function for zip code
     void setPhoneNumber(int p);     //Mutator function for phone number
     int getPhoneNumber();           //Accessor function for phone number
     void setEmail(string e);        //Mutator function for email
@@ -30,7 +32,7 @@ private:
     string type;                    //Either "Shelter Owner" or "Foster Parent"
     string name;
     string address;
-    int zip;
+    int zipCode;
     int phoneNumber;
     string email;
 
