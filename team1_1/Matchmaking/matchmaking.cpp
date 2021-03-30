@@ -40,19 +40,31 @@ void Matchmaking::findMatch(preferences *p){
             string gender = query.value(6).toString().toStdString();
 
             for(int i = 0; i < p->getSpecies().size(); i++){
-                if(p->getSpecies().at(i) == species) currScore++;
+                if(p->getSpecies().at(i) == species){
+                    currScore++;
+                    break;
+                }
             }
 
             for(int j = 0; j < p->getBreed().size(); j++){
-                if(p->getBreed().at(j) == breed) currScore++;
+                if(p->getBreed().at(j) == breed) {
+                    currScore++;
+                    break;
+                }
             }
 
             for(int k = 0; k < p->getAge().size(); k++){
-                if(p->getAge().at(k) == age) currScore++;
+                if(p->getAge().at(k) == age) {
+                    currScore++;
+                    break;
+                }
             }
 
             for(int l = 0; l < p->getTemperament().size(); l++){
-                if(p->getTemperament().at(l) == temperament) currScore++;
+                if(p->getTemperament().at(l) == temperament) {
+                    currScore++;
+                    break;
+                }
             }
 
                 if(p->getGender() == gender) currScore++;
