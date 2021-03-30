@@ -4,6 +4,7 @@
 #include "../Adopter/adopter.h"
 //include animals
 #include <vector>
+#include <QtSql>
 
 using namespace std;
 
@@ -11,14 +12,18 @@ class Matchmaking
 {
 public:
     Matchmaking();
+    ~Matchmaking();
 
-    void findMatch(preferences p);
+    void findMatch(Preferences *p);
     //cout the 10 most relavent
+    void openDB();
+    void showResults();
+    static bool customSort(const pair<int,int> &a, const pair<int,int> &b);
 
 
 private:
     vector<pair<int, int>> dbResults;
-
+    QSqlDatabase db;
 
 
 

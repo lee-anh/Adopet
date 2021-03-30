@@ -8,11 +8,11 @@
 
 using namespace std;
 
-class adopter
+class Adopter
 {
 public:
-    adopter();
-    ~adopter();
+    Adopter();
+    ~Adopter();
 
     //getters and setters
 
@@ -34,7 +34,7 @@ public:
     int getZipCode();
     void setZipCode(int zip);
 
-    preferences preferenceList;
+    Preferences *preferenceList;
 
 private:
     //instance variables
@@ -45,8 +45,7 @@ private:
     string emailAddress;
     int zipcode;
 
-    //saved pet list
-    //link to preferences?
+
 
 
 
