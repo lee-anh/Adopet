@@ -11,15 +11,15 @@ class Pet
 {
 public:
     Pet();
-    Pet(string n, int a, string s, string b, string g, string t);
+    Pet(string n, string a, string s, string b, string g, string t);
     ~Pet();
 
     //getters and setters
     string getName();
     void setName(string n);
 
-    int getAge();
-    void setAge(int a);
+    string getAge();
+    void setAge(string a);
 
     string getSpecies();
     void setSpecies(string sp);
@@ -36,7 +36,7 @@ public:
 
 private:
     string name;
-    int age;
+    string age;
     string species;
     string breed;
     string gender;

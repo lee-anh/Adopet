@@ -8,10 +8,10 @@ Pet::Pet()
     species = "";
     breed = "";
     gender = "";
-    string temperament;
+    temperament = "";
 }
 
-Pet::Pet(string n, int a, string s, string b, string g, string t){
+Pet::Pet(string n, string a, string s, string b, string g, string t){
     name = n;
     age = a;
     species = s;
@@ -33,11 +33,11 @@ void Pet::setName(string n){
     name = n;
 }
 
-int Pet::getAge(){
+string Pet::getAge(){
     return age;
 }
 
-void Pet::setAge(int a){
+void Pet::setAge(string a){
     age = a;
 }
 
