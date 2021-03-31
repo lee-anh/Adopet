@@ -4,6 +4,7 @@ DBSearch::DBSearch()
 {
 
     //keywords
+    //read from file
     mainSpecies = {"dog", "cat", "rabbit", "rodent", "fish", "bird"};
     mainBreeds = {"sporting", "hound", "working", "terrier", "toy", "non-sporting", "herding",
                  "siamese", "persian", "maine coon", "ragdoll",
