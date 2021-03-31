@@ -8,16 +8,16 @@ Pet::Pet()
     species = "";
     breed = "";
     gender = "";
-    vector<string> temperament;
+    string temperament;
 }
 
-Pet::Pet(string n, int a, string s, string b, string g, vector<string> t){
+Pet::Pet(string n, int a, string s, string b, string g, string t){
     name = n;
     age = a;
     species = s;
     breed = b;
     gender = g;
-    temperament = t;
+    t = temperament;
 }
 
 Pet::~Pet(){
@@ -66,10 +66,10 @@ void Pet::setGender(string g){
 }
 
 //Will need to add more methods to manipulate temperament
-vector<string> Pet::getTemperament(){
+string Pet::getTemperament(){
     return temperament;
 }
 
-void Pet::addTemperament(string t){
-    temperament.push_back(t);
+void Pet::setTemperament(string t){
+    temperament = t;
 }

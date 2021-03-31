@@ -59,22 +59,18 @@ TEST(unitTest, testTemperaments){
     p->setBreed("Beagle");
     p->setGender("Male");
     p->setSpecies("Dog");
-    ASSERT_EQ(o1.getAddress(), "111 Quad Drive") << p.getName() << " should be Davies";
+
+    ASSERT_EQ(p->getName(), "Davies") << p->getName() << " should be Davies";
+    ASSERT_EQ(p->getAge(), 4) << p->getAge() << " should be 4";
+    ASSERT_EQ(p->getBreed(), "Beagle") << p->getName() << " should be Beagle";
+    ASSERT_EQ(p->getSpecies(), "Dog") << p->getName() << " should be Dog";
+    ASSERT_EQ(p->getGender(), "Male") << p->getName() << " should be Male";
+}
 
 //Testing object setters and getters
 TEST(unitTest, settersAndGetters){
-    pet o1("Shelter Owner");
-    o1.setAddress("111 Quad Drive");
-    o1.setEmail("example@gmail.com");
-    o1.setName("John Doe");
-    o1.setPhoneNumber(1234567890);
-    o1.setZipCode(12345);
+    Pet* (p);
 
-    ASSERT_EQ(o1.getAddress(), "111 Quad Drive") << o1.getAddress() << " should be 111 Quad Drive";
-    ASSERT_EQ(o1.getEmail(), "example@gmail.com") << o1.getEmail() << " should be example@gmail.com";
-    ASSERT_EQ(o1.getName(), "John Doe") << o1.getName() << " should be John Doe";
-    ASSERT_EQ(o1.getPhoneNumber(), 1234567890) << o1.getPhoneNumber() << " should be 1234567890";
-    ASSERT_EQ(o1.getZipCode(), 12345) << o1.getZipCode() << " should be 12345";
 }
 
 int main(int argc, char **argv){
