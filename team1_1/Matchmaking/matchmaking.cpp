@@ -30,7 +30,7 @@ void Matchmaking::openDB(){
 /*
  * Sorts the vector of animal results based on the score of each animal
 */
-bool Matchmaking::customSort(const pair<int,int> &a, const pair<int,int> &b){
+bool Matchmaking::customSort(const pair<Pet*,int> &a, const pair<Pet*,int> &b){
     return (a.second > b.second);
 }
 
@@ -93,7 +93,7 @@ void Matchmaking::findMatch(Preferences *p){
 */
 void Matchmaking::showResults(){
     for(int i = 0; i <= (int) dbResults.size(); i++){
-         cout << "Pet Name: " << dbResults[i].first.getName() << ", Score: " << dbResults[i].second << endl;
+         cout << "Pet Name: " << dbResults[i].first->getName() << ", Score: " << dbResults[i].second << endl;
     }
 }
 
@@ -109,8 +109,7 @@ void Matchmaking::showResults(int amount){
     while ((input = cin.get())) {
         if (input == (int)'\n' && shownAmount <= resultSize) {
             for(int i = 0; i < amount && shownAmount <= resultSize; i++){
-                cout << "Pet Name: " << dbResults[shownAmount].first.getName()
-                     << ", Score: " << dbResults[shownAmount].second << endl;
+                cout << "Pet Name: " << dbResults[shownAmount].first->getName() << ", Score: " << dbResults[shownAmount].second << endl;
                 shownAmount++;
             }
         }

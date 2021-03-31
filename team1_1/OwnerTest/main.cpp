@@ -36,10 +36,10 @@ TEST(unitTest, ownerTypes){
     Owner o1("Shelter Owner");
     Owner o2("Foster Parent");
     Owner o3("Invalid Owner");
-    ASSERT_EQ(o1.getType(), "Shelter Owner") << o1.getType() << " should be Shelter Owner";
-    ASSERT_EQ(o2.getType(), "Foster Parent") << o2.getType() << " should be Foster Parent";
-    ASSERT_NE(o1.getType(), o2.getType()) << o1.getType() << " and " << o2.getType() << " should not match";
-    ASSERT_EQ(o3.getType(), "") << o3.getType() << " should not exist";
+    ASSERT_EQ(o1.getOwnerType(), "Shelter Owner") << o1.getOwnerType() << " should be Shelter Owner";
+    ASSERT_EQ(o2.getOwnerType(), "Foster Parent") << o2.getOwnerType() << " should be Foster Parent";
+    ASSERT_NE(o1.getOwnerType(), o2.getOwnerType()) << o1.getOwnerType() << " and " << o2.getOwnerType() << " should not match";
+    ASSERT_EQ(o3.getOwnerType(), "") << o3.getOwnerType() << " should not exist";
 }
 
 //Testing object setters and getters

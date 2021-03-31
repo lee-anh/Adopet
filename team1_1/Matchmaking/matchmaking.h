@@ -18,7 +18,7 @@ public:
     void showResults();                                 //prints out the list of matching pets based on score
     void showResults(int amount);
     int getScore(vector <string> list, string name);    //checks the passed list if it contains what the user wanted
-    static bool customSort(const pair<int,int> &a, const pair<int,int> &b);     //sorts the result list based on score
+    static bool customSort(const pair<Pet*,int> &a, const pair<Pet*,int> &b);     //sorts the result list based on score
 
 private:
     vector<pair<Pet*, int>> dbResults;
