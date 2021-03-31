@@ -53,15 +53,15 @@ class FooTest : public ::testing::Test {
 };
 
 TEST(unitTest, testTemperaments){
-    Pet* p;
-    p->setAge(4);
+    Pet* p = new Pet();
+    p->setAge("4");
     p->setName("Davies");
     p->setBreed("Beagle");
     p->setGender("Male");
     p->setSpecies("Dog");
 
     ASSERT_EQ(p->getName(), "Davies") << p->getName() << " should be Davies";
-    ASSERT_EQ(p->getAge(), 4) << p->getAge() << " should be 4";
+    ASSERT_EQ(p->getAge(), "4") << p->getAge() << " should be 4";
     ASSERT_EQ(p->getBreed(), "Beagle") << p->getName() << " should be Beagle";
     ASSERT_EQ(p->getSpecies(), "Dog") << p->getName() << " should be Dog";
     ASSERT_EQ(p->getGender(), "Male") << p->getName() << " should be Male";
@@ -69,8 +69,19 @@ TEST(unitTest, testTemperaments){
 
 //Testing object setters and getters
 TEST(unitTest, settersAndGetters){
-    Pet* (p);
+    string a = "Young";
+    string n = "Alex";
+    string g = "Male";
+    string s = "Cat";
+    string b = "Siamese";
+    string t = "Passive";
+    Pet* p = new Pet(n,a,s,b,g,t);
 
+    ASSERT_EQ(p->getName(), "Alex") << p->getName() << " should be Alex";
+    ASSERT_EQ(p->getAge(), "Young") << p->getAge() << " should be Young";
+    ASSERT_EQ(p->getBreed(), "Siamese") << p->getName() << " should be Siamese";
+    ASSERT_EQ(p->getSpecies(), "Cat") << p->getName() << " should be Cat";
+    ASSERT_EQ(p->getGender(), "Male") << p->getName() << " should be Male";
 }
 
 int main(int argc, char **argv){
