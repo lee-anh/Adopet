@@ -13,5 +13,5 @@ INCLUDEPATH += ../../gtest \
  ../../gtest/googletest/include \
  ../../gtest/googletest/include/gtest
 
-HEADERS += ../Pets/Pet.h
-SOURCES += ../Pets/Pet.cpp
+HEADERS += ../Pets/pet.h
+SOURCES += ../Pets/pet.cpp
