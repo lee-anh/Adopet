@@ -13,5 +13,5 @@ int main(){
 
     Matchmaking* match = new Matchmaking();
     match->findMatch(p);
-    match->showResults();
+    match->showResults(2);
 }

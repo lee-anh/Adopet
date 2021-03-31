@@ -24,6 +24,19 @@ void Matchmaking::openDB(){
     }
 }
 
+bool Matchmaking::customSort(const pair<int,int> &a, const pair<int,int> &b){
+    return (a.second > b.second);
+}
+
+int Matchmaking::getScore(vector<string> list, string name){
+    for(int i = 0; i < (int) list.size(); i++){
+        if(list.at(i) == name){
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void Matchmaking::findMatch(Preferences *p){
     if(db.open()){
         QSqlQuery query = QSqlQuery();
@@ -39,54 +52,40 @@ void Matchmaking::findMatch(Preferences *p){
             string temperament = query.value(5).toString().toStdString();
             string gender = query.value(6).toString().toStdString();
 
-            for(int i = 0; i < (int) p->getSpecies().size(); i++){
-                if(p->getSpecies().at(i) == species){
-                    currScore++;
-                    break;
-                }
-            }
-
-            for(int j = 0; j < (int) p->getBreed().size(); j++){
-                if(p->getBreed().at(j) == breed) {
-                    currScore++;
-                    break;
-                }
-            }
-
-            for(int k = 0; k < (int) p->getAge().size(); k++){
-                if(p->getAge().at(k) == age) {
-                    currScore++;
-                    break;
-                }
-            }
-
-            for(int l = 0; l < (int) p->getTemperament().size(); l++){
-                if(p->getTemperament().at(l) == temperament) {
-                    currScore++;
-                    break;
-                }
-            }
-
-                if(p->getGender() == gender) currScore++;
-                else if(p->getGender() == "all") currScore++;
+            currScore += getScore(p->getSpecies(), species);
+            currScore += getScore(p->getBreed(), breed);
+            currScore += getScore(p->getAge(), age);
+            currScore += getScore(p->getTemperament(), temperament);
+            if(p->getGender() == gender || p->getGender() == "all") currScore++;
 
             dbResults.push_back(make_pair(id, currScore));
         }
     }
-}
 
-bool Matchmaking::customSort(const pair<int,int> &a, const pair<int,int> &b){
-    return (a.second > b.second);
-}
-
-
-//how many results to show
-//chunking the results
-//display information about the pet
-
-void Matchmaking::showResults(){
     sort(dbResults.begin(), dbResults.end(), customSort);
-    for(int i = 0; i < (int) dbResults.size(); i++){
+}
+
+//display information about the pet
+void Matchmaking::showResults(){
+    for(int i = 0; i <= (int) dbResults.size(); i++){
          cout << "Id: " << dbResults[i].first << ", Score: " << dbResults[i].second << endl;
+    }
+}
+
+void Matchmaking::showResults(int amount){
+    int resultSize = (int) dbResults.size();
+    int shownAmount = 0;
+    int input;
+    while ((input = cin.get())) {
+        if (input == (int)'\n' && shownAmount <= resultSize) {
+            for(int i = 0; i < amount && shownAmount <= resultSize; i++){
+                cout << "Id: " << dbResults[shownAmount].first << ", Score: " << dbResults[shownAmount].second << endl;
+                shownAmount++;
+            }
+        }
+        else {
+            cout << "Showed all results!\n";
+            break;
+        }
     }
 }
