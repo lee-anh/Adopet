@@ -8,4 +8,6 @@ SUBDIRS += \
     Owner \
     OwnerTest \
     Pets \
-    PetsTest
+    PetsTest \
+    Randomizer \
+    SavedList
