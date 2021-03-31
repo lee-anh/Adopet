@@ -1,16 +1,16 @@
 #include "owner.h"
 
 Owner::Owner(string t){
-    if(t == "Shelter Owner" || t == "Foster Parent") type = t;
-    else type = "";
+    if(t == "Shelter Owner" || t == "Foster Parent") ownerType = t;
+    else ownerType = "";
 }
 
 /*
- * Gets the type of the owner
- * @return The type of the owner
+ * Gets the owner type of the owner
+ * @return The owner type of the owner
 */
-string Owner::getType(){
-    return type;
+string Owner::getOwnerType(){
+    return ownerType;
 }
 
 /*
