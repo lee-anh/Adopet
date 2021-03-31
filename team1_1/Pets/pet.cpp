@@ -5,10 +5,19 @@ Pet::Pet()
 {
     name = "";
     age = -1;
-    type = "";
+    species = "";
     breed = "";
     gender = "";
     vector<string> temperament;
+}
+
+Pet::Pet(string n, int a, string s, string b, string g, vector<string> t){
+    name = n;
+    age = a;
+    species = s;
+    breed = b;
+    gender = g;
+    temperament = t;
 }
 
 Pet::~Pet(){
@@ -32,12 +41,12 @@ void Pet::setAge(int a){
     age = a;
 }
 
-string Pet::getType(){
-    return type;
+string Pet::getSpecies(){
+    return species;
 }
 
-void Pet::setType(string t){
-    type = t;
+void Pet::setSpecies(string sp){
+    species = sp;
 }
 
 string Pet::getBreed(){
@@ -61,6 +70,6 @@ vector<string> Pet::getTemperament(){
     return temperament;
 }
 
-void Pet::addTemperament(string temp){
-    temperament.push_back(temp);
+void Pet::addTemperament(string t){
+    temperament.push_back(t);
 }
