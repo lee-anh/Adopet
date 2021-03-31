@@ -6,4 +6,5 @@ SUBDIRS += \
     Matchmaking \
     Owner \
     OwnerTest \
-    Pets
+    Pets \
+    PetsTest

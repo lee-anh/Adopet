@@ -11,6 +11,7 @@ class Pet
 {
 public:
     Pet();
+    Pet(string n, int a, string s, string b, string g, vector<string> t);
     ~Pet();
 
     //getters and setters
@@ -20,8 +21,8 @@ public:
     int getAge();
     void setAge(int a);
 
-    string getType();
-    void setType(string t);
+    string getSpecies();
+    void setSpecies(string sp);
 
     string getBreed();
     void setBreed(string b);
@@ -31,12 +32,12 @@ public:
 
     //Will need to add more methods to manipulate temperament
     vector<string> getTemperament();
-    void addTemperament(string n);
+    void addTemperament(string t);
 
 private:
     string name;
     int age;
-    string type;
+    string species;
     string breed;
     string gender;
     vector<string> temperament;
