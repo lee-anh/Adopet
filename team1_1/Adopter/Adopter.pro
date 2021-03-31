@@ -6,8 +6,10 @@ CONFIG -= qt
 SOURCES += \
         adopter.cpp \
         main.cpp \
-        preferences.cpp
+        preferences.cpp \
+        savedpets.cpp
 
 HEADERS += \
     adopter.h \
-    preferences.h
+    preferences.h \
+    savedpets.h

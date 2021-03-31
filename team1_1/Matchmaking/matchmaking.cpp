@@ -79,6 +79,11 @@ bool Matchmaking::customSort(const pair<int,int> &a, const pair<int,int> &b){
     return (a.second > b.second);
 }
 
+
+//how many results to show
+//chunking the results
+//display information about the pet
+
 void Matchmaking::showResults(){
     sort(dbResults.begin(), dbResults.end(), customSort);
     for(int i = 0; i < (int) dbResults.size(); i++){

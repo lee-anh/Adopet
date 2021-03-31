@@ -7,61 +7,163 @@
 
 using namespace std;
 
+/*!
+ * \brief The Preferences class contains a potential adopter's preferences
+ */
 class Preferences
 {
 public:
+    /*!
+     * \brief Preferences constructor
+     */
     Preferences();
+    /*!
+     * \brief Preferences destructor
+     */
     ~Preferences();
 
-    //could be multiple types
-    //could be all except
+    //Species
+
+    /*!
+     * \brief getSpecies
+     * \return the species vector
+     */
     vector<string> getSpecies();
+
+    /*!
+     * \brief addSpecies
+     * \param s species to add
+     */
     void addSpecies(string s);
+
+    /*!
+     * \brief removeSpecies
+     * \param s species to remove
+     * \return a bool
+     */
     bool removeSpecies(string s);
 
-    //could be multiple types
-    //could be all except
+
+    //Breed
+    /*!
+     * \brief getBreed
+     * \return  the breed vector
+     */
     vector<string> getBreed();
+
+    /*!
+     * \brief addBreed
+     * \param b breed to add
+     */
     void addBreed(string b);
+
+    /*!
+     * \brief removeBreed
+     * \param b breed to remove
+     * \return a bool
+     */
     bool removeBreed(string b);
 
-    //could be multiple types/all excepts
+    //Age
+    /*!
+     * \brief getAge
+     * \return the age vector
+     */
     vector<string> getAge();
+
+    /*!
+     * \brief addAge
+     * \param a age to add
+     */
     void addAge(string a);
+
+    /*!
+     * \brief removeAge
+     * \param a age to remove
+     * \return a bool
+     */
     bool removeAge(string a);
 
-    //could be multiple types/all excepts
+    //Size
+    /*!
+     * \brief getSize
+     * \return the size vector
+     */
     vector<string> getSize();
+
+    /*!
+     * \brief addSize
+     * \param sz size to add
+     */
     void addSize(string sz);
+
+    /*!
+     * \brief removeSize
+     * \param sz size to remove
+     * \return a bool
+     */
     bool removeSize(string sz);
 
-    //temperament
+    //Temperament
+    /*!
+     * \brief getTemperament
+     * \return the temperament vector
+     */
     vector<string> getTemperament();
+
+    /*!
+     * \brief addTemperament
+     * \param temper temperament to add
+     */
     void addTemperament(string temper);
+
+    /*!
+     * \brief removeTemperament
+     * \param temper
+     * \return a bool
+     */
     bool removeTemperament(string temper);
 
 
-    //limited to one or all
+    //Gender
+    /*!
+     * \brief getGender
+     * \return the gender in a string
+     */
     string getGender();
+
+    /*!
+     * \brief setGender
+     * \param g gender
+     */
     void setGender(string g);
 
+    vector<string> getGoodWith();
+    void addGoodWith(string gw);
+    bool removeGoodWith(string gw);
+
+    vector<string> getShelter();
+    void addShelter(string s);
+    bool removeShelter(string s);
 
 
+
+    //could I potentially optimize this? yes
+    //the getters are good
+    void addToVec(string attribute, string field);
+    void addToVecHelper(string s, vector<string> vec);
 
 private:
 
-    //instance variables
+    //vectors to store preference info
     vector<string> species;
     vector<string> breed;
     vector<string> age;
     vector<string> animalSize;
     vector<string> temperament;
     string gender;
-
-
-
-    //optional?
     vector<string> goodWith;
+    vector<string> shelter;
 
 
 };
