@@ -4,7 +4,7 @@ DBSearch::DBSearch()
 {
 
     //keywords
-    //read from file
+    //read in from database
     mainSpecies = {"dog", "cat", "rabbit", "rodent", "fish", "bird"};
     mainBreeds = {"sporting", "hound", "working", "terrier", "toy", "non-sporting", "herding",
                  "siamese", "persian", "maine coon", "ragdoll",
@@ -99,7 +99,7 @@ void DBSearch::search(string s){
     */
 
     if(attributeToSearch == ""){
-        count = generalQueryDB(s);//general query
+       // count = generalQueryDB(s);//general query
     } else {
         count = queryDB(s, attributeToSearch);
     }
@@ -142,6 +142,7 @@ int DBSearch::queryDB(string s, string attribute){
     return count;
 }
 
+/*
 int DBSearch::generalQueryDB(string s){
     int count = 0;
     if(db.open()){
@@ -171,6 +172,7 @@ int DBSearch::generalQueryDB(string s){
 
     return count;
 }
+*/
 
 
 void DBSearch::openDB(){
