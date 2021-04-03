@@ -13,15 +13,24 @@ public:
     Matchmaking();
     ~Matchmaking();
 
-    void findMatch(Preferences *p);                     //finds the matching pets based on user preference
     void openDB();                                      //opens the database before performing actions
-    void showResults();                                 //prints out the list of matching pets based on score
-    void showResults(int amount);
-    int getScore(vector <string> list, string name);    //checks the passed list if it contains what the user wanted
-    static bool customSort(const pair<Pet*,int> &a, const pair<Pet*,int> &b);     //sorts the result list based on score
+    void findMatchForAdopter(Preferences *p);           //finds the matching pets based on user preference
+    void fillPets();                                    //stores all the pets in the DB in the vector
+    void findMatchForPets();                            //finds matching potential adopters for all pets in the DB
+    void findMatchForPet(Pet *p);                       //finds the matching potential adopters based on pet attributes
+    void showPetResults();                              //prints out the list of matching pets based on score
+    void showPetResults(int amount);
+    void showAdopterResults();                          //prints out the list of matching adopters based on score
+    void showAdopterResults(int amount);                          //prints out the list of matching adopters based on score
+    int getPetScore(vector <string> list, string name);    //checks the passed list if it contains what the user wanted
+    int getAdopterScore(Pet* p, string attributeType, string attribute);    //checks if the pet contains the adopter's preference
+    static bool customPetResultSort(const pair<Pet*,int> &a, const pair<Pet*,int> &b);     //sorts the pet result list based on score
+    static bool customAdopterResultSort(const pair<Adopter*,int> &a, const pair<Adopter*,int> &b); //sorts the adopter results list based on score
 
 private:
-    vector<pair<Pet*, int>> dbResults;
+    vector<pair<Pet*, int>> petResults;
+    vector<pair<Adopter*, int>> adopterResults;
+    vector<Pet*> allPets;
     QSqlDatabase db;
 };
 
