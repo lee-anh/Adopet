@@ -13,34 +13,37 @@ public:
     DBSearch();
     ~DBSearch();
 
-    //two option: search bar or check/uncheck the boxes
+    //two options: search bar or check/uncheck the boxes
 
     //cout all the animals that match
     void search(string s);
 
     int queryDB(string s, string attribute);
-    int generalQueryDB(string s);
-
-
-
 
 
 private:
     //database stuff
     void openDB();
     QSqlDatabase db;
+    void fillVecsFromDB();
+    void fillStaticVecs();
 
     //vectors of keywords
-    vector<string> mainSpecies;
-    vector<string> mainBreeds;
-    vector<string> mainAges;
-    vector<string> mainSizes;
-    vector<string> mainTemperaments;
-    vector<string> mainGenders;
+    vector<string> mainSpecies; //from DB
+    vector<string> mainBreeds; //from DB
 
-    //not doing main goodWiths
+
+    vector<string> mainAges; //static
+    vector<string> mainSizes; //static
+
+
+    vector<string> mainTemperaments; //from DB
+    vector<string> mainGenders; //static
+    vector<string> mainGoodWith; //from DB
+
+
     //not doing zipcodes yet
-    vector<string> mainShelters;
+    vector<string> mainShelters; //from DB
 
 
     //optimization for later: find likes
