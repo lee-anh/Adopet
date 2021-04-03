@@ -11,10 +11,7 @@ class Pet
 {
 public:
     Pet();
-    Pet(string n, string s, string b,
-        string a, string sz, string t,
-        string gd, string gw, string sh,
-        string bio);
+    Pet(string n, string s, string b, string a, string sz, string t, string gd, string gw, string sh, string bio);
     ~Pet();
 
     //getters and setters

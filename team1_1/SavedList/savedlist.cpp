@@ -15,7 +15,8 @@ SavedList::~SavedList(){
 }
 
 void SavedList::savePet(Pet* p){
-    Pet newPet = Pet(p->getName(),p->getAge(),p->getSpecies(),p->getBreed(), p->getGender(), p->getTemperament());
+    Pet newPet = Pet(p->getName(), p->getSpecies(), p->getBreed(),p->getAge(),p->getGender(), p->getSize(),
+                     p->getTemperament(), p->getGoodWith(), p->getShelter(), p->getBio());
     savedPets.push_back(newPet);
 }
 

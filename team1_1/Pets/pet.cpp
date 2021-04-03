@@ -101,3 +101,13 @@ string Pet::getBio(){
 void Pet::setBio(string bi){
     bio = bi;
 }
+
+string Pet::getSize(){
+    return size;
+}
+
+void Pet::setSize(string sz){
+    size = sz;
+}
+
+
