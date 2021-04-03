@@ -45,6 +45,12 @@ create table preferences(
       attributeType CHAR NOT NULL
 
 );
+
+create table savedPets(
+      username CHAR NOT NULL,
+      petID INT NOT NULL
+
+);
       
 create table species (
       speciesType   CHAR NOT NULL
