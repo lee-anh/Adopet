@@ -11,7 +11,10 @@ class Pet
 {
 public:
     Pet();
-    Pet(string n, string a, string s, string b, string g, string t);
+    Pet(string n, string s, string b,
+        string a, string sz, string t,
+        string gd, string gw, string sh,
+        string bio);
     ~Pet();
 
     //getters and setters
@@ -24,6 +27,18 @@ public:
     string getSpecies();
     void setSpecies(string sp);
 
+    string getSize();
+    void setSize(string sz);
+
+    string getGoodWith();
+    void setGoodWith(string gw);
+
+    string getShelter();
+    void setShelter(string sh);
+
+    string getBio();
+    void setBio(string bi);
+
     string getBreed();
     void setBreed(string b);
 
@@ -35,13 +50,17 @@ public:
     void setTemperament(string t);
 
 private:
+    int id;
     string name;
-    string age;
     string species;
     string breed;
-    string gender;
+    string age;
+    string size;
     string temperament;
-
+    string gender;
+    string goodWith;
+    string shelter;
+    string bio;
 };
 
 #endif // PET_H
