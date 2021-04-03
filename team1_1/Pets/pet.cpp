@@ -9,15 +9,20 @@ Pet::Pet()
     breed = "";
     gender = "";
     temperament = "";
+
 }
 
-Pet::Pet(string n, string a, string s, string b, string g, string t){
+Pet::Pet(string n, string s, string b, string a, string sz, string t, string gd, string gw, string sh, string bio){
     name = n;
+    size = sz;
     age = a;
     species = s;
     breed = b;
-    gender = g;
-    t = temperament;
+    gender = gd;
+    temperament = t;
+    this->bio = bio;
+    goodWith = gw;
+    shelter = sh;
 }
 
 Pet::~Pet(){
@@ -72,4 +77,27 @@ string Pet::getTemperament(){
 
 void Pet::setTemperament(string t){
     temperament = t;
+}
+
+string Pet::getGoodWith(){
+    return goodWith;
+}
+void Pet::setGoodWith(string gw){
+    goodWith = gw;
+}
+
+string Pet::getShelter(){
+    return shelter;
+}
+
+void Pet::setShelter(string sh){
+    shelter = sh;
+}
+
+string Pet::getBio(){
+    return bio;
+}
+
+void Pet::setBio(string bi){
+    bio = bi;
 }

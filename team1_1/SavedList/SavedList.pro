@@ -9,3 +9,6 @@ SOURCES += \
 
 HEADERS += \
     savedlist.h
+
+HEADERS += ../Pets/pet.h
+SOURCES += ../Pets/pet.cpp
