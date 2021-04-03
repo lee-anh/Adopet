@@ -1,26 +1,26 @@
-sporting
-hound
-working
-terrier
-toy
-non-sporting
-herding
-siamese
-persian
-main coon
-ragdoll
-rex
-lionhead
-californian
-anogra
-silver fox
-hamster
-guinea pig
-gerbil 
-mouse 
-rat
-freshwater
-saltwater
-parakeet
-lovebird
-parrot
+sporting,dog
+hound,dog
+working,dog
+terrier,dog
+toy,dog
+non-sporting,dog
+herding,dog
+siamese,cat
+persian,cat
+main coon,cat
+ragdoll,cat
+rex,rabbit
+lionhead,rabbit
+californian,rabbit
+anogra,rabbit
+silver fox,rabbit
+hamster,rodent
+guinea pig,rodent
+gerbil ,rodent
+mouse ,rodent
+rat,rodent
+freshwater,fish
+saltwater,fish
+parakeet,bird
+lovebird,bird
+parrot,bird

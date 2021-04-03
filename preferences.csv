@@ -1,0 +1,160 @@
+user1,dog,species
+user1,hound,breed
+user1,sporting,breed
+user1,senior,age
+user1,young,age
+user1,large,size
+user1,small,size
+user1,active,temperament
+user1,vigilant,temperament
+user1,female,gender
+user1,male,gender
+user1,kids,goodWith
+user1,animal welfare league,shelter
+user1,best friends,shelter
+user2,bird,species
+user2,rodent,species
+user2,hound,breed
+user2,sporting,breed
+user2,working,breed
+user2,senior,age
+user2,young,age
+user2,small,size
+user2,active,temperament
+user2,happy,temperament
+user2,vigilant,temperament
+user2,female,gender
+user2,male,gender
+user2,animals,goodWith
+user2,kids,goodWith
+user2,animal welfare league,shelter
+user2,best friends,shelter
+user2,humane society,shelter
+user3,bird,species
+user3,cat,species
+user3,dog,species
+user3,fish,species
+user3,rodent,species
+user3,hound,breed
+user3,sporting,breed
+user3,working,breed
+user3,adult,age
+user3,senior,age
+user3,medium,size
+user3,active,temperament
+user3,friendly,temperament
+user3,happy,temperament
+user3,male,gender
+user3,animals,goodWith
+user3,animal welfare league,shelter
+user4,bird,species
+user4,cat,species
+user4,dog,species
+user4,fish,species
+user4,rabbit,species
+user4,hound,breed
+user4,sporting,breed
+user4,working,breed
+user4,young,age
+user4,large,size
+user4,medium,size
+user4,friendly,temperament
+user4,happy,temperament
+user4,vigilant,temperament
+user4,female,gender
+user4,male,gender
+user4,kids,goodWith
+user4,humane society,shelter
+user5,bird,species
+user5,hound,breed
+user5,sporting,breed
+user5,working,breed
+user5,adult,age
+user5,young,age
+user5,large,size
+user5,medium,size
+user5,active,temperament
+user5,vigilant,temperament
+user5,male,gender
+user5,kids,goodWith
+user5,animal welfare league,shelter
+user5,best friends,shelter
+user5,humane society,shelter
+user6,cat,species
+user6,rabbit,species
+user6,rodent,species
+user6,hound,breed
+user6,sporting,breed
+user6,working,breed
+user6,adult,age
+user6,medium,size
+user6,happy,temperament
+user6,vigilant,temperament
+user6,female,gender
+user6,male,gender
+user6,kids,goodWith
+user6,best friends,shelter
+user6,humane society,shelter
+user7,bird,species
+user7,dog,species
+user7,rabbit,species
+user7,hound,breed
+user7,sporting,breed
+user7,working,breed
+user7,adult,age
+user7,young,age
+user7,large,size
+user7,small,size
+user7,friendly,temperament
+user7,vigilant,temperament
+user7,female,gender
+user7,kids,goodWith
+user7,animal welfare league,shelter
+user7,best friends,shelter
+user7,humane society,shelter
+user8,dog,species
+user8,hound,breed
+user8,sporting,breed
+user8,working,breed
+user8,senior,age
+user8,young,age
+user8,medium,size
+user8,small,size
+user8,introverted,temperament
+user8,vigilant,temperament
+user8,female,gender
+user8,animals,goodWith
+user8,best friends,shelter
+user9,cat,species
+user9,rabbit,species
+user9,rodent,species
+user9,hound,breed
+user9,sporting,breed
+user9,working,breed
+user9,senior,age
+user9,small,size
+user9,active,temperament
+user9,introverted,temperament
+user9,female,gender
+user9,animals,goodWith
+user9,kids,goodWith
+user9,animal welfare league,shelter
+user9,humane society,shelter
+user10,bird,species
+user10,cat,species
+user10,rabbit,species
+user10,hound,breed
+user10,sporting,breed
+user10,working,breed
+user10,senior,age
+user10,large,size
+user10,friendly,temperament
+user10,introverted,temperament
+user10,vigilant,temperament
+user10,female,gender
+user10,male,gender
+user10,animals,goodWith
+user10,kids,goodWith
+user10,animal welfare league,shelter
+user10,best friends,shelter
+user10,humane society,shelter

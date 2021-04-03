@@ -51,7 +51,8 @@ create table species (
 );
 
 create table breed (
-      breedType     CHAR NOT NULL
+      breedType     CHAR NOT NULL,
+      speciesType   CHAR NOT NULL
 );
 
 
