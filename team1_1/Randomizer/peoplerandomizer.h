@@ -6,7 +6,7 @@
 #include <vector>
 #include <QtSql>
 #include <algorithm>
-
+#include <time.h>
 using namespace std;
 
 class PeopleRandomizer
@@ -56,6 +56,7 @@ private:
     vector<string> goodWith;
     vector<string> shelter;
 
+    int seed;
 
 
 

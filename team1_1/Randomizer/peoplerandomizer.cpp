@@ -18,6 +18,7 @@ PeopleRandomizer::PeopleRandomizer()
     csv3.open("../../csvs/preferences.csv", ofstream::out | ofstream::trunc);
     csv3.close();
 
+    srand(time(0));
 
 }
 
@@ -36,6 +37,9 @@ PeopleRandomizer::PeopleRandomizer(int num){
 
     csv3.open("../../csvs/preferences.csv", ofstream::out | ofstream::trunc);
     csv3.close();
+
+    srand(time(0));
+
 }
 
 PeopleRandomizer::~PeopleRandomizer(){
@@ -59,12 +63,13 @@ void PeopleRandomizer::writeToCSV(){
         csv1 << username << "," << password << "," << accountType << "\n";
         csv1.close();
 
-        int rand1 = arc4random() % firstNames.size();
+
+        int rand1 = rand() % (int) firstNames.size();
         string fName = firstNames.at(rand1);
-        int rand2 = arc4random() % lastNames.size();
+        int rand2 = rand() % lastNames.size();
         string lName = lastNames.at(rand2);
         string email = fName + lName + "@gmail.com";
-        int zip = arc4random() % 224 + 15201; //valid zip in PA
+        int zip = rand() % 224 + 15201; //valid zip in PA
 
         //write to adopters.csv
         csv2.open("../../csvs/adopters.csv", ios_base::app);
@@ -78,10 +83,10 @@ void PeopleRandomizer::writeToCSV(){
 
         //species
         vector<string> userSpecies = vector<string>();
-        int speciesRand = (arc4random() % species.size()) + 1;
+        int speciesRand = (rand() % species.size()) + 1;
 
         for(int i = 0;  i < speciesRand; i++){
-            int speciesRand1 = arc4random() % species.size();
+            int speciesRand1 = rand() % species.size();
 
             string toAdd = species.at(speciesRand1);
             userSpecies.push_back(toAdd);
@@ -95,12 +100,12 @@ void PeopleRandomizer::writeToCSV(){
         //BREED IS A LITTLE MORE COMPLICATED
         //make sure the breed has a species type that fits a user species preference
         vector<string> userBreed = vector<string>();
-        int breedRand = (arc4random() % breed.size()) + 1;
+        int breedRand = (rand() % breed.size()) + 1;
 
 
 
         for(int i = 0;  i < breedRand; i++){
-            int rand1 = arc4random() % breed.size();
+            int rand1 = rand() % breed.size();
 
             string toAdd = breed.at(rand1).first;
             userBreed.push_back(toAdd);
@@ -108,7 +113,7 @@ void PeopleRandomizer::writeToCSV(){
 
         /*
         for(int i = 0;  i < breedRand; i++){
-            int rand2 = arc4random() % breed.size();
+            int rand2 = rand() % breed.size();
 
             bool stop = false;
             string toAdd;
@@ -120,7 +125,7 @@ void PeopleRandomizer::writeToCSV(){
 
                     }
                 }
-                rand2 = arc4random() % breed.size();
+                rand2 = rand() % breed.size();
 
             }
 
@@ -138,10 +143,10 @@ void PeopleRandomizer::writeToCSV(){
 
         //age
         vector<string> userAge = vector<string>();
-        int ageRand = (arc4random() % age.size()) + 1;
+        int ageRand = (rand() % age.size()) + 1;
 
         for(int i = 0;  i < ageRand; i++){
-            int rand2 = arc4random() % age.size();
+            int rand2 = rand() % age.size();
 
             string toAdd = age.at(rand2);
             userAge.push_back(toAdd);
@@ -155,10 +160,10 @@ void PeopleRandomizer::writeToCSV(){
 
         //size
         vector<string> userSize = vector<string>();
-        int szRand = (arc4random() % size.size()) + 1;
+        int szRand = (rand() % size.size()) + 1;
 
         for(int i = 0;  i < szRand; i++){
-            int rand2 = arc4random() % size.size();
+            int rand2 = rand() % size.size();
 
             string toAdd = size.at(rand2);
             userSize.push_back(toAdd);
@@ -170,10 +175,10 @@ void PeopleRandomizer::writeToCSV(){
 
         //temperament
         vector<string> userTemp = vector<string>();
-        int teRand = (arc4random() % temperament.size()) + 1;
+        int teRand = (rand() % temperament.size()) + 1;
 
         for(int i = 0;  i < teRand; i++){
-            int rand2 = arc4random() % temperament.size();
+            int rand2 = rand() % temperament.size();
 
             string toAdd = temperament.at(rand2);
             userTemp.push_back(toAdd);
@@ -185,10 +190,10 @@ void PeopleRandomizer::writeToCSV(){
 
         //gender
         vector<string> userGender = vector<string>();
-        int geRand = (arc4random() % gender.size()) + 1;
+        int geRand = (rand() % gender.size()) + 1;
 
         for(int i = 0;  i < geRand; i++){
-            int rand2 = arc4random() % gender.size();
+            int rand2 = rand() % gender.size();
 
             string toAdd = gender.at(rand2);
             userGender.push_back(toAdd);
@@ -199,10 +204,10 @@ void PeopleRandomizer::writeToCSV(){
 
         //goodWith
         vector<string> userGW = vector<string>();
-        int gwRand = (arc4random() % goodWith.size()) + 1;
+        int gwRand = (rand() % goodWith.size()) + 1;
 
         for(int i = 0;  i < gwRand; i++){
-            int rand2 = arc4random() % goodWith.size();
+            int rand2 = rand() % goodWith.size();
 
             string toAdd = goodWith.at(rand2);
             userGW.push_back(toAdd);
@@ -213,10 +218,10 @@ void PeopleRandomizer::writeToCSV(){
 
         //shelter
         vector<string> userShelter = vector<string>();
-        int seRand = (arc4random() % shelter.size()) + 1;
+        int seRand = (rand() % shelter.size()) + 1;
 
         for(int i = 0;  i < seRand; i++){
-            int rand2 = arc4random() % shelter.size();
+            int rand2 = rand() % shelter.size();
 
             string toAdd = shelter.at(rand2);
             userShelter.push_back(toAdd);
@@ -373,10 +378,10 @@ void PeopleRandomizer::initalizeNameVecs(){
 void PeopleRandomizer::speciesTest(){
     vector<string> userSpecies = vector<string>();
     //how many to add
-    int speciesRand = (arc4random() % species.size()) + 1;
+    int speciesRand = (rand() % species.size()) + 1;
 
     for(int i = 0;  i < speciesRand; i++){
-        int speciesRand1 = arc4random() % species.size();
+        int speciesRand1 = rand() % species.size();
 
         string toAdd = species.at(speciesRand1);
         userSpecies.push_back(toAdd);
