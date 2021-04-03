@@ -1,9 +1,13 @@
 #include <iostream>
 
+#include "peoplerandomizer.h"
 using namespace std;
 
 int main()
 {
-    cout << "Hello World!" << endl;
+    PeopleRandomizer *test = new PeopleRandomizer(20);
+    test->writeToCSV();
+    test->speciesTest();
+
     return 0;
 }
