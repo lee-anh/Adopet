@@ -78,3 +78,6 @@ create table shelter (
 .import "csvs/temperament.csv" temperament
 .import "csvs/good_with.csv" goodWith
 .import "csvs/shelter.csv" shelter
+.import "csvs/accounts.csv" accounts
+.import "csvs/adopters.csv" adopter
+.import "csvs/preferences.csv" preferences
