@@ -151,8 +151,8 @@ public:
 
     //could I potentially optimize this? yes
     //the getters are good
-    void addToVec(string attribute, string field);
-    void addToVecHelper(string s, vector<string> vec);
+    //void addToVec(string attribute, string field);
+    //void addToVecHelper(string s, vector<string> vec);
 
 private:
 

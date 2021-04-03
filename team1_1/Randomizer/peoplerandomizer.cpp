@@ -97,13 +97,36 @@ void PeopleRandomizer::writeToCSV(){
         vector<string> userBreed = vector<string>();
         int breedRand = (arc4random() % breed.size()) + 1;
 
+
+
         for(int i = 0;  i < breedRand; i++){
-            int rand2 = arc4random() % age.size();
+            int rand1 = arc4random() % breed.size();
 
-
-            string toAdd = breed.at(rand2).first;
+            string toAdd = breed.at(rand1).first;
             userBreed.push_back(toAdd);
         }
+
+        /*
+        for(int i = 0;  i < breedRand; i++){
+            int rand2 = arc4random() % breed.size();
+
+            bool stop = false;
+            string toAdd;
+            while(stop == false){
+                string spec = breed.at(rand2).second;
+                for(int j = 0; j < (int) userSpecies.size(); j++){
+                    if(spec == userSpecies.at(j)){
+                        toAdd = breed.at(rand2).first;
+
+                    }
+                }
+                rand2 = arc4random() % breed.size();
+
+            }
+
+            userBreed.push_back(toAdd);
+        }
+        */
 
         //get rid of duplicates
         sort(userBreed.begin(), userBreed.end());

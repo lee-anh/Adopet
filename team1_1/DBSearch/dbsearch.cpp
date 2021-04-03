@@ -3,22 +3,12 @@
 DBSearch::DBSearch()
 {
 
-    //keywords
-    //read in from database
-    mainSpecies = {"dog", "cat", "rabbit", "rodent", "fish", "bird"};
-    mainBreeds = {"sporting", "hound", "working", "terrier", "toy", "non-sporting", "herding",
-                 "siamese", "persian", "maine coon", "ragdoll",
-                 "hamster", "guinea pig", "gerbil", "mouse", "rat",
-                 "freshwater", "saltwater",
-                 "parakeet", "lovebird", "parrot"};
-    mainAges = {"young", "adult", "senior"};
-    mainSizes = {"small", "medium", "large"};
-    mainGenders = {"male", "female"};
-    mainTemperaments = {"happy", "friendly", "introverted", "active", "vigilant"};
-    mainShelters = {"best friends", "humane society", "animal welfare league"};
-
     //Databse stuff
     openDB();
+
+    //load keyword vectors
+    fillStaticVecs();
+    fillVecsFromDB();
 
 
 
@@ -65,6 +55,16 @@ void DBSearch::search(string s){
         }
     }
 
+    //size
+    if(attributeToSearch == ""){
+        for(int i = 0; i < (int) mainSizes.size(); i++){
+            if(s == mainSizes.at(i)){
+                attributeToSearch = "size";
+                break;
+            }
+        }
+    }
+
     //temperament
     if(attributeToSearch == ""){
         for(int i = 0; i < (int) mainTemperaments.size(); i++){
@@ -85,8 +85,17 @@ void DBSearch::search(string s){
         }
     }
 
+    //goodWith
+    if(attributeToSearch == ""){
+        for(int i = 0; i < (int) mainGoodWith.size(); i++){
+            if(s == mainGoodWith.at(i)){
+                attributeToSearch = "goodWith";
+                break;
+            }
+        }
+    }
 
-    /*
+
      //Shelters
     if(attributeToSearch == ""){
         for(int i = 0; i < (int) mainShelters.size(); i++){
@@ -96,7 +105,7 @@ void DBSearch::search(string s){
             }
         }
     }
-    */
+
 
     if(attributeToSearch == ""){
        // count = generalQueryDB(s);//general query
@@ -120,18 +129,19 @@ int DBSearch::queryDB(string s, string attribute){
     if(db.open()){
         QSqlQuery query = QSqlQuery();
         QString qAttribute = QString::fromStdString(attribute);
-       // QString qs = "SELECT rowid, " + qAttribute + " FROM pets WHERE " +
+       // QString qs = "SELECT id, " + qAttribute + " FROM pets WHERE " +
        //         qAttribute + " LIKE '%" + QString::fromStdString(s) + "%'";
-        QString qs = "SELECT rowid, " + qAttribute + " FROM pets";
+        QString qs = "SELECT id, name," + qAttribute + " FROM pets";
         query.exec(qs);
         while(query.next()){
             int id = query.value(0).toInt();
-            string petAttribute = query.value(1).toString().toStdString();
+            string name = query.value(1).toString().toStdString();
+            string petAttribute = query.value(2).toString().toStdString();
            // cout << "ID: " << id << endl; //%male% female problem
             //count++;
             if(s == petAttribute){
                 count++;
-               cout << "ID: " << id << endl;
+               cout << "ID: " << id << " " << name << endl;
             }
         }
         cout << "Showing " << count << " results" << endl;
@@ -142,37 +152,7 @@ int DBSearch::queryDB(string s, string attribute){
     return count;
 }
 
-/*
-int DBSearch::generalQueryDB(string s){
-    int count = 0;
-    if(db.open()){
-        QSqlQuery query = QSqlQuery();
-        QString qs = "SELECT rowid, species, breed, age, temperament, gender FROM pets";
-        query.exec(qs);
-        while(query.next()){
-            //divide up the query
-            int id = query.value(0).toInt();
-            string species = query.value(1).toString().toStdString();
-            string breed = query.value(2).toString().toStdString();
-            string age = query.value(3).toString().toStdString();
-            string temperament = query.value(4).toString().toStdString();
-            string gender = query.value(5).toString().toStdString();
 
-            //if s matches any of the fields
-            if(s == species || s == breed || s == age
-                    || s == temperament || s == gender){
-                count++;
-                cout << "ID: " << id << endl;
-            }
-        }
-        cout << "Showing " << count << " results" << endl;
-    } else {
-        return -1; // -1 will indicate that the database couldn't open
-    }
-
-    return count;
-}
-*/
 
 
 void DBSearch::openDB(){
@@ -189,4 +169,59 @@ void DBSearch::openDB(){
     } else {
         std::cerr << "Opened database successfully\n";
     }
+}
+
+void DBSearch::fillVecsFromDB(){
+    if(db.open()){
+    QSqlQuery query = QSqlQuery();
+
+    //species
+    QString qs = "SELECT speciesType FROM species";
+    query.exec(qs);
+    while(query.next()){
+        string s = query.value(0).toString().toStdString();
+        mainSpecies.push_back(s);
+    }
+
+    //breed
+    QString qs2 = "SELECT breedType FROM breed";
+    query.exec(qs2);
+    while(query.next()){
+        string s = query.value(0).toString().toStdString();
+        mainBreeds.push_back(s);
+    }
+
+    //temperament
+    QString qs3 = "SELECT temperamentType FROM temperament";
+    query.exec(qs3);
+    while(query.next()){
+        string s = query.value(0).toString().toStdString();
+        mainTemperaments.push_back(s);
+    }
+
+
+    //goodWith
+    QString qs4 = "SELECT goodWithType FROM goodWith";
+    query.exec(qs4);
+    while(query.next()){
+        string s = query.value(0).toString().toStdString();
+        mainGoodWith.push_back(s);
+    }
+
+
+    //shelter
+    QString qs5 = "SELECT shelterType FROM shelter";
+    query.exec(qs5);
+    while(query.next()){
+        string s = query.value(0).toString().toStdString();
+        mainShelters.push_back(s);
+    }
+
+    }
+}
+
+void DBSearch::fillStaticVecs(){
+    mainAges = {"young", "adult","senior"};
+    mainGenders = {"male", "female"};
+    mainSizes = {"small", "medium", "large"};
 }

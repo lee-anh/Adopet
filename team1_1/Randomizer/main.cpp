@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    PeopleRandomizer *test = new PeopleRandomizer();
+    PeopleRandomizer *test = new PeopleRandomizer(20);
     test->writeToCSV();
     test->speciesTest();
 
