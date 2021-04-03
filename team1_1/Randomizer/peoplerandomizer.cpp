@@ -9,13 +9,13 @@ PeopleRandomizer::PeopleRandomizer()
     loadDBVecs();
 
     //clear old data in csvs
-    csv1.open("../../accounts.csv", ofstream::out | ofstream::trunc);
+    csv1.open("../../csvs/accounts.csv", ofstream::out | ofstream::trunc);
     csv1.close();
 
-    csv2.open("../../adopters.csv", ofstream::out | ofstream::trunc);
+    csv2.open("../../csvs/adopters.csv", ofstream::out | ofstream::trunc);
     csv2.close();
 
-    csv3.open("../../preferences.csv", ofstream::out | ofstream::trunc);
+    csv3.open("../../csvs/preferences.csv", ofstream::out | ofstream::trunc);
     csv3.close();
 
 
@@ -28,13 +28,13 @@ PeopleRandomizer::PeopleRandomizer(int num){
     loadDBVecs();
 
     //clear old data in csvs
-    csv1.open("../../accounts.csv", ofstream::out | ofstream::trunc);
+    csv1.open("../../csvs/accounts.csv", ofstream::out | ofstream::trunc);
     csv1.close();
 
-    csv2.open("../../adopters.csv", ofstream::out | ofstream::trunc);
+    csv2.open("../../csvs/adopters.csv", ofstream::out | ofstream::trunc);
     csv2.close();
 
-    csv3.open("../../preferences.csv", ofstream::out | ofstream::trunc);
+    csv3.open("../../csvs/preferences.csv", ofstream::out | ofstream::trunc);
     csv3.close();
 }
 
@@ -54,7 +54,7 @@ void PeopleRandomizer::writeToCSV(){
         string accountType = "adopter";
 
         //write to accounts.csv
-        csv1.open("../../accounts.csv", ios_base::app);
+        csv1.open("../../csvs/accounts.csv", ios_base::app);
         //cout << username << "," << password << "," << accountType << "\n";
         csv1 << username << "," << password << "," << accountType << "\n";
         csv1.close();
@@ -67,7 +67,7 @@ void PeopleRandomizer::writeToCSV(){
         int zip = arc4random() % 224 + 15201; //valid zip in PA
 
         //write to adopters.csv
-        csv2.open("../../adopters.csv", ios_base::app);
+        csv2.open("../../csvs/adopters.csv", ios_base::app);
         csv2 << username << "," << fName << "," << lName << "," <<
                 email << "," << zip << "\n";
         csv2.close();
@@ -227,7 +227,7 @@ void PeopleRandomizer::writeToCSV(){
 
 
         //write to CSV
-        csv3.open("../../preferences.csv", ios_base::app);
+        csv3.open("../../csvs/preferences.csv", ios_base::app);
 
 
         for(int i = 0; i < (int) userSpecies.size(); i++){

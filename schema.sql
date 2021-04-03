@@ -72,9 +72,9 @@ create table shelter (
 
 .separator ","
 .mode csv
-.import "pets.csv" pets
-.import "species.csv" species
-.import "breed.csv" breed
-.import "temperament.csv" temperament
-.import "good_with.csv" goodWith
-.import "shelter.csv" shelter
+.import "csvs/pets.csv" pets
+.import "csvs/species.csv" species
+.import "csvs/breed.csv" breed
+.import "csvs/temperament.csv" temperament
+.import "csvs/good_with.csv" goodWith
+.import "csvs/shelter.csv" shelter
