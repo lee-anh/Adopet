@@ -95,18 +95,6 @@ void Matchmaking::fillPets(){
             string shelter = query.value(9).toString().toStdString();
             string bio = query.value(10).toString().toStdString();
 
-
-            cout << "name: " << name << endl;
-            cout << "species: " << species << endl;
-            cout << "breed: " << breed << endl;
-            cout << "age: " << age << endl;
-            cout << "size: " << size << endl;
-            cout << "temperament: " << temperament << endl;
-            cout << "gender: " << gender << endl;
-            cout << "goodWith: " << goodWith << endl;
-            cout << "shelter: " << shelter << endl;
-            cout << "bio: " << bio << endl;
-
             Pet* pet = new Pet(name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
             allPets.push_back(pet);
         }
@@ -135,20 +123,27 @@ void Matchmaking::findMatchForPet(Pet *p){
         query.exec(s);
         string userName = "";
         //need to handle score change and userName change
-        int currScore = 0;
+        int currScore;
         while(query.next()){
             string newUserName = query.value(0).toString().toStdString();
+
             if(userName != newUserName){
+                if(userName != ""){
+                    Adopter* adopter = new Adopter();
+                    adopter->setUsername(userName);
+                    adopterResults.push_back(make_pair(adopter, currScore));
+                    currScore = 0;
+                }
                 userName = newUserName;
             }
+
+            cout << "Current userName: " << userName << endl;
+            cout << "Current score: " << currScore << endl;
 
             //storing information in each line
             string attribute = query.value(1).toString().toStdString();
             string attributeType = query.value(2).toString().toStdString();
             currScore += getAdopterScore(p, attributeType, attribute);
-
-
-            //adopterResults.push_back(make_pair(pet, currScore));
         }
     }
 
@@ -214,7 +209,7 @@ void Matchmaking::showPetResults(){
 */
 void Matchmaking::showAdopterResults(){
     for(int i = 0; i <= (int) adopterResults.size(); i++){
-         cout << "Adopter Name: " << adopterResults[i].first->getFirstName() << ", Score: " << petResults[i].second << endl;
+         cout << "Adopter Name: " << adopterResults[i].first->getUsername() << ", Score: " << petResults[i].second << endl;
     }
 }
 

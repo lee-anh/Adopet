@@ -9,9 +9,11 @@ SOURCES += \
         main.cpp \
         matchmaking.cpp \
         ../Adopter/preferences.cpp \
+        ../Adopter/adopter.cpp \
         ../Pets/pet.cpp
 
 HEADERS += \
     matchmaking.h \
     ../Adopter/preferences.h \
+    ../Adopter/adopter.h \
     ../Pets/pet.h
