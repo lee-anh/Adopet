@@ -1,5 +1,5 @@
 #include "petrandomizer.h"
-
+/*
 PetRandomizer::PetRandomizer()
 {
     //default 10 people are created
@@ -40,3 +40,4 @@ PetRandomizer::PetRandomizer(int num){
     srand(time(0));
 
 }
+*/
