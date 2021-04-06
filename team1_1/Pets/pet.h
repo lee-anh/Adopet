@@ -11,21 +11,39 @@ class Pet
 {
 public:
     Pet();
-    Pet(string n, string s, string b, string a, string sz, string t, string gd, string gw, string sh, string bio);
+    Pet(string petName, string petSpecies, string petBreed, string petAge,
+        string petSize, string petTemperament, string petGender,
+        string petGoodWith, string petShelter, string petBio);
+    Pet(int petId, string petName, string petSpecies, string petBreed,
+        string petAge, string petSize, string petTemperament, string petGender,
+        string petGoodWith, string petShelter, string petBio);
     ~Pet();
 
     //getters and setters
+
+    int getID();
+    void setID(int petID);
+
     string getName();
     void setName(string n);
-
-    string getAge();
-    void setAge(string a);
 
     string getSpecies();
     void setSpecies(string sp);
 
+    string getBreed();
+    void setBreed(string b);
+
+    string getAge();
+    void setAge(string a);
+
     string getSize();
     void setSize(string sz);
+
+    string getTemperament();
+    void setTemperament(string t);
+
+    string getGender();
+    void setGender(string g);
 
     string getGoodWith();
     void setGoodWith(string gw);
@@ -36,15 +54,8 @@ public:
     string getBio();
     void setBio(string bi);
 
-    string getBreed();
-    void setBreed(string b);
 
-    string getGender();
-    void setGender(string g);
 
-    //Will need to add more methods to manipulate temperament
-    string getTemperament();
-    void setTemperament(string t);
 
 private:
     int id;
