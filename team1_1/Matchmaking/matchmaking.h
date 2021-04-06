@@ -18,6 +18,7 @@ public:
     void fillPets();                                    //stores all the pets in the DB in the vector
     void findMatchForPets();                            //finds matching potential adopters for all pets in the DB
     void findMatchForPet(Pet *p);                       //finds the matching potential adopters based on pet attributes
+    void findMatchForPet(string name);                 // finds the pet with the given name and finds adopter matches for it
     void showPetResults();                              //prints out the list of matching pets based on score
     void showPetResults(int amount);
     void showAdopterResults();                          //prints out the list of matching adopters based on score

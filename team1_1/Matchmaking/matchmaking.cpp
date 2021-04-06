@@ -111,6 +111,15 @@ void Matchmaking::findMatchForPets(){
 }
 
 /*
+ * Loops through all the pets and finds the pet with the passed name, and then finds adopter matches for it
+*/
+void Matchmaking::findMatchForPet(string name){
+    for(int i = 0; i < (int)allPets.size(); i++){
+        if(allPets.at(i)->getName() == name) findMatchForPet(allPets.at(i));
+    }
+}
+
+/*
  * The matchmaking algorithm.
  * Goes through the database line by line and stores each animal.
  * Sorts the animals based on matching score at the end.
@@ -123,22 +132,28 @@ void Matchmaking::findMatchForPet(Pet *p){
         query.exec(s);
         string userName = "";
         //need to handle score change and userName change
-        int currScore;
+        int currScore = 0;
+        //int count = 0;
         while(query.next()){
+            //cout << "Count: " << count << endl;
+            //count++;
+
             string newUserName = query.value(0).toString().toStdString();
+
+            //cout << "Previous userName: " << userName << endl;
+            //cout << "Current userName: " << newUserName << endl;
 
             if(userName != newUserName){
                 if(userName != ""){
                     Adopter* adopter = new Adopter();
                     adopter->setUsername(userName);
+                    //cout << "Adopter username: " << adopter->getUsername() << endl;
+                    //cout << "Adding adopter to vector...CurrentScore: " << currScore << " userName: " << userName << endl;
                     adopterResults.push_back(make_pair(adopter, currScore));
                     currScore = 0;
                 }
                 userName = newUserName;
             }
-
-            cout << "Current userName: " << userName << endl;
-            cout << "Current score: " << currScore << endl;
 
             //storing information in each line
             string attribute = query.value(1).toString().toStdString();
@@ -208,8 +223,9 @@ void Matchmaking::showPetResults(){
  * Prints out the adopter result - sorted vector of animals based on score
 */
 void Matchmaking::showAdopterResults(){
+    cout << "vector size is: " << adopterResults.size() << endl;
     for(int i = 0; i <= (int) adopterResults.size(); i++){
-         cout << "Adopter Name: " << adopterResults[i].first->getUsername() << ", Score: " << petResults[i].second << endl;
+         cout << "Adopter Name: " << adopterResults[i].first->getUsername() << ", Score: " << adopterResults[i].second << endl;
     }
 }
 
