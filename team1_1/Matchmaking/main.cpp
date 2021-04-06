@@ -23,11 +23,11 @@ void checkPetMatches(){
 //checking if finding matches for pets work
 void checkAdopterMatches(){
     Matchmaking* match = new Matchmaking();
-    string petName = "violet";
+    string petName = "jessica";
     match->fillPets();
     match->findMatchForPet(petName);
     cout << "Searching adopter matches for pet: " << petName << endl;
-    match->showAdopterResults();
+    match->showAdopterResults(3);
 }
 
 int main(){

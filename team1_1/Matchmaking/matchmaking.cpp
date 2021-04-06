@@ -120,6 +120,19 @@ void Matchmaking::findMatchForPet(string name){
 }
 
 /*
+ * Adds an adopter with the passed name and score to the adopter results vector
+ * @param name Adopter's username
+ * @param score Adopter's score relative to a Pet's tags
+*/
+void Matchmaking::fillAdopterResults(string name, int score){
+    Adopter* adopter = new Adopter();
+    adopter->setUsername(name);
+    //cout << "Adopter username: " << adopter->getUsername() << endl;
+    //cout << "Adding adopter to vector...CurrentScore: " << currScore << " userName: " << userName << endl;
+    adopterResults.push_back(make_pair(adopter, score));
+}
+
+/*
  * The matchmaking algorithm.
  * Goes through the database line by line and stores each animal.
  * Sorts the animals based on matching score at the end.
@@ -133,23 +146,15 @@ void Matchmaking::findMatchForPet(Pet *p){
         string userName = "";
         //need to handle score change and userName change
         int currScore = 0;
-        //int count = 0;
         while(query.next()){
-            //cout << "Count: " << count << endl;
-            //count++;
-
             string newUserName = query.value(0).toString().toStdString();
 
             //cout << "Previous userName: " << userName << endl;
-            //cout << "Current userName: " << newUserName << endl;
+            //cout << "Current userName# " << count << ": " << newUserName << endl;
 
             if(userName != newUserName){
                 if(userName != ""){
-                    Adopter* adopter = new Adopter();
-                    adopter->setUsername(userName);
-                    //cout << "Adopter username: " << adopter->getUsername() << endl;
-                    //cout << "Adding adopter to vector...CurrentScore: " << currScore << " userName: " << userName << endl;
-                    adopterResults.push_back(make_pair(adopter, currScore));
+                    fillAdopterResults(userName, currScore);
                     currScore = 0;
                 }
                 userName = newUserName;
@@ -160,6 +165,7 @@ void Matchmaking::findMatchForPet(Pet *p){
             string attributeType = query.value(2).toString().toStdString();
             currScore += getAdopterScore(p, attributeType, attribute);
         }
+        fillAdopterResults(userName, currScore);
     }
 
     sort(adopterResults.begin(), adopterResults.end(), customAdopterResultSort);
@@ -223,7 +229,6 @@ void Matchmaking::showPetResults(){
  * Prints out the adopter result - sorted vector of animals based on score
 */
 void Matchmaking::showAdopterResults(){
-    cout << "vector size is: " << adopterResults.size() << endl;
     for(int i = 0; i <= (int) adopterResults.size(); i++){
          cout << "Adopter Name: " << adopterResults[i].first->getUsername() << ", Score: " << adopterResults[i].second << endl;
     }
@@ -242,6 +247,29 @@ void Matchmaking::showPetResults(int amount){
         if (input == (int)'\n' && shownAmount <= resultSize) {
             for(int i = 0; i < amount && shownAmount <= resultSize; i++){
                 cout << "Pet Name: " << petResults[shownAmount].first->getName() << ", Score: " << petResults[shownAmount].second << endl;
+                shownAmount++;
+            }
+        }
+        else {
+            cout << "Showed all results!\n";
+            break;
+        }
+    }
+}
+
+/*
+ * Prints out the result - sorted vector of adopters based on their score.
+ * Takes in a specified amount of results to show each time.
+ * @param amount Number of items to show each time
+*/
+void Matchmaking::showAdopterResults(int amount){
+    int resultSize = (int) adopterResults.size();
+    int shownAmount = 0;
+    int input;
+    while ((input = cin.get())) {
+        if (input == (int)'\n' && shownAmount <= resultSize) {
+            for(int i = 0; i < amount && shownAmount <= resultSize; i++){
+                cout << "Pet Name: " << adopterResults[shownAmount].first->getUsername() << ", Score: " << adopterResults[shownAmount].second << endl;
                 shownAmount++;
             }
         }

@@ -21,6 +21,7 @@ public:
     void findMatchForPet(string name);                 // finds the pet with the given name and finds adopter matches for it
     void showPetResults();                              //prints out the list of matching pets based on score
     void showPetResults(int amount);
+    void fillAdopterResults(string name, int score);    //adds in an adopter with the given information to the adopter results vector
     void showAdopterResults();                          //prints out the list of matching adopters based on score
     void showAdopterResults(int amount);                          //prints out the list of matching adopters based on score
     int getPetScore(vector <string> list, string name);    //checks the passed list if it contains what the user wanted

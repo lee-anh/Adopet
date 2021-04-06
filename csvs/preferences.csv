@@ -1,10 +1,10 @@
 user1,fish,species
 user1,anogra,breed
-user1,gerbil ,breed
+user1,gerbil,breed
 user1,hamster,breed
 user1,herding,breed
 user1,main coon,breed
-user1,mouse ,breed
+user1,mouse,breed
 user1,parakeet,breed
 user1,rat,breed
 user1,silver fox,breed
@@ -23,7 +23,7 @@ user2,rodent,species
 user2,anogra,breed
 user2,californian,breed
 user2,freshwater,breed
-user2,mouse ,breed
+user2,mouse,breed
 user2,non-sporting,breed
 user2,parrot,breed
 user2,persian,breed
@@ -45,12 +45,12 @@ user2,best friends,shelter
 user3,bird,species
 user3,rodent,species
 user3,anogra,breed
-user3,gerbil ,breed
+user3,gerbil,breed
 user3,guinea pig,breed
 user3,hamster,breed
 user3,herding,breed
 user3,hound,breed
-user3,mouse ,breed
+user3,mouse,breed
 user3,parakeet,breed
 user3,parrot,breed
 user3,persian,breed
@@ -119,7 +119,7 @@ user6,hamster,breed
 user6,herding,breed
 user6,hound,breed
 user6,main coon,breed
-user6,mouse ,breed
+user6,mouse,breed
 user6,non-sporting,breed
 user6,parrot,breed
 user6,ragdoll,breed
@@ -139,7 +139,7 @@ user6,kids,goodWith
 user6,animal welfare league,shelter
 user6,humane society,shelter
 user7,cat,species
-user7,mouse ,breed
+user7,mouse,breed
 user7,adult,age
 user7,senior,age
 user7,large,size
