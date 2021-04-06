@@ -46,6 +46,9 @@ public:
     string getTemperament();
     void setTemperament(string t);
 
+    int getPetID();
+    void setPetID(int id);
+
 private:
     int id;
     string name;

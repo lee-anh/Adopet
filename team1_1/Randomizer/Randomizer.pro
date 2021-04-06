@@ -8,7 +8,9 @@ QT += sql
 
 SOURCES += \
         main.cpp \
-        peoplerandomizer.cpp
+        peoplerandomizer.cpp \
+        petrandomizer.cpp
 
 HEADERS += \
-    peoplerandomizer.h
+    peoplerandomizer.h \
+    petrandomizer.h

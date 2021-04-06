@@ -4,12 +4,15 @@
 Pet::Pet()
 {
     name = "";
-    age = -1;
+    size = "";
+    age = "";
     species = "";
     breed = "";
     gender = "";
     temperament = "";
-
+    this->bio = "";
+    goodWith = "";
+    shelter = "";
 }
 
 Pet::Pet(string n, string s, string b, string a, string sz, string t, string gd, string gw, string sh, string bio){
@@ -110,4 +113,10 @@ void Pet::setSize(string sz){
     size = sz;
 }
 
+int Pet::getPetID(){
+    return id;
+}
 
+void Pet::setPetID(int id){
+    this->id = id;
+}
