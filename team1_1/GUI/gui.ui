@@ -58,7 +58,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>DB Searching Page</string>
+      <string>Database Searching Page</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="searchBar">
