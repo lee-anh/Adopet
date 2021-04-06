@@ -27,7 +27,7 @@ void checkAdopterMatches(){
     match->fillPets();
     match->findMatchForPet(petName);
     cout << "Searching adopter matches for pet: " << petName << endl;
-    match->showAdopterResults(3);
+    match->showAdopterResults(1);
 }
 
 int main(){
