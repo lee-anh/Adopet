@@ -46,7 +46,6 @@ Pet::Pet(int petId, string petName, string petSpecies, string petBreed,
     goodWith = petGoodWith;
     shelter = petShelter;
     bio = petBio;
-
 }
 
 Pet::~Pet(){
@@ -144,4 +143,10 @@ void Pet::setBio(string bi){
 }
 
 
+int Pet::getPetID(){
+    return id;
+}
 
+void Pet::setPetID(int id){
+    this->id = id;
+}

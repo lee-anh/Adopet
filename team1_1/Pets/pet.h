@@ -57,6 +57,9 @@ public:
 
 
 
+    int getPetID();
+    void setPetID(int id);
+
 private:
     int id;
     string name;
