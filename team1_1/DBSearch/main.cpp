@@ -13,6 +13,7 @@ int main()
     cin >> input;
     cout << endl;
     dbTest->search(input);
+    dbTest->printMatchingVec();
 
     return 0;
 }

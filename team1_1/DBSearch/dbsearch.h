@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <QtSql>
+#include "../Pets/pet.h"
+
 
 using namespace std;
 
@@ -11,6 +13,7 @@ class DBSearch
 {
 public:
     DBSearch();
+    DBSearch(string dbFilepath);
     ~DBSearch();
 
     //two options: search bar or check/uncheck the boxes
@@ -19,31 +22,34 @@ public:
     void search(string s);
 
     int queryDB(string s, string attribute);
+    vector<Pet> getPetVec();
+    int getPetVecSize();
+    void printMatchingVec();
+    void clearMatchingVec();
 
 
 private:
     //database stuff
+    string filepath;
     void openDB();
     QSqlDatabase db;
     void fillVecsFromDB();
     void fillStaticVecs();
 
+
+
     //vectors of keywords
     vector<string> mainSpecies; //from DB
     vector<string> mainBreeds; //from DB
-
-
     vector<string> mainAges; //static
     vector<string> mainSizes; //static
-
-
     vector<string> mainTemperaments; //from DB
     vector<string> mainGenders; //static
     vector<string> mainGoodWith; //from DB
-
-
-    //not doing zipcodes yet
     vector<string> mainShelters; //from DB
+
+    vector<Pet> matchingPets;
+
 
 
     //optimization for later: find likes

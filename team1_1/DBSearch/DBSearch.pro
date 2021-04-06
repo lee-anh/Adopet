@@ -7,7 +7,9 @@ QT += sql
 
 SOURCES += \
         dbsearch.cpp \
-        main.cpp
+        main.cpp \
+        ../Pets/pet.cpp
 
 HEADERS += \
-    dbsearch.h
+    dbsearch.h \
+    ../Pets/pet.h
