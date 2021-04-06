@@ -34,7 +34,7 @@ DBSearch::~DBSearch()
 }
 
 void DBSearch::search(string s){
-    matchingPets.clear();
+    //matchingPets.clear();
 
     //lowercase the input
     transform(s.begin(), s.end(), s.begin(), ::tolower);
@@ -266,4 +266,8 @@ void DBSearch::printMatchingVec(){
     for(int i = 0; i < (int) matchingPets.size(); i++){
         cout << matchingPets.at(i).getName() << endl;
     }
+}
+
+void DBSearch::clearMatchingVec(){
+    matchingPets.clear();
 }

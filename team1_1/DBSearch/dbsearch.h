@@ -25,6 +25,7 @@ public:
     vector<Pet> getPetVec();
     int getPetVecSize();
     void printMatchingVec();
+    void clearMatchingVec();
 
 
 private:
@@ -48,7 +49,6 @@ private:
     vector<string> mainShelters; //from DB
 
     vector<Pet> matchingPets;
-
 
 
 
