@@ -2,6 +2,7 @@
 
 DBSearch::DBSearch()
 {
+    filepath = "../../projectDB.sqlite";
 
     //Databse stuff
     openDB();
@@ -12,8 +13,20 @@ DBSearch::DBSearch()
 
 
 
+
+
 }
 
+DBSearch::DBSearch(string dbFilepath){
+    filepath = dbFilepath;
+    //Databse stuff
+    openDB();
+
+    //load keyword vectors
+    fillStaticVecs();
+    fillVecsFromDB();
+
+}
 DBSearch::~DBSearch()
 {
 
@@ -21,6 +34,8 @@ DBSearch::~DBSearch()
 }
 
 void DBSearch::search(string s){
+    //matchingPets.clear();
+
     //lowercase the input
     transform(s.begin(), s.end(), s.begin(), ::tolower);
 
@@ -131,17 +146,30 @@ int DBSearch::queryDB(string s, string attribute){
         QString qAttribute = QString::fromStdString(attribute);
        // QString qs = "SELECT id, " + qAttribute + " FROM pets WHERE " +
        //         qAttribute + " LIKE '%" + QString::fromStdString(s) + "%'";
-        QString qs = "SELECT id, name," + qAttribute + " FROM pets";
+        QString qs = "SELECT " + qAttribute +
+                ", id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio FROM pets";
         query.exec(qs);
         while(query.next()){
-            int id = query.value(0).toInt();
-            string name = query.value(1).toString().toStdString();
-            string petAttribute = query.value(2).toString().toStdString();
+            string petAttribute = query.value(0).toString().toStdString();
+            int id = query.value(1).toInt();
+            string name = query.value(2).toString().toStdString();
+            string species = query.value(3).toString().toStdString();
+            string breed = query.value(4).toString().toStdString();
+            string age = query.value(5).toString().toStdString();
+            string size = query.value(6).toString().toStdString();
+            string temperament = query.value(7).toString().toStdString();
+            string gender = query.value(8).toString().toStdString();
+            string goodWith = query.value(9).toString().toStdString();
+            string shelter = query.value(10).toString().toStdString();
+            string bio = query.value(11).toString().toStdString();
+
+
            // cout << "ID: " << id << endl; //%male% female problem
             //count++;
             if(s == petAttribute){
                 count++;
-               cout << "ID: " << id << " " << name << endl;
+                Pet p = Pet(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+                matchingPets.push_back(p);
             }
         }
         cout << "Showing " << count << " results" << endl;
@@ -152,12 +180,19 @@ int DBSearch::queryDB(string s, string attribute){
     return count;
 }
 
+vector<Pet> DBSearch::getPetVec(){
+    return matchingPets;
+}
+
+int DBSearch::getPetVecSize(){
+    return (int) matchingPets.size();
+}
 
 
 
 void DBSearch::openDB(){
     db = QSqlDatabase::addDatabase("QSQLITE");
-    string fullName = "../../projectDB.sqlite";
+    string fullName = filepath;
     db.setDatabaseName(QString::fromStdString(fullName));
     if(!db.open()){
         std::cerr << "Database does not open -- "
@@ -224,4 +259,15 @@ void DBSearch::fillStaticVecs(){
     mainAges = {"young", "adult","senior"};
     mainGenders = {"male", "female"};
     mainSizes = {"small", "medium", "large"};
+    matchingPets = vector<Pet>();
+}
+
+void DBSearch::printMatchingVec(){
+    for(int i = 0; i < (int) matchingPets.size(); i++){
+        cout << matchingPets.at(i).getName() << endl;
+    }
+}
+
+void DBSearch::clearMatchingVec(){
+    matchingPets.clear();
 }

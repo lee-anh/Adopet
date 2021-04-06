@@ -3,15 +3,35 @@
 
 using namespace std;
 
-int main(){
+//checking if matchmaking for adopters works
+void checkPetMatches(){
     Preferences* p = new Preferences();
-    p->addAge("Young");
-    p->addAge("Adult");
-    p->addBreed("Golden Retriever");
-    p->addSpecies("Dog");
-    p->addTemperament("Happy");
+    p->addAge("young");
+    p->addAge("adult");
+    p->addBreed("golden retriever");
+    p->addSpecies("dog");
+    p->addTemperament("happy");
+    p->addSize("middle");
+    p->addShelter("human society");
+    p->addGoodWith("kids");
 
     Matchmaking* match = new Matchmaking();
-    match->findMatch(p);
-    match->showResults();
+    match->findMatchForAdopter(p);
+    match->showPetResults(4);
+}
+
+//checking if finding matches for pets work
+void checkAdopterMatches(){
+    Matchmaking* match = new Matchmaking();
+    string petName = "jessica";
+    match->fillPets();
+    match->findMatchForPet(petName);
+    cout << "Searching adopter matches for pet: " << petName << endl;
+    match->showAdopterResults(1);
+}
+
+int main(){
+    //checkPetMatches();
+
+    checkAdopterMatches();
 }
