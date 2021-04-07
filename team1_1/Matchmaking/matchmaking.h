@@ -14,7 +14,9 @@ public:
     ~Matchmaking();
 
     void openDB();                                      //opens the database before performing actions
-    void findMatchForAdopter(Preferences *p);           //finds the matching pets based on user preference
+    Preferences* fillPreferences(string adopterName);           //searches the DB and gets the preference of the passed user
+    void updatePreference(Preferences* p, string attribute, string attributeType);     //sets a specific preference based on attribute type and attribute
+    void findMatchForAdopter(string adopterName);           //finds the matching pets based on an adopter user
     void fillPets();                                    //stores all the pets in the DB in the vector
     void findMatchForPets();                            //finds matching potential adopters for all pets in the DB
     void findMatchForPet(Pet *p);                       //finds the matching potential adopters based on pet attributes

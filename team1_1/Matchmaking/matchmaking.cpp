@@ -172,12 +172,53 @@ void Matchmaking::findMatchForPet(Pet *p){
 }
 
 /*
+ * Sets the specific preference of the user based on the bassed attribute and type of attribute
+ * @param p Preference to be editted
+ * @param attributeType the type of the attribute
+ * @param attribute the attribute itself
+*/
+void Matchmaking::updatePreference(Preferences* p, string attribute, string attributeType){
+    if(attributeType == "species") p->addSpecies(attribute);
+    else if(attributeType == "breed") p->addBreed(attribute);
+    else if(attributeType == "age") p->addAge(attribute);
+    else if(attributeType == "size") p->addSize(attribute);
+    else if(attributeType == "temperament") p->addTemperament(attribute);
+    else if(attributeType == "gender") p->setGender(attribute);
+    else if(attributeType == "goodWith") p->addGoodWith(attribute);
+    else if(attributeType == "shelter") p->addShelter(attribute);
+}
+
+/*
+ * Loops through the preferences database and gets the preference of the passed adopter user
+ * @param adopterName Username of the adopter
+ * @return Preference object with the adopter's preferences
+*/
+Preferences* Matchmaking::fillPreferences(string adopterName){
+    Preferences* p = new Preferences();
+    if(db.open()){
+        QSqlQuery query = QSqlQuery();
+        QString s = "SELECT * from preferences";
+        query.exec(s);
+        while(query.next()){
+            string name = query.value(0).toString().toStdString();
+            if(name == adopterName){
+                string attribute = query.value(1).toString().toStdString();
+                string attributeType = query.value(2).toString().toStdString();
+                updatePreference(p, attribute, attributeType);
+            }
+        }
+    }
+    return p;
+}
+
+/*
  * The matchmaking algorithm.
  * Goes through the database line by line and stores each animal.
  * Sorts the animals based on matching score at the end.
  * @param p User preference object
 */
-void Matchmaking::findMatchForAdopter(Preferences *p){
+void Matchmaking::findMatchForAdopter(string adopterName){
+    Preferences* adopterPreference = fillPreferences(adopterName);
     if(db.open()){
         QSqlQuery query = QSqlQuery();
         QString s = "SELECT * from pets";
@@ -200,14 +241,14 @@ void Matchmaking::findMatchForAdopter(Preferences *p){
             Pet* pet = new Pet(name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
 
             //gathering the scores based on whether it matches user preferences
-            currScore += getPetScore(p->getSpecies(), species);
-            currScore += getPetScore(p->getBreed(), breed);
-            currScore += getPetScore(p->getAge(), age);
-            currScore += getPetScore(p->getTemperament(), temperament);
-            currScore += getPetScore(p->getSize(), size);
-            currScore += getPetScore(p->getGoodWith(), goodWith);
-            currScore += getPetScore(p->getShelter(), shelter);
-            if(p->getGender() == gender || p->getGender() == "all") currScore++;
+            currScore += getPetScore(adopterPreference->getSpecies(), species);
+            currScore += getPetScore(adopterPreference->getBreed(), breed);
+            currScore += getPetScore(adopterPreference->getAge(), age);
+            currScore += getPetScore(adopterPreference->getTemperament(), temperament);
+            currScore += getPetScore(adopterPreference->getSize(), size);
+            currScore += getPetScore(adopterPreference->getGoodWith(), goodWith);
+            currScore += getPetScore(adopterPreference->getShelter(), shelter);
+            if(adopterPreference->getGender() == gender || adopterPreference->getGender() == "all") currScore++;
 
             petResults.push_back(make_pair(pet, currScore));
         }

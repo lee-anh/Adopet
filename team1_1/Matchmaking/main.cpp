@@ -5,19 +5,12 @@ using namespace std;
 
 //checking if matchmaking for adopters works
 void checkPetMatches(){
-    Preferences* p = new Preferences();
-    p->addAge("young");
-    p->addAge("adult");
-    p->addBreed("golden retriever");
-    p->addSpecies("dog");
-    p->addTemperament("happy");
-    p->addSize("middle");
-    p->addShelter("human society");
-    p->addGoodWith("kids");
-
     Matchmaking* match = new Matchmaking();
-    match->findMatchForAdopter(p);
-    match->showPetResults(4);
+    string adopterName;
+    cout << "Find match for adopter: ";
+    getline(cin, adopterName);
+    match->findMatchForAdopter(adopterName);
+    match->showPetResults();
 }
 
 //checking if finding matches for pets work
@@ -32,9 +25,8 @@ void checkAdopterMatches(){
 }
 
 int main(){
-    //checkPetMatches();
-
-    checkAdopterMatches();
+    checkPetMatches();
+    //checkAdopterMatches();
 
     //algorithm3(string shelterName);
 }
