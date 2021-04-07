@@ -8,12 +8,17 @@ int main()
 {
     DBSearch *dbTest = new DBSearch();
 
-    cout << "Search bar: ";
-    string input;
-    cin >> input;
-    cout << endl;
-    dbTest->search(input);
-    dbTest->printMatchingVec();
+
+    dbTest->addToAttributes("cat", "species");
+    dbTest->addToAttributes("dog", "species");
+
+    dbTest->addToAttributes("maine coon", "breed");
+    dbTest->addToAttributes("young", "age");
+    dbTest->removeFromAttributes("maine coon", "breed");
+
+
+    cout << dbTest->createQuery() << endl;
+
 
     return 0;
 }

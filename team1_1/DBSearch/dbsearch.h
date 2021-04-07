@@ -7,6 +7,7 @@
 #include "../Pets/pet.h"
 
 
+
 using namespace std;
 
 class DBSearch
@@ -16,16 +17,21 @@ public:
     DBSearch(string dbFilepath);
     ~DBSearch();
 
-    //two options: search bar or check/uncheck the boxes
+    //Step 1: edit constraints vector
+    bool addToAttributes(string attribute, string category);
+    bool removeFromAttributes(string attribute, string category);
+    bool search(string s);
 
-    //cout all the animals that match
-    void search(string s);
+    //Step 2: run the query
+    int runNewQuery();
+    string createQuery(); //should be private?
+    int queryDB(string qry); //should be private?
 
-    int queryDB(string s, string attribute);
     vector<Pet> getPetVec();
     int getPetVecSize();
     void printMatchingVec();
-    void clearMatchingVec();
+
+
 
 
 private:
@@ -35,6 +41,10 @@ private:
     QSqlDatabase db;
     void fillVecsFromDB();
     void fillStaticVecs();
+
+    //helper functions
+
+    int getIndex(string category);
 
 
 
@@ -48,7 +58,11 @@ private:
     vector<string> mainGoodWith; //from DB
     vector<string> mainShelters; //from DB
 
+
+    vector<string> attributes;
+    vector<vector<string>> constraints;
     vector<Pet> matchingPets;
+
 
 
 

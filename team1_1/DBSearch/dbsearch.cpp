@@ -11,10 +11,6 @@ DBSearch::DBSearch()
     fillStaticVecs();
     fillVecsFromDB();
 
-
-
-
-
 }
 
 DBSearch::DBSearch(string dbFilepath){
@@ -33,16 +29,49 @@ DBSearch::~DBSearch()
     db.~QSqlDatabase();
 }
 
-void DBSearch::search(string s){
-    //matchingPets.clear();
+bool DBSearch::addToAttributes(string attribute, string category){
+    int index = getIndex(category);
+
+    if(index < 0){
+        return false;
+    }
+    //else
+    constraints[index].push_back(attribute);
+    return true;
+}
+
+
+bool DBSearch::removeFromAttributes(string attribute, string category){
+    int index = getIndex(category);
+    bool toReturn = false;
+    if (index < 0){
+        return toReturn;
+    }
+    //else
+    for(int i = 0; i < (int) constraints[index].size(); i++){
+        if(attribute == constraints[index][i]){
+            constraints[index].erase(constraints[index].begin() + i);
+            toReturn = true;
+            break;
+        }
+    }
+
+    return toReturn;
+
+}
+
+bool DBSearch::search(string s){
+    //clear vectors in the constraints vector, not constraint vector itsle
+    for(int i = 0; i < (int) constraints.size(); i++){
+        constraints[i].clear();
+    }
 
     //lowercase the input
     transform(s.begin(), s.end(), s.begin(), ::tolower);
 
-    int count = 0;
     string attributeToSearch = "";
 
-    //how to prevent iterating over everything? it's a little repetitive rn
+    //species
     for(int i = 0; i < (int) mainSpecies.size(); i++){
         if(s == mainSpecies.at(i)){
             attributeToSearch = "species";
@@ -111,7 +140,7 @@ void DBSearch::search(string s){
     }
 
 
-     //Shelters
+    //shelter
     if(attributeToSearch == ""){
         for(int i = 0; i < (int) mainShelters.size(); i++){
             if(s == mainShelters.at(i)){
@@ -122,64 +151,88 @@ void DBSearch::search(string s){
     }
 
 
-    if(attributeToSearch == ""){
-       // count = generalQueryDB(s);//general query
-    } else {
-        count = queryDB(s, attributeToSearch);
-    }
-
-    if(count == 0){
-        cout << "No animals match your search" << endl;
-    }
-
-
-
+    return addToAttributes(s, attributeToSearch);
 
 
 }
 
 
-int DBSearch::queryDB(string s, string attribute){
+
+
+
+
+int DBSearch::runNewQuery(){
+    //clear the current vector of matchingPets
+    matchingPets.clear();
+
+    //generate query from current constraints vector
+    string qry = createQuery();
+
+    //run query, which alters the matchingPets vector
+    return queryDB(qry);
+
+
+}
+
+string DBSearch::createQuery(){
+    string query = "SELECT id, name, species, breed, age, "
+        "size, temperament, gender, goodWith, shelter, bio FROM pets ";
+    int first = 0;
+    for(int i = 0; i < (int) constraints.size(); i++){
+        vector<string> temp = constraints[i];
+        if(first == 0 && temp.size() > 0){
+            query = query + "WHERE (";
+            first++;
+        } else if (first > 0 && temp.size() > 0){
+            query = query + "AND (";
+        } //else do nothing
+
+        for(int j = 0; j < (int) temp.size(); j++){
+            query = query  + attributes[i] + " = \"" + temp[j] + "\"";
+            if(j < ((int) temp.size() - 1)){
+                query = query + " OR ";
+            } else {
+                query = query + ") ";
+            }
+        }
+    }
+
+    return query;
+}
+
+
+int DBSearch::queryDB(string qry){
     int count = 0;
     if(db.open()){
         QSqlQuery query = QSqlQuery();
-        QString qAttribute = QString::fromStdString(attribute);
-       // QString qs = "SELECT id, " + qAttribute + " FROM pets WHERE " +
-       //         qAttribute + " LIKE '%" + QString::fromStdString(s) + "%'";
-        QString qs = "SELECT " + qAttribute +
-                ", id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio FROM pets";
+        QString qs = QString::fromStdString(qry);
         query.exec(qs);
         while(query.next()){
-            string petAttribute = query.value(0).toString().toStdString();
-            int id = query.value(1).toInt();
-            string name = query.value(2).toString().toStdString();
-            string species = query.value(3).toString().toStdString();
-            string breed = query.value(4).toString().toStdString();
-            string age = query.value(5).toString().toStdString();
-            string size = query.value(6).toString().toStdString();
-            string temperament = query.value(7).toString().toStdString();
-            string gender = query.value(8).toString().toStdString();
-            string goodWith = query.value(9).toString().toStdString();
-            string shelter = query.value(10).toString().toStdString();
-            string bio = query.value(11).toString().toStdString();
+            int id = query.value(0).toInt();
+            string name = query.value(1).toString().toStdString();
+            string species = query.value(2).toString().toStdString();
+            string breed = query.value(3).toString().toStdString();
+            string age = query.value(4).toString().toStdString();
+            string size = query.value(5).toString().toStdString();
+            string temperament = query.value(6).toString().toStdString();
+            string gender = query.value(7).toString().toStdString();
+            string goodWith = query.value(8).toString().toStdString();
+            string shelter = query.value(9).toString().toStdString();
+            string bio = query.value(10).toString().toStdString();
 
 
-           // cout << "ID: " << id << endl; //%male% female problem
-            //count++;
-            if(s == petAttribute){
-                count++;
-                Pet p = Pet(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
-                matchingPets.push_back(p);
-            }
+
+            Pet p = Pet(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+            matchingPets.push_back(p);
+            count++;
         }
-        cout << "Showing " << count << " results" << endl;
+
     } else {
         return -1; // -1 will indicate that the database couldn't open
     }
 
     return count;
 }
-
 vector<Pet> DBSearch::getPetVec(){
     return matchingPets;
 }
@@ -259,7 +312,11 @@ void DBSearch::fillStaticVecs(){
     mainAges = {"young", "adult","senior"};
     mainGenders = {"male", "female"};
     mainSizes = {"small", "medium", "large"};
+
     matchingPets = vector<Pet>();
+    attributes = {"species", "breed", "age",
+                  "size", "temperament", "gender", "goodWith", "shelter"};
+    constraints.resize(8, vector<string>(0)); //8 attributes to compare
 }
 
 void DBSearch::printMatchingVec(){
@@ -268,6 +325,27 @@ void DBSearch::printMatchingVec(){
     }
 }
 
-void DBSearch::clearMatchingVec(){
-    matchingPets.clear();
+
+
+int DBSearch::getIndex(string category){
+    if (category == "species"){
+        return 0;
+    } else if (category == "breed"){
+        return 1;
+    } else if (category == "age"){
+        return 2;
+    } else if (category == "size"){
+        return 3;
+    } else if (category == "temperament"){
+        return 4;
+    } else if (category == "gender"){
+        return 5;
+    } else if (category == "goodWith"){
+        return 6;
+    } else if (category == "shelter"){
+        return 7;
+    } else {
+        return -1;
+    }
 }
+

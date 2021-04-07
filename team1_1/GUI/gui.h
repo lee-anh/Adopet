@@ -2,8 +2,8 @@
 #define GUI_H
 
 #include <QWidget>
-
 #include <QtSql>
+#include <vector>
 
 #include "../DBSearch/dbsearch.h"
 #include "../Pets/pet.h"
@@ -28,7 +28,7 @@ private:
     void displayPets(int start);
     void meetPet(Pet p);
     void clearLabels();
-    void checkBoxSearch(string wordToSearch, int arg1);
+    void checkBoxSearch(string wordToSearch, string category, int arg1);
 
 
     //static or dynamic?
@@ -36,7 +36,10 @@ private:
     Pet displayedPet2;
     Pet displayedPet3;
 
+    int nextDisplayPetsStartIndex;
+    int displayPetsPageNumber;
     int previousPage;
+
 
 
 private slots:
@@ -51,9 +54,13 @@ private slots:
     void on_birdCheckBox_stateChanged(int arg1);
 
 
+    //results
     void on_linkToResult1_clicked();
     void on_linkToResult2_clicked();
     void on_linkToResult3_clicked();
     void on_backButton_clicked();
+
+    void on_loadNext_clicked();
+    void on_loadPrevious_clicked();
 };
 #endif // GUI_H
