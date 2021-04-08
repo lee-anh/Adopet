@@ -8,7 +8,7 @@ int main()
 
     SavedList *test = new SavedList();
     Pet p = Pet();
-    p.setID(1);
+    p.setID(45);
     test->unsavePet(p);
 
     return 0;

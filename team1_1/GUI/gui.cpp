@@ -328,11 +328,11 @@ void GUI::on_saveButton_clicked()
 {
     //how to tell if saved or unsaved?
     if(ui->saveButton->isChecked() == false){
-        savedList->unsavePet(petToMeet.getID());
+        savedList->unsavePet(petToMeet);
         ui->exit->setText(QString::fromStdString(petToMeet.getName()));
         ui->saveButton->setText("Save");
     } else if (ui->saveButton->isChecked() == true){
-        savedList->savePet(petToMeet.getID());
+        savedList->savePet(petToMeet);
         ui->saveButton->setText("Unsave");
     }
 }

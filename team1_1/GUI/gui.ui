@@ -22,7 +22,7 @@
      <x>20</x>
      <y>60</y>
      <width>771</width>
-     <height>471</height>
+     <height>511</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -32,7 +32,7 @@
    <property name="currentIndex">
     <number>1</number>
    </property>
-   <widget class="QWidget" name="page">
+   <widget class="QWidget" name="Login0">
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
@@ -617,7 +617,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="page_2">
+   <widget class="QWidget" name="MyFavorites">
     <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
@@ -715,8 +715,9 @@
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="page_3"/>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>110</x>
