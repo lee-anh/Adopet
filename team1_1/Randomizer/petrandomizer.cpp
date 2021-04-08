@@ -4,8 +4,8 @@ PetRandomizer::PetRandomizer()
 {
     //default 10 people are created
     numOfPets = 10;
-    initializeNameVecs();
     openDB();
+    initializeNameVecs();
 
     //clear old data in csvs
     writeCsv.open("../../csvs/pets.csv", ofstream::out | ofstream::trunc);
@@ -16,8 +16,8 @@ PetRandomizer::PetRandomizer()
 
 PetRandomizer::PetRandomizer(int num){
     numOfPets = num;
-    initializeNameVecs();
     openDB();
+    initializeNameVecs();
 
     writeCsv.open("../../csvs/pets.csv", ofstream::out | ofstream::trunc);
     writeCsv.close();
@@ -64,6 +64,7 @@ void PetRandomizer::initializeNameVecs(){
         query.exec(qs);
         while(query.next()){
             string s = query.value(0).toString().toStdString();
+            cout << s << endl;
             species.push_back(s);
         }
 
@@ -75,6 +76,8 @@ void PetRandomizer::initializeNameVecs(){
         while(query.next()){
             string s = query.value(0).toString().toStdString();
             string t = query.value(1).toString().toStdString();
+            cout << s << endl;
+            cout << t << endl;
             breed.push_back(make_pair(s,t));
         }
 
@@ -83,6 +86,7 @@ void PetRandomizer::initializeNameVecs(){
         query.exec(qs3);
         while(query.next()){
             string s = query.value(0).toString().toStdString();
+            cout << s << endl;
             temperament.push_back(s);
         }
 
@@ -92,6 +96,7 @@ void PetRandomizer::initializeNameVecs(){
         query.exec(qs4);
         while(query.next()){
             string s = query.value(0).toString().toStdString();
+            cout << s << endl;
             goodWith.push_back(s);
         }
 
@@ -101,6 +106,7 @@ void PetRandomizer::initializeNameVecs(){
         query.exec(qs5);
         while(query.next()){
             string s = query.value(0).toString().toStdString();
+            cout << s << endl;
             shelter.push_back(s);
         }
     }
@@ -108,9 +114,10 @@ void PetRandomizer::initializeNameVecs(){
 
 void PetRandomizer::writeToCSV(){
     //Do we not skip the first line?
-    for(int i=0; i<numOfPets;i++){
-        writeCsv.open("../../csvs/pets.csv", ios_base::app);
-
+    cout <<" Number of Pets: " << numOfPets << endl;
+    writeCsv.open("../../csvs/pets.csv", ios_base::app);
+    for(int i=1; i<numOfPets+1;i++){
+        cout << " Counter: " << i << endl;
         int rand1 = rand() % (int) names.size();
         string petName = names.at(rand1);
         cout << petName << endl;
@@ -118,7 +125,7 @@ void PetRandomizer::writeToCSV(){
         string petAge = age.at(rand2);
         cout << petAge << endl;
         int rand3 = rand() % (int) gender.size();
-        string petGen = names.at(rand3);
+        string petGen = gender.at(rand3);
         cout << petGen << endl;
         int rand4 = rand() % (int) size.size();
         string petSize = size.at(rand4);
@@ -143,6 +150,6 @@ void PetRandomizer::writeToCSV(){
         writeCsv << petName << "," << petSpecies << "," << petBreed << "," << petSize << "," << petTemp
                  << "," << petGen << "," << petGoodWith << "," << petShelter << "," << "Lorem ipsum";
         writeCsv << "\n";
-        writeCsv.close();
     }
+    writeCsv.close();
 }

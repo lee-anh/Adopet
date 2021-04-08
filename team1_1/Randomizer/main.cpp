@@ -13,7 +13,7 @@ int main()
     delete test;
     */
 
-    PetRandomizer* test1 = new PetRandomizer(10);
+    PetRandomizer* test1 = new PetRandomizer(100);
     test1->writeToCSV();
 
     return 0;
