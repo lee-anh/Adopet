@@ -17,7 +17,6 @@ public:
     ~PetRandomizer();
 
     void writeToCSV();
-    void speciesTest();
 
 private:
     int numOfPets;
@@ -28,7 +27,7 @@ private:
     QSqlDatabase db;
     void openDB();
 
-    void initalizeNameVecs();
+    void initializeNameVecs();
     void loadDBVecs();
 
     //vectors that don't change
@@ -41,7 +40,7 @@ private:
 
     //read from DB
     vector<string> species;
-    vector<string> breed;
+    vector<pair<string, string>> breed;
     vector<string> temperament;
     vector<string> goodWith;
     vector<string> shelter;

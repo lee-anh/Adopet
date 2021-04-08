@@ -3,6 +3,7 @@ TEMPLATE = subdirs
 SUBDIRS += \
     Adopter \
     AdopterTests \
+    Authentication \
     DBSearch \
     GUI \
     Matchmaking \
