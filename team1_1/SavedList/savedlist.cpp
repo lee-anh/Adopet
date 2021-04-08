@@ -48,7 +48,9 @@ void SavedList::loadList(){
     savedPets.clear();
     if(db.open()){
         QString qry = "SELECT petID FROM savedPets WHERE username=";
+        qry+="\"";
         qry += QString::fromStdString(username);
+        qry+="\"";
         qry+=";";
         QSqlQuery query = QSqlQuery();
         QSqlQuery queryPets = QSqlQuery();
@@ -59,13 +61,23 @@ void SavedList::loadList(){
             qry += QString::fromStdString(s) + ";";
             queryPets.exec(qry);
             while (queryPets.next()){
-                //Have to change the constructor
-                Pet* newPet = new Pet();
+                //Construct pets to be put into the saved list
+                Pet* newPet = new Pet(queryPets.value(1).toString().toStdString()
+                                      ,queryPets.value(2).toString().toStdString()
+                                      ,queryPets.value(3).toString().toStdString()
+                                      ,queryPets.value(4).toString().toStdString()
+                                      ,queryPets.value(5).toString().toStdString()
+                                      ,queryPets.value(6).toString().toStdString()
+                                      ,queryPets.value(7).toString().toStdString()
+                                      ,queryPets.value(8).toString().toStdString()
+                                      ,queryPets.value(9).toString().toStdString(),
+                                      queryPets.value(10).toString().toStdString());
                 savedPets.push_back(*newPet);
             }
         }
     }
 }
+
 
 void SavedList::setUsername(string username){
     this->username = username;
