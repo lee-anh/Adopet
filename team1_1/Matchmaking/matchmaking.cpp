@@ -133,7 +133,7 @@ void Matchmaking::findMatchesForPets(string shelterName){
         vector<pair<Adopter*, int>> tempMatches = findBestMatchForPet(currShelterPets.at(i));
         cout << "Match for " << currShelterPets.at(i)->getName()
              << " - Adopter: " << tempMatches.at(0).first->getUsername()
-             << "   Socer: " << tempMatches.at(0).second << endl;
+             << "   Score: " << tempMatches.at(0).second << endl;
     }
 }
 
@@ -185,7 +185,7 @@ void Matchmaking::findMatchesForPet(Pet *p){
 
             if(userName != newUserName){
                 if(userName != ""){
-                    fillAdopterResults(userName, currScore, adopterResults);
+                    adopterResults = fillAdopterResults(userName, currScore, adopterResults);
                     currScore = 0;
                 }
                 userName = newUserName;
@@ -196,7 +196,7 @@ void Matchmaking::findMatchesForPet(Pet *p){
             string attributeType = query.value(2).toString().toStdString();
             currScore += getAdopterScore(p, attributeType, attribute);
         }
-        fillAdopterResults(userName, currScore, adopterResults);
+        adopterResults = fillAdopterResults(userName, currScore, adopterResults);
     }
 
     sort(adopterResults.begin(), adopterResults.end(), customAdopterResultSort);
