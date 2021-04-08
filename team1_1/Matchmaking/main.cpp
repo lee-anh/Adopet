@@ -9,7 +9,7 @@ void checkPetMatches(){
     string adopterName;
     cout << "Find match for adopter: ";
     getline(cin, adopterName);
-    match->findMatchForAdopter(adopterName);
+    match->findMatchesForAdopter(adopterName);
     match->showPetResults();
 }
 
@@ -20,13 +20,22 @@ void checkAdopterMatches(){
     cout << "Find match for pet: ";
     getline(cin, petName);
     match->fillPets();
-    match->findMatchForPet(petName);
+    match->findMatchesForPet(petName);
     match->showAdopterResults();
 }
 
-int main(){
-    checkPetMatches();
-    //checkAdopterMatches();
+//checking if finding matches for all pets in a specific shelter work
+void checkAllShelterPetsMatches(){
+    Matchmaking* match = new Matchmaking();
+    string shelterName;
+    cout << "Find matches for pets in the shelter: ";
+    getline(cin, shelterName);
+    match->fillPets();
+    match->findMatchesForPets(shelterName);
+}
 
-    //algorithm3(string shelterName);
+int main(){
+    //checkPetMatches();
+    //checkAdopterMatches();
+    checkAllShelterPetsMatches();
 }
