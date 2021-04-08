@@ -38,7 +38,8 @@ private:
     //database stuff
     string filepath;
     void openDB();
-    QSqlDatabase db;
+
+    QSqlDatabase dbSearchdb;
     void fillVecsFromDB();
     void fillStaticVecs();
 

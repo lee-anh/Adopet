@@ -55,8 +55,6 @@ public:
     void setBio(string bi);
 
 
-
-
     int getPetID();
     void setPetID(int id);
 

@@ -14,12 +14,17 @@ SOURCES += \
     main.cpp \
     gui.cpp \
     ../DBSearch/dbsearch.cpp \
-    ../Pets/pet.cpp
+    ../Pets/pet.cpp \
+    ../SavedList/savedlist.cpp
+
+
 
 HEADERS += \
     gui.h \
     ../DBSearch/dbsearch.h \
-    ../Pets/pet.cpp
+    ../Pets/pet.h \
+    ../SavedList/savedlist.h
+
 
 FORMS += \
     gui.ui

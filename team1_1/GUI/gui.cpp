@@ -10,10 +10,14 @@ GUI::GUI(QWidget *parent)
     ui->linkToResult2->setVisible(false);
     ui->linkToResult3->setVisible(false);
     search = new DBSearch("../../../../../projectDB.sqlite");
+    savedList = new SavedList();
 
     //JUST FOR NOW
     ui->stackedWidget->setCurrentIndex(1);
     previousPage = 1;
+    displayPetsPageNumber = 1;
+    search->runNewQuery();
+    displayPets(0);
 
 
 }
@@ -22,11 +26,13 @@ GUI::~GUI()
 {
     delete ui;
     delete search;
+    delete savedList;
 }
 
 void GUI::on_searchButton_clicked()
 {
 
+    clearCheckBoxes();
     QString searchInput = ui->searchBar->text();
     string searchString = searchInput.toStdString();
     search->search(searchString);
@@ -34,10 +40,6 @@ void GUI::on_searchButton_clicked()
 
     nextDisplayPetsStartIndex = 0;
     displayPetsPageNumber = 1;
-
-    displayPets(0);
-
-
 
 }
 
@@ -158,7 +160,24 @@ void GUI::clearLabels(){
     ui->numOfResults->setText("No animals match your search");
 }
 
+void GUI::clearCheckBoxes(){
+    ui->dogCheckBox->setChecked(false);
+    ui->catCheckBox->setChecked(false);
+    ui->rabbitCheckBox->setChecked(false);
+    ui->rodentCheckBox->setChecked(false);
+    ui->fishCheckBox->setChecked(false);
+    ui->birdCheckBox->setChecked(false);
+    ui->youngCheckBox->setChecked(false);
+    ui->adultCheckBox->setChecked(false);
+    ui->seniorCheckBox->setChecked(false);
+    ui->maleCheckBox->setChecked(false);
+    ui->femaleCheckBox->setChecked(false);
 
+
+
+
+
+}
 void GUI::checkBoxSearch(string wordToSearch, string category, int arg1){
     // 0 unchecked
     // 1 partially checked
@@ -214,12 +233,39 @@ void GUI::on_birdCheckBox_stateChanged(int arg1)
     checkBoxSearch("bird", "species", arg1);
 }
 
+void GUI::on_youngCheckBox_stateChanged(int arg1)
+{
+    checkBoxSearch("young", "age", arg1);
+}
+
+void GUI::on_adultCheckBox_stateChanged(int arg1)
+{
+    checkBoxSearch("adult", "age", arg1);
+}
+
+void GUI::on_seniorCheckBox_stateChanged(int arg1)
+{
+    checkBoxSearch("senior", "age", arg1);
+}
+
+void GUI::on_maleCheckBox_stateChanged(int arg1)
+{
+    checkBoxSearch("male", "gender", arg1);
+}
+
+void GUI::on_femaleCheckBox_stateChanged(int arg1)
+{
+    checkBoxSearch("female", "gender", arg1);
+}
+
+
 
 
 void GUI::on_linkToResult1_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
-    meetPet(displayedPet1);
+    petToMeet = displayedPet1;
+    meetPet(petToMeet);
     previousPage = 1;
 
 }
@@ -227,7 +273,8 @@ void GUI::on_linkToResult1_clicked()
 void GUI::on_linkToResult2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
-    meetPet(displayedPet2);
+    petToMeet = displayedPet2;
+    meetPet(petToMeet);
     previousPage = 1;
 
 }
@@ -235,7 +282,8 @@ void GUI::on_linkToResult2_clicked()
 void GUI::on_linkToResult3_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
-    meetPet(displayedPet3);
+    petToMeet = displayedPet3;
+    meetPet(petToMeet);
     previousPage = 1;
 }
 
@@ -271,4 +319,26 @@ void GUI::on_loadPrevious_clicked()
             displayPetsPageNumber = 1;
         displayPets(nextDisplayPetsStartIndex);
     }
+}
+
+
+
+
+void GUI::on_saveButton_clicked()
+{
+    //how to tell if saved or unsaved?
+    if(ui->saveButton->isChecked() == false){
+        savedList->unsavePet(petToMeet.getID());
+        ui->exit->setText(QString::fromStdString(petToMeet.getName()));
+        ui->saveButton->setText("Save");
+    } else if (ui->saveButton->isChecked() == true){
+        savedList->savePet(petToMeet.getID());
+        ui->saveButton->setText("Unsave");
+    }
+}
+
+void GUI::on_exit_clicked()
+{
+    //idk why it keeps crashing
+    connect(ui->exit, &QPushButton::clicked, qApp, &QApplication::quit);
 }

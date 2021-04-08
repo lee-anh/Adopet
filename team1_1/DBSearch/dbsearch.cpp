@@ -26,7 +26,7 @@ DBSearch::DBSearch(string dbFilepath){
 DBSearch::~DBSearch()
 {
 
-    db.~QSqlDatabase();
+    dbSearchdb.~QSqlDatabase();
 }
 
 bool DBSearch::addToAttributes(string attribute, string category){
@@ -203,8 +203,8 @@ string DBSearch::createQuery(){
 
 int DBSearch::queryDB(string qry){
     int count = 0;
-    if(db.open()){
-        QSqlQuery query = QSqlQuery();
+    if(dbSearchdb.open()){
+        QSqlQuery query = QSqlQuery(dbSearchdb);
         QString qs = QString::fromStdString(qry);
         query.exec(qs);
         while(query.next()){
@@ -244,12 +244,12 @@ int DBSearch::getPetVecSize(){
 
 
 void DBSearch::openDB(){
-    db = QSqlDatabase::addDatabase("QSQLITE");
+    dbSearchdb = QSqlDatabase::addDatabase("QSQLITE", "dbsearch");
     string fullName = filepath;
-    db.setDatabaseName(QString::fromStdString(fullName));
-    if(!db.open()){
+    dbSearchdb.setDatabaseName(QString::fromStdString(fullName));
+    if(!dbSearchdb.open()){
         std::cerr << "Database does not open -- "
-                  << db.lastError().text().toStdString()
+                  << dbSearchdb.lastError().text().toStdString()
                   << std::endl;
 
         std::cerr << "  File -- " << fullName << std::endl;
@@ -259,9 +259,10 @@ void DBSearch::openDB(){
     }
 }
 
+
 void DBSearch::fillVecsFromDB(){
-    if(db.open()){
-    QSqlQuery query = QSqlQuery();
+    if(dbSearchdb.open()){
+    QSqlQuery query = QSqlQuery(dbSearchdb);
 
     //species
     QString qs = "SELECT speciesType FROM species";
