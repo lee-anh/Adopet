@@ -5,33 +5,37 @@ using namespace std;
 
 //checking if matchmaking for adopters works
 void checkPetMatches(){
-    Preferences* p = new Preferences();
-    p->addAge("young");
-    p->addAge("adult");
-    p->addBreed("golden retriever");
-    p->addSpecies("dog");
-    p->addTemperament("happy");
-    p->addSize("middle");
-    p->addShelter("human society");
-    p->addGoodWith("kids");
-
     Matchmaking* match = new Matchmaking();
-    match->findMatchForAdopter(p);
-    match->showPetResults(4);
+    string adopterName;
+    cout << "Find match for adopter: ";
+    getline(cin, adopterName);
+    match->findMatchesForAdopter(adopterName);
+    match->showPetResults();
 }
 
 //checking if finding matches for pets work
 void checkAdopterMatches(){
     Matchmaking* match = new Matchmaking();
-    string petName = "jessica";
+    string petName;
+    cout << "Find match for pet: ";
+    getline(cin, petName);
     match->fillPets();
-    match->findMatchForPet(petName);
-    cout << "Searching adopter matches for pet: " << petName << endl;
-    match->showAdopterResults(1);
+    match->findMatchesForPet(petName);
+    match->showAdopterResults();
+}
+
+//checking if finding matches for all pets in a specific shelter work
+void checkAllShelterPetsMatches(){
+    Matchmaking* match = new Matchmaking();
+    string shelterName;
+    cout << "Find matches for pets in the shelter: ";
+    getline(cin, shelterName);
+    match->fillPets();
+    match->findMatchesForPets(shelterName);
 }
 
 int main(){
     //checkPetMatches();
-
-    checkAdopterMatches();
+    //checkAdopterMatches();
+    //checkAllShelterPetsMatches();
 }
