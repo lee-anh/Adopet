@@ -151,7 +151,8 @@ bool DBSearch::search(string s){
     }
 
 
-    return addToAttributes(s, attributeToSearch);
+    addToAttributes(s, attributeToSearch);
+    return true; //TODO
 
 
 }

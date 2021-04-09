@@ -32,6 +32,7 @@ GUI::~GUI()
 void GUI::on_searchButton_clicked()
 {
 
+
     clearCheckBoxes();
     QString searchInput = ui->searchBar->text();
     string searchString = searchInput.toStdString();

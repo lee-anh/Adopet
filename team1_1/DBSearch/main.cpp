@@ -6,6 +6,7 @@ using namespace std;
 
 int main()
 {
+    /*
     DBSearch *dbTest = new DBSearch();
 
 
@@ -18,6 +19,7 @@ int main()
 
 
     cout << dbTest->createQuery() << endl;
+    */
 
 
     return 0;
