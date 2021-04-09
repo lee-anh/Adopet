@@ -292,61 +292,56 @@ void PeopleRandomizer::openDB(){
     } else {
         std::cerr << "Opened database successfully\n";
     }
-
-
-
-
 }
 
 void PeopleRandomizer::loadDBVecs(){
     if(db.open()){
-    QSqlQuery query = QSqlQuery();
+        QSqlQuery query = QSqlQuery();
 
-    //species
-    QString qs = "SELECT speciesType FROM species";
-    query.exec(qs);
-    while(query.next()){
-        string s = query.value(0).toString().toStdString();
-        species.push_back(s);
-    }
-
-
-
-    //breed
-    QString qs2 = "SELECT breedType, speciesType FROM breed";
-    query.exec(qs2);
-    while(query.next()){
-        string s = query.value(0).toString().toStdString();
-        string t = query.value(0).toString().toStdString();
-        breed.push_back(make_pair(s,t));
-    }
-
-    //temperament
-    QString qs3 = "SELECT temperamentType FROM temperament";
-    query.exec(qs3);
-    while(query.next()){
-        string s = query.value(0).toString().toStdString();
-        temperament.push_back(s);
-    }
+        //species
+        QString qs = "SELECT speciesType FROM species";
+        query.exec(qs);
+        while(query.next()){
+            string s = query.value(0).toString().toStdString();
+            species.push_back(s);
+        }
 
 
-    //goodWith
-    QString qs4 = "SELECT goodWithType FROM goodWith";
-    query.exec(qs4);
-    while(query.next()){
-        string s = query.value(0).toString().toStdString();
-        goodWith.push_back(s);
-    }
+
+        //breed
+        QString qs2 = "SELECT breedType, speciesType FROM breed";
+        query.exec(qs2);
+        while(query.next()){
+            string s = query.value(0).toString().toStdString();
+            string t = query.value(0).toString().toStdString();
+            breed.push_back(make_pair(s,t));
+        }
+
+        //temperament
+        QString qs3 = "SELECT temperamentType FROM temperament";
+        query.exec(qs3);
+        while(query.next()){
+            string s = query.value(0).toString().toStdString();
+            temperament.push_back(s);
+        }
 
 
-    //shelter
-    QString qs5 = "SELECT shelterType FROM shelter";
-    query.exec(qs5);
-    while(query.next()){
-        string s = query.value(0).toString().toStdString();
-        shelter.push_back(s);
-    }
+        //goodWith
+        QString qs4 = "SELECT goodWithType FROM goodWith";
+        query.exec(qs4);
+        while(query.next()){
+            string s = query.value(0).toString().toStdString();
+            goodWith.push_back(s);
+        }
 
+
+        //shelter
+        QString qs5 = "SELECT shelterType FROM shelter";
+        query.exec(qs5);
+        while(query.next()){
+            string s = query.value(0).toString().toStdString();
+            shelter.push_back(s);
+        }
     }
 }
 

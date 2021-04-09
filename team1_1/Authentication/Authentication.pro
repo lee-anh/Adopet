@@ -6,11 +6,8 @@ QT += core
 QT += sql
 
 SOURCES += \
-        main.cpp \
-        savedlist.cpp
+        authentication.cpp \
+        main.cpp
 
 HEADERS += \
-    savedlist.h
-
-HEADERS += ../Pets/pet.h
-SOURCES += ../Pets/pet.cpp
+    authentication.h
