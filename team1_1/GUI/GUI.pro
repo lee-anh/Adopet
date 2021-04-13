@@ -15,7 +15,9 @@ SOURCES += \
     gui.cpp \
     ../DBSearch/dbsearch.cpp \
     ../Pets/pet.cpp \
-    ../SavedList/savedlist.cpp
+    ../SavedList/savedlist.cpp \
+    petdisplay.cpp \
+    petgallery.cpp
 
 
 
@@ -23,11 +25,14 @@ HEADERS += \
     gui.h \
     ../DBSearch/dbsearch.h \
     ../Pets/pet.h \
-    ../SavedList/savedlist.h
+    ../SavedList/savedlist.h \
+    petdisplay.h \
+    petgallery.h
 
 
 FORMS += \
-    gui.ui
+    gui.ui \
+    petdisplay.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

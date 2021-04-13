@@ -15,6 +15,7 @@ class DBSearch
 public:
     DBSearch();
     DBSearch(string dbFilepath);
+    DBSearch(QSqlDatabase d);
     ~DBSearch();
 
     //Step 1: edit constraints vector

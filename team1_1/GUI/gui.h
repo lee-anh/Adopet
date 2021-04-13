@@ -2,12 +2,14 @@
 #define GUI_H
 
 #include <QWidget>
+#include <QLabel>
 #include <QtSql>
 #include <vector>
 
 #include "../DBSearch/dbsearch.h"
 #include "../Pets/pet.h"
 #include "../SavedList/savedlist.h"
+#include "petgallery.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -20,14 +22,18 @@ class GUI : public QWidget
 
 public:
     GUI(QWidget *parent = nullptr);
+    GUI(QSqlDatabase d, QWidget *parent = nullptr);
     ~GUI();
 
-
+    //Ui::GUI *ui;
 
 private:
     Ui::GUI *ui;
     DBSearch *search;
     SavedList *savedList;
+
+    string currentUser;
+
     void displayPets(int start);
     void meetPet(Pet p);
     void clearLabels();
@@ -44,6 +50,8 @@ private:
     int nextDisplayPetsStartIndex;
     int displayPetsPageNumber;
     int previousPage;
+
+    vector<QLabel*> nameLabels;
 
 
 
@@ -80,5 +88,7 @@ private slots:
 
     void on_saveButton_clicked();
     void on_exit_clicked();
+    void on_navMyFavoritesButton_clicked();
+    void on_hiButton_clicked();
 };
 #endif // GUI_H
