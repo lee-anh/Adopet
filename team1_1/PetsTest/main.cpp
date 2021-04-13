@@ -67,16 +67,21 @@ TEST(unitTest, testTemperaments){
     ASSERT_EQ(p->getGender(), "Male") << p->getName() << " should be Male";
 }
 
-/*
+
 //Testing object setters and getters
 TEST(unitTest, settersAndGetters){
-    string a = "Young";
-    string n = "Alex";
-    string g = "Male";
-    string s = "Cat";
-    string b = "Siamese";
-    string t = "Passive";
-    Pet* p = new Pet(n,a,s,b,g,t);
+    string age = "Young";
+    string name = "Alex";
+    string gender = "Male";
+    string species = "Cat";
+    string breed = "Siamese";
+    string temp = "Passive";
+    string gw = "Kids";
+    string sh = "Big";
+    string bio = "Lorem Ipsum";
+    string size = "Medium";
+
+    Pet* p = new Pet(name, species, breed, age, size, temp, gender, gw, sh, bio);
 
     ASSERT_EQ(p->getName(), "Alex") << p->getName() << " should be Alex";
     ASSERT_EQ(p->getAge(), "Young") << p->getAge() << " should be Young";
@@ -84,7 +89,7 @@ TEST(unitTest, settersAndGetters){
     ASSERT_EQ(p->getSpecies(), "Cat") << p->getName() << " should be Cat";
     ASSERT_EQ(p->getGender(), "Male") << p->getName() << " should be Male";
 }
-*/
+
 
 int main(int argc, char **argv){
     ::testing::InitGoogleTest(&argc, argv);
