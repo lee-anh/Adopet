@@ -18,6 +18,7 @@ public:
     void fillPreference(Preferences* p, string attribute, string attributeType);         //sets a specific preference based on attribute type and attribute
     void findMatchesForAdopter(string adopterName);                                      //finds the matching pets based on an adopter user
     void fillPets();                                                                     //stores all the pets in the DB in the vector
+    Pet* makePet(QSqlQuery query);                                                                      //makes and retrieves a Pet by passing the query in a DB
     void findMatchesForPets(string shelterName);                                         //finds matching potential adopters for all pets in the DB
     vector<pair<Adopter*, int>> findBestMatchForPet(Pet *p);                             //finds the best adopter match for the specified pet
     void findMatchesForPet(Pet *p);                                                      //finds the matching potential adopters based on pet attributes
@@ -31,6 +32,8 @@ public:
     int getAdopterScore(Pet* p, string attributeType, string attribute);                 //checks if the pet contains the adopter's preference
     static bool customPetResultSort(const pair<Pet*,int> &a, const pair<Pet*,int> &b);   //sorts the pet result list based on score
     static bool customAdopterResultSort(const pair<Adopter*,int> &a, const pair<Adopter*,int> &b);              //sorts the adopter results list based on score
+
+    vector<Pet*> getAllPets();      //getter method for allPets
 
 private:
     vector<pair<Pet*, int>> petResults;
