@@ -493,6 +493,88 @@
       </item>
      </layout>
     </widget>
+    <widget class="QLabel" name="hi1">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>340</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="hi2">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>400</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="hi3">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>460</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="hiButton">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>460</y>
+       <width>113</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PushButton</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>60</y>
+       <width>91</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <item>
+      <property name="text">
+       <string>New Item</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>New Item</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>New Item</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>New Item</string>
+      </property>
+     </item>
+    </widget>
    </widget>
    <widget class="QWidget" name="MeetPetPage">
     <widget class="QLabel" name="petPic">
@@ -665,8 +747,8 @@
     <widget class="QLabel" name="label_11">
      <property name="geometry">
       <rect>
-       <x>550</x>
-       <y>150</y>
+       <x>540</x>
+       <y>140</y>
        <width>141</width>
        <height>141</height>
       </rect>
@@ -675,7 +757,7 @@
       <string>TextLabel</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_12">
+    <widget class="QLabel" name="test1">
      <property name="geometry">
       <rect>
        <x>60</x>
@@ -688,7 +770,7 @@
       <string>TextLabel</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_13">
+    <widget class="QLabel" name="test2">
      <property name="geometry">
       <rect>
        <x>300</x>
@@ -705,7 +787,7 @@
      <property name="geometry">
       <rect>
        <x>550</x>
-       <y>320</y>
+       <y>310</y>
        <width>121</width>
        <height>16</height>
       </rect>
@@ -715,7 +797,18 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="page_3"/>
+   <widget class="QWidget" name="page_3">
+    <widget class="PetDisplay" name="widget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>30</y>
+       <width>311</width>
+       <height>441</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -765,6 +858,14 @@
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>PetDisplay</class>
+   <extends>QWidget</extends>
+   <header>petdisplay.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -13,6 +13,8 @@ class SavedList
 public:
     SavedList();
     SavedList(string username);
+    SavedList(string databaseFilepath, string username);
+    SavedList(QSqlDatabase d);
     ~SavedList();
     void savePet(Pet p);
     void unsavePet(Pet p);
@@ -32,6 +34,7 @@ private:
     string username;
 
     //DB Stuff
+    string dbName;
     QSqlDatabase dbSL;
     void loadList();
     void openDB();

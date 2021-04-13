@@ -8,6 +8,7 @@ int main()
 
     //Demo
 
+    /*
     SavedList *test = new SavedList();
     test->printVec(); //load from database
 
@@ -27,6 +28,7 @@ int main()
     test->savePet(p);
     test->savePet(p1);
     test->savePet(p2);
+    */
 
 
     return 0;

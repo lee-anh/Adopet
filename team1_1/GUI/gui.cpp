@@ -9,18 +9,23 @@ GUI::GUI(QWidget *parent)
     ui->linkToResult1->setVisible(false);
     ui->linkToResult2->setVisible(false);
     ui->linkToResult3->setVisible(false);
+
+
+
     search = new DBSearch("../../../../../projectDB.sqlite");
-    savedList = new SavedList();
+    savedList = new SavedList("../../../../../projectDB.sqlite", "exampleUser");
+
 
     //JUST FOR NOW
-    ui->stackedWidget->setCurrentIndex(1);
-    previousPage = 1;
+    int openingPage = 1;
+    ui->stackedWidget->setCurrentIndex(openingPage); //opening page
+    previousPage = openingPage;
     displayPetsPageNumber = 1;
     search->runNewQuery();
     displayPets(0);
 
-
 }
+
 
 GUI::~GUI()
 {
@@ -31,14 +36,13 @@ GUI::~GUI()
 
 void GUI::on_searchButton_clicked()
 {
-
-
     clearCheckBoxes();
     QString searchInput = ui->searchBar->text();
     string searchString = searchInput.toStdString();
     search->search(searchString);
     search->runNewQuery();
 
+    displayPets(0);
     nextDisplayPetsStartIndex = 0;
     displayPetsPageNumber = 1;
 
@@ -70,7 +74,6 @@ void GUI::displayPets(int start){
 
 
     //displayedPet2
-
     if(start < search->getPetVecSize()){
         displayedPet2 = search->getPetVec().at(start);
         string s2 = displayedPet2.getName();
@@ -202,7 +205,7 @@ void GUI::checkBoxSearch(string wordToSearch, string category, int arg1){
 }
 
 
-
+//CHECKBOXES
 void GUI::on_dogCheckBox_stateChanged(int arg1)
 {
     checkBoxSearch("dog", "species", arg1);
@@ -327,10 +330,8 @@ void GUI::on_loadPrevious_clicked()
 
 void GUI::on_saveButton_clicked()
 {
-    //how to tell if saved or unsaved?
     if(ui->saveButton->isChecked() == false){
         savedList->unsavePet(petToMeet);
-        ui->exit->setText(QString::fromStdString(petToMeet.getName()));
         ui->saveButton->setText("Save");
     } else if (ui->saveButton->isChecked() == true){
         savedList->savePet(petToMeet);
@@ -340,6 +341,24 @@ void GUI::on_saveButton_clicked()
 
 void GUI::on_exit_clicked()
 {
+    this->~GUI();
     //idk why it keeps crashing
-    connect(ui->exit, &QPushButton::clicked, qApp, &QApplication::quit);
+    //connect(ui->exit, &QPushButton::clicked, qApp, &QApplication::quit);
+}
+
+void GUI::on_navMyFavoritesButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+}
+
+
+
+void GUI::on_hiButton_clicked()
+{
+    nameLabels.push_back(ui->hi1);
+    nameLabels.push_back(ui->hi2);
+    nameLabels.push_back(ui->hi3);
+    PetGallery test = PetGallery(3, nameLabels);
+    test.displayNames(0);
+
 }

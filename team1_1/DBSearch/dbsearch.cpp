@@ -23,6 +23,13 @@ DBSearch::DBSearch(string dbFilepath){
     fillVecsFromDB();
 
 }
+
+DBSearch::DBSearch(QSqlDatabase d){
+    dbSearchdb = d;
+    fillStaticVecs();
+    fillVecsFromDB();
+}
+
 DBSearch::~DBSearch()
 {
 
@@ -61,7 +68,7 @@ bool DBSearch::removeFromAttributes(string attribute, string category){
 }
 
 bool DBSearch::search(string s){
-    //clear vectors in the constraints vector, not constraint vector itsle
+    //clear vectors in the constraints vector, not constraint vector itself
     for(int i = 0; i < (int) constraints.size(); i++){
         constraints[i].clear();
     }

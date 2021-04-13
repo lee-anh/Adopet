@@ -8,13 +8,27 @@ using namespace std;
 SavedList::SavedList()
 {
     username = "exampleUser";
+    dbName =  "../../projectDB.sqlite";
     openDB();
     loadList();
 }
 
 SavedList::SavedList(string username){
     this->username = username;
+    dbName = "../../projectDB.sqlite";
     openDB();
+    loadList();
+}
+
+SavedList::SavedList(string databaseFilePath, string username){
+    this->username = username;
+    dbName = databaseFilePath;
+    openDB();
+    loadList();
+}
+
+SavedList::SavedList(QSqlDatabase d){
+    dbSL = d;
     loadList();
 }
 
@@ -35,7 +49,7 @@ void SavedList::savePet(Pet p){
 
 
 void SavedList::savePet(int petID){
-   // openDB();
+
     QString qry = "INSERT INTO savedPets(username, petID) VALUES(\"";
     qry+= QString::fromStdString(username) + "\", ";
     qry+= QString::number(petID) + ")";
@@ -44,7 +58,7 @@ void SavedList::savePet(int petID){
         query.exec(qry);
     }
     cout << qry.toStdString() << endl;
-   // closeDB();
+
 }
 
 void SavedList::unsavePet(Pet p){
@@ -76,7 +90,7 @@ void SavedList::unsavePet(int petID){
 }
 
 void SavedList::loadList(){
-    //openDB();
+
     savedPets.clear();
     if(dbSL.open()){
         QString qry = "SELECT petID FROM savedPets WHERE username = \"" +
@@ -114,7 +128,6 @@ void SavedList::loadList(){
                 savedPets.push_back(p);
             }
         }
-       // closeDB();
     }
 }
 
@@ -126,7 +139,7 @@ void SavedList::setUsername(string username){
 
 void SavedList::openDB(){
     dbSL = QSqlDatabase::addDatabase("QSQLITE", "savedListsCxn");
-    string fullName = "../../projectDB.sqlite";
+    string fullName = dbName;
     dbSL.setDatabaseName(QString::fromStdString(fullName));
     if(!dbSL.open()){
         std::cerr << "Database does not open -- "
