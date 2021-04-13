@@ -42,6 +42,35 @@ bool Matchmaking::customAdopterResultSort(const pair<Adopter*,int> &a, const pai
 }
 
 /*
+ * Creates a Pet object with the information present in the passed query
+ * @param query A QSqlQuery object
+ * @return A new Pet object with the retrieved information
+*/
+Pet* Matchmaking::makePet(QSqlQuery query){
+    //storing information in each line
+    string name = query.value(1).toString().toStdString();
+    string species = query.value(2).toString().toStdString();
+    string breed = query.value(3).toString().toStdString();
+    string age = query.value(4).toString().toStdString();
+    string size = query.value(5).toString().toStdString();
+    string temperament = query.value(6).toString().toStdString();
+    string gender = query.value(7).toString().toStdString();
+    string goodWith = query.value(8).toString().toStdString();
+    string shelter = query.value(9).toString().toStdString();
+    string bio = query.value(10).toString().toStdString();
+
+    return new Pet(name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+}
+
+/*
+ * Accessor method for vector of all pets in the system
+ * @return All of the pets
+*/
+vector<Pet*> Matchmaking::getAllPets(){
+    return allPets;
+}
+
+/*
  * Loops through all the pets in the database and stores each pet in a vector.
 */
 void Matchmaking::fillPets(){
@@ -50,19 +79,7 @@ void Matchmaking::fillPets(){
         QString s = "SELECT * FROM pets";
         query.exec(s);
         while(query.next()){
-            //storing information in each line
-            string name = query.value(1).toString().toStdString();
-            string species = query.value(2).toString().toStdString();
-            string breed = query.value(3).toString().toStdString();
-            string age = query.value(4).toString().toStdString();
-            string size = query.value(5).toString().toStdString();
-            string temperament = query.value(6).toString().toStdString();
-            string gender = query.value(7).toString().toStdString();
-            string goodWith = query.value(8).toString().toStdString();
-            string shelter = query.value(9).toString().toStdString();
-            string bio = query.value(10).toString().toStdString();
-
-            Pet* pet = new Pet(name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+            Pet* pet = makePet(query);
             allPets.push_back(pet);
         }
     }
@@ -76,8 +93,6 @@ void Matchmaking::fillPets(){
 vector<pair<Adopter*, int>> Matchmaking::fillAdopterResults(string name, int score, vector<pair<Adopter*, int>> res){
     Adopter* adopter = new Adopter();
     adopter->setUsername(name);
-    //cout << "Adopter username: " << adopter->getUsername() << endl;
-    //cout << "Adding adopter to vector...CurrentScore: " << currScore << " userName: " << userName << endl;
     res.push_back(make_pair(adopter, score));
     return res;
 }
@@ -115,7 +130,6 @@ vector<pair<Adopter*, int>> Matchmaking::findBestMatchForPet(Pet *p){
         }
         tempAdopterResults = fillAdopterResults(userName, currScore, tempAdopterResults);
     }
-
     sort(tempAdopterResults.begin(), tempAdopterResults.end(), customAdopterResultSort);
     return tempAdopterResults;
 }
@@ -124,11 +138,13 @@ vector<pair<Adopter*, int>> Matchmaking::findBestMatchForPet(Pet *p){
  * Loops through all the pets in the vector and finds adopters whose preference match the pet.
 */
 void Matchmaking::findMatchesForPets(string shelterName){
+    //filling out a vector with pets in the given shelter
     vector<Pet*> currShelterPets;
     for(int i = 0; i < (int)allPets.size(); i++){
         if(allPets.at(i)->getShelter() == shelterName) currShelterPets.push_back(allPets.at(i));
     }
 
+    //getting matches for each pet in the said shelter
     for(int i = 0; i < (int)currShelterPets.size(); i++){
         vector<pair<Adopter*, int>> tempMatches = findBestMatchForPet(currShelterPets.at(i));
         cout << "Match for " << currShelterPets.at(i)->getName()
@@ -198,7 +214,6 @@ void Matchmaking::findMatchesForPet(Pet *p){
         }
         adopterResults = fillAdopterResults(userName, currScore, adopterResults);
     }
-
     sort(adopterResults.begin(), adopterResults.end(), customAdopterResultSort);
 }
 
@@ -226,7 +241,6 @@ void Matchmaking::fillPreference(Preferences* p, string attribute, string attrib
 */
 Preferences* Matchmaking::fillPreferences(string adopterName){
     Preferences* p = new Preferences();
-    cout << "FillPreferences entered" << endl;
     if(db.open()){
         QSqlQuery query = QSqlQuery();
         QString name = QString::fromStdString(adopterName);
@@ -269,35 +283,21 @@ void Matchmaking::findMatchesForAdopter(string adopterName){
         query.exec(s);
         while(query.next()){
             int currScore = 0;
-
-            //storing information in each line
-            string name = query.value(1).toString().toStdString();
-            string species = query.value(2).toString().toStdString();
-            string breed = query.value(3).toString().toStdString();
-            string age = query.value(4).toString().toStdString();
-            string size = query.value(5).toString().toStdString();
-            string temperament = query.value(6).toString().toStdString();
-            string gender = query.value(7).toString().toStdString();
-            string goodWith = query.value(8).toString().toStdString();
-            string shelter = query.value(9).toString().toStdString();
-            string bio = query.value(10).toString().toStdString();
-
-            Pet* pet = new Pet(name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+            Pet* pet = makePet(query);
 
             //gathering the scores based on whether it matches user preferences
-            currScore += getPetScore(adopterPreference->getSpecies(), species);
-            currScore += getPetScore(adopterPreference->getBreed(), breed);
-            currScore += getPetScore(adopterPreference->getAge(), age);
-            currScore += getPetScore(adopterPreference->getTemperament(), temperament);
-            currScore += getPetScore(adopterPreference->getSize(), size);
-            currScore += getPetScore(adopterPreference->getGoodWith(), goodWith);
-            currScore += getPetScore(adopterPreference->getShelter(), shelter);
-            if(adopterPreference->getGender() == gender || adopterPreference->getGender() == "all") currScore++;
+            currScore += getPetScore(adopterPreference->getSpecies(), pet->getSpecies());
+            currScore += getPetScore(adopterPreference->getBreed(), pet->getBreed());
+            currScore += getPetScore(adopterPreference->getAge(), pet->getAge());
+            currScore += getPetScore(adopterPreference->getTemperament(), pet->getTemperament());
+            currScore += getPetScore(adopterPreference->getSize(), pet->getSize());
+            currScore += getPetScore(adopterPreference->getGoodWith(), pet->getGoodWith());
+            currScore += getPetScore(adopterPreference->getShelter(), pet->getShelter());
+            if(adopterPreference->getGender() == pet->getGender() || adopterPreference->getGender() == "all") currScore++;
 
             petResults.push_back(make_pair(pet, currScore));
         }
     }
-
     sort(petResults.begin(), petResults.end(), customPetResultSort);
 }
 
@@ -326,10 +326,7 @@ void Matchmaking::showPetResults(int amount){
                 shownAmount++;
             }
         }
-        else {
-            cout << "Showed all results!\n";
-            break;
-        }
+        else break;
     }
 }
 
@@ -354,13 +351,11 @@ void Matchmaking::showAdopterResults(int amount){
     while ((input = cin.get())) {
         if (input == (int)'\n' && shownAmount <= resultSize) {
             for(int i = 0; i < amount && shownAmount <= resultSize; i++){
-                cout << "Pet Name: " << adopterResults[shownAmount].first->getUsername() << ", Score: " << adopterResults[shownAmount].second << endl;
+                cout << "Pet Name: " << adopterResults[shownAmount].first->getUsername()
+                     << ", Score: " << adopterResults[shownAmount].second << endl;
                 shownAmount++;
             }
         }
-        else {
-            cout << "Showed all results!\n";
-            break;
-        }
+        else break;
     }
 }
