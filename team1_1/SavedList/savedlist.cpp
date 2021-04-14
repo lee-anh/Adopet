@@ -7,15 +7,17 @@ using namespace std;
 
 SavedList::SavedList()
 {
-    username = "exampleUser";
+    username = "default User";
     dbName =  "../../projectDB.sqlite";
-    openDB();
-    loadList();
+   // openDB();
+   // loadList();
+    cout << "default constructor called" <<endl;
 }
 
 SavedList::SavedList(string username){
     this->username = username;
     dbName = "../../projectDB.sqlite";
+    cout << "other constructor called" << endl;
     openDB();
     loadList();
 }
@@ -57,7 +59,7 @@ void SavedList::savePet(int petID){
         QSqlQuery query = QSqlQuery(dbSL);
         query.exec(qry);
     }
-    cout << qry.toStdString() << endl;
+    //cout << qry.toStdString() << endl;
 
 }
 
@@ -85,7 +87,7 @@ void SavedList::unsavePet(int petID){
         query.exec(qry);
 
     }
-    cout << qry.toStdString() << endl;
+    //cout << qry.toStdString() << endl;
 
 
 }
@@ -97,7 +99,7 @@ void SavedList::loadList(){
         QString qry = "SELECT petID FROM savedPets WHERE username = \"" +
                 QString::fromStdString(username) + "\"";
 
-        cout << qry.toStdString() << endl;
+        //cout << qry.toStdString() << endl;
         QSqlQuery query = QSqlQuery(dbSL);
         QSqlQuery queryPets = QSqlQuery(dbSL);
 
@@ -109,7 +111,7 @@ void SavedList::loadList(){
                      "size, temperament, gender, goodWith, shelter,"
                      "bio FROM pets WHERE id = "
                      + query.value(0).toString().toStdString();
-            cout << qry2StdString << endl;
+            //cout << qry2StdString << endl;
             QString qry2 = QString::fromStdString(qry2StdString);
             queryPets.exec(qry2);
             while (queryPets.next()){

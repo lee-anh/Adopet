@@ -7,6 +7,7 @@
 
 #include "../DBSearch/dbsearch.h"
 #include "../Pets/pet.h"
+#include "../SavedList/savedlist.h"
 
 #include "petgallery.h"
 
@@ -23,12 +24,19 @@ public:
     explicit ManualSearch(QWidget *parent = nullptr);
     ~ManualSearch();
 
+    void setSavedList(SavedList s);
+
 private:
     Ui::ManualSearch *ui;
     DBSearch *search;
     PetGallery petgal;
+    SavedList sl;
+
+
     void checkBoxSearch(string wordToSearch, string category, int arg1);
     void clearCheckBoxes();
+    void loadSaveButtons(vector<QPushButton *> saveButtons);
+    void saveButton(QPushButton* saveButton, int index);
 
 private slots:
     //CHECKBOXES
@@ -84,8 +92,16 @@ private slots:
     void on_link2_clicked();
     void on_link3_clicked();
 
+    void on_save1_clicked();
+    void on_save2_clicked();
+    void on_save3_clicked();
+
+
+
+
 signals:
     void learnMoreClicked(Pet sendPet);
+    void learnMoreClicked(Pet sendPet, bool b);
 
 
 

@@ -13,7 +13,3 @@ FindMatchForAdopters::~FindMatchForAdopters()
     delete ui;
 }
 
-void FindMatchForAdopters::on_pushButton_clicked()
-{
-
-}

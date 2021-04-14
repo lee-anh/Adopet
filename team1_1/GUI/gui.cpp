@@ -9,25 +9,28 @@ GUI::GUI(QWidget *parent)
 
 
     savedList = SavedList("../../../../../projectDB.sqlite", "exampleUser");
-    ui->stackedWidget->addWidget(&manSearch); //2
-    ui->stackedWidget->addWidget(&myFavs); //3
 
-    //JUST FOR NOW
+    ui->stackedWidget->addWidget(&manSearch); //3
+    ui->stackedWidget->addWidget(&myFavs); //4
+    ui->stackedWidget->addWidget(&fmForAdopters); //5
 
-    int openingPage = 2;
+
+
+    int openingPage = 2; //home page
     ui->stackedWidget->setCurrentIndex(openingPage); //opening page
     previousPage = openingPage;
 
 
     //Signals and slots
-    connect(&manSearch, SIGNAL(learnMoreClicked(Pet)), this, SLOT(moveToMeetMe(Pet)));
-    connect(&myFavs, SIGNAL(learnMoreClicked(Pet)), this, SLOT(moveToMeetMe(Pet)));
+    connect(&manSearch, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
+    connect(&myFavs, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
 }
 
 
 GUI::~GUI()
 {
     ui->stackedWidget->removeWidget(&manSearch);
+    ui->stackedWidget->removeWidget(&myFavs);
     delete ui;
 
 }
@@ -41,7 +44,7 @@ void GUI::meetPet(Pet p){
     if(savedList.isSavedPet(petToMeet) == true){
         ui->saveButton->setChecked(true);
         ui->saveButton->setText("♥");
-        ui->saveButton->setStyleSheet("color: red");
+        ui->saveButton->setStyleSheet("color: red; border: none");
     } else{
         ui->saveButton->setChecked(false);
         ui->saveButton->setText("♡");
@@ -87,7 +90,7 @@ void GUI::on_saveButton_clicked()
     } else if (ui->saveButton->isChecked() == true){
         savedList.savePet(petToMeet);
         ui->saveButton->setText("♥");
-        ui->saveButton->setStyleSheet("color: red");
+        ui->saveButton->setStyleSheet("color: red; border: none");
     }
 }
 
@@ -103,6 +106,21 @@ void GUI::moveToMeetMe(Pet sendPet){
     meetPet(sendPet);
 }
 
+void GUI::moveToMeetMe(Pet sendPet, bool b){
+    ui->stackedWidget->setCurrentIndex(1);
+
+    if(b == true){
+        savedList.unsavePet(sendPet); //prevents dupliates
+        savedList.savePet(sendPet);
+    } else {
+        savedList.unsavePet(sendPet);
+    }
+
+    meetPet(sendPet);
+}
+
+
+
 void GUI::on_backButton_clicked()
 {
     //reset heart button
@@ -110,22 +128,62 @@ void GUI::on_backButton_clicked()
     ui->saveButton->setText("♡");
     ui->saveButton->setStyleSheet("color: black");
 
+
+    //unsaves pet if you unsaved it (should we keep it until you navigate away?)
+    if(previousPage == 4){
+        myFavs.setSavedList(savedList);
+        myFavs.showGal();
+    } else if (previousPage == 3){
+        manSearch.setSavedList(savedList);
+    }
+
     //back to last page
     ui->stackedWidget->setCurrentIndex(previousPage);
+}
+
+void GUI::on_navHomeButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+void GUI::on_navFindMatchButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
 }
 
 void GUI::on_navMyFavoritesButton_clicked()
 {
     myFavs.setSavedList(savedList);
     myFavs.showGal();
-    ui->stackedWidget->setCurrentIndex(3);
-    previousPage = 3;
+    ui->stackedWidget->setCurrentIndex(4);
+    previousPage = 4;
 
 }
 
 void GUI::on_navManualSearchButton_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(2);
-    previousPage = 2;
+    ui->stackedWidget->setCurrentIndex(3);
+
+    manSearch.setSavedList(savedList);
+
+
+    previousPage = 3;
 
 }
+
+void GUI::on_findMatchFromHome_clicked()
+{
+
+}
+
+void GUI::on_manualSearchFromHome_clicked()
+{
+    on_navManualSearchButton_clicked();
+}
+
+void GUI::on_myFavoritesFromHome_clicked()
+{
+    on_navMyFavoritesButton_clicked();
+}
+
+

@@ -29,6 +29,8 @@ private:
     SavedList sl;
     PetGallery petgal;
     void clearLabels();
+    void saveButton(QPushButton *saveButton, int index);
+    void loadSaveButtons(vector<QPushButton*> saveButtons);
 
 private slots:
     void on_previous_clicked();
@@ -39,8 +41,14 @@ private slots:
     void on_link3_clicked();
     void on_link4_clicked();
 
+    void on_save1_clicked();
+    void on_save2_clicked();
+    void on_save3_clicked();
+    void on_save4_clicked();
+
 signals:
-    void learnMoreClicked(Pet sendPet);
+
+    void learnMoreClicked(Pet sendPet, bool b);
 
 
 

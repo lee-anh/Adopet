@@ -18,8 +18,12 @@ class PetGallery
 public:
 
     PetGallery();
-    PetGallery(int numPetsToDisplay, QLabel* pageLine, vector<QLabel*> petNameLabels,
+    PetGallery(int numPetsToDisplay,QPushButton* prev, QPushButton* next, QLabel* pageLine, vector<QLabel*> petNameLabels,
                vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,vector<Pet> petVec);
+    PetGallery(int numPetsToDisplay, QPushButton* prev, QPushButton* next, QLabel* pageLine,
+               vector<QLabel*> petNameLabels,
+               vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,
+               vector<QPushButton*> petSaves, vector<Pet> petVec);
     // PetGallery(int numPetsToDisplay, vector<QLabel*> petNameLabels); //just for testing
     ~PetGallery();
 
@@ -31,6 +35,11 @@ public:
 
     void setPageNum(int p);
     Pet getPet(int pos);
+
+    vector<Pet> getPetVec();
+
+    void clearLabels();
+
 
 
 
@@ -46,10 +55,15 @@ public:
 private:
 
     int numToDisplay;
+    QPushButton* previousButton;
+    QPushButton* nextButton;
+
     QLabel* pageNum;
     vector<QLabel*> nameLabels;
     vector<QLabel*> picLabels;
     vector<QPushButton*> learnMores;
+    vector <QPushButton*> saveButtons;
+
     vector<Pet> pets;
 
     vector<Pet> petsToDisplay;

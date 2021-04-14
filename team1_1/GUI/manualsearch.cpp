@@ -7,14 +7,17 @@ ManualSearch::ManualSearch(QWidget *parent) :
 {
     ui->setupUi(this);
     search = new DBSearch("../../../../../projectDB.sqlite");
-    petgal = PetGallery(3, ui->pageLine, {ui->name1, ui->name2, ui->name3},
+    petgal = PetGallery(3,ui->previous, ui->next, ui->pageLine, {ui->name1, ui->name2, ui->name3},
                         {ui->pic1, ui->pic2, ui->pic3},
                         {ui->link1, ui->link2, ui->link3},
+                        {ui->save1, ui->save2, ui->save3},
                         search->getPetVec());
 
-    search->runNewQuery();
+    //search->runNewQuery();
     petgal.updatePetVec(search->getPetVec());
-    petgal.displayPets(0);
+    ui->pageLine->setText("Search for pets using search bar and checkboxes!");
+    //petgal.displayPets(0);
+
 
 
 
@@ -23,9 +26,14 @@ ManualSearch::ManualSearch(QWidget *parent) :
 
 ManualSearch::~ManualSearch()
 {
-
     delete search;
     delete ui;
+}
+
+void ManualSearch::setSavedList(SavedList s){
+    sl = s;
+   // loadSaveButtons({ui->save1, ui->save2, ui->save3});
+
 }
 
 
@@ -46,6 +54,7 @@ void ManualSearch::checkBoxSearch(string wordToSearch, string category, int arg1
     petgal.updatePetVec(search->getPetVec());
     petgal.setPageNum(1);
     petgal.displayPets(0);
+    loadSaveButtons({ui->save1, ui->save2, ui->save3});
 
 }
 
@@ -139,11 +148,13 @@ void ManualSearch::on_animalWelfareLeagueCheckBox_stateChanged(int arg1){
 void ManualSearch::ManualSearch::on_previous_clicked()
 {
     petgal.previous();
+    loadSaveButtons({ui->save1, ui->save2, ui->save3});
 }
 
 void ManualSearch::on_next_clicked()
 {
     petgal.next();
+    loadSaveButtons({ui->save1, ui->save2, ui->save3});
 }
 
 void ManualSearch::on_searchButton_clicked()
@@ -156,6 +167,7 @@ void ManualSearch::on_searchButton_clicked()
     petgal.updatePetVec(search->getPetVec());
     petgal.displayPets(0);
     petgal.setPageNum(1);
+    loadSaveButtons({ui->save1, ui->save2, ui->save3});
 }
 
 void ManualSearch::clearCheckBoxes(){
@@ -175,15 +187,61 @@ void ManualSearch::clearCheckBoxes(){
 
 void ManualSearch::on_link1_clicked()
 {
-    emit learnMoreClicked(petgal.getPet(0));
+
+    emit learnMoreClicked(petgal.getPet(0), ui->save1->isChecked());
 }
 
-void ManualSearch::on_link2_clicked()
-{
-    emit learnMoreClicked(petgal.getPet(1));
+void ManualSearch::on_link2_clicked(){
+
+    emit learnMoreClicked(petgal.getPet(1), ui->save2->isChecked());
 }
 
 void ManualSearch::on_link3_clicked()
 {
-    emit learnMoreClicked(petgal.getPet(2));
+
+    emit learnMoreClicked(petgal.getPet(2), ui->save3->isChecked());
+}
+
+void ManualSearch::on_save1_clicked()
+{
+    saveButton(ui->save1, 0);
+}
+
+void ManualSearch::on_save2_clicked()
+{
+    saveButton(ui->save2, 1);
+}
+
+void ManualSearch::on_save3_clicked()
+{
+    saveButton(ui->save3, 2);
+}
+
+void ManualSearch::saveButton(QPushButton* saveButton, int index){
+    if(saveButton->isChecked() == false){
+        sl.unsavePet(petgal.getPet(index));
+        saveButton->setText("♡");
+        saveButton->setStyleSheet("color: black");
+
+    } else if (saveButton->isChecked() == true){
+        sl.savePet(petgal.getPet(index));
+        saveButton->setText("♥");
+        saveButton->setStyleSheet("color: red; border: none");
+    }
+}
+
+void ManualSearch::loadSaveButtons(vector<QPushButton *> saveButtons){
+    for(int i = 0; i < (int) saveButtons.size(); i++){
+        if((int) petgal.getPetVec().size() > i){
+        if(sl.isSavedPet(petgal.getPet(i)) == true){
+            saveButtons[i]->setChecked(true);
+            saveButtons[i]->setText("♥");
+            saveButtons[i]->setStyleSheet("color: red; border: none");
+        } else{
+            saveButtons[i]->setChecked(false);
+            saveButtons[i]->setText("♡");
+            saveButtons[i]->setStyleSheet("color: black");
+        }
+    }
+    }
 }

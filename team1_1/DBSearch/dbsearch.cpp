@@ -279,7 +279,7 @@ void DBSearch::openDB(){
         std::cerr << "  File -- " << fullName << std::endl;
         exit(0);
     } else {
-        std::cerr << "Opened database successfully\n";
+        std::cerr << "Opened database successfully (from DBSearch class)\n";
     }
 }
 

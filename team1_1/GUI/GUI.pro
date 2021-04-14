@@ -17,6 +17,9 @@ SOURCES += \
     ../DBSearch/dbsearch.cpp \
     ../Pets/pet.cpp \
     ../SavedList/savedlist.cpp \
+    ../Matchmaking/matchmaking.cpp \
+    ../Adopter/adopter.cpp \
+    ../Adopter/preferences.cpp \
     manualsearch.cpp \
     myfavorites.cpp \
     petgallery.cpp
@@ -29,6 +32,9 @@ HEADERS += \
     ../DBSearch/dbsearch.h \
     ../Pets/pet.h \
     ../SavedList/savedlist.h \
+    ../Matchmaking/matchmaking.h \
+    ../Adopter/adopter.h \
+    ../Adopter/preferences.h \
     manualsearch.h \
     myfavorites.h \
     petgallery.h

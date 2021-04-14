@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include "../Pets/pet.h"
-//#include "../Matchmaking/matchmaking.h"
+#include "../Matchmaking/matchmaking.h"
 #include "petgallery.h"
 
 namespace Ui {
@@ -20,10 +20,9 @@ public:
 
 private:
     Ui::FindMatchForAdopters *ui;
-    //Matchmaking mat;
+    Matchmaking mat;
 
 private slots:
-    void on_pushButton_clicked();
 
 
 };

@@ -6,9 +6,13 @@ PetGallery::PetGallery()
 
 }
 
-PetGallery:: PetGallery(int numPetsToDisplay, QLabel* pageLine, vector<QLabel*> petNameLabels,
+PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev, QPushButton* next, QLabel* pageLine, vector<QLabel*> petNameLabels,
                         vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,vector<Pet> petVec){
+
     numToDisplay = numPetsToDisplay;
+
+    previousButton = prev;
+    nextButton = next;
     pageNum = pageLine;
     nameLabels = petNameLabels;
     picLabels = petPhotos;
@@ -17,7 +21,30 @@ PetGallery:: PetGallery(int numPetsToDisplay, QLabel* pageLine, vector<QLabel*> 
     nextStartIndex = 0;
     displayPetsPageNumber = 1;
 
+
     petsToDisplay = vector<Pet>();
+    clearLabels();
+
+}
+
+PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev, QPushButton* next, QLabel* pageLine, vector<QLabel*> petNameLabels,
+                        vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,
+                        vector<QPushButton*> petSaves, vector<Pet> petVec){
+
+    numToDisplay = numPetsToDisplay;
+    previousButton = prev;
+    nextButton = next;
+    pageNum = pageLine;
+    nameLabels = petNameLabels;
+    picLabels = petPhotos;
+    learnMores = petLearnMore;
+    saveButtons = petSaves;
+    pets = petVec;
+    nextStartIndex = 0;
+    displayPetsPageNumber = 1;
+
+    petsToDisplay = vector<Pet>();
+    clearLabels();
 
 }
 
@@ -36,10 +63,16 @@ void PetGallery::displayPets(int start){
     int counter = 0;
     petsToDisplay.clear();
 
+    previousButton->setVisible(true);
+    nextButton->setVisible(true);
+
     for(int i = 0; i < numToDisplay; i++){
         nameLabels[i]->clear();
         picLabels[i]->clear();
         learnMores[i]->setVisible(false);
+        if(saveButtons.size() > 0){
+            saveButtons[i]->setVisible(false);
+        }
         if(start < (int) pets.size()){
             //add to petsToDisplay vec
              petsToDisplay.push_back(pets[start]);
@@ -55,6 +88,9 @@ void PetGallery::displayPets(int start){
 
             //learnMores
             learnMores[i]->setVisible(true);
+            if(saveButtons.size() > 0){
+                saveButtons[i]->setVisible(true);
+            }
 
             start++;
             counter++;
@@ -115,3 +151,19 @@ Pet PetGallery::getPet(int pos){
     return petsToDisplay[pos];
 }
 
+vector<Pet> PetGallery::getPetVec(){
+    return pets;
+}
+
+void PetGallery::clearLabels(){
+    for(int i = 0; i < numToDisplay; i++){
+        nameLabels[i]->clear();
+        picLabels[i]->clear();
+        learnMores[i]->setVisible(false);
+        if(saveButtons.size() > 0){
+            saveButtons[i]->setVisible(false);
+        }
+    }
+    previousButton->setVisible(false);
+    nextButton->setVisible(false);
+}
