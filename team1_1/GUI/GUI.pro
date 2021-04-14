@@ -11,28 +11,34 @@ QT += sql
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    findmatchforadopters.cpp \
     main.cpp \
     gui.cpp \
     ../DBSearch/dbsearch.cpp \
     ../Pets/pet.cpp \
     ../SavedList/savedlist.cpp \
-    petdisplay.cpp \
+    manualsearch.cpp \
+    myfavorites.cpp \
     petgallery.cpp
 
 
 
 HEADERS += \
+    findmatchforadopters.h \
     gui.h \
     ../DBSearch/dbsearch.h \
     ../Pets/pet.h \
     ../SavedList/savedlist.h \
-    petdisplay.h \
+    manualsearch.h \
+    myfavorites.h \
     petgallery.h
 
 
 FORMS += \
+    findmatchforadopters.ui \
     gui.ui \
-    petdisplay.ui
+    manualsearch.ui \
+    myfavorites.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

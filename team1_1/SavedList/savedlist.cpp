@@ -85,6 +85,7 @@ void SavedList::unsavePet(int petID){
         query.exec(qry);
 
     }
+    cout << qry.toStdString() << endl;
 
 
 }
@@ -157,8 +158,21 @@ void SavedList::closeDB(){
     dbSL.close();
 }
 
+vector<Pet> SavedList::getPetVec(){
+    return savedPets;
+}
+
 void SavedList::printVec(){
     for(int i = 0; i < (int) savedPets.size(); i++){
         cout << savedPets[i].getName() << endl;
     }
+}
+
+bool SavedList::isSavedPet(Pet p){
+    for(int i = 0; i < (int) savedPets.size(); i++){
+        if(savedPets[i].getID() == p.getID()){
+            return true;
+            }
+    }
+    return false;
 }

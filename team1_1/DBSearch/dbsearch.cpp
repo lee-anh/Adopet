@@ -76,6 +76,20 @@ bool DBSearch::search(string s){
     //lowercase the input
     transform(s.begin(), s.end(), s.begin(), ::tolower);
 
+    vector<string> words = vector<string>();
+    string word = ""; //temp word string
+    for(auto x: s){
+        if(x == ' '){
+            words.push_back(word);
+            word = "";
+        } else {
+            word = word + x;
+        }
+        words.push_back(word);
+    }
+
+    for(int i = 0; i < (int) words.size(); i++){
+        s = words[i];
     string attributeToSearch = "";
 
     //species
@@ -159,6 +173,8 @@ bool DBSearch::search(string s){
 
 
     addToAttributes(s, attributeToSearch);
+
+    }
     return true; //TODO
 
 
