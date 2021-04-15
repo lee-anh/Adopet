@@ -23,7 +23,9 @@ GUI::GUI(QWidget *parent)
 
     //Signals and slots
     connect(&manSearch, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
+    connect(&manSearch, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
     connect(&myFavs, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
+    connect(&myFavs, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
 }
 
 
@@ -100,6 +102,7 @@ void GUI::on_exit_clicked()
 
 }
 
+//slots for signals
 
 void GUI::moveToMeetMe(Pet sendPet){
     ui->stackedWidget->setCurrentIndex(1);
@@ -119,6 +122,15 @@ void GUI::moveToMeetMe(Pet sendPet, bool b){
     meetPet(sendPet);
 }
 
+void GUI::heartPet(Pet p, bool b){
+    if(b == true){
+        savedList.unsavePet(p); //prevents dupliates
+        savedList.savePet(p);
+    } else {
+        savedList.unsavePet(p);
+    }
+
+}
 
 
 void GUI::on_backButton_clicked()
@@ -155,6 +167,8 @@ void GUI::on_navMyFavoritesButton_clicked()
 {
     myFavs.setSavedList(savedList);
     myFavs.showGal();
+
+
     ui->stackedWidget->setCurrentIndex(4);
     previousPage = 4;
 
@@ -162,11 +176,8 @@ void GUI::on_navMyFavoritesButton_clicked()
 
 void GUI::on_navManualSearchButton_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(3);
-
     manSearch.setSavedList(savedList);
-
-
+    ui->stackedWidget->setCurrentIndex(3);
     previousPage = 3;
 
 }

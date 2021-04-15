@@ -102,6 +102,7 @@ private slots:
 signals:
     void learnMoreClicked(Pet sendPet);
     void learnMoreClicked(Pet sendPet, bool b);
+    void heartClicked(Pet p, bool b);
 
 
 

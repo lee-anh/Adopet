@@ -56,6 +56,7 @@ private slots:
 
     void moveToMeetMe(Pet sendPet);
     void moveToMeetMe(Pet sendPet, bool b);
+    void heartPet(Pet p, bool b);
 
     void on_saveButton_clicked();
     void on_exit_clicked();

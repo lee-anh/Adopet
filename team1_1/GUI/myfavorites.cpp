@@ -97,11 +97,13 @@ void MyFavorites::saveButton(QPushButton* saveButton, int index){
         sl.unsavePet(petgal.getPet(index));
         saveButton->setText("♡");
         saveButton->setStyleSheet("color: black");
+        emit heartClicked(petgal.getPet(index), false);
 
     } else if (saveButton->isChecked() == true){
         sl.savePet(petgal.getPet(index));
         saveButton->setText("♥");
         saveButton->setStyleSheet("color: red; border: none");
+        emit heartClicked(petgal.getPet(index), true);
     }
 }
 

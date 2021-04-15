@@ -32,7 +32,7 @@ ManualSearch::~ManualSearch()
 
 void ManualSearch::setSavedList(SavedList s){
     sl = s;
-   // loadSaveButtons({ui->save1, ui->save2, ui->save3});
+    loadSaveButtons({ui->save1, ui->save2, ui->save3});
 
 }
 
@@ -182,6 +182,18 @@ void ManualSearch::clearCheckBoxes(){
     ui->seniorCheckBox->setChecked(false);
     ui->maleCheckBox->setChecked(false);
     ui->femaleCheckBox->setChecked(false);
+    ui->smallCheckBox->setChecked(false);
+    ui->mediumCheckBox->setChecked(false);
+    ui->largeCheckBox->setChecked(false);
+    ui->kidsCheckBox->setChecked(false);
+    ui->happyCheckBox->setChecked(false);
+    ui->friendlyCheckBox->setChecked(false);
+    ui->introvertedCheckBox->setChecked(false);
+    ui->activeCheckBox->setChecked(false);
+    ui->vigilantCheckBox->setChecked(false);
+    ui->bestFriendsCheckBox->setChecked(false);
+    ui->humaneSocietyCheckBox->setChecked(false);
+    ui->animalWelfareLeagueCheckBox->setChecked(false);
 
 }
 
@@ -205,6 +217,7 @@ void ManualSearch::on_link3_clicked()
 void ManualSearch::on_save1_clicked()
 {
     saveButton(ui->save1, 0);
+
 }
 
 void ManualSearch::on_save2_clicked()
@@ -222,11 +235,13 @@ void ManualSearch::saveButton(QPushButton* saveButton, int index){
         sl.unsavePet(petgal.getPet(index));
         saveButton->setText("♡");
         saveButton->setStyleSheet("color: black");
+        emit heartClicked(petgal.getPet(index), false);
 
     } else if (saveButton->isChecked() == true){
         sl.savePet(petgal.getPet(index));
         saveButton->setText("♥");
         saveButton->setStyleSheet("color: red; border: none");
+        emit heartClicked(petgal.getPet(index), true);
     }
 }
 
