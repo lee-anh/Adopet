@@ -6,119 +6,53 @@ GUI::GUI(QWidget *parent)
     , ui(new Ui::GUI)
 {
     ui->setupUi(this);
-    ui->linkToResult1->setVisible(false);
-    ui->linkToResult2->setVisible(false);
-    ui->linkToResult3->setVisible(false);
+
+
+    savedList = SavedList("../../../../../projectDB.sqlite", "exampleUser");
+
+    ui->stackedWidget->addWidget(&manSearch); //3
+    ui->stackedWidget->addWidget(&myFavs); //4
+    ui->stackedWidget->addWidget(&fmForAdopters); //5
 
 
 
-    search = new DBSearch("../../../../../projectDB.sqlite");
-    savedList = new SavedList("../../../../../projectDB.sqlite", "exampleUser");
-
-
-    //JUST FOR NOW
-    int openingPage = 1;
+    int openingPage = 2; //home page
     ui->stackedWidget->setCurrentIndex(openingPage); //opening page
     previousPage = openingPage;
-    displayPetsPageNumber = 1;
-    search->runNewQuery();
-    displayPets(0);
 
+
+    //Signals and slots
+    connect(&manSearch, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
+    connect(&manSearch, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
+    connect(&myFavs, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
+    connect(&myFavs, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
 }
 
 
 GUI::~GUI()
 {
+    ui->stackedWidget->removeWidget(&manSearch);
+    ui->stackedWidget->removeWidget(&myFavs);
     delete ui;
-    delete search;
-    delete savedList;
-}
-
-void GUI::on_searchButton_clicked()
-{
-    clearCheckBoxes();
-    QString searchInput = ui->searchBar->text();
-    string searchString = searchInput.toStdString();
-    search->search(searchString);
-    search->runNewQuery();
-
-    displayPets(0);
-    nextDisplayPetsStartIndex = 0;
-    displayPetsPageNumber = 1;
 
 }
 
-
-
-void GUI::displayPets(int start){
-    clearLabels();
-    int counter = 0;
-
-    QPixmap pixmap("../../../../../pictures/default.png");
-
-
-    //displayedPet1
-    if(start < search->getPetVecSize()){
-        displayedPet1 = search->getPetVec().at(start);
-        string s = displayedPet1.getName();
-        transform(s.begin(), s.end(), s.begin(), ::toupper);
-        QString qpet1 = QString::fromStdString(s);
-
-        ui->results1->setText(qpet1);
-        ui->results1pic->setPixmap(pixmap.scaled(100, 100, Qt::KeepAspectRatio));
-        ui->linkToResult1->setVisible(true);
-        counter++;
-        start++;
-
-    }
-
-
-    //displayedPet2
-    if(start < search->getPetVecSize()){
-        displayedPet2 = search->getPetVec().at(start);
-        string s2 = displayedPet2.getName();
-        transform(s2.begin(), s2.end(), s2.begin(), ::toupper);
-        QString qpet2 = QString::fromStdString(s2);
-
-        ui->results2->setText(qpet2);
-        ui->results2pic->setPixmap(pixmap.scaled(100, 100, Qt::KeepAspectRatio));
-        ui->linkToResult2->setVisible(true);
-        counter++;
-        start++;
-
-    }
-
-
-
-    //displayedPet3
-
-    if(start < search->getPetVecSize()){
-        displayedPet3 = search->getPetVec().at(start);
-        string s3 = displayedPet3.getName();
-        transform(s3.begin(), s3.end(), s3.begin(), ::toupper);
-        QString qpet3 = QString::fromStdString(s3);
-
-        ui->results3->setText(qpet3);
-        ui->results3pic->setPixmap(pixmap.scaled(100, 100, Qt::KeepAspectRatio));
-        ui->linkToResult3->setVisible(true);
-        counter++;
-    }
-
-    nextDisplayPetsStartIndex = start;
-
-
-    int numOfPages = ceil(search->getPetVecSize()/3.0);
-    if(counter == 0){
-        ui->numOfResults->setText("No animals match your search");
-    } else {
-
-        ui->numOfResults->setText("Showing page " +
-             QString::number(displayPetsPageNumber) + " out of "
-             + QString::number(numOfPages));
-    }
-}
 
 void GUI::meetPet(Pet p){
+    petToMeet = p;
+
+    //set button
+    //update savedList
+    if(savedList.isSavedPet(petToMeet) == true){
+        ui->saveButton->setChecked(true);
+        ui->saveButton->setText("♥");
+        ui->saveButton->setStyleSheet("color: red; border: none");
+    } else{
+        ui->saveButton->setChecked(false);
+        ui->saveButton->setText("♡");
+        ui->saveButton->setStyleSheet("color: black");
+    }
+
     //set name
     string s = p.getName();
     transform(s.begin(), s.end(), s.begin(), ::toupper);
@@ -132,7 +66,7 @@ void GUI::meetPet(Pet p){
     //set attributes
     string sep = " - ";
     string attributes = p.getSpecies() + sep +  p.getBreed() +
-            sep + p.getAge() + "\n" + p.getSize() + sep + p.getGender()
+            sep + p.getAge() + sep + p.getTemperament() + "\n" + p.getSize() + sep + p.getGender()
             + sep + "good with " + p.getGoodWith();
     QString qattributes = QString::fromStdString(attributes);
     ui->petAttributes->setText(qattributes);
@@ -148,217 +82,119 @@ void GUI::meetPet(Pet p){
 
 }
 
-//blind clearing right now
-void GUI::clearLabels(){
-    ui->results1->clear();
-    ui->results1pic->clear();
-    ui->results2->clear();
-    ui->results2pic->clear();
-    ui->results3->clear();
-    ui->results3pic->clear();
-    ui->numOfResults->clear();
-    ui->linkToResult1->setVisible(false);
-    ui->linkToResult2->setVisible(false);
-    ui->linkToResult3->setVisible(false);
-
-    ui->numOfResults->setText("No animals match your search");
-}
-
-void GUI::clearCheckBoxes(){
-    ui->dogCheckBox->setChecked(false);
-    ui->catCheckBox->setChecked(false);
-    ui->rabbitCheckBox->setChecked(false);
-    ui->rodentCheckBox->setChecked(false);
-    ui->fishCheckBox->setChecked(false);
-    ui->birdCheckBox->setChecked(false);
-    ui->youngCheckBox->setChecked(false);
-    ui->adultCheckBox->setChecked(false);
-    ui->seniorCheckBox->setChecked(false);
-    ui->maleCheckBox->setChecked(false);
-    ui->femaleCheckBox->setChecked(false);
-
-
-
-
-
-}
-void GUI::checkBoxSearch(string wordToSearch, string category, int arg1){
-    // 0 unchecked
-    // 1 partially checked
-    // 2 checked
-    if(arg1 == 2){
-        search->addToAttributes(wordToSearch, category);
-
-
-    } else if (arg1 == 0){
-        search->removeFromAttributes(wordToSearch, category);
-    }
-
-
-    search->runNewQuery();
-
-    nextDisplayPetsStartIndex = 0;
-    displayPetsPageNumber = 1;
-
-    displayPets(0);
-
-}
-
-
-//CHECKBOXES
-void GUI::on_dogCheckBox_stateChanged(int arg1)
-{
-    checkBoxSearch("dog", "species", arg1);
-}
-
-void GUI::on_catCheckBox_stateChanged(int arg1)
-{
-    checkBoxSearch("cat", "species", arg1);
-}
-
-void GUI::on_rabbitCheckBox_stateChanged(int arg1)
-{
-    checkBoxSearch("rabbit","species", arg1);
-}
-
-void GUI::on_rodentCheckBox_stateChanged(int arg1)
-{
-    checkBoxSearch("rodent", "species", arg1);
-}
-
-
-void GUI::on_fishCheckBox_stateChanged(int arg1)
-{
-    checkBoxSearch("fish", "species", arg1);
-}
-
-void GUI::on_birdCheckBox_stateChanged(int arg1)
-{
-    checkBoxSearch("bird", "species", arg1);
-}
-
-void GUI::on_youngCheckBox_stateChanged(int arg1)
-{
-    checkBoxSearch("young", "age", arg1);
-}
-
-void GUI::on_adultCheckBox_stateChanged(int arg1)
-{
-    checkBoxSearch("adult", "age", arg1);
-}
-
-void GUI::on_seniorCheckBox_stateChanged(int arg1)
-{
-    checkBoxSearch("senior", "age", arg1);
-}
-
-void GUI::on_maleCheckBox_stateChanged(int arg1)
-{
-    checkBoxSearch("male", "gender", arg1);
-}
-
-void GUI::on_femaleCheckBox_stateChanged(int arg1)
-{
-    checkBoxSearch("female", "gender", arg1);
-}
-
-
-
-
-void GUI::on_linkToResult1_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(2);
-    petToMeet = displayedPet1;
-    meetPet(petToMeet);
-    previousPage = 1;
-
-}
-
-void GUI::on_linkToResult2_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(2);
-    petToMeet = displayedPet2;
-    meetPet(petToMeet);
-    previousPage = 1;
-
-}
-
-void GUI::on_linkToResult3_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(2);
-    petToMeet = displayedPet3;
-    meetPet(petToMeet);
-    previousPage = 1;
-}
-
-
-
-void GUI::on_backButton_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(previousPage);
-}
-
-void GUI::on_loadNext_clicked()
-{
-
-    if(nextDisplayPetsStartIndex+1 < (int) search->getPetVecSize()){
-        displayPetsPageNumber++;
-        nextDisplayPetsStartIndex++;
-        displayPets(nextDisplayPetsStartIndex);
-    }
-}
-
-void GUI::on_loadPrevious_clicked()
-{
-
-    int startMod =  nextDisplayPetsStartIndex % 3;
-    if(nextDisplayPetsStartIndex - 3 < 0){
-        displayPetsPageNumber = 1;
-        displayPets(0);
-    } else {
-        nextDisplayPetsStartIndex = nextDisplayPetsStartIndex- 3 - startMod;
-        if(displayPetsPageNumber - 1 > 0)
-            displayPetsPageNumber--;
-        else
-            displayPetsPageNumber = 1;
-        displayPets(nextDisplayPetsStartIndex);
-    }
-}
-
-
-
 
 void GUI::on_saveButton_clicked()
 {
     if(ui->saveButton->isChecked() == false){
-        savedList->unsavePet(petToMeet);
-        ui->saveButton->setText("Save");
+        savedList.unsavePet(petToMeet);
+        ui->saveButton->setText("♡");
+        ui->saveButton->setStyleSheet("color: black");
     } else if (ui->saveButton->isChecked() == true){
-        savedList->savePet(petToMeet);
-        ui->saveButton->setText("Unsave");
+        savedList.savePet(petToMeet);
+        ui->saveButton->setText("♥");
+        ui->saveButton->setStyleSheet("color: red; border: none");
     }
 }
 
 void GUI::on_exit_clicked()
 {
-    this->~GUI();
-    //idk why it keeps crashing
-    //connect(ui->exit, &QPushButton::clicked, qApp, &QApplication::quit);
+    this->close();
+
+}
+
+//slots for signals
+
+void GUI::moveToMeetMe(Pet sendPet){
+    ui->stackedWidget->setCurrentIndex(1);
+    meetPet(sendPet);
+}
+
+void GUI::moveToMeetMe(Pet sendPet, bool b){
+    ui->stackedWidget->setCurrentIndex(1);
+
+    if(b == true){
+        savedList.unsavePet(sendPet); //prevents dupliates
+        savedList.savePet(sendPet);
+    } else {
+        savedList.unsavePet(sendPet);
+    }
+
+    meetPet(sendPet);
+}
+
+void GUI::heartPet(Pet p, bool b){
+    if(b == true){
+        savedList.unsavePet(p); //prevents dupliates
+        savedList.savePet(p);
+    } else {
+        savedList.unsavePet(p);
+    }
+
+}
+
+
+void GUI::on_backButton_clicked()
+{
+    //reset heart button
+    ui->saveButton->setChecked(false);
+    ui->saveButton->setText("♡");
+    ui->saveButton->setStyleSheet("color: black");
+
+
+    //unsaves pet if you unsaved it (should we keep it until you navigate away?)
+    if(previousPage == 4){
+        myFavs.setSavedList(savedList);
+        myFavs.showGal();
+    } else if (previousPage == 3){
+        manSearch.setSavedList(savedList);
+    }
+
+    //back to last page
+    ui->stackedWidget->setCurrentIndex(previousPage);
+}
+
+void GUI::on_navHomeButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+void GUI::on_navFindMatchButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
 }
 
 void GUI::on_navMyFavoritesButton_clicked()
 {
+    myFavs.setSavedList(savedList);
+    myFavs.showGal();
+
+
     ui->stackedWidget->setCurrentIndex(4);
+    previousPage = 4;
+
 }
 
-
-
-void GUI::on_hiButton_clicked()
+void GUI::on_navManualSearchButton_clicked()
 {
-    nameLabels.push_back(ui->hi1);
-    nameLabels.push_back(ui->hi2);
-    nameLabels.push_back(ui->hi3);
-    PetGallery test = PetGallery(3, nameLabels);
-    test.displayNames(0);
+    manSearch.setSavedList(savedList);
+    ui->stackedWidget->setCurrentIndex(3);
+    previousPage = 3;
 
 }
+
+void GUI::on_findMatchFromHome_clicked()
+{
+
+}
+
+void GUI::on_manualSearchFromHome_clicked()
+{
+    on_navManualSearchButton_clicked();
+}
+
+void GUI::on_myFavoritesFromHome_clicked()
+{
+    on_navMyFavoritesButton_clicked();
+}
+
+
