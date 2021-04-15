@@ -34,7 +34,7 @@ void Matchmaking::closeDB(){
     QString name = db.connectionName();
     db.close();
     QSqlDatabase::removeDatabase(name);
-    db.~QSqlDatabase();
+    //db.~QSqlDatabase();
 }
 
 /*
@@ -173,6 +173,7 @@ vector<pair<Adopter, int>> Matchmaking::findMatchesForPet(string name){
     for(int i = 0; i < (int)allPets.size(); i++){
         if(allPets.at(i).getName() == name) return findMatchesForPet(allPets.at(i));
     }
+    return adopterResults;
 }
 
 /*

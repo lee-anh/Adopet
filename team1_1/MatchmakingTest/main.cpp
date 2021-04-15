@@ -32,7 +32,7 @@ protected:
     Matchmaking m;
 };
 
-/*
+
 //Testing if the pets vector is fille correctly with pets in the database
 TEST_F(FooTest, fillPets){
     ASSERT_EQ(m.getAllPets().size(), 0) << "The vector is empty in the beginning";
@@ -101,48 +101,58 @@ TEST_F(FooTest, AdopterSorting){
 
 //Testing if makePet() works properly
 TEST_F(FooTest, makePet){
-    QSqlQuery query = QSqlQuery();
-    QString s = "SELECT * FROM pets";
-    query.exec(s);
-    query.next();
-    string name = query.value(1).toString().toStdString();
-    string species = query.value(2).toString().toStdString();
-    string breed = query.value(3).toString().toStdString();
-    string age = query.value(4).toString().toStdString();
-    string size = query.value(5).toString().toStdString();
-    string temperament = query.value(6).toString().toStdString();
-    string gender = query.value(7).toString().toStdString();
-    string goodWith = query.value(8).toString().toStdString();
-    string shelter = query.value(9).toString().toStdString();
-    string bio = query.value(10).toString().toStdString();
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "matchmakingTestCxn");
+    string fullName = "../../projectDB.sqlite";
+    db.setDatabaseName(QString::fromStdString(fullName));
+    if(db.open()){
+        QSqlQuery query = QSqlQuery(db);
+        QString s = "SELECT * FROM pets";
+        query.exec(s);
+        query.next();
+        string name = query.value(1).toString().toStdString();
+        string species = query.value(2).toString().toStdString();
+        string breed = query.value(3).toString().toStdString();
+        string age = query.value(4).toString().toStdString();
+        string size = query.value(5).toString().toStdString();
+        string temperament = query.value(6).toString().toStdString();
+        string gender = query.value(7).toString().toStdString();
+        string goodWith = query.value(8).toString().toStdString();
+        string shelter = query.value(9).toString().toStdString();
+        string bio = query.value(10).toString().toStdString();
 
-    Pet pet = m.makePet(query);
+        Pet pet = m.makePet(query);
 
-    ASSERT_EQ(name, pet.getName()) << "Checking the pet name is correct";
-    ASSERT_EQ(species, pet.getSpecies()) << "Checking the pet species is correct";
-    ASSERT_EQ(breed, pet.getBreed()) << "Checking the pet breed is correct";
-    ASSERT_EQ(age, pet.getAge()) << "Checking the pet age is correct";
-    ASSERT_EQ(size, pet.getSize()) << "Checking the pet size is correct";
-    ASSERT_EQ(temperament, pet.getTemperament()) << "Checking the pet temperament is correct";
-    ASSERT_EQ(gender, pet.getGender()) << "Checking the pet gender is correct";
-    ASSERT_EQ(goodWith, pet.getGoodWith()) << "Checking the pet goodWith is correct";
-    ASSERT_EQ(shelter, pet.getShelter()) << "Checking the pet shelter is correct";
-    ASSERT_EQ(bio, pet.getBio()) << "Checking the pet bio is correct";
+        ASSERT_EQ(name, pet.getName()) << "Checking the pet name is correct";
+        ASSERT_EQ(species, pet.getSpecies()) << "Checking the pet species is correct";
+        ASSERT_EQ(breed, pet.getBreed()) << "Checking the pet breed is correct";
+        ASSERT_EQ(age, pet.getAge()) << "Checking the pet age is correct";
+        ASSERT_EQ(size, pet.getSize()) << "Checking the pet size is correct";
+        ASSERT_EQ(temperament, pet.getTemperament()) << "Checking the pet temperament is correct";
+        ASSERT_EQ(gender, pet.getGender()) << "Checking the pet gender is correct";
+        ASSERT_EQ(goodWith, pet.getGoodWith()) << "Checking the pet goodWith is correct";
+        ASSERT_EQ(shelter, pet.getShelter()) << "Checking the pet shelter is correct";
+        ASSERT_EQ(bio, pet.getBio()) << "Checking the pet bio is correct";
+
+
+        QString dbName = db.connectionName();
+        db.close();
+        QSqlDatabase::removeDatabase(dbName);
+    }
 }
 
 //Testing if fillPreference() works properly
 TEST_F(FooTest, fillPreference){
     Preferences p = Preferences();
 
-    m.fillPreference(p, "dog", "species");
-    m.fillPreference(p, "fish", "species");
-    m.fillPreference(p, "cat", "species");
-    m.fillPreference(p, "male", "gender");
+    p = m.fillPreference(p, "dog", "species");
+    p = m.fillPreference(p, "fish", "species");
+    p = m.fillPreference(p, "cat", "species");
+    p = m.fillPreference(p, "male", "gender");
 
     ASSERT_EQ(p.getGender(), "male") << "Checking that the gender preference is set correctly";
     ASSERT_EQ(p.getSpecies().size(), 3) << "Checking that the size of the species preference is set correctly";
 }
-*/
+
 
 int main(int argc, char **argv){
     ::testing::InitGoogleTest(&argc, argv);
