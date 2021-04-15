@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include "gtest/gtest.h"
 #include "../Matchmaking/matchmaking.h"
@@ -8,28 +7,32 @@ class FooTest : public ::testing::Test{
 
 protected:
 
+    Matchmaking m;
+
     FooTest(){
-        // You can do set-up work for each test here.
+    // You can do set-up work for each test here.
     }
     virtual ~FooTest(){
+
         // You can do clean-up work that doesn't throw exceptions here.
     }
     // If the constructor and destructor are not enough for setting up
     // and cleaning up each test, you can define the following methods:
 
     virtual void SetUp(){
+        m.openDB();
         // Code here will be called immediately after the constructor (right
         // before each test).
 
     }
 
     virtual void TearDown(){
+        m.closeDB();
         // Code here will be called immediately after each test (right
         // before the destructor).
     }
     // Objects declared here can be used by all tests in the test case for Foo.
 
-    Matchmaking m;
 };
 
 
@@ -134,9 +137,8 @@ TEST_F(FooTest, makePet){
         ASSERT_EQ(bio, pet.getBio()) << "Checking the pet bio is correct";
 
 
-        QString dbName = db.connectionName();
+        db.removeDatabase(db.connectionName());
         db.close();
-        QSqlDatabase::removeDatabase(dbName);
     }
 }
 
@@ -152,7 +154,6 @@ TEST_F(FooTest, fillPreference){
     ASSERT_EQ(p.getGender(), "male") << "Checking that the gender preference is set correctly";
     ASSERT_EQ(p.getSpecies().size(), 3) << "Checking that the size of the species preference is set correctly";
 }
-
 
 int main(int argc, char **argv){
     ::testing::InitGoogleTest(&argc, argv);

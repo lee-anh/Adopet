@@ -11,6 +11,8 @@ using namespace std;
 class Matchmaking{
 public:
     Matchmaking();
+    Matchmaking(string n);
+    Matchmaking(string path, string n);
     ~Matchmaking();
 
     void openDB();                                                                       //opens the database before performing actions
@@ -41,6 +43,9 @@ private:
     vector<pair<Adopter, int>> adopterResults;
     vector<Pet> allPets;
     QSqlDatabase db;
+
+    string username;
+    string dbName;
 };
 
 #endif // MATCHMAKING_H

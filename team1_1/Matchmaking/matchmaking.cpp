@@ -1,11 +1,23 @@
 #include "matchmaking.h"
 
 Matchmaking::Matchmaking(){
+    username = "defaultUser";
+    dbName = "../../projectDB.sqlite";
+}
+
+Matchmaking::Matchmaking(string n){
+    username = n;
+    dbName = "../../projectDB.sqlite";
+    openDB();
+}
+
+Matchmaking::Matchmaking(string path, string n){
+    username = n;
+    dbName = path;
     openDB();
 }
 
 Matchmaking::~Matchmaking(){
-    closeDB();
 }
 
 /*
@@ -13,7 +25,7 @@ Matchmaking::~Matchmaking(){
 */
 void Matchmaking::openDB(){
     db = QSqlDatabase::addDatabase("QSQLITE", "matchmakingCxn");
-    string fullName = "../../projectDB.sqlite";
+    string fullName = dbName;
     db.setDatabaseName(QString::fromStdString(fullName));
     if(!db.open()){
         std::cerr << "Database does not open -- "
@@ -31,10 +43,15 @@ void Matchmaking::openDB(){
  * Closes the database
 */
 void Matchmaking::closeDB(){
-    QString name = db.connectionName();
+    //db.close();
+    //cout << "Closed DB\n";
+    //QString name = db.connectionName();
+    //cout << "Got DB name\n";
+    //QSqlDatabase::removeDatabase("matchmakingCxn");
+    //cout << "Removed Connection\n";
+
+    db.removeDatabase(db.connectionName());
     db.close();
-    QSqlDatabase::removeDatabase(name);
-    //db.~QSqlDatabase();
 }
 
 /*
