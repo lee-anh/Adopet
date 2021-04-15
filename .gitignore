@@ -130,3 +130,5 @@ compile_commands.json
 #Google Test
 gtest/
 
+#ProjectDB SQL
+./projectDB.sqlite
