@@ -31,7 +31,7 @@ public:
      * \param p Preferences object
      */
     Adopter(string uname, string pwd, string fname, string lname,
-            string email, int zip, Preferences *p);
+            string email, int zip, Preferences p);
 
 
 
@@ -114,7 +114,7 @@ public:
      */
     void setZipCode(int zip);
 
-    Preferences *preferenceList;
+    Preferences preferenceList;
 
 private:
     //instance variables

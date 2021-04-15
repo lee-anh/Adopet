@@ -12,7 +12,7 @@ Adopter::Adopter()
     lastName = "null";
     emailAddress = "null";
     zipcode = -1;
-    preferenceList = new Preferences();
+    preferenceList = Preferences();
 }
 
 /*!
@@ -26,7 +26,7 @@ Adopter::Adopter()
  * \param p Preferences object
  */
 Adopter::Adopter(string uname, string pwd, string fname, string lname,
-                 string email, int zip, Preferences *p){
+                 string email, int zip, Preferences p){
     username = uname;
     password = pwd;
     firstName = fname;
@@ -41,7 +41,6 @@ Adopter::Adopter(string uname, string pwd, string fname, string lname,
  * \brief Adopter destructor
  */
 Adopter::~Adopter(){
-    delete preferenceList;
 }
 
 

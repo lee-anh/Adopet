@@ -147,7 +147,7 @@ void PetRandomizer::writeToCSV(){
         cout << petSpecies << endl;
 
         writeCsv << i << ",";
-        writeCsv << petName << "," << petSpecies << "," << petBreed << "," << petSize << "," << petTemp
+        writeCsv << petName << "," << petSpecies << "," << petBreed << "," << petAge << "," << petSize << "," << petTemp
                  << "," << petGen << "," << petGoodWith << "," << petShelter << "," << "Lorem ipsum";
         writeCsv << "\n";
     }

@@ -240,14 +240,14 @@ vector<string> Preferences::getShelter(){
 
 void Preferences::addShelter(string s){
     transform(s.begin(), s.end(), s.begin(), ::tolower);
-    species.push_back(s);
+    shelter.push_back(s);
 }
 
 bool Preferences::removeShelter(string s){
     int speciesSize = (int) species.size();
     for(int i = 0; i < speciesSize; i++){
-        if(species.at(i) == s){
-            species.erase(species.begin()+i);
+        if(shelter.at(i) == s){
+            shelter.erase(shelter.begin()+i);
             return true;
         }
 

@@ -5,33 +5,33 @@ using namespace std;
 
 //checking if matchmaking for adopters works
 void checkPetMatches(){
-    Matchmaking* match = new Matchmaking();
+    Matchmaking match = Matchmaking();
     string adopterName;
     cout << "Find match for adopter: ";
     getline(cin, adopterName);
-    match->findMatchesForAdopter(adopterName);
-    match->showPetResults();
+    match.findMatchesForAdopter(adopterName);
+    match.showPetResults();
 }
 
 //checking if finding matches for pets work
 void checkAdopterMatches(){
-    Matchmaking* match = new Matchmaking();
+    Matchmaking match = Matchmaking();
     string petName;
     cout << "Find match for pet: ";
     getline(cin, petName);
-    match->fillPets();
-    match->findMatchesForPet(petName);
-    match->showAdopterResults();
+    match.fillPets();
+    match.findMatchesForPet(petName);
+    match.showAdopterResults();
 }
 
 //checking if finding matches for all pets in a specific shelter work
 void checkAllShelterPetsMatches(){
-    Matchmaking* match = new Matchmaking();
+    Matchmaking match = Matchmaking();
     string shelterName;
     cout << "Find matches for pets in the shelter: ";
     getline(cin, shelterName);
-    match->fillPets();
-    match->findMatchesForPets(shelterName);
+    match.fillPets();
+    match.findMatchesForPets(shelterName);
 }
 
 int main(){
