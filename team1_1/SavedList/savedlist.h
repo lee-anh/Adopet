@@ -23,9 +23,11 @@ public:
     void unsavePet(int petID); //just helper rn, doesn't push to vec
 
     void setUsername(string username);
-    //Reload the vector from the SQL every time you
-    //call
+
+    vector<Pet> getPetVec();
     void printVec();
+
+    bool isSavedPet(Pet p);
 
 
 
