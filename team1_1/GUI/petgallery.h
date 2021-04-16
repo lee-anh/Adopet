@@ -18,13 +18,21 @@ class PetGallery
 public:
 
     PetGallery();
-    PetGallery(int numPetsToDisplay,QPushButton* prev, QPushButton* next, QLabel* pageLine, vector<QLabel*> petNameLabels,
-               vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,vector<Pet> petVec);
-    PetGallery(int numPetsToDisplay, QPushButton* prev, QPushButton* next, QLabel* pageLine,
+
+    //for my favorites and manual search
+    PetGallery(int numPetsToDisplay, QPushButton* prev,
+               QPushButton* next, QLabel* pageLine,
                vector<QLabel*> petNameLabels,
                vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,
                vector<QPushButton*> petSaves, vector<Pet> petVec);
-    // PetGallery(int numPetsToDisplay, vector<QLabel*> petNameLabels); //just for testing
+
+    //for matchmaking
+    PetGallery(int numPetsToDisplay, QPushButton* prev,
+               QPushButton* next, QLabel* pageLine,
+               vector<QLabel*> petNameLabels, vector<QLabel*> petPhotos,
+               vector<QLabel*> petScores, vector<QPushButton*> petLearnMore,
+               vector<QPushButton*> petSaves, vector<pair<Pet, int>> petVec);
+
     ~PetGallery();
 
     void updatePetVec(vector<Pet> p);
@@ -32,6 +40,7 @@ public:
     void displayPets(int start);
     void next();
     void previous();
+
 
     void setPageNum(int p);
     Pet getPet(int pos);
@@ -42,16 +51,6 @@ public:
 
 
 
-
-
-
-    //constructor that takes in list of pets, start pos
-    //list of relavent gui elements
-
-    //learn more method could be here too
-    //learn more just needs the positions and the vector of pets.
-    //learn more needs to return a pet
-
 private:
 
     int numToDisplay;
@@ -61,16 +60,22 @@ private:
     QLabel* pageNum;
     vector<QLabel*> nameLabels;
     vector<QLabel*> picLabels;
+    vector<QLabel*> scoreLabels;
+
     vector<QPushButton*> learnMores;
     vector <QPushButton*> saveButtons;
 
     vector<Pet> pets;
+    vector<pair<Pet, int>> matPets;
 
     vector<Pet> petsToDisplay;
+
 
     int nextStartIndex;
     int displayPetsPageNumber;
 
+    //conversion method
+    void matchPetsToRegPets();
 
 
 };

@@ -22,7 +22,9 @@ SOURCES += \
     ../Adopter/preferences.cpp \
     manualsearch.cpp \
     myfavorites.cpp \
-    petgallery.cpp
+    petgallery.cpp \
+    preferencesform.cpp \
+    userinfo.cpp
 
 
 
@@ -37,14 +39,18 @@ HEADERS += \
     ../Adopter/preferences.h \
     manualsearch.h \
     myfavorites.h \
-    petgallery.h
+    petgallery.h \
+    preferencesform.h \
+    userinfo.h
 
 
 FORMS += \
     findmatchforadopters.ui \
     gui.ui \
     manualsearch.ui \
-    myfavorites.ui
+    myfavorites.ui \
+    preferencesform.ui \
+    userinfo.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
