@@ -8,14 +8,18 @@ GUI::GUI(QWidget *parent)
     ui->setupUi(this);
 
 
+    //will need to change the constructor later
+    //FILEPATH may be different on lab server ... maybe ../../projectDB.sqlite instead?
     savedList = SavedList("../../../../../projectDB.sqlite", "exampleUser");
 
+    //dynamically add widgets to the stackedWidget
     ui->stackedWidget->addWidget(&manSearch); //3
     ui->stackedWidget->addWidget(&myFavs); //4
     ui->stackedWidget->addWidget(&fmForAdopters); //5
 
 
 
+    //Set the opening page
     int openingPage = 2; //home page
     ui->stackedWidget->setCurrentIndex(openingPage); //opening page
     previousPage = openingPage;
@@ -26,13 +30,17 @@ GUI::GUI(QWidget *parent)
     connect(&manSearch, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
     connect(&myFavs, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
     connect(&myFavs, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
+    connect(&fmForAdopters, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
+    connect(&fmForAdopters, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
 }
 
 
 GUI::~GUI()
 {
+    //dynamically remove stackedWidgets
     ui->stackedWidget->removeWidget(&manSearch);
     ui->stackedWidget->removeWidget(&myFavs);
+    ui->stackedWidget->removeWidget(&fmForAdopters);
     delete ui;
 
 }
@@ -41,8 +49,8 @@ GUI::~GUI()
 void GUI::meetPet(Pet p){
     petToMeet = p;
 
-    //set button
-    //update savedList
+
+    //set button correctly
     if(savedList.isSavedPet(petToMeet) == true){
         ui->saveButton->setChecked(true);
         ui->saveButton->setText("♥");
@@ -86,11 +94,11 @@ void GUI::meetPet(Pet p){
 void GUI::on_saveButton_clicked()
 {
     if(ui->saveButton->isChecked() == false){
-        savedList.unsavePet(petToMeet);
+        savedList.unsavePet(petToMeet); //update database
         ui->saveButton->setText("♡");
         ui->saveButton->setStyleSheet("color: black");
     } else if (ui->saveButton->isChecked() == true){
-        savedList.savePet(petToMeet);
+        savedList.savePet(petToMeet); //update database
         ui->saveButton->setText("♥");
         ui->saveButton->setStyleSheet("color: red; border: none");
     }
@@ -104,10 +112,7 @@ void GUI::on_exit_clicked()
 
 //slots for signals
 
-void GUI::moveToMeetMe(Pet sendPet){
-    ui->stackedWidget->setCurrentIndex(1);
-    meetPet(sendPet);
-}
+
 
 void GUI::moveToMeetMe(Pet sendPet, bool b){
     ui->stackedWidget->setCurrentIndex(1);
@@ -155,20 +160,25 @@ void GUI::on_backButton_clicked()
 
 void GUI::on_navHomeButton_clicked()
 {
+    //navigate to home screen
     ui->stackedWidget->setCurrentIndex(2);
 }
 
 void GUI::on_navFindMatchButton_clicked()
 {
+    //navigate to find match screen
     ui->stackedWidget->setCurrentIndex(5);
+    fmForAdopters.setSavedList(savedList);
+    fmForAdopters.setUser("user1");
 }
 
 void GUI::on_navMyFavoritesButton_clicked()
 {
+    //pass vital information to myFavs
     myFavs.setSavedList(savedList);
     myFavs.showGal();
 
-
+    //navigate to my favorites screen
     ui->stackedWidget->setCurrentIndex(4);
     previousPage = 4;
 
@@ -176,7 +186,10 @@ void GUI::on_navMyFavoritesButton_clicked()
 
 void GUI::on_navManualSearchButton_clicked()
 {
+    //pass vital information to manSearch
     manSearch.setSavedList(savedList);
+
+    //navigate to manual search
     ui->stackedWidget->setCurrentIndex(3);
     previousPage = 3;
 
@@ -184,7 +197,7 @@ void GUI::on_navManualSearchButton_clicked()
 
 void GUI::on_findMatchFromHome_clicked()
 {
-
+    on_navFindMatchButton_clicked();
 }
 
 void GUI::on_manualSearchFromHome_clicked()

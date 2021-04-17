@@ -6,6 +6,7 @@
 #include <QtSql>
 #include <vector>
 
+//classes that we need
 #include "../DBSearch/dbsearch.h"
 #include "../Pets/pet.h"
 #include "../SavedList/savedlist.h"
@@ -43,25 +44,21 @@ private:
     string currentUser;
 
     void meetPet(Pet p);
-
-
     Pet petToMeet;
     int previousPage;
 
 
-
-
-
 private slots:
 
-    void moveToMeetMe(Pet sendPet);
+    //slots to receive signals
     void moveToMeetMe(Pet sendPet, bool b);
     void heartPet(Pet p, bool b);
 
+    //save Button
     void on_saveButton_clicked();
+
+    //navigation slots
     void on_exit_clicked();
-
-
     void on_backButton_clicked();
     void on_navHomeButton_clicked();
     void on_navFindMatchButton_clicked();

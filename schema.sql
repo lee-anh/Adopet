@@ -51,6 +51,13 @@ create table savedPets(
       petID INT NOT NULL
 
 );
+
+create table media(
+      petID INT NOT NULL, 
+      filename CHAR NOT NULL,
+      mediaType CHAR NOT NULL
+
+);
       
 create table species (
       speciesType   CHAR NOT NULL

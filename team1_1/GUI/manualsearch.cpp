@@ -7,12 +7,14 @@ ManualSearch::ManualSearch(QWidget *parent) :
 {
     ui->setupUi(this);
     search = new DBSearch("../../../../../projectDB.sqlite");
+    //able to initalize petgal here b/c username doesn't matter
     petgal = PetGallery(3,ui->previous, ui->next, ui->pageLine, {ui->name1, ui->name2, ui->name3},
                         {ui->pic1, ui->pic2, ui->pic3},
                         {ui->link1, ui->link2, ui->link3},
                         {ui->save1, ui->save2, ui->save3},
                         search->getPetVec());
 
+    //manual search doesn't display any results when the user starts
     //search->runNewQuery();
     petgal.updatePetVec(search->getPetVec());
     ui->pageLine->setText("Search for pets using search bar and checkboxes!");
@@ -50,10 +52,15 @@ void ManualSearch::checkBoxSearch(string wordToSearch, string category, int arg1
     }
 
 
+    //rerun the query
     search->runNewQuery();
+
+    //update the gallery and display
     petgal.updatePetVec(search->getPetVec());
     petgal.setPageNum(1);
     petgal.displayPets(0);
+
+    //reload save buttons
     loadSaveButtons({ui->save1, ui->save2, ui->save3});
 
 }
@@ -160,10 +167,14 @@ void ManualSearch::on_next_clicked()
 void ManualSearch::on_searchButton_clicked()
 {
     clearCheckBoxes();
+
+    //take string from search bar and run query on it
     QString searchInput = ui->searchBar->text();
     string searchString = searchInput.toStdString();
     search->search(searchString);
     search->runNewQuery();
+
+    //update the pet gallery
     petgal.updatePetVec(search->getPetVec());
     petgal.displayPets(0);
     petgal.setPageNum(1);
@@ -171,6 +182,10 @@ void ManualSearch::on_searchButton_clicked()
 }
 
 void ManualSearch::clearCheckBoxes(){
+    //clear all the checkboxes!
+    //could potentially iterate over everything to optimize
+
+
     ui->dogCheckBox->setChecked(false);
     ui->catCheckBox->setChecked(false);
     ui->rabbitCheckBox->setChecked(false);
