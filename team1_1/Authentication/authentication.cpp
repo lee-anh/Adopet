@@ -62,40 +62,31 @@ void Authentication::openDB(){
     }
 }
 
-int Authentication::signUp(string username, string password, string emailAdd, int zip, string accountType){
+
+bool Authentication::signUp(string username, string password, string accountType){
     if(checkUsername("username")){
         std::cerr << "Account already exists" << endl;
-        return -1;
-    }
-    if(accountType.compare("Adopter")){
-        createAdopter(username,password, emailAdd, zip);
-        std::cerr << "New Adopter Created" << endl;
-        return 1;
+        return false;
     }
     else{
-        std::cerr << "Invalid sign up. Return code -1" << endl;
-        return -1;
+        if(db.isOpen()){
+            QSqlQuery qry = QSqlQuery(db);
+            string s = "INSERT INTO accounts(username, password, accountType) VALUES(\""
+            + username + "\", \"" + password + "\", \""+ accountType + "\")";
+            QString qs = QString::fromStdString(s);
+            qry.exec(qs);
+        }
     }
+    return true;
 }
 
+/*
+
 Adopter* Authentication::createAdopter(string username, string password, string emailAdd, int zip){
-    Preferences* pref = new Preferences();
+    Preferences pref = Preferences();
     //Big problem: find a way to add first and last name
     Adopter* newAdptr = new Adopter(username, password, "", "",emailAdd, zip, *pref);
-    //Add to accounts
-    if(db.isOpen()){
-        QSqlQuery qry = QSqlQuery(db);
-        QString qs = "INSERT INTO accounts(username, password, accountType) VALUES(";
-        qs+= "\"" + QString::fromStdString(username) + "\"";
-        qs += ",";
-        qs+= "\"" + QString::fromStdString(password)+"\"";
-        qs += ",";
-        qs+= "\"";
-        qs+= "adopter";
-        qs+= "\"";
-        qs+=");";
-        qry.exec(qs);
-    }
+
     //Add to adopters
     if(db.isOpen()){
         QSqlQuery qry = QSqlQuery(db);
@@ -129,6 +120,7 @@ Adopter* Authentication::createAdopter(string username, string password, string 
     return newAdptr;
 }
 
+*/
 Adopter* Authentication::getAuthenticatedAdopter(){
     if(authAdopter){
         return authAdopter;

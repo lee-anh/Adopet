@@ -15,7 +15,8 @@ public:
     ~Authentication();
 
     bool logIn(string username, string password);
-    int signUp(string username, string password, string emailAdd, int zip, string accountType);
+    bool signUp(string username, string password, string accountType);
+
     Adopter* createAdopter(string username, string password, string emailAdd, int zip);
     Adopter* getAuthenticatedAdopter();
 private:
