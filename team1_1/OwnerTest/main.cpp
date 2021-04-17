@@ -1,6 +1,7 @@
 #include <iostream>
 #include "gtest/gtest.h"
 #include "../Owner/owner.h"
+#include "../Pets/pet.h"
 
 
 // The fixture for testing class Foo.
@@ -57,6 +58,54 @@ TEST(unitTest, settersAndGetters){
     ASSERT_EQ(o1.getPhoneNumber(), 1234567890) << o1.getPhoneNumber() << " should be 1234567890";
     ASSERT_EQ(o1.getZipCode(), 12345) << o1.getZipCode() << " should be 12345";
 }
+
+//Testing the function of filling in the owner's pets
+TEST(unitTest, fillPets){
+    Owner o1("Shelter Owner");
+    o1.setName("best friends");
+
+    vector<Pet> before = o1.getPets();
+    ASSERT_EQ(before.empty(), true) << before.size() << " should be empty";
+
+    o1.fillPets();
+
+    vector<Pet> after = o1.getPets();
+    ASSERT_EQ(after.empty(), false) << after.size() << " should not be empty";
+    ASSERT_NE(after.size(), 0) << after.size() << " should not be 0";
+}
+
+/*
+//Testing the function of uploading a single pet onto the database
+TEST(unitTest, uploadPet){
+    Owner o1("Shelter Owner");
+    o1.setName("best friends");
+
+    o1.fillPets();
+    int petAmountBefore = o1.getPets().size();
+
+    Owner o2("Shelter Owner");
+    o2.setName("best friends");
+    Pet p = Pet("qwerty", "dog", "newBreed", "adult", "large", "happy", "male", "kids", "best friends", "loren ipsum");
+    o2.uploadPet(p);
+
+    o2.fillPets();
+    int petAmountAfter = o2.getPets().size();
+
+    ASSERT_EQ(petAmountAfter, petAmountBefore + 1) << "Pet amount should increase after uploading a pet";
+    cout << "Pet amount before: " << petAmountBefore << endl;
+    cout << "Pet amount after: " << petAmountAfter << endl;
+}
+*/
+
+
+//Testing the function of uploading a single pet onto the database
+TEST(unitTest, uploadPets){
+    Owner o1("Shelter Owner");
+    o1.setName("best friends");
+
+    o1.uploadPets();
+}
+
 
 int main(int argc, char **argv){
     ::testing::InitGoogleTest(&argc, argv);
