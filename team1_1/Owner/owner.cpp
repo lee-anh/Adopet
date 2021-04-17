@@ -190,16 +190,25 @@ void Owner::uploadPet(Pet p){
 }
 
 /*
- * Uses the passed fields to create a pet and adds it onto the database
- * @petFields List of pet data
+ * Creates a Pet object with the information present in the passed query
+ * @param query A QSqlQuery object
+ * @return A new Pet object with the retrieved information
 */
-void Owner::addPetFromLine(QStringList petData){
+Pet Owner::makePet(QStringList petData){
+    //storing information in each line
+    string name = petData.at(0).toStdString();
+    string species = petData.at(1).toStdString();
+    string breed = petData.at(2).toStdString();
+    string age = petData.at(3).toStdString();
+    string size = petData.at(4).toStdString();
+    string temperament = petData.at(5).toStdString();
+    string gender = petData.at(6).toStdString();
+    string goodWith = petData.at(7).toStdString();
+    string shelter = petData.at(8).toStdString();
+    string bio = petData.at(9).toStdString();
 
-    for (int i = 0; i < petData.size(); ++i){
-              string element = petData.at(i).toStdString();
-              cout << i << ": " << element << endl;
-    }
-    cout << endl;
+    Pet p = Pet(name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+    return p;
 }
 
 /*
@@ -218,7 +227,7 @@ void Owner::uploadPets(){
     while(!in.atEnd()) {
         QString line = in.readLine();
         QStringList petData = line.split(",");
-        addPetFromLine(petData);
+        uploadPet(makePet(petData));
     }
 
     file.close();
