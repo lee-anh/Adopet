@@ -36,6 +36,8 @@ public:
     void uploadPet(Pet p);          //uploads a Pet into the database one at a time
     void uploadPets();    //Reads animals from a txt file and fills up the vector
 
+    int getLastPetID();         //loops through the pets database and gets the last pet id
+
 
 private:
     string ownerType;                    //Either "Shelter Owner" or "Foster Parent"
@@ -46,6 +48,7 @@ private:
     string email;
 
     vector<Pet> pets;                  //stores the pets of the owner
+    int lastPetID;
 };
 
 #endif // OWNER_H

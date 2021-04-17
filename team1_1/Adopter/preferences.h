@@ -165,8 +165,6 @@ private:
     string gender;
     vector<string> goodWith;
     vector<string> shelter;
-
-
 };
 
 #endif //PREFERENCES_H

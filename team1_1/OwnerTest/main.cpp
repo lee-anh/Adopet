@@ -94,9 +94,9 @@ TEST(unitTest, uploadPet){
     ASSERT_EQ(petAmountAfter, petAmountBefore + 1) << "Pet amount should increase after uploading a pet";
     cout << "Pet amount before: " << petAmountBefore << endl;
     cout << "Pet amount after: " << petAmountAfter << endl;
-
 }
 */
+
 
 //Testing the function of uploading a single pet onto the database
 TEST(unitTest, uploadPets){
@@ -105,6 +105,7 @@ TEST(unitTest, uploadPets){
 
     o1.uploadPets();
 }
+
 
 int main(int argc, char **argv){
     ::testing::InitGoogleTest(&argc, argv);

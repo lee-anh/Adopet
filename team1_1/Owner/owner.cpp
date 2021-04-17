@@ -3,6 +3,8 @@
 Owner::Owner(string t){
     if(t == "Shelter Owner" || t == "Foster Parent") ownerType = t;
     else ownerType = "";
+
+    lastPetID = getLastPetID();
 }
 
 Owner::Owner(string n, string oT, string a, int zip, int pN, string e){
@@ -12,6 +14,34 @@ Owner::Owner(string n, string oT, string a, int zip, int pN, string e){
     zipCode = zip;
     phoneNumber = pN;
     email = e;
+
+    lastPetID = getLastPetID();
+}
+
+/*
+ * Loops through the database and retreives the last pet id used
+ * @return Last pet ID
+*/
+int Owner::getLastPetID(){
+    QSqlDatabase petsDB = QSqlDatabase::addDatabase("QSQLITE", "ownerCxn");
+    string fullName = "../../projectDB.sqlite";
+    petsDB.setDatabaseName(QString::fromStdString(fullName));
+
+    int lPI = 0;
+
+    if(petsDB.open()){
+        QSqlQuery query = QSqlQuery(petsDB);
+        QString s = "SELECT id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio FROM pets";
+        query.exec(s);
+        while(query.next()){
+            lPI = query.value(0).toInt();
+        }
+    }
+
+    petsDB.removeDatabase(petsDB.connectionName());
+    petsDB.close();
+
+    return lPI;
 }
 
 /*
@@ -167,23 +197,28 @@ void Owner::uploadPet(Pet p){
     string fullName = "../../projectDB.sqlite";
     petsDB.setDatabaseName(QString::fromStdString(fullName));
 
-    QString s = "INSERT INTO pets(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio) VALUES(\"";
-    s += QString::number(1000) + "\", ";    //arbitrary id
-    s += QString::fromStdString(p.getName()) + "\", ";
-    s += QString::fromStdString(p.getSpecies()) + "\", ";
-    s += QString::fromStdString(p.getBreed()) + "\", ";
-    s += QString::fromStdString(p.getAge()) + "\", ";
-    s += QString::fromStdString(p.getSize()) + "\", ";
-    s += QString::fromStdString(p.getTemperament()) + "\", ";
-    s += QString::fromStdString(p.getGender()) + "\", ";
-    s += QString::fromStdString(p.getGoodWith()) + "\", ";
-    s += QString::fromStdString(p.getShelter()) + "\", ";
-    s += QString::fromStdString(p.getBio()) + ")";
+    QString s = "INSERT INTO pets(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio) VALUES(";
+    s += QString::number(lastPetID + 1) + ", \"";    //arbitrary id
+    s += QString::fromStdString(p.getName()) + "\", \"";
+    s += QString::fromStdString(p.getSpecies()) + "\", \"";
+    s += QString::fromStdString(p.getBreed()) + "\", \"";
+    s += QString::fromStdString(p.getAge()) + "\", \"";
+    s += QString::fromStdString(p.getSize()) + "\", \"";
+    s += QString::fromStdString(p.getTemperament()) + "\", \"";
+    s += QString::fromStdString(p.getGender()) + "\", \"";
+    s += QString::fromStdString(p.getGoodWith()) + "\", \"";
+    s += QString::fromStdString(p.getShelter()) + "\", \"";
+    s += QString::fromStdString(p.getBio()) + "\")";
+
+    string test = s.toStdString();
+    cout << "Command: " << test << endl;
 
     if(petsDB.open()){
         QSqlQuery query = QSqlQuery(petsDB);
         query.exec(s);
     }
+
+    lastPetID += 1;
 
     petsDB.removeDatabase(petsDB.connectionName());
     petsDB.close();
