@@ -3,6 +3,8 @@
 #include <string>
 #include <QtSql>
 #include <QString>
+#include "../Adopter/adopter.h"
+#include "../Adopter/preferences.h"
 
 using namespace std;
 
@@ -13,11 +15,13 @@ public:
     ~Authentication();
 
     bool logIn(string username, string password);
-    int signUp(string username, string password, string accountType);
-    void createAdopter();
-    void createShelter();
+    int signUp(string username, string password, string emailAdd, int zip, string accountType);
+    Adopter* createAdopter(string username, string password, string emailAdd, int zip);
+    Adopter* getAuthenticatedAdopter();
 private:
     void openDB();
+    bool checkUsername(string username);
+    Adopter* authAdopter;
     QSqlDatabase db;
 };
 

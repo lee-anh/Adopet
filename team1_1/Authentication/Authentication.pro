@@ -7,7 +7,11 @@ QT += sql
 
 SOURCES += \
         authentication.cpp \
-        main.cpp
+        main.cpp \
+        ../Adopter/adopter.cpp \
+        ../Adopter/preferences.cpp
 
 HEADERS += \
-    authentication.h
+    authentication.h \
+    ../Adopter/adopter.h \
+    ../Adopter/preferences.h
