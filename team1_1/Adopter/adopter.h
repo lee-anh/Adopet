@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <QtSql>
 
 #include "preferences.h"
 
@@ -114,7 +115,10 @@ public:
      */
     void setZipCode(int zip);
 
-    Preferences preferenceList;
+    void addPreference(string attr, string attrType);           //adds a specific preference onto the adopter's preference list
+    void fillPreferences();             //fills the adopter's preference list by accessing the DB
+    void getPreferences();              //accessor method for adopter's preference list
+
 
 private:
     //instance variables
@@ -125,7 +129,7 @@ private:
     string emailAddress;
     int zipcode;
 
-
+    Preferences preferenceList;
 };
 
 #endif // ADOPTER_H
