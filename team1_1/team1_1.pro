@@ -13,4 +13,5 @@ SUBDIRS += \
     PetsTest \
     Randomizer \
     SavedList \
-    MatchmakingTest
+    MatchmakingTest \
+    SavedListTest

@@ -88,6 +88,10 @@ TEST(unitTest, settersAndGetters){
     ASSERT_EQ(p->getBreed(), "Siamese") << p->getName() << " should be Siamese";
     ASSERT_EQ(p->getSpecies(), "Cat") << p->getName() << " should be Cat";
     ASSERT_EQ(p->getGender(), "Male") << p->getName() << " should be Male";
+    ASSERT_EQ(p->getSize(), "Medium") << p->getName() << " should be Medium";
+    ASSERT_EQ(p->getBio(), "Lorem Ipsum") << p->getBio() << " should be Lorem Ipsum";
+    ASSERT_EQ(p->getTemperament(), "Passive") << p->getTemperament() << " should be Male";
+    ASSERT_EQ(p->getGoodWith(), "Kids") << p->getGoodWith() << " should be Kids";
 }
 
 
