@@ -7,25 +7,31 @@ GUI::GUI(QWidget *parent)
 {
     ui->setupUi(this);
 
+    dbName = "../../../../../projectDB.sqlite";
+    auth = Authentication(dbName);
+
+
 
     //will need to change the constructor later
     //FILEPATH may be different on lab server ... maybe ../../projectDB.sqlite instead?
-    savedList = SavedList("../../../../../projectDB.sqlite", "exampleUser");
+   // savedList = SavedList("../../../../../projectDB.sqlite", "exampleUser");
 
     //dynamically add widgets to the stackedWidget
     ui->stackedWidget->addWidget(&manSearch); //3
     ui->stackedWidget->addWidget(&myFavs); //4
     ui->stackedWidget->addWidget(&fmForAdopters); //5
-
-
+    ui->stackedWidget->addWidget(&uinfo);//6
 
     //Set the opening page
-    int openingPage = 2; //home page
+    int openingPage = 0; //login
+    hideNav();
     ui->stackedWidget->setCurrentIndex(openingPage); //opening page
     previousPage = openingPage;
 
 
     //Signals and slots
+    connect(&uinfo, SIGNAL(backClicked()), this, SLOT(backToLogin()));
+    connect(&uinfo, SIGNAL(updatedAdopter(Adopter)), this, SLOT(updateAdopter(Adopter)));
     connect(&manSearch, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
     connect(&manSearch, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
     connect(&myFavs, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
@@ -91,6 +97,29 @@ void GUI::meetPet(Pet p){
 }
 
 
+
+void GUI::hideNav(){
+    ui->navFindMatchButton->setVisible(false);
+    ui->navHomeButton->setVisible(false);
+    ui->navManualSearchButton->setVisible(false);
+    ui->navMyFavoritesButton->setVisible(false);
+    ui->navMyPreferences->setVisible(false);
+    ui->navHelpButton->setVisible(false);
+    ui->exit->setVisible(false);
+    ui->navMyInfoButton->setVisible(false);
+}
+
+void GUI::showNav(){
+    ui->navFindMatchButton->setVisible(true);
+    ui->navHomeButton->setVisible(true);
+    ui->navManualSearchButton->setVisible(true);
+    ui->navMyFavoritesButton->setVisible(true);
+    ui->navMyPreferences->setVisible(true);
+    ui->navHelpButton->setVisible(true);
+    ui->exit->setVisible(true);
+    ui->navMyInfoButton->setVisible(true);
+}
+
 void GUI::on_saveButton_clicked()
 {
     if(ui->saveButton->isChecked() == false){
@@ -110,9 +139,9 @@ void GUI::on_exit_clicked()
 
 }
 
+
+
 //slots for signals
-
-
 
 void GUI::moveToMeetMe(Pet sendPet, bool b){
     ui->stackedWidget->setCurrentIndex(1);
@@ -137,6 +166,14 @@ void GUI::heartPet(Pet p, bool b){
 
 }
 
+
+void GUI::backToLogin(){
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+void GUI::updateAdopter(Adopter a){
+    adopter = a;
+}
 
 void GUI::on_backButton_clicked()
 {
@@ -164,12 +201,14 @@ void GUI::on_navHomeButton_clicked()
     ui->stackedWidget->setCurrentIndex(2);
 }
 
+
 void GUI::on_navFindMatchButton_clicked()
 {
     //navigate to find match screen
     ui->stackedWidget->setCurrentIndex(5);
     fmForAdopters.setSavedList(savedList);
     fmForAdopters.setUser("user1");
+    previousPage = 5;
 }
 
 void GUI::on_navMyFavoritesButton_clicked()
@@ -195,6 +234,13 @@ void GUI::on_navManualSearchButton_clicked()
 
 }
 
+void GUI::on_navMyInfoButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(6);
+    uinfo.adopterMyInfoClicked();
+}
+
+
 void GUI::on_findMatchFromHome_clicked()
 {
     on_navFindMatchButton_clicked();
@@ -210,4 +256,44 @@ void GUI::on_myFavoritesFromHome_clicked()
     on_navMyFavoritesButton_clicked();
 }
 
+
+
+void GUI::on_loginButton_clicked()
+{
+
+    string uname = ui->username->text().toStdString();
+    string pwd = ui->password->text().toStdString();
+    cout << uname << endl;
+    cout << pwd << endl;
+    //int i = auth.logIn("user1", "password1"); //why is this giving me -1 here but not in the main of auth
+    //cout << i << endl;
+    // 0 = adopter
+    // 1 = owner
+    // -1 = auth fail
+
+    if(auth.logIn(uname, pwd) == 0){
+        uinfo.setAuth(auth);
+        adopter = auth.getAuthenticatedAdopter();
+        savedList = SavedList(dbName, uname);
+        ui->stackedWidget->setCurrentIndex(2); //go to home screen
+        previousPage = 0;
+        showNav();
+    } else if (auth.logIn(uname, pwd) == 1){
+        //WILL NEED TO REVISE?
+        uinfo.setAuth(auth);
+        owner = auth.getAuthenticatedOwner();
+        ui->stackedWidget->setCurrentIndex(2); //go to home screen
+        previousPage = 0;
+        showNav();
+    } else {
+        ui->errorLine->setText("Username or password is not correct");
+    }
+}
+
+void GUI::on_createAccountButton_clicked()
+{
+    //to create account page (userinfo.ui)
+    ui->stackedWidget->setCurrentIndex(6);
+    uinfo.setAuth(auth);
+}
 

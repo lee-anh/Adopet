@@ -4,33 +4,112 @@
 #include <iostream>
 #include <vector>
 #include <QtSql>
+#include <algorithm>
+#include <random>
+#include <chrono>
 #include "../Pets/pet.h"
 
 
 
 using namespace std;
 
+/*!
+ * \brief The DBSearch class provides backend support for manual searching
+ */
 class DBSearch
 {
 public:
+    /*!
+     * \brief DBSearch default constructor
+     */
     DBSearch();
+
+    /*!
+     * \brief DBSearch main constructor
+     * \param dbFilepath
+     */
     DBSearch(string dbFilepath);
+
+    /*!
+     * \brief DBSearch experimental constructor
+     * \param d
+     */
     DBSearch(QSqlDatabase d);
+
+    /*!
+     * \brief DBSearch destructor
+     */
     ~DBSearch();
 
+
+
     //Step 1: edit constraints vector
+
+    /*!
+     * \brief search
+     * \param s
+     */
+    void search(string s);
+
+    /*!
+     * \brief addToAttributes
+     * \param attribute
+     * \param category
+     * \return
+     */
     bool addToAttributes(string attribute, string category);
+
+    /*!
+     * \brief removeFromAttributes
+     * \param attribute
+     * \param category
+     * \return
+     */
     bool removeFromAttributes(string attribute, string category);
-    bool search(string s);
 
     //Step 2: run the query
+    /*!
+     * \brief runNewQuery
+     * \return
+     */
     int runNewQuery();
-    string createQuery(); //should be private?
-    int queryDB(string qry); //should be private?
 
+    /*!
+     * \brief createQuery, helper method to runNewQuery()
+     * \return
+     */
+    string createQuery();
+
+    /*!
+     * \brief queryDB, helper method to runNewQuery()
+     * \param qry
+     * \return
+     */
+    int queryDB(string qry);
+
+    /*!
+     * \brief getPetVec
+     * \return
+     */
     vector<Pet> getPetVec();
+
+    /*!
+     * \brief getPetVecSize
+     * \return
+     */
     int getPetVecSize();
+
+    /*!
+     * \brief printMatchingVec
+     */
     void printMatchingVec();
+
+    /*!
+     * \brief randomShuffle the matchingPets
+     */
+    void randomShuffle();
+
+
 
 
 
@@ -38,17 +117,29 @@ public:
 private:
     //database stuff
     string filepath;
+    /*!
+     * \brief openDB
+     */
     void openDB();
-
     QSqlDatabase dbSearchdb;
+
+    /*!
+     * \brief fillVecsFromDB
+     */
     void fillVecsFromDB();
+    /*!
+     * \brief fillStaticVecs
+     */
     void fillStaticVecs();
 
-    //helper functions
 
+
+    /*!
+     * \brief getIndex, helper method to add/remove attributes
+     * \param category
+     * \return
+     */
     int getIndex(string category);
-
-
 
     //vectors of keywords
     vector<string> mainSpecies; //from DB
@@ -59,22 +150,13 @@ private:
     vector<string> mainGenders; //static
     vector<string> mainGoodWith; //from DB
     vector<string> mainShelters; //from DB
+    vector<string> names;
 
 
     vector<string> attributes;
     vector<vector<string>> constraints;
     vector<Pet> matchingPets;
 
-
-
-
-    //optimization for later: find likes
-
-    //how do we refine searches?
-    //store what you write to a datastructure
-    //or you could query the database again (preferred)
-
-    //specific order
 
 
 

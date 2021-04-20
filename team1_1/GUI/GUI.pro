@@ -24,8 +24,9 @@ SOURCES += \
     myfavorites.cpp \
     petgallery.cpp \
     preferencesform.cpp \
-    userinfo.cpp
-
+    userinfo.cpp \
+    ../Authentication/authentication.cpp \
+    ../Owner/owner.cpp
 
 
 HEADERS += \
@@ -41,7 +42,10 @@ HEADERS += \
     myfavorites.h \
     petgallery.h \
     preferencesform.h \
-    userinfo.h
+    userinfo.h \
+    ../Authentication/authentication.h \
+    ../Owner/owner.h
+
 
 
 FORMS += \

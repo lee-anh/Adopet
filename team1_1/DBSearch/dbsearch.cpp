@@ -1,7 +1,13 @@
 #include "dbsearch.h"
 
+/*!
+ * \brief DBSearch default constructor. Not recommended for use
+ */
 DBSearch::DBSearch()
 {
+
+    cout << "default constructor called (DBSearch)";
+    /*
     filepath = "../../projectDB.sqlite";
 
     //Databse stuff
@@ -10,9 +16,14 @@ DBSearch::DBSearch()
     //load keyword vectors
     fillStaticVecs();
     fillVecsFromDB();
+    */
 
 }
 
+/*!
+ * \brief DBSearch main constructor, recommended
+ * \param dbFilepath database filepath
+ */
 DBSearch::DBSearch(string dbFilepath){
     filepath = dbFilepath;
     //Databse stuff
@@ -24,50 +35,34 @@ DBSearch::DBSearch(string dbFilepath){
 
 }
 
+
+/*!
+ * \brief DBSearch experimental constructor, not recommended
+ * \param d
+ */
 DBSearch::DBSearch(QSqlDatabase d){
     dbSearchdb = d;
     fillStaticVecs();
     fillVecsFromDB();
 }
 
+
+/*!
+ * \brief DBSearch destructor, closes database
+ */
 DBSearch::~DBSearch()
 {
 
-    dbSearchdb.~QSqlDatabase();
-}
-
-bool DBSearch::addToAttributes(string attribute, string category){
-    int index = getIndex(category);
-
-    if(index < 0){
-        return false;
-    }
-    //else
-    constraints[index].push_back(attribute);
-    return true;
+    dbSearchdb.close();
 }
 
 
-bool DBSearch::removeFromAttributes(string attribute, string category){
-    int index = getIndex(category);
-    bool toReturn = false;
-    if (index < 0){
-        return toReturn;
-    }
-    //else
-    for(int i = 0; i < (int) constraints[index].size(); i++){
-        if(attribute == constraints[index][i]){
-            constraints[index].erase(constraints[index].begin() + i);
-            toReturn = true;
-            break;
-        }
-    }
-
-    return toReturn;
-
-}
-
-bool DBSearch::search(string s){
+/*!
+ * \brief search - search a user provided string for keywords
+ * \param s user provided string
+ * \return
+ */
+void DBSearch::search(string s){
     //clear vectors in the constraints vector, not constraint vector itself
     for(int i = 0; i < (int) constraints.size(); i++){
         constraints[i].clear();
@@ -171,20 +166,75 @@ bool DBSearch::search(string s){
         }
     }
 
+    //name
+    if(attributeToSearch == ""){
+        for(int i = 0; i < (int) names.size(); i++){
+            if(s == names.at(i)){
+                attributeToSearch = "name";
+                break;
+            }
+        }
+    }
 
+
+    //add to attributes to search for
     addToAttributes(s, attributeToSearch);
 
     }
-    return true; //TODO
+   // return true; //TODO
 
 
 }
 
 
+/*!
+ * \brief addToAttributes adds an attribute to the constraints vector
+ * \param attribute attribute to dd
+ * \param category attribute's category
+ * \return true if successfully added to constraints vector, false if not
+ */
+bool DBSearch::addToAttributes(string attribute, string category){
+    int index = getIndex(category);
+
+    if(index < 0){
+        return false;
+    }
+    //else
+    constraints[index].push_back(attribute);
+    return true;
+}
+
+/*!
+ * \brief removeFromAttributes removes an attribute from the constraints vector
+ * \param attribute attribute to remove
+ * \param category attribute's cattegory
+ * \return true if successfully removed from constraints vector, false if not
+ */
+bool DBSearch::removeFromAttributes(string attribute, string category){
+    int index = getIndex(category);
+    bool toReturn = false;
+    if (index < 0){
+        return toReturn;
+    }
+    //else
+    for(int i = 0; i < (int) constraints[index].size(); i++){
+        if(attribute == constraints[index][i]){
+            constraints[index].erase(constraints[index].begin() + i);
+            toReturn = true;
+            break;
+        }
+    }
+
+    return toReturn;
+
+}
 
 
 
-
+/*!
+ * \brief runNewQuery, driver method for running a query to the database
+ * \return how many matches in the database for a given query
+ */
 int DBSearch::runNewQuery(){
     //clear the current vector of matchingPets
     matchingPets.clear();
@@ -198,6 +248,11 @@ int DBSearch::runNewQuery(){
 
 }
 
+/*!
+ * \brief createQuery, helper method to runNewQuery()
+ * creates a string representation of the query
+ * \return the query in string format
+ */
 string DBSearch::createQuery(){
     string query = "SELECT id, name, species, breed, age, "
         "size, temperament, gender, goodWith, shelter, bio FROM pets ";
@@ -225,6 +280,12 @@ string DBSearch::createQuery(){
 }
 
 
+/*!
+ * \brief queryDB, helper method to runNewQuery()
+ * executes a query
+ * \param qry string version of query to execute
+ * \return how many matches in the database there were
+ */
 int DBSearch::queryDB(string qry){
     int count = 0;
     if(dbSearchdb.open()){
@@ -257,16 +318,67 @@ int DBSearch::queryDB(string qry){
 
     return count;
 }
+
+/*!
+ * \brief getPetVec
+ * \return matchingPets vector
+ */
 vector<Pet> DBSearch::getPetVec(){
     return matchingPets;
 }
 
+/*!
+ * \brief getPetVecSize
+ * \return size of matchingPets vector
+ */
 int DBSearch::getPetVecSize(){
     return (int) matchingPets.size();
 }
 
+/*!
+ * \brief printMatchingVec, prints matches for testing
+ */
+void DBSearch::printMatchingVec(){
+    for(int i = 0; i < (int) matchingPets.size(); i++){
+        cout << matchingPets.at(i).getName() << endl;
+    }
+}
+
+/*
+vector<string> DBSearch::searchingFor(){
+    vector<string> toReturn = vector<string>();
+    for(int i = 0; i < (int) constraints.size(); i++){
+        string s = "";
+        if(constraints[i].size() > 0){
+            s = attributes[i] + " - ";
+        }
+        for(int j = 0; i < (int) constraints[i].size(); j++){
+            s = s + constraints[i][j];
+        }
+        toReturn.push_back(s);
+    }
+    return toReturn;
+}
+*/
 
 
+/*!
+ * \brief randomShuffle the matchingPets vector
+ */
+
+void DBSearch::randomShuffle(){
+    search(""); //step 1
+    runNewQuery(); //step 2
+
+    //a seed dependant on time
+    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+    shuffle (matchingPets.begin(), matchingPets.end(), std::default_random_engine(seed));
+
+}
+
+/*!
+ * \brief openDB, opens a connection to the database
+ */
 void DBSearch::openDB(){
     dbSearchdb = QSqlDatabase::addDatabase("QSQLITE", "dbsearch");
     string fullName = filepath;
@@ -284,6 +396,9 @@ void DBSearch::openDB(){
 }
 
 
+/*!
+ * \brief fillVecsFromDB, fills the categories that have dynamic attributes
+ */
 void DBSearch::fillVecsFromDB(){
     if(dbSearchdb.open()){
     QSqlQuery query = QSqlQuery(dbSearchdb);
@@ -330,9 +445,21 @@ void DBSearch::fillVecsFromDB(){
         mainShelters.push_back(s);
     }
 
+    //name
+    QString qs6 = "SELECT DISTINCT name FROM pets";
+    query.exec(qs6);
+    while(query.next()){
+        string s = query.value(0).toString().toStdString();
+        names.push_back(s);
+    }
+
     }
 }
 
+
+/*!
+ * \brief fillStaticVecs, fills the static vectors needed for this class
+ */
 void DBSearch::fillStaticVecs(){
     mainAges = {"young", "adult","senior"};
     mainGenders = {"male", "female"};
@@ -340,18 +467,16 @@ void DBSearch::fillStaticVecs(){
 
     matchingPets = vector<Pet>();
     attributes = {"species", "breed", "age",
-                  "size", "temperament", "gender", "goodWith", "shelter"};
-    constraints.resize(8, vector<string>(0)); //8 attributes to compare
-}
-
-void DBSearch::printMatchingVec(){
-    for(int i = 0; i < (int) matchingPets.size(); i++){
-        cout << matchingPets.at(i).getName() << endl;
-    }
+                  "size", "temperament", "gender", "goodWith", "shelter", "name"};
+    constraints.resize(9, vector<string>(0)); //8 attributes to compare
 }
 
 
-
+/*!
+ * \brief getIndex, helper method to add/remove attributes
+ * \param category category to search for
+ * \return index of that category in the constraint vector
+ */
 int DBSearch::getIndex(string category){
     if (category == "species"){
         return 0;
@@ -369,7 +494,9 @@ int DBSearch::getIndex(string category){
         return 6;
     } else if (category == "shelter"){
         return 7;
-    } else {
+    } else if (category == "name"){
+        return 8;
+    }else {
         return -1;
     }
 }

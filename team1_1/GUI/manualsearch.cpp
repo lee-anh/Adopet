@@ -167,12 +167,27 @@ void ManualSearch::on_next_clicked()
 void ManualSearch::on_searchButton_clicked()
 {
     clearCheckBoxes();
+    //ui->searchingForLabel->clear();
 
     //take string from search bar and run query on it
     QString searchInput = ui->searchBar->text();
     string searchString = searchInput.toStdString();
     search->search(searchString);
     search->runNewQuery();
+
+    /*
+    string s = "";
+    if(search->searchingFor().size() > 0){
+        s = "Searching for: ";
+    }
+    for(int i = 0; i < (int) search->searchingFor().size(); i++){
+        s = s + search->searchingFor()[i] + "\n";
+
+    }
+
+
+    ui->searchingForLabel->setText(QString::fromStdString(s));
+*/
 
     //update the pet gallery
     petgal.updatePetVec(search->getPetVec());
@@ -274,4 +289,14 @@ void ManualSearch::loadSaveButtons(vector<QPushButton *> saveButtons){
         }
     }
     }
+}
+
+void ManualSearch::on_surpriseMe_clicked()
+{
+    clearCheckBoxes();
+    search->randomShuffle();
+    petgal.updatePetVec(search->getPetVec());
+    petgal.displayPets(0);
+    petgal.setPageNum(1);
+    loadSaveButtons({ui->save1, ui->save2, ui->save3});
 }

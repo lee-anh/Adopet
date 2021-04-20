@@ -11,7 +11,7 @@ create table pets (
       shelter       CHAR NOT NULL, 
       bio           CHAR
 
-      );
+);
 
 create table accounts(
       username  CHAR NOT NULL UNIQUE,
@@ -24,7 +24,8 @@ create table owner(
       username CHAR NOT NULL UNIQUE,
       name     CHAR NOT NULL,
       phoneNumber CHAR NOT NULL,
-      emailAddress CHAR NOT NULL, 
+      emailAddress CHAR NOT NULL,
+      ownerAddress CHAR NOT NULL, 
       zip         INT NOT NULL,
       ownerType  CHAR NOT NULL 
 );
