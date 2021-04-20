@@ -5,6 +5,9 @@ CONFIG -= app_bundle
 QT += core
 QT += sql
 
+QMAKE_CXXFLAGS += --coverage
+QMAKE_LFLAGS += --coverage
+
 SOURCES += \
         main.cpp
 
