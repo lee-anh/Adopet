@@ -115,9 +115,11 @@ public:
      */
     void setZipCode(int zip);
 
-    void addPreference(string attr, string attrType);           //adds a specific preference onto the adopter's preference list
+    void removePreference(string attr, string attrType);            //removes a preference from the adopter's preference list and the DB
+    void addPreference(string attr, string attrType);            //adds a preference onto the adopter's preference list and the DB
+    void fillPreference(string attr, string attrType);           //fills the passed preference onto the adopter's preference list
     void fillPreferences();             //fills the adopter's preference list by accessing the DB
-    void getPreferences();              //accessor method for adopter's preference list
+    Preferences getPreferences();              //accessor method for adopter's preference list
 
 
 private:
