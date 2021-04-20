@@ -23,6 +23,7 @@ UserInfo::~UserInfo()
 
 void UserInfo::setAuth(Authentication a){
     auth = a;
+    username = a.getAuthenticatedAdopter().getUsername();
 }
 
 void UserInfo::adopterMyInfoClicked(){

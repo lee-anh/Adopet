@@ -31,6 +31,7 @@ public:
     Owner createOwner(string ownerType, string name, string address, int zip, int phone, string email);
     void insertOwnerToDB(string username, string name, string phone, string email, string address, string zip, string ownerType);
     Owner getAuthenticatedOwner();
+    Owner updateOnwer(string username, string name, string phone, string email, string address, string zip, string ownerType);
 
 
        bool checkUsername(string username);
