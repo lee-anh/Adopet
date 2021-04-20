@@ -13,6 +13,7 @@ Adopter::Adopter()
     emailAddress = "null";
     zipcode = -1;
     preferenceList = Preferences();
+    fillPreferences();
 }
 
 /*!
