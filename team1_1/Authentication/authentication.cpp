@@ -358,7 +358,7 @@ Owner Authentication::getAuthenticatedOwner(){
  * \param ownerType
  * \return
  */
-Owner Authentication::updateOnwer(string username, string name, string phone, string email, string address, string zip, string ownerType){
+Owner Authentication::updateOnwer(string username, string name, string phone, string email, string address, string zip){
     int zp = stoi(zip); //convert zip to an int
 
 

@@ -16,7 +16,6 @@ int main()
         cout << "Access denied" << endl;
     }
 
-    cout << auth.checkUsername("user1") << endl;
     cout << auth.signUp("user1", "pwd", "adopter") << endl;
    //auth.insertAdopterToDB("sliu4", "Sabrina", "Liu", "sab@gmail.com", "01234");
    //auth.insertOwnerToDB("sliu4", "Sabrina's Shelter", "50834567", "shelter@gmail.com", "2345 Main St", "23456", "shelter owner");
