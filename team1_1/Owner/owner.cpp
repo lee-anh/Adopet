@@ -1,5 +1,8 @@
 #include "owner.h"
 
+Owner::Owner(){
+    //default constructor
+}
 Owner::Owner(string t){
     if(t == "Shelter Owner" || t == "Foster Parent") ownerType = t;
     else ownerType = "";

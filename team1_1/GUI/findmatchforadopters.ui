@@ -56,7 +56,7 @@
     <bool>false</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 125);</string>
+    <string notr="true">background-color: rgb(247, 250, 170);</string>
    </property>
    <property name="text">
     <string>Generate Matches</string>
@@ -171,6 +171,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="link1">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(161, 212, 255)</string>
+        </property>
         <property name="text">
          <string>Learn More</string>
         </property>
@@ -268,6 +271,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="link2">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(161, 212, 255)</string>
+        </property>
         <property name="text">
          <string>Learn More</string>
         </property>
@@ -365,6 +371,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="link3">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(161, 212, 255)</string>
+        </property>
         <property name="text">
          <string>Learn More</string>
         </property>
@@ -462,6 +471,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="link4">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(161, 212, 255)</string>
+        </property>
         <property name="text">
          <string>Learn More</string>
         </property>

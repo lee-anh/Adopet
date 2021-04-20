@@ -15,8 +15,10 @@ using namespace std;
 class Owner{
 
 public:
+    Owner();
     Owner(string t);
     Owner(string n, string oT, string a, int zip, int pN, string e);
+
     string getOwnerType();          //Accessor function for owner type
     void setName(string n);         //Mutator function for name
     string getName();               //Accessor function for name

@@ -129,6 +129,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="link1">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(161, 212, 255)</string>
+         </property>
          <property name="text">
           <string>Learn More</string>
          </property>
@@ -216,6 +219,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="link2">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(161, 212, 255)</string>
+         </property>
          <property name="text">
           <string>Learn More</string>
          </property>
@@ -303,6 +309,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="link3">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(161, 212, 255)</string>
+         </property>
          <property name="text">
           <string>Learn More</string>
          </property>
@@ -390,6 +399,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="link4">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(161, 212, 255)</string>
+         </property>
          <property name="text">
           <string>Learn More</string>
          </property>
