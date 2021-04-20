@@ -44,14 +44,14 @@ void PetRandomizer::openDB(){
 
 void PetRandomizer::initializeNameVecs(){
     names = {
-       "Oliver", "Liam", "Ethan", "Aiden", "Gabriel", "Caleb", "Theo", "Owen",
-        "Elijah", "Henry", "Jackson", "Grayson", "Levi", "Ben", "Miles", "Alex",
-        "Sebastian", "Leo", "Landon", "Emmett", "Everett", "Milo", "Jasper",
-        "Lucas", "Noah", "Harrison", "Charlotte", "Ava", "Amelia", "Olivia",
-        "Aurora", "Violet", "Luna", "Hazel", "Chloe", "Aria", "Scarlett",
-        "Abigail", "Freya", "Adeline", "Sophia", "Nora", "Adelaide", "Emma",
-        "Mila", "Lily", "Grace", "Maeve", "Ivy", "Ella", "Audrey",
-        "Genevieve", "Iris", "Isabelle", "Lucy"
+       "oliver", "liam", "ethan", "aiden", "gabriel", "caleb", "theo", "owen",
+        "elijah", "henry", "jackson", "grayson", "levi", "ben", "miles", "alex",
+        "sebastian", "leo", "landon", "emmett", "everett", "milo", "jasper",
+        "lucas", "noah", "harrison", "charlotte", "ava", "amelia", "olivia",
+        "aurora", "violet", "luna", "hazel", "chloe", "aria", "scarlett",
+        "abigail", "freya", "adeline", "sophia", "nora", "adelaide", "emma",
+        "mila", "lily", "grace", "maeve", "ivy", "ella", "audrey",
+        "genevieve", "iris", "isabelle", "lucy"
     };
     age = {"young", "adult","senior"};
     gender = {"male", "female"};
