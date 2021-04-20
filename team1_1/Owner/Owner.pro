@@ -1,10 +1,15 @@
 TEMPLATE = app
 CONFIG += console c++11
 CONFIG -= app_bundle
-CONFIG -= qt
+
+QT += core
+QT += sql
 
 SOURCES += main.cpp \
-    owner.cpp
+    owner.cpp \
+    ../Pets/pet.cpp
 
 HEADERS += \
-    owner.h
+    owner.h \
+    ../Pets/pet.h
+

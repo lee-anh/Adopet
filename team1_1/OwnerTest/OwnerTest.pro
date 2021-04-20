@@ -1,7 +1,10 @@
 TEMPLATE = app
 CONFIG += console c++11
 CONFIG -= app_bundle
-CONFIG -= qt
+
+QT += core
+QT += sql
+
 
 SOURCES += main.cpp
 
@@ -13,5 +16,10 @@ INCLUDEPATH += ../../gtest \
  ../../gtest/googletest/include \
  ../../gtest/googletest/include/gtest
 
-HEADERS += ../Owner/owner.h
-SOURCES += ../Owner/owner.cpp
+SOURCES += \
+    ../Owner/owner.cpp \
+    ../Pets/pet.cpp
+
+HEADERS += \
+    ../Owner/owner.h \
+    ../Pets/pet.h

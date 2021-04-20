@@ -19,6 +19,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -49,8 +52,17 @@
      <height>51</height>
     </rect>
    </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(247, 250, 170);</string>
+   </property>
    <property name="text">
     <string>Generate Matches</string>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QWidget" name="layoutWidget">
@@ -59,7 +71,7 @@
      <x>10</x>
      <y>190</y>
      <width>944</width>
-     <height>250</height>
+     <height>276</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -148,7 +160,20 @@
        </layout>
       </item>
       <item>
+       <widget class="QLabel" name="score1">
+        <property name="text">
+         <string>score</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="link1">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(161, 212, 255)</string>
+        </property>
         <property name="text">
          <string>Learn More</string>
         </property>
@@ -235,7 +260,20 @@
        </layout>
       </item>
       <item>
+       <widget class="QLabel" name="score2">
+        <property name="text">
+         <string>score</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="link2">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(161, 212, 255)</string>
+        </property>
         <property name="text">
          <string>Learn More</string>
         </property>
@@ -322,7 +360,20 @@
        </layout>
       </item>
       <item>
+       <widget class="QLabel" name="score3">
+        <property name="text">
+         <string>score</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="link3">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(161, 212, 255)</string>
+        </property>
         <property name="text">
          <string>Learn More</string>
         </property>
@@ -409,7 +460,20 @@
        </layout>
       </item>
       <item>
+       <widget class="QLabel" name="score4">
+        <property name="text">
+         <string>score</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="link4">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(161, 212, 255)</string>
+        </property>
         <property name="text">
          <string>Learn More</string>
         </property>

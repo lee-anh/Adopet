@@ -23,6 +23,8 @@ void MyFavorites::setSavedList(SavedList s){
 }
 
 void MyFavorites::showGal(){
+
+    //pet gall must be initalized here b/c need the right saved list
     petgal = PetGallery(4, ui->previous, ui->next, ui->pageLine, {ui->name1, ui->name2, ui->name3, ui->name4},
                         {ui->pic1, ui->pic2, ui->pic3, ui->pic4},
                         {ui->link1, ui->link2, ui->link3, ui->link4},
