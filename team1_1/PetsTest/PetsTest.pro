@@ -5,13 +5,13 @@ CONFIG -= app_bundle
 QT += core
 QT += sql
 
-QMAKE_CXXFLAGS += --coverage
-QMAKE_LFLAGS += --coverage
+
 
 SOURCES += main.cpp
 
 LIBS += -pthread
-LIBS += -lgcov
+
+
 SOURCES += ../../gtest/googletest/src/gtest-all.cc
 
 INCLUDEPATH += ../../gtest \

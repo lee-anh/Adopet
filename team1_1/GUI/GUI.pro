@@ -22,6 +22,8 @@ SOURCES += \
     ../Adopter/preferences.cpp \
     manualsearch.cpp \
     myfavorites.cpp \
+    mypets.cpp \
+    petadopted.cpp \
     petgallery.cpp \
     preferencesform.cpp \
     userinfo.cpp \
@@ -40,6 +42,8 @@ HEADERS += \
     ../Adopter/preferences.h \
     manualsearch.h \
     myfavorites.h \
+    mypets.h \
+    petadopted.h \
     petgallery.h \
     preferencesform.h \
     userinfo.h \
@@ -53,6 +57,8 @@ FORMS += \
     gui.ui \
     manualsearch.ui \
     myfavorites.ui \
+    mypets.ui \
+    petadopted.ui \
     preferencesform.ui \
     userinfo.ui
 

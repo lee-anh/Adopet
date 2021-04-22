@@ -64,7 +64,7 @@ public:
      * \param zip
      * \return
      */
-    Adopter createAdopter(string username, string pwd, string fname, string lname, string emailAdd, int zip);
+    Adopter* createAdopter(string username, string pwd, string fname, string lname, string emailAdd, int zip);
 
     /*!
      * \brief insertAdopterToDB
@@ -80,7 +80,7 @@ public:
      * \brief getAuthenticatedAdopter
      * \return
      */
-    Adopter getAuthenticatedAdopter();
+    Adopter* getAuthenticatedAdopter();
 
     /*!
      * \brief updateAdopter
@@ -109,7 +109,7 @@ public:
      * \param email
      * \return
      */
-    Owner createOwner(string ownerType, string name, string address, int zip, int phone, string email);
+    Owner* createOwner(string ownerType, string name, string address, int zip, int phone, string email);
 
     /*!
      * \brief insertOwnerToDB
@@ -127,7 +127,7 @@ public:
      * \brief getAuthenticatedOwner
      * \return
      */
-    Owner getAuthenticatedOwner();
+    Owner* getAuthenticatedOwner();
 
     /*!
      * \brief updateOnwer
@@ -140,7 +140,7 @@ public:
      * \param ownerType
      * \return
      */
-    Owner updateOnwer(string username, string name, string phone, string email, string address, string zip);
+    Owner updateOwner(string username, string name, string phone, string email, string address, string zip);
 
 
 
@@ -161,8 +161,8 @@ private:
      */
     bool checkUsername(string username);
 
-    Adopter authAdopter;
-    Owner authOwner;
+    Adopter *authAdopter;
+    Owner *authOwner;
 
 
 };

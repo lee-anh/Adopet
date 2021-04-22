@@ -19,6 +19,7 @@
 #include "myfavorites.h"
 #include "findmatchforadopters.h"
 #include "userinfo.h"
+#include "preferencesform.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -36,16 +37,21 @@ public:
 
 private:
     Ui::GUI *ui;
+    QSqlDatabase db;
+
+
     SavedList savedList;
     Authentication auth;
-    Adopter adopter;
-    Owner owner;
+   // Adopter adopter;
+   // Owner owner;
 
     //other UI pages
     ManualSearch manSearch;
     MyFavorites myFavs;
     FindMatchForAdopters fmForAdopters;
     UserInfo uinfo;
+    PreferencesForm pform;
+
 
     string currentUser; //currently not used
     string dbName;
@@ -54,8 +60,13 @@ private:
     Pet petToMeet;
     int previousPage;
 
-    void hideNav();
-    void showNav();
+    void hideNavAdopter();
+    void showNavAdopter();
+
+    void hideNavOwner();
+    void showNavOwner();
+
+
 
 
 
@@ -66,25 +77,41 @@ private slots:
     void moveToMeetMe(Pet sendPet, bool b);
     void heartPet(Pet p, bool b);
     void backToLogin();
-    void updateAdopter(Adopter a);
 
 
     //save Button
     void on_saveButton_clicked();
 
     //navigation slots
-    void on_exit_clicked();
-    void on_backButton_clicked();
+
+
+    //adopter navigation
+
+        //nav bar
     void on_navHomeButton_clicked();
     void on_navFindMatchButton_clicked();
     void on_navMyFavoritesButton_clicked();
     void on_navManualSearchButton_clicked();
+    void on_navMyInfoButton_clicked();
+    void on_navMyPreferences_clicked();
+    void on_exit_clicked();
+
+        //from home
     void on_findMatchFromHome_clicked();
     void on_manualSearchFromHome_clicked();
     void on_myFavoritesFromHome_clicked();
+    void on_preferenceFromHome_clicked();
 
+    //owner navigation
+        //nav bar
+
+
+        //from home
+
+    //common navigation elements
+    void on_backButton_clicked();
     void on_loginButton_clicked();
     void on_createAccountButton_clicked();
-    void on_navMyInfoButton_clicked();
+
 };
 #endif // GUI_H

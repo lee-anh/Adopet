@@ -6,6 +6,7 @@ using namespace std;
 
 int main()
 {
+    /*
     Authentication auth = Authentication("../../projectDB.sqlite");
     if(auth.logIn("user1","password1") == 0){
         cout << "Access Granted" << endl;
@@ -19,5 +20,5 @@ int main()
     cout << auth.signUp("user1", "pwd", "adopter") << endl;
    //auth.insertAdopterToDB("sliu4", "Sabrina", "Liu", "sab@gmail.com", "01234");
    //auth.insertOwnerToDB("sliu4", "Sabrina's Shelter", "50834567", "shelter@gmail.com", "2345 Main St", "23456", "shelter owner");
-
+ */
 }
