@@ -19,8 +19,9 @@ public:
     explicit UserInfo(QWidget *parent = nullptr);
     ~UserInfo();
 
-    void setAuth(Authentication a);
+    void setAuth(Authentication *a);
     void adopterMyInfoClicked();
+    void ownerMyInfoClicked();
 
 private slots:
     void on_continueButton_clicked();
@@ -29,16 +30,19 @@ private slots:
 
     void on_backButton_clicked();
 
+    void on_saveOwnerButton_clicked();
+
 private:
     Ui::UserInfo *ui;
-    Authentication auth;
+    Authentication *auth;
+
     string username;
     string password;
     bool firstTime;
 
 signals:
     void backClicked();
-    void updatedAdopter(Adopter);
+    //void updatedAdopter(Adopter);
 
 
 };

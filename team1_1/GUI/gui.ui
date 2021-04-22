@@ -23,67 +23,7 @@
    <string notr="true">background-color: rgb(161, 212, 255)</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QPushButton" name="navHomeButton">
-       <property name="text">
-        <string>Home</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="navMyInfoButton">
-       <property name="text">
-        <string>My Info</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="navMyPreferences">
-       <property name="text">
-        <string>My Preferences</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="navFindMatchButton">
-       <property name="text">
-        <string>Find Match</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="navManualSearchButton">
-       <property name="text">
-        <string>Manual Search</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="navMyFavoritesButton">
-       <property name="text">
-        <string>My Favorites</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="navHelpButton">
-       <property name="text">
-        <string>Help</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="exit">
-       <property name="text">
-        <string>Logout</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="1" column="0">
+   <item row="2" column="0">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="minimumSize">
       <size>
@@ -719,6 +659,119 @@
       </widget>
      </widget>
     </widget>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QPushButton" name="navHomeButton">
+       <property name="text">
+        <string>Home</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="navMyInfoButton">
+       <property name="text">
+        <string>My Info</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="navMyPreferences">
+       <property name="text">
+        <string>My Preferences</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="navFindMatchButton">
+       <property name="text">
+        <string>Find Match</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="navManualSearchButton">
+       <property name="text">
+        <string>Manual Search</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="navMyFavoritesButton">
+       <property name="text">
+        <string>My Favorites</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="navHelpButton">
+       <property name="text">
+        <string>Help</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="exit">
+       <property name="text">
+        <string>Logout</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QPushButton" name="ownerHome">
+       <property name="text">
+        <string>Home</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ownerMyInfo">
+       <property name="text">
+        <string>My Info</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ownerUploadPet">
+       <property name="text">
+        <string>Upload Pet</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ownerMyPets">
+       <property name="text">
+        <string>My Pets</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ownerFindMatch">
+       <property name="text">
+        <string>Find Match</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ownerHelp">
+       <property name="text">
+        <string>Help</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ownerLogout">
+       <property name="text">
+        <string>Logout</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

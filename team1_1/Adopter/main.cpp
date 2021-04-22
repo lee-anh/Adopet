@@ -37,6 +37,7 @@ void printPreferences(Preferences p){
 }
 
 int main(){
+    /*
     Adopter adopter = Adopter();
     adopter.setUsername("user1");
     //printPreferences(adopter.getPreferences());
@@ -45,6 +46,6 @@ int main(){
     //cout << "FILLED PREFERENCES" << endl;
     //cout << endl;
     //printPreferences(adopter.getPreferences());
-
+    */
     return 0;
 }

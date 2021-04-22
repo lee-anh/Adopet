@@ -7,31 +7,32 @@ GUI::GUI(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //DIFFERENT UI system
+
     dbName = "../../../../../projectDB.sqlite";
+
+
+
     auth = Authentication(dbName);
 
-
-
-    //will need to change the constructor later
-    //FILEPATH may be different on lab server ... maybe ../../projectDB.sqlite instead?
-   // savedList = SavedList("../../../../../projectDB.sqlite", "exampleUser");
 
     //dynamically add widgets to the stackedWidget
     ui->stackedWidget->addWidget(&manSearch); //3
     ui->stackedWidget->addWidget(&myFavs); //4
     ui->stackedWidget->addWidget(&fmForAdopters); //5
     ui->stackedWidget->addWidget(&uinfo);//6
+    ui->stackedWidget->addWidget(&pform); //7
 
     //Set the opening page
     int openingPage = 0; //login
-    hideNav();
+    hideNavAdopter();
+    hideNavOwner();
     ui->stackedWidget->setCurrentIndex(openingPage); //opening page
     previousPage = openingPage;
 
 
     //Signals and slots
     connect(&uinfo, SIGNAL(backClicked()), this, SLOT(backToLogin()));
-    connect(&uinfo, SIGNAL(updatedAdopter(Adopter)), this, SLOT(updateAdopter(Adopter)));
     connect(&manSearch, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
     connect(&manSearch, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
     connect(&myFavs, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
@@ -50,6 +51,8 @@ GUI::~GUI()
     delete ui;
 
 }
+
+
 
 
 void GUI::meetPet(Pet p){
@@ -90,7 +93,7 @@ void GUI::meetPet(Pet p){
     QString qbio = QString::fromStdString(bio);
     ui->petBio->setText(qbio);
 
-    //TODO - shelter info and link to shelter bio
+    //TODO - shelter info and link to shelter bio?
 
 
 
@@ -98,7 +101,7 @@ void GUI::meetPet(Pet p){
 
 
 
-void GUI::hideNav(){
+void GUI::hideNavAdopter(){
     ui->navFindMatchButton->setVisible(false);
     ui->navHomeButton->setVisible(false);
     ui->navManualSearchButton->setVisible(false);
@@ -109,7 +112,7 @@ void GUI::hideNav(){
     ui->navMyInfoButton->setVisible(false);
 }
 
-void GUI::showNav(){
+void GUI::showNavAdopter(){
     ui->navFindMatchButton->setVisible(true);
     ui->navHomeButton->setVisible(true);
     ui->navManualSearchButton->setVisible(true);
@@ -118,6 +121,26 @@ void GUI::showNav(){
     ui->navHelpButton->setVisible(true);
     ui->exit->setVisible(true);
     ui->navMyInfoButton->setVisible(true);
+}
+
+void GUI::hideNavOwner(){
+    ui->ownerHome->setVisible(false);
+    ui->ownerMyInfo->setVisible(false);
+    ui->ownerMyPets->setVisible(false);
+    ui->ownerFindMatch->setVisible(false);
+    ui->ownerHelp->setVisible(false);
+    ui->ownerLogout->setVisible(false);
+    ui->ownerUploadPet->setVisible(false);
+}
+
+void GUI::showNavOwner(){
+    ui->ownerHome->setVisible(true);
+    ui->ownerMyInfo->setVisible(true);
+    ui->ownerMyPets->setVisible(true);
+    ui->ownerFindMatch->setVisible(true);
+    ui->ownerHelp->setVisible(true);
+    ui->ownerLogout->setVisible(true);
+    ui->ownerUploadPet->setVisible(true);
 }
 
 void GUI::on_saveButton_clicked()
@@ -135,7 +158,11 @@ void GUI::on_saveButton_clicked()
 
 void GUI::on_exit_clicked()
 {
-    this->close();
+    //back to login page
+    hideNavAdopter();
+    hideNavOwner();
+    ui->stackedWidget->setCurrentIndex(0);
+    previousPage = 0;
 
 }
 
@@ -171,29 +198,9 @@ void GUI::backToLogin(){
     ui->stackedWidget->setCurrentIndex(0);
 }
 
-void GUI::updateAdopter(Adopter a){
-    adopter = a;
-}
-
-void GUI::on_backButton_clicked()
-{
-    //reset heart button
-    ui->saveButton->setChecked(false);
-    ui->saveButton->setText("♡");
-    ui->saveButton->setStyleSheet("color: black");
 
 
-    //unsaves pet if you unsaved it (should we keep it until you navigate away?)
-    if(previousPage == 4){
-        myFavs.setSavedList(savedList);
-        myFavs.showGal();
-    } else if (previousPage == 3){
-        manSearch.setSavedList(savedList);
-    }
 
-    //back to last page
-    ui->stackedWidget->setCurrentIndex(previousPage);
-}
 
 void GUI::on_navHomeButton_clicked()
 {
@@ -240,6 +247,17 @@ void GUI::on_navMyInfoButton_clicked()
     uinfo.adopterMyInfoClicked();
 }
 
+void GUI::on_navMyPreferences_clicked()
+{
+    //to preferences form
+    ui->stackedWidget->setCurrentIndex(7);
+    pform.setAdopter(auth.getAuthenticatedAdopter());
+
+    pform.clearCheckBoxes(); //clear
+    pform.loadPreferences(); //reload
+
+}
+
 
 void GUI::on_findMatchFromHome_clicked()
 {
@@ -255,8 +273,30 @@ void GUI::on_myFavoritesFromHome_clicked()
 {
     on_navMyFavoritesButton_clicked();
 }
+void GUI::on_preferenceFromHome_clicked()
+{
+    on_navMyPreferences_clicked();
+}
+
+void GUI::on_backButton_clicked()
+{
+    //reset heart button
+    ui->saveButton->setChecked(false);
+    ui->saveButton->setText("♡");
+    ui->saveButton->setStyleSheet("color: black");
 
 
+    //unsaves pet if you unsaved it (should we keep it until you navigate away?)
+    if(previousPage == 4){
+        myFavs.setSavedList(savedList);
+        myFavs.showGal();
+    } else if (previousPage == 3){
+        manSearch.setSavedList(savedList);
+    }
+
+    //back to last page
+    ui->stackedWidget->setCurrentIndex(previousPage);
+}
 
 void GUI::on_loginButton_clicked()
 {
@@ -272,28 +312,37 @@ void GUI::on_loginButton_clicked()
     // -1 = auth fail
 
     if(auth.logIn(uname, pwd) == 0){
-        uinfo.setAuth(auth);
-        adopter = auth.getAuthenticatedAdopter();
+        uinfo.setAuth(&auth);
+
+        //adopter = auth.getAuthenticatedAdopter();
         savedList = SavedList(dbName, uname);
         ui->stackedWidget->setCurrentIndex(2); //go to home screen
         previousPage = 0;
-        showNav();
+        showNavAdopter();
     } else if (auth.logIn(uname, pwd) == 1){
-        //WILL NEED TO REVISE?
-        uinfo.setAuth(auth);
-        owner = auth.getAuthenticatedOwner();
+        //OWNER
+        uinfo.setAuth(&auth);
+       // owner = auth.getAuthenticatedOwner();
         ui->stackedWidget->setCurrentIndex(2); //go to home screen
         previousPage = 0;
-        showNav();
+        showNavOwner();
     } else {
         ui->errorLine->setText("Username or password is not correct");
     }
+
+    //clear the line edits
+    ui->username->clear();
+    ui->password->clear();
 }
 
 void GUI::on_createAccountButton_clicked()
 {
     //to create account page (userinfo.ui)
     ui->stackedWidget->setCurrentIndex(6);
-    uinfo.setAuth(auth);
+    uinfo.setAuth(&auth);
 }
+
+
+
+
 

@@ -2,7 +2,7 @@
 
 
 /*!
- * \brief default Adopter constructor
+ * \brief default Adopter constructor, not recommended
  */
 Adopter::Adopter()
 {
@@ -13,8 +13,37 @@ Adopter::Adopter()
     emailAddress = "null";
     zipcode = -1;
     preferenceList = Preferences();
-    fillPreferences();
+    //fillPreferences();
+    cout << "default constructor called (adopter)" << endl;
 }
+
+/*!
+ * \brief Adopter alternate constructor, recommended
+ * \param uname username
+ * \param pwd password
+ * \param fname firstname
+ * \param lname lastname
+ * \param email email address
+ * \param zip zipcode
+ * \param p Preferences object
+ */
+Adopter::Adopter(string db, string uname, string pwd, string fname, string lname,
+                 string email, int zip){
+    dbName = db;
+    username = uname;
+    password = pwd;
+    firstName = fname;
+    lastName = lname;
+    emailAddress = email;
+    zipcode = zip;
+    preferenceList = Preferences();
+    openDB();
+    fillPreferences();
+    cout << "Adopter database constructor called" << endl;
+
+}
+
+
 
 /*!
  * \brief Adopter alternate constructor
@@ -42,6 +71,9 @@ Adopter::Adopter(string uname, string pwd, string fname, string lname,
  * \brief Adopter destructor
  */
 Adopter::~Adopter(){
+
+   // prefDB.removeDatabase(prefDB.connectionName());
+    prefDB.close();
 }
 
 
@@ -161,9 +193,9 @@ void Adopter::fillPreference(string attr, string attrType){
  * Goes through the preferences database and fills the preference list of the current adopter
 */
 void Adopter::fillPreferences(){
-    QSqlDatabase prefDB = QSqlDatabase::addDatabase("QSQLITE", "adopterCxn");
-    string fullName = "../../projectDB.sqlite";
-    prefDB.setDatabaseName(QString::fromStdString(fullName));
+    //QSqlDatabase prefDB = QSqlDatabase::addDatabase("QSQLITE", "adopterCxn");
+   // string fullName = "../../projectDB.sqlite";
+   // prefDB.setDatabaseName(QString::fromStdString(fullName));
 
     if(prefDB.open()){
         QSqlQuery query = QSqlQuery(prefDB);
@@ -178,8 +210,8 @@ void Adopter::fillPreferences(){
         }
     }
 
-    prefDB.removeDatabase(prefDB.connectionName());
-    prefDB.close();
+   // prefDB.removeDatabase(prefDB.connectionName());
+   // prefDB.close();
 }
 
 /*
@@ -197,9 +229,9 @@ Preferences Adopter::getPreferences(){
  * @param attrType Type of preference
 */
 void Adopter::addPreference(string attr, string attrType){
-    QSqlDatabase prefDB = QSqlDatabase::addDatabase("QSQLITE", "adopterCxn");
-    string fullName = "../../projectDB.sqlite";
-    prefDB.setDatabaseName(QString::fromStdString(fullName));
+    //QSqlDatabase prefDB = QSqlDatabase::addDatabase("QSQLITE", "adopterCxn");
+    //string fullName = "../../projectDB.sqlite";
+  //  prefDB.setDatabaseName(QString::fromStdString(fullName));
 
     QString s = "INSERT INTO preferences(adopterUsername, attribute, attributeType) VALUES(\"";
     s += QString::fromStdString(username) + "\", \"";
@@ -207,15 +239,15 @@ void Adopter::addPreference(string attr, string attrType){
     s += QString::fromStdString(attrType) + "\")";
 
     string addQuery = s.toStdString();
-    cout << "add query is: " << addQuery << endl;
+   // cout << "add query is: " << addQuery << endl;
 
     if(prefDB.open()){
         QSqlQuery query = QSqlQuery(prefDB);
         query.exec(s);
     }
 
-    prefDB.removeDatabase(prefDB.connectionName());
-    prefDB.close();
+    //prefDB.removeDatabase(prefDB.connectionName());
+    //prefDB.close();
 }
 
 /*
@@ -224,9 +256,9 @@ void Adopter::addPreference(string attr, string attrType){
  * @param attrType Type of preference
 */
 void Adopter::removePreference(string attr, string attrType){
-    QSqlDatabase prefDB = QSqlDatabase::addDatabase("QSQLITE", "adopterCxn");
-    string fullName = "../../projectDB.sqlite";
-    prefDB.setDatabaseName(QString::fromStdString(fullName));
+   // QSqlDatabase prefDB = QSqlDatabase::addDatabase("QSQLITE", "adopterCxn");
+   // string fullName = "../../projectDB.sqlite";
+   // prefDB.setDatabaseName(QString::fromStdString(fullName));
 
     QString s = "DELETE FROM preferences WHERE (adopterUsername = ";
     s += "\"" + QString::fromStdString(username) + "\" AND attribute = ";
@@ -238,7 +270,22 @@ void Adopter::removePreference(string attr, string attrType){
         query.exec(s);
     }
 
-    prefDB.removeDatabase(prefDB.connectionName());
-    prefDB.close();
+   // prefDB.removeDatabase(prefDB.connectionName());
+   // prefDB.close();
 }
 
+void Adopter::openDB(){
+    prefDB = QSqlDatabase::addDatabase("QSQLITE", "adopterCxn");
+    string fullName = dbName;
+    prefDB.setDatabaseName(QString::fromStdString(fullName));
+    if(!prefDB.open()){
+        std::cerr << "Database does not open -- "
+                  << prefDB.lastError().text().toStdString()
+                  << std::endl;
+
+        std::cerr << "  File -- " << fullName << std::endl;
+        exit(0);
+    } else {
+        std::cerr << "Opened database successfully (from Adopter class)\n";
+    }
+}

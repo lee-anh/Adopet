@@ -19,310 +19,1247 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>140</y>
-     <width>841</width>
-     <height>311</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
-    <item>
-     <widget class="QGroupBox" name="species">
-      <property name="title">
-       <string>Species</string>
+  <layout class="QVBoxLayout" name="verticalLayout_16">
+   <item>
+    <widget class="QLabel" name="unsavedChangesLabel">
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:red;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <pointsize>36</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>My Preferences</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>Take a Fun Quiz Instead!</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>859</width>
+        <height>660</height>
+       </rect>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout_46">
        <item>
-        <widget class="QCheckBox" name="dogCheckBox">
-         <property name="text">
-          <string>Dog</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="catCheckBox">
-         <property name="text">
-          <string>Cat</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="rabbitCheckBox">
-         <property name="text">
-          <string>Rabbit</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="rodentCheckBox">
-         <property name="text">
-          <string>Rodent</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="fishCheckBox">
-         <property name="text">
-          <string>Fish</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="birdCheckBox">
-         <property name="text">
-          <string>Bird</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="temperament">
-      <property name="title">
-       <string>Temperament</string>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_8">
-       <item>
-        <widget class="QCheckBox" name="happyCheckBox">
-         <property name="text">
-          <string>Happy</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="friendlyCheckBox">
-         <property name="text">
-          <string>Friendly</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="introvertedCheckBox">
-         <property name="font">
-          <font>
-           <pointsize>13</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Introverted</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="activeCheckBox">
-         <property name="text">
-          <string>Active</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="vigilantCheckBox">
-         <property name="text">
-          <string>Vigilant</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="goodWith">
-      <property name="title">
-       <string>Good With</string>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_7">
-       <item>
-        <widget class="QCheckBox" name="kidsCheckBox">
-         <property name="text">
-          <string>Kids</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="animalsCheckBox">
-         <property name="text">
-          <string>Animals</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <widget class="QGroupBox" name="shelter">
-      <property name="title">
-       <string>Shelter</string>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_5">
-       <item>
-        <widget class="QCheckBox" name="bestFriendsCheckBox">
-         <property name="text">
-          <string>Best Friends</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="humaneSocietyCheckBox">
-         <property name="text">
-          <string>Humane Society</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="animalWelfareLeagueCheckBox">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Animal Welfare League</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_4">
-      <item>
-       <widget class="QGroupBox" name="gender">
-        <property name="title">
-         <string>Gender</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="QCheckBox" name="maleCheckBox">
-           <property name="text">
-            <string>Male</string>
+          <widget class="QGroupBox" name="species_2">
+           <property name="palette">
+            <palette>
+             <active>
+              <colorrole role="WindowText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Button">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>236</red>
+                 <green>236</green>
+                 <blue>236</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Light">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>255</red>
+                 <green>255</green>
+                 <blue>255</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Midlight">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>245</red>
+                 <green>245</green>
+                 <blue>245</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Dark">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>118</red>
+                 <green>118</green>
+                 <blue>118</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Mid">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>157</red>
+                 <green>157</green>
+                 <blue>157</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Text">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="BrightText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>255</red>
+                 <green>255</green>
+                 <blue>255</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="ButtonText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Base">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>255</red>
+                 <green>255</green>
+                 <blue>255</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Window">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>236</red>
+                 <green>236</green>
+                 <blue>236</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Shadow">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="AlternateBase">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>245</red>
+                 <green>245</green>
+                 <blue>245</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="ToolTipBase">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>255</red>
+                 <green>255</green>
+                 <blue>220</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="ToolTipText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="PlaceholderText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="128">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+             </active>
+             <inactive>
+              <colorrole role="WindowText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Button">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>236</red>
+                 <green>236</green>
+                 <blue>236</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Light">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>255</red>
+                 <green>255</green>
+                 <blue>255</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Midlight">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>245</red>
+                 <green>245</green>
+                 <blue>245</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Dark">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>118</red>
+                 <green>118</green>
+                 <blue>118</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Mid">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>157</red>
+                 <green>157</green>
+                 <blue>157</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Text">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="BrightText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>255</red>
+                 <green>255</green>
+                 <blue>255</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="ButtonText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Base">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>255</red>
+                 <green>255</green>
+                 <blue>255</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Window">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>236</red>
+                 <green>236</green>
+                 <blue>236</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Shadow">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="AlternateBase">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>245</red>
+                 <green>245</green>
+                 <blue>245</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="ToolTipBase">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>255</red>
+                 <green>255</green>
+                 <blue>220</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="ToolTipText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="PlaceholderText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="128">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+             </inactive>
+             <disabled>
+              <colorrole role="WindowText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>118</red>
+                 <green>118</green>
+                 <blue>118</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Button">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>236</red>
+                 <green>236</green>
+                 <blue>236</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Light">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>255</red>
+                 <green>255</green>
+                 <blue>255</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Midlight">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>245</red>
+                 <green>245</green>
+                 <blue>245</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Dark">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>118</red>
+                 <green>118</green>
+                 <blue>118</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Mid">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>157</red>
+                 <green>157</green>
+                 <blue>157</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Text">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>118</red>
+                 <green>118</green>
+                 <blue>118</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="BrightText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>255</red>
+                 <green>255</green>
+                 <blue>255</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="ButtonText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>118</red>
+                 <green>118</green>
+                 <blue>118</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Base">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>236</red>
+                 <green>236</green>
+                 <blue>236</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Window">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>236</red>
+                 <green>236</green>
+                 <blue>236</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Shadow">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="AlternateBase">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>236</red>
+                 <green>236</green>
+                 <blue>236</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="ToolTipBase">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>255</red>
+                 <green>255</green>
+                 <blue>220</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="ToolTipText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="PlaceholderText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="128">
+                 <red>0</red>
+                 <green>0</green>
+                 <blue>0</blue>
+                </color>
+               </brush>
+              </colorrole>
+             </disabled>
+            </palette>
            </property>
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="title">
+            <string>Species</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_17">
+            <item>
+             <widget class="QCheckBox" name="dogCheckBox">
+              <property name="text">
+               <string>Dog</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="catCheckBox">
+              <property name="text">
+               <string>Cat</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="rabbitCheckBox">
+              <property name="text">
+               <string>Rabbit</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="rodentCheckBox">
+              <property name="text">
+               <string>Rodent</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="fishCheckBox">
+              <property name="text">
+               <string>Fish</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="birdCheckBox">
+              <property name="text">
+               <string>Bird</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="femaleCheckBox">
-           <property name="text">
-            <string>Female</string>
+          <widget class="QGroupBox" name="groupBox_2">
+           <property name="title">
+            <string>Breeds</string>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_26">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_18">
+                <item>
+                 <widget class="QLabel" name="label_8">
+                  <property name="text">
+                   <string>Dogs</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="dogBreeds">
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="scrollAreaWidgetContents_10">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>325</width>
+                     <height>163</height>
+                    </rect>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_27">
+                    <item>
+                     <widget class="QCheckBox" name="sporting">
+                      <property name="text">
+                       <string>Sporting</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="hound">
+                      <property name="text">
+                       <string>Hound</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="working">
+                      <property name="text">
+                       <string>Working</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="terrier">
+                      <property name="text">
+                       <string>Terrier</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="toy">
+                      <property name="text">
+                       <string>Toy</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="nonsporting">
+                      <property name="text">
+                       <string>Non-sporting</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="herding">
+                      <property name="text">
+                       <string>Herding</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_28">
+                <item>
+                 <widget class="QLabel" name="label_9">
+                  <property name="text">
+                   <string>Cats</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="catBreeds">
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="scrollAreaWidgetContents_11">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>324</width>
+                     <height>100</height>
+                    </rect>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_29">
+                    <item>
+                     <widget class="QCheckBox" name="siamese">
+                      <property name="text">
+                       <string>Siamese</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="persian">
+                      <property name="text">
+                       <string>Persian</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="maineCoon">
+                      <property name="text">
+                       <string>Maine Coon</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="ragdoll">
+                      <property name="text">
+                       <string>Ragdoll</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_30">
+                <item>
+                 <widget class="QLabel" name="label_10">
+                  <property name="text">
+                   <string>Rabbits</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="rabbitBreeds">
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="scrollAreaWidgetContents_12">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>325</width>
+                     <height>121</height>
+                    </rect>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_31">
+                    <item>
+                     <widget class="QCheckBox" name="rex">
+                      <property name="text">
+                       <string>Rex</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="lionhead">
+                      <property name="text">
+                       <string>Lionhead</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="californian">
+                      <property name="text">
+                       <string>Californian</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="angora">
+                      <property name="text">
+                       <string>Angora</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="silverFox">
+                      <property name="text">
+                       <string>Silver Fox</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_32">
+                <item>
+                 <widget class="QLabel" name="label_11">
+                  <property name="text">
+                   <string>Rodents</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="rodentBreeds">
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="scrollAreaWidgetContents_13">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>-52</y>
+                     <width>324</width>
+                     <height>121</height>
+                    </rect>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_33">
+                    <item>
+                     <widget class="QCheckBox" name="hamster">
+                      <property name="text">
+                       <string>Hamster</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="gerbil">
+                      <property name="text">
+                       <string>Gerbil</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="guineaPig">
+                      <property name="text">
+                       <string>Guinea Pig</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="mouse">
+                      <property name="text">
+                       <string>Mouse</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="rat">
+                      <property name="text">
+                       <string>Rat</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_10">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_34">
+                <item>
+                 <widget class="QLabel" name="label_12">
+                  <property name="text">
+                   <string>Fish</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="fishBreeds">
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="scrollAreaWidgetContents_14">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>340</width>
+                     <height>69</height>
+                    </rect>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_35">
+                    <item>
+                     <widget class="QCheckBox" name="freshwater">
+                      <property name="text">
+                       <string>Freshwater</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="saltwater">
+                      <property name="text">
+                       <string>Saltwater</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_36">
+                <item>
+                 <widget class="QLabel" name="label_13">
+                  <property name="text">
+                   <string>Birds</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QScrollArea" name="birdBreeds">
+                  <property name="widgetResizable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="scrollAreaWidgetContents_15">
+                   <property name="geometry">
+                    <rect>
+                     <x>0</x>
+                     <y>0</y>
+                     <width>324</width>
+                     <height>79</height>
+                    </rect>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_37">
+                    <item>
+                     <widget class="QCheckBox" name="parakeet">
+                      <property name="text">
+                       <string>Parakeet</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="lovebird">
+                      <property name="text">
+                       <string>Lovebird</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QCheckBox" name="parrot">
+                      <property name="text">
+                       <string>Parrot</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </widget>
          </item>
         </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="age">
-        <property name="title">
-         <string>Age</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_12">
          <item>
-          <widget class="QCheckBox" name="youngCheckBox">
-           <property name="text">
-            <string>Young</string>
+          <widget class="QGroupBox" name="size">
+           <property name="title">
+            <string>Size</string>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_45">
+            <item>
+             <widget class="QCheckBox" name="smallCheckBox">
+              <property name="text">
+               <string>Small</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="mediumCheckBox">
+              <property name="text">
+               <string>Medium</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="largeCheckBox">
+              <property name="text">
+               <string>Large</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="adultCheckBox">
-           <property name="text">
-            <string>Adult</string>
+          <widget class="QGroupBox" name="age">
+           <property name="title">
+            <string>Age</string>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_44">
+            <item>
+             <widget class="QCheckBox" name="youngCheckBox">
+              <property name="text">
+               <string>Young</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="adultCheckBox">
+              <property name="text">
+               <string>Adult</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="seniorCheckBox">
+              <property name="text">
+               <string>Senior</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="seniorCheckBox">
-           <property name="text">
-            <string>Senior</string>
+          <widget class="QGroupBox" name="gender">
+           <property name="title">
+            <string>Gender</string>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_43">
+            <item>
+             <widget class="QCheckBox" name="maleCheckBox">
+              <property name="text">
+               <string>Male</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="femaleCheckBox">
+              <property name="text">
+               <string>Female</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
         </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="size">
-        <property name="title">
-         <string>Size</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_6">
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_11">
          <item>
-          <widget class="QCheckBox" name="smallCheckBox">
-           <property name="text">
-            <string>Small</string>
+          <widget class="QGroupBox" name="goodWith">
+           <property name="title">
+            <string>Good With</string>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_41">
+            <item>
+             <widget class="QCheckBox" name="kidsCheckBox">
+              <property name="text">
+               <string>Kids</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="animalsCheckBox">
+              <property name="text">
+               <string>Animals</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="mediumCheckBox">
-           <property name="text">
-            <string>Medium</string>
+          <widget class="QGroupBox" name="temperament">
+           <property name="title">
+            <string>Temperament</string>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_38">
+            <item>
+             <widget class="QCheckBox" name="happyCheckBox">
+              <property name="text">
+               <string>Happy</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="friendlyCheckBox">
+              <property name="text">
+               <string>Friendly</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="introvertedCheckBox">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Introverted</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="activeCheckBox">
+              <property name="text">
+               <string>Active</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="vigilantCheckBox">
+              <property name="text">
+               <string>Vigilant</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="largeCheckBox">
-           <property name="text">
-            <string>Large</string>
+          <widget class="QGroupBox" name="shelter">
+           <property name="title">
+            <string>Shelter</string>
            </property>
+           <layout class="QVBoxLayout" name="verticalLayout_40">
+            <item>
+             <widget class="QCheckBox" name="bestFriendsCheckBox">
+              <property name="text">
+               <string>Best Friends</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="humaneSocietyCheckBox">
+              <property name="text">
+               <string>Humane Society</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="animalWelfareLeagueCheckBox">
+              <property name="font">
+               <font>
+                <pointsize>13</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Animal Welfare League</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
         </layout>
-       </widget>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>80</y>
-     <width>331</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Take a Fun Quiz Instead!</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>10</y>
-     <width>321</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>36</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>My Preferences</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>260</x>
-     <y>480</y>
-     <width>371</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Save</string>
-   </property>
-  </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="savedLabel">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>16</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="saveButton">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(161, 212, 255)</string>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

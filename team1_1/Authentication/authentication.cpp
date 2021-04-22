@@ -24,8 +24,8 @@ Authentication::Authentication(string dbfilepath)
     openDB();
 
     //temporary instance variable assignments
-    authOwner = Owner();
-    authAdopter = Adopter();
+    //authOwner = Owner();
+    //authAdopter = NULL;
 
 }
 
@@ -174,13 +174,13 @@ void Authentication::loadAdopterFromDB(string username, string password){
  * \param zip
  * \return an Adopter object
  */
-Adopter Authentication::createAdopter(string username, string pwd, string fname, string lname, string emailAdd, int zip){
+Adopter* Authentication::createAdopter(string username, string pwd, string fname, string lname, string emailAdd, int zip){
     //create adopter object
     Preferences pref = Preferences();//TODO: INCORPORATE SHAKH'S PREFERENCE CHANGES
-    Adopter newAdptr =  Adopter(username, pwd, fname, lname, emailAdd, zip, pref);
-    authAdopter = newAdptr;
+    authAdopter= new Adopter(dbName, username, pwd, fname, lname, emailAdd, zip);
 
-    return newAdptr;
+
+    return authAdopter;
 }
 
 
@@ -213,7 +213,7 @@ void Authentication::insertAdopterToDB(string username, string fname, string lna
  * \brief getAuthenticatedAdopter
  * \return authenticated adopter
  */
-Adopter Authentication::getAuthenticatedAdopter(){
+Adopter* Authentication::getAuthenticatedAdopter(){
     return authAdopter;
 
 }
@@ -247,11 +247,11 @@ Adopter Authentication::updateAdopter(string username, string fname, string lnam
     }
 
     //update local object
-    authAdopter.setFirstName(fname);
-    authAdopter.setLastName(lname);
-    authAdopter.setEmailAddress(emailAdd);
-    authAdopter.setZipCode(zp);
-    return authAdopter;
+    authAdopter->setFirstName(fname);
+    authAdopter->setLastName(lname);
+    authAdopter->setEmailAddress(emailAdd);
+    authAdopter->setZipCode(zp);
+    return *authAdopter;
 }
 
 
@@ -305,8 +305,8 @@ void Authentication::loadOwnerFromDB(string username){
  * \param email
  * \return
  */
-Owner Authentication::createOwner(string ownerType, string name, string address, int zip, int phone, string email){
-    Owner o = Owner(name, ownerType, address, zip, phone, email);
+Owner* Authentication::createOwner(string ownerType, string name, string address, int zip, int phone, string email){
+    Owner *o = new Owner(name, ownerType, address, zip, phone, email);
     authOwner = o;
     return o;
 }
@@ -322,13 +322,13 @@ Owner Authentication::createOwner(string ownerType, string name, string address,
  * \param ownerType
  */
 void Authentication::insertOwnerToDB(string username, string name, string phone, string email, string address, string zip, string ownerType){
-    int phoneNum = stoi(phone);
+    //int phoneNum = stoi(phone);
     int zipNum = stoi(zip);
 
     if(db.open()){
         QSqlQuery qry = QSqlQuery(db);
         string s = "INSERT INTO owner(username, name, phoneNumber, emailAddress, ownerAddress, zip, ownerType) VALUES( \""
-        + username + "\", \"" + name + "\", \"" + to_string(phoneNum) + "\", \""
+        + username + "\", \"" + name + "\", \"" + phone + "\", \""
         + email + "\", \"" + address + "\"," + to_string(zipNum) + ", \"" + ownerType +"\")";
 
         QString qs = QString::fromStdString(s);
@@ -341,12 +341,12 @@ void Authentication::insertOwnerToDB(string username, string name, string phone,
  * \brief getAuthenticatedOwner
  * \return authenicated owner
  */
-Owner Authentication::getAuthenticatedOwner(){
+Owner* Authentication::getAuthenticatedOwner(){
     return authOwner;
 }
 
 /*!
- * \brief updateOnwer updates the adopter's entry in the database
+ * \brief updateOwner updates the adopter's entry in the database
  *Step 1: update the database
  * Step 2: update local adopter object
  * \param username
@@ -355,10 +355,9 @@ Owner Authentication::getAuthenticatedOwner(){
  * \param email
  * \param address
  * \param zip
- * \param ownerType
  * \return
  */
-Owner Authentication::updateOnwer(string username, string name, string phone, string email, string address, string zip){
+Owner Authentication::updateOwner(string username, string name, string phone, string email, string address, string zip){
     int zp = stoi(zip); //convert zip to an int
 
 
@@ -366,7 +365,7 @@ Owner Authentication::updateOnwer(string username, string name, string phone, st
     if(db.open()){
         QSqlQuery qry = QSqlQuery(db);
 
-        QString qs = "UPDATE onwer SET name = \"" + QString::fromStdString(name) +
+        QString qs = "UPDATE owner SET name = \"" + QString::fromStdString(name) +
                 "\", phoneNumber = \"" + QString::fromStdString(phone) +
                 "\", emailAddress = \"" + QString::fromStdString(email) +
                 "\", ownerAddress = \"" + QString::fromStdString(address) +
@@ -378,13 +377,13 @@ Owner Authentication::updateOnwer(string username, string name, string phone, st
 
     //Step 2: update local owner object
     //alternatively... loadOwnerFromDB(username);
-        authOwner.setName(name);
-        authOwner.setPhoneNumber(stoi(phone));
-        authOwner.setEmail(email);
-        authOwner.setAddress(address);
-        authOwner.setZipCode(zp);
+        authOwner->setName(name);
+        authOwner->setPhoneNumber(stoi(phone));
+        authOwner->setEmail(email);
+        authOwner->setAddress(address);
+        authOwner->setZipCode(zp);
 
-    return authOwner;
+    return *authOwner;
 }
 
 /*!
@@ -432,4 +431,3 @@ bool Authentication::checkUsername(string username){
 
     return false;
 }
-

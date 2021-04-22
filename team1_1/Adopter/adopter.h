@@ -21,6 +21,11 @@ public:
      */
     Adopter();
 
+
+    Adopter(string db, string uname, string pwd, string fname, string lname,
+                     string email, int zip);
+
+
     /*!
      * \brief Adopter alternate constructor
      * \param uname username
@@ -132,6 +137,11 @@ private:
     int zipcode;
 
     Preferences preferenceList;
+
+    //database stuff
+    void openDB();
+    string dbName;
+    QSqlDatabase prefDB;
 };
 
 #endif // ADOPTER_H
