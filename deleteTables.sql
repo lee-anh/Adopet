@@ -9,3 +9,4 @@ drop table if exists breed;
 drop table if exists temperament;
 drop table if exists goodWith;
 drop table if exists shelter;
+drop table if exists media;

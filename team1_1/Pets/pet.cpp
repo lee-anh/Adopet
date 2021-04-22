@@ -14,7 +14,6 @@ Pet::Pet()
     goodWith = "";
     shelter = "";
     bio = "";
-
 }
 
 Pet::Pet(string petName, string petSpecies, string petBreed, string petAge,
@@ -149,4 +148,39 @@ int Pet::getPetID(){
 
 void Pet::setPetID(int id){
     this->id = id;
+}
+
+/*
+ * Loops through the database and sets the pets image file name
+*/
+void Pet::fillImageFiles(){
+    QSqlDatabase petsDB = QSqlDatabase::addDatabase("QSQLITE", "mediaCxn");
+    string fullName = "../../projectDB.sqlite";
+    petsDB.setDatabaseName(QString::fromStdString(fullName));
+
+    if(petsDB.open()){
+        QSqlQuery query = QSqlQuery(petsDB);
+        QString s = "SELECT petID, filename, mediaType FROM media";
+        query.exec(s);
+        while(query.next()){
+            int petID = query.value(0).toInt();
+            string filename = query.value(1).toString().toStdString();
+            string mediaType = query.value(2).toString().toStdString();
+
+            if(petID == id && mediaType == "image") {
+                imageFiles.push_back(filename);
+            }
+        }
+    }
+
+    petsDB.removeDatabase(petsDB.connectionName());
+    petsDB.close();
+}
+
+/*
+ * Accessor method that retrieves image file name
+ * @return The pet's image file name
+*/
+vector<string> Pet::getImageFiles(){
+    return imageFiles;
 }

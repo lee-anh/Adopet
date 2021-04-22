@@ -146,7 +146,7 @@ vector<pair<Adopter, int>> Matchmaking::findBestMatchForPet(Pet p){
 
             if(userName != newUserName){
                 if(userName != ""){
-                    tempAdopterResults = fillAdopterResults(userName, currScore, tempAdopterResults);
+                    tempAdopterResults = fillAdopterResults(userName, (int)((double)currScore * 100 / 8), tempAdopterResults);
                     currScore = 0;
                 }
                 userName = newUserName;
@@ -157,7 +157,7 @@ vector<pair<Adopter, int>> Matchmaking::findBestMatchForPet(Pet p){
             string attributeType = query.value(2).toString().toStdString();
             currScore += getAdopterScore(p, attributeType, attribute);
         }
-        tempAdopterResults = fillAdopterResults(userName, currScore, tempAdopterResults);
+        tempAdopterResults = fillAdopterResults(userName, (int)((double)currScore * 100 / 8), tempAdopterResults);
     }
     sort(tempAdopterResults.begin(), tempAdopterResults.end(), customAdopterResultSort);
     return tempAdopterResults;
@@ -234,7 +234,7 @@ vector<pair<Adopter, int>> Matchmaking::findMatchesForPet(Pet p){
 
             if(userName != newUserName){
                 if(userName != ""){
-                    adopterResults = fillAdopterResults(userName, currScore, adopterResults);
+                    adopterResults = fillAdopterResults(userName, (int)((double)currScore * 100 / 8), adopterResults);
                     currScore = 0;
                 }
                 userName = newUserName;
@@ -245,7 +245,7 @@ vector<pair<Adopter, int>> Matchmaking::findMatchesForPet(Pet p){
             string attributeType = query.value(2).toString().toStdString();
             currScore += getAdopterScore(p, attributeType, attribute);
         }
-        adopterResults = fillAdopterResults(userName, currScore, adopterResults);
+        adopterResults = fillAdopterResults(userName, (int)((double)currScore * 100 / 8), adopterResults);
     }
     sort(adopterResults.begin(), adopterResults.end(), customAdopterResultSort);
     return adopterResults;
@@ -333,7 +333,7 @@ vector<pair<Pet, int>> Matchmaking::findMatchesForAdopter(string adopterName){
             currScore += getPetScore(adopterPreference.getShelter(), pet.getShelter());
             if(adopterPreference.getGender() == pet.getGender() || adopterPreference.getGender() == "all") currScore++;
 
-            petResults.push_back(make_pair(pet, currScore));
+            petResults.push_back(make_pair(pet, (int)((double)currScore * 100 / 8)));
         }
     }
     sort(petResults.begin(), petResults.end(), customPetResultSort);

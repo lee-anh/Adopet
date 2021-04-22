@@ -18,9 +18,14 @@ public:
 
     void writeToCSV();
 
+    string getFileNameBySpecies(string petSpecies);     //gets the media file name of a specific pet based on its species
+    string getMediaType(string fileName);               //returns either "image" or "video" depending on file type
+
+
 private:
     int numOfPets;
-    ofstream writeCsv;
+    ofstream writePetsCsv;
+    ofstream writeMediaCsv;
     ofstream readCsv;
 
     //Database stuff
@@ -35,7 +40,7 @@ private:
     vector<string> age;
     vector<string> gender;
     vector<string> size;
-
+    vector<string> imageFileNames;
 
 
     //read from DB

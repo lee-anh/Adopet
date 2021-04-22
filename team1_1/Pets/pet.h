@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <QtSql>
 
 using namespace std;
 
@@ -54,6 +55,8 @@ public:
     string getBio();
     void setBio(string bi);
 
+    vector<string> getImageFiles();
+    void fillImageFiles();
 
     int getPetID();
     void setPetID(int id);
@@ -70,6 +73,8 @@ private:
     string goodWith;
     string shelter;
     string bio;
+
+    vector<string> imageFiles;
 };
 
 #endif // PET_H
