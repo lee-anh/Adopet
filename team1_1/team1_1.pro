@@ -5,6 +5,7 @@ SUBDIRS += \
     AdopterTests \
     Authentication \
     DBSearch \
+    DBSearchTest \
     GUI \
     Matchmaking \
     Owner \
