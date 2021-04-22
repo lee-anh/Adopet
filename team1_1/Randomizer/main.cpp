@@ -14,7 +14,8 @@ int main()
     */
 
     PetRandomizer* test1 = new PetRandomizer(100);
-    test1->writeToCSV();
+    //test1->getFileNameBySpecies("rabbit");
 
+    test1->writeToCSV();
     return 0;
 }

@@ -57,7 +57,6 @@ create table media(
       petID INT NOT NULL, 
       filename CHAR NOT NULL,
       mediaType CHAR NOT NULL
-
 );
       
 create table species (
@@ -88,6 +87,7 @@ create table shelter (
 .mode csv
 .import "csvs/pets.csv" pets
 .import "csvs/species.csv" species
+.import "csvs/media.csv" media
 .import "csvs/breed.csv" breed
 .import "csvs/temperament.csv" temperament
 .import "csvs/good_with.csv" goodWith

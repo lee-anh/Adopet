@@ -47,9 +47,6 @@ PeopleRandomizer::~PeopleRandomizer(){
 }
 
 void PeopleRandomizer::writeToCSV(){
-
-
-
     int counter = 1;
     while(counter <= numOfPeople){
         //user info FOR ADOPTERS ONLY RIGHT NOW
@@ -76,10 +73,6 @@ void PeopleRandomizer::writeToCSV(){
         csv2 << username << "," << fName << "," << lName << "," <<
                 email << "," << zip << "\n";
         csv2.close();
-
-
-
-        //preferences
 
         //species
         vector<string> userSpecies = vector<string>();
