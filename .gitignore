@@ -131,4 +131,4 @@ compile_commands.json
 gtest/
 
 #ProjectDB SQL
-./projectDB.sqlite
+projectDB.sqlite

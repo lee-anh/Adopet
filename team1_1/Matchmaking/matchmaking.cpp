@@ -35,7 +35,7 @@ void Matchmaking::openDB(){
         std::cerr << "  File -- " << fullName << std::endl;
         exit(0);
     } else {
-        std::cerr << "Opened database successfully\n";
+        std::cerr << "Opened database successfully (from Matchmaking class)\n";
     }
 }
 
@@ -75,6 +75,7 @@ bool Matchmaking::customAdopterResultSort(const pair<Adopter,int> &a, const pair
 */
 Pet Matchmaking::makePet(QSqlQuery query){
     //storing information in each line
+    int id = query.value(0).toInt();
     string name = query.value(1).toString().toStdString();
     string species = query.value(2).toString().toStdString();
     string breed = query.value(3).toString().toStdString();
@@ -86,7 +87,7 @@ Pet Matchmaking::makePet(QSqlQuery query){
     string shelter = query.value(9).toString().toStdString();
     string bio = query.value(10).toString().toStdString();
 
-    Pet p = Pet(name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+    Pet p = Pet(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
     return p;
 }
 

@@ -13,6 +13,7 @@ Adopter::Adopter()
     emailAddress = "null";
     zipcode = -1;
     preferenceList = Preferences();
+    fillPreferences();
 }
 
 /*!
@@ -139,3 +140,105 @@ int Adopter::getZipCode(){
 void Adopter::setZipCode(int zip){
     zipcode = zip;
 }
+
+/*
+ * Adds the specific preference onto the adopter's preference list
+ * @param attr Preference
+ * @param attrType Type of preference
+*/
+void Adopter::fillPreference(string attr, string attrType){
+    if(attrType == "species") preferenceList.addSpecies(attr);
+    else if(attrType == "breed") preferenceList.addBreed(attr);
+    else if(attrType == "age") preferenceList.addAge(attr);
+    else if(attrType == "size") preferenceList.addSize(attr);
+    else if(attrType == "temperament") preferenceList.addTemperament(attr);
+    else if(attrType == "gender") preferenceList.setGender(attr);
+    else if(attrType == "goodWith") preferenceList.addGoodWith(attr);
+    else if(attrType == "shelter") preferenceList.addShelter(attr);
+}
+
+/*
+ * Goes through the preferences database and fills the preference list of the current adopter
+*/
+void Adopter::fillPreferences(){
+    QSqlDatabase prefDB = QSqlDatabase::addDatabase("QSQLITE", "adopterCxn");
+    string fullName = "../../projectDB.sqlite";
+    prefDB.setDatabaseName(QString::fromStdString(fullName));
+
+    if(prefDB.open()){
+        QSqlQuery query = QSqlQuery(prefDB);
+        QString s = "SELECT adopterUsername, attribute, attributeType FROM preferences";
+        query.exec(s);
+        while(query.next()){
+            string name = query.value(0).toString().toStdString();
+            string attribute = query.value(1).toString().toStdString();
+            string attributeType = query.value(2).toString().toStdString();
+
+            if(name == username) fillPreference(attribute, attributeType);
+        }
+    }
+
+    prefDB.removeDatabase(prefDB.connectionName());
+    prefDB.close();
+}
+
+/*
+ * Accessor method that returns the preference of the current adopter
+ * @return Preferences object
+*/
+Preferences Adopter::getPreferences(){
+    return preferenceList;
+}
+
+
+/*
+ * Adds a preference onto the adopter's preference list and the preference database
+ * @param attr Preference to be added
+ * @param attrType Type of preference
+*/
+void Adopter::addPreference(string attr, string attrType){
+    QSqlDatabase prefDB = QSqlDatabase::addDatabase("QSQLITE", "adopterCxn");
+    string fullName = "../../projectDB.sqlite";
+    prefDB.setDatabaseName(QString::fromStdString(fullName));
+
+    QString s = "INSERT INTO preferences(adopterUsername, attribute, attributeType) VALUES(\"";
+    s += QString::fromStdString(username) + "\", \"";
+    s += QString::fromStdString(attr) + "\", \"";
+    s += QString::fromStdString(attrType) + "\")";
+
+    string addQuery = s.toStdString();
+    cout << "add query is: " << addQuery << endl;
+
+    if(prefDB.open()){
+        QSqlQuery query = QSqlQuery(prefDB);
+        query.exec(s);
+    }
+
+    prefDB.removeDatabase(prefDB.connectionName());
+    prefDB.close();
+}
+
+/*
+ * Removes a preference from the adopter's preference list and the preference database
+ * @param attr Preference to be removed
+ * @param attrType Type of preference
+*/
+void Adopter::removePreference(string attr, string attrType){
+    QSqlDatabase prefDB = QSqlDatabase::addDatabase("QSQLITE", "adopterCxn");
+    string fullName = "../../projectDB.sqlite";
+    prefDB.setDatabaseName(QString::fromStdString(fullName));
+
+    QString s = "DELETE FROM preferences WHERE (adopterUsername = ";
+    s += "\"" + QString::fromStdString(username) + "\" AND attribute = ";
+    s += "\"" + QString::fromStdString(attr) + "\" AND attributeType = ";
+    s += "\"" + QString::fromStdString(attrType) + "\")";
+
+    if(prefDB.open()){
+        QSqlQuery query = QSqlQuery(prefDB);
+        query.exec(s);
+    }
+
+    prefDB.removeDatabase(prefDB.connectionName());
+    prefDB.close();
+}
+

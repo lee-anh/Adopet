@@ -3,32 +3,17 @@
 
 PetGallery::PetGallery()
 {
-
+    //default constructor, don't use
 }
 
-PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev, QPushButton* next, QLabel* pageLine, vector<QLabel*> petNameLabels,
-                        vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,vector<Pet> petVec){
-
-    numToDisplay = numPetsToDisplay;
-
-    previousButton = prev;
-    nextButton = next;
-    pageNum = pageLine;
-    nameLabels = petNameLabels;
-    picLabels = petPhotos;
-    learnMores = petLearnMore;
-    pets = petVec;
-    nextStartIndex = 0;
-    displayPetsPageNumber = 1;
 
 
-    petsToDisplay = vector<Pet>();
-    clearLabels();
-
-}
-
-PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev, QPushButton* next, QLabel* pageLine, vector<QLabel*> petNameLabels,
-                        vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,
+//constructor used in my favorites and manual search
+PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev,
+                        QPushButton* next,  QLabel* pageLine,
+                        vector<QLabel*> petNameLabels,
+                        vector<QLabel*> petPhotos,
+                        vector<QPushButton*> petLearnMore,
                         vector<QPushButton*> petSaves, vector<Pet> petVec){
 
     numToDisplay = numPetsToDisplay;
@@ -48,6 +33,34 @@ PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev, QPushButton* ne
 
 }
 
+//constructor for matchmaking
+PetGallery::PetGallery(int numPetsToDisplay, QPushButton* prev,
+                       QPushButton* next, QLabel* pageLine,
+                       vector<QLabel*> petNameLabels,
+                       vector<QLabel*> petPhotos,
+                       vector<QLabel*> petScores,
+                       vector<QPushButton*> petLearnMore,
+                       vector<QPushButton*> petSaves, vector<pair<Pet, int>> petVec){
+    numToDisplay = numPetsToDisplay;
+    previousButton = prev;
+    nextButton = next;
+    pageNum = pageLine;
+    nameLabels = petNameLabels;
+    picLabels = petPhotos;
+    scoreLabels = petScores;
+    learnMores = petLearnMore;
+    saveButtons = petSaves;
+    matPets = petVec;
+
+    matchPetsToRegPets(); //convert vector
+
+    nextStartIndex = 0;
+    displayPetsPageNumber = 1;
+
+    petsToDisplay = vector<Pet>();
+    clearLabels();
+}
+
 
 
 PetGallery::~PetGallery(){
@@ -59,20 +72,30 @@ void PetGallery::updatePetVec(vector<Pet> p){
 }
 
 void PetGallery::displayPets(int start){
+    //default picture
     QPixmap pixmap("../../../../../pictures/default.png");
     int counter = 0;
+
+    //clear petsToDisplayVector
     petsToDisplay.clear();
 
+    //hide old buttons
     previousButton->setVisible(true);
     nextButton->setVisible(true);
 
     for(int i = 0; i < numToDisplay; i++){
+        //clear the old labels and hide the old buttonsd
         nameLabels[i]->clear();
         picLabels[i]->clear();
         learnMores[i]->setVisible(false);
         if(saveButtons.size() > 0){
             saveButtons[i]->setVisible(false);
         }
+        if(matPets.size() > 0){
+            scoreLabels[i]->clear();
+        }
+
+        //display pets
         if(start < (int) pets.size()){
             //add to petsToDisplay vec
              petsToDisplay.push_back(pets[start]);
@@ -90,6 +113,15 @@ void PetGallery::displayPets(int start){
             learnMores[i]->setVisible(true);
             if(saveButtons.size() > 0){
                 saveButtons[i]->setVisible(true);
+
+            }
+
+            //scores
+            if(matPets.size() > 0){
+
+                int score = matPets[start].second;
+                QString m = QString::number(score) + "% match";
+                scoreLabels[i]->setText(m);
             }
 
             start++;
@@ -122,6 +154,7 @@ void PetGallery::next(){
         displayPetsPageNumber++;
         nextStartIndex++;
         displayPets(nextStartIndex);
+
     }
 
 }
@@ -132,6 +165,7 @@ void PetGallery::previous(){
     if(nextStartIndex - numToDisplay < 0){
         displayPetsPageNumber = 1;
         displayPets(0);
+
     } else {
         nextStartIndex = nextStartIndex- numToDisplay - startMod;
         if(displayPetsPageNumber - 1 > 0)
@@ -139,6 +173,7 @@ void PetGallery::previous(){
         else
             displayPetsPageNumber = 1;
         displayPets(nextStartIndex);
+
     }
 }
 
@@ -160,10 +195,25 @@ void PetGallery::clearLabels(){
         nameLabels[i]->clear();
         picLabels[i]->clear();
         learnMores[i]->setVisible(false);
+
+        //if there are save buttons
         if(saveButtons.size() > 0){
             saveButtons[i]->setVisible(false);
+        }
+
+        //if there are score labels
+        if(scoreLabels.size() > 0){
+            scoreLabels[i]->clear();
+            pageNum->clear();
         }
     }
     previousButton->setVisible(false);
     nextButton->setVisible(false);
+}
+
+void PetGallery::matchPetsToRegPets(){
+    pets = vector<Pet>();
+   for(int i = 0; i < (int) matPets.size(); i++){
+       pets.push_back(matPets[i].first);
+   }
 }

@@ -99,6 +99,8 @@ private slots:
 
 
 
+    void on_surpriseMe_clicked();
+
 signals:
     void learnMoreClicked(Pet sendPet);
     void learnMoreClicked(Pet sendPet, bool b);

@@ -59,7 +59,7 @@ void SavedList::savePet(int petID){
         QSqlQuery query = QSqlQuery(dbSL);
         query.exec(qry);
     }
-    //cout << qry.toStdString() << endl;
+    cout << qry.toStdString() << endl;
 
 }
 
