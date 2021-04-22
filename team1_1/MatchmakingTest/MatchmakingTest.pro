@@ -10,6 +10,8 @@ QMAKE_LFLAGS += --coverage
 
 SOURCES += main.cpp
 
+LIBS += -pthread
+LIBS += -lgcov
 SOURCES += ../../gtest/googletest/src/gtest-all.cc
 
 INCLUDEPATH += ../../gtest \
