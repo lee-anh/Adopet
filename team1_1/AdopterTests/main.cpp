@@ -269,8 +269,6 @@ TEST(general, SETGENDER) {
 */
 
 
-
-
 TEST(general, ADOPTERSETTERS) {
     Adopter *a = new Adopter();
     a->setUsername("m.francis");

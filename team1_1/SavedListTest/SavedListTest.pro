@@ -13,8 +13,6 @@ QT += sql
     LIBS += -lgcov
 }
 
-
-
 SOURCES += main.cpp
 
 LIBS += -pthread
