@@ -2,58 +2,61 @@
 
 Owner::Owner(){
     //default constructor
-}
-Owner::Owner(string t){
-    if(t == "Shelter Owner" || t == "Foster Parent") ownerType = t;
-    else ownerType = "";
-
-    lastPetID = getLastPetID();
+    cout << "default constructor called (owner)" << endl;
+    //lastPetID = getLastPetID();
 }
 
-Owner::Owner(string n, string oT, string a, int zip, int pN, string e){
+Owner::Owner(string n, string a, int zip, int pN, string e){
     name = n;
-    ownerType = oT;
     address = a;
     zipCode = zip;
     phoneNumber = pN;
     email = e;
-
-    lastPetID = getLastPetID();
+    cout << "wrong constructor called (owner)" << endl;
+    //openDB();
+    //lastPetID = getLastPetID();
 }
+
+Owner::Owner(string database, string n, string a, int zip, int pN, string e){
+    dbName = database;
+    name = n;
+    address = a;
+    zipCode = zip;
+    phoneNumber = pN;
+    email = e;
+    pets = vector<Pet>();
+    openDB();
+    //fillPets();
+    lastPetID = getLastPetID();
+
+
+}
+Owner::~Owner(){
+    petsDB.close();
+}
+
 
 /*
  * Loops through the database and retreives the last pet id used
  * @return Last pet ID
 */
 int Owner::getLastPetID(){
-    QSqlDatabase petsDB = QSqlDatabase::addDatabase("QSQLITE", "ownerCxn");
-    string fullName = "../../projectDB.sqlite";
-    petsDB.setDatabaseName(QString::fromStdString(fullName));
 
     int lPI = 0;
 
     if(petsDB.open()){
         QSqlQuery query = QSqlQuery(petsDB);
-        QString s = "SELECT id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio FROM pets";
+        QString s = "SELECT MAX(id) FROM pets";
         query.exec(s);
         while(query.next()){
             lPI = query.value(0).toInt();
         }
     }
 
-    petsDB.removeDatabase(petsDB.connectionName());
-    petsDB.close();
 
     return lPI;
 }
 
-/*
- * Gets the owner type of the owner
- * @return The owner type of the owner
-*/
-string Owner::getOwnerType(){
-    return ownerType;
-}
 
 /*
  * Sets the name of the owner
@@ -142,6 +145,7 @@ string Owner::getEmail(){
 */
 Pet Owner::makePet(QSqlQuery query){
     //storing information in each line
+    int id = query.value(0).toInt();
     string name = query.value(1).toString().toStdString();
     string species = query.value(2).toString().toStdString();
     string breed = query.value(3).toString().toStdString();
@@ -153,7 +157,10 @@ Pet Owner::makePet(QSqlQuery query){
     string shelter = query.value(9).toString().toStdString();
     string bio = query.value(10).toString().toStdString();
 
-    Pet p = Pet(name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+
+    Pet p = Pet(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+
+
     return p;
 }
 
@@ -162,25 +169,37 @@ Pet Owner::makePet(QSqlQuery query){
  * Stores the pets in the 'pets' vector
 */
 void Owner::fillPets(){
-    QSqlDatabase petsDB = QSqlDatabase::addDatabase("QSQLITE", "ownerCxn");
-    string fullName = "../../projectDB.sqlite";
-    petsDB.setDatabaseName(QString::fromStdString(fullName));
 
+    pets.clear();
     if(petsDB.open()){
         QSqlQuery query = QSqlQuery(petsDB);
-        QString s = "SELECT id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio FROM pets";
-        query.exec(s);
+        string s = "SELECT id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio FROM pets WHERE shelter = \"" + name + "\"";
+        cout << s << endl;
+        QString qs = QString::fromStdString(s);
+        query.exec(qs);
         while(query.next()){
+            int id = query.value(0).toInt();
+            string name = query.value(1).toString().toStdString();
+            string species = query.value(2).toString().toStdString();
+            string breed = query.value(3).toString().toStdString();
+            string age = query.value(4).toString().toStdString();
+            string size = query.value(5).toString().toStdString();
+            string temperament = query.value(6).toString().toStdString();
+            string gender = query.value(7).toString().toStdString();
+            string goodWith = query.value(8).toString().toStdString();
             string shelter = query.value(9).toString().toStdString();
-            if(shelter == name) {
-                Pet pet = makePet(query);
-                pets.push_back(pet);
-            }
+            string bio = query.value(10).toString().toStdString();
+
+
+            Pet p = Pet(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+           // Pet pet = makePet(query);
+            pets.push_back(p);
+
+
         }
+       // cout << pets[5].getName() << endl;
     }
 
-    petsDB.removeDatabase(petsDB.connectionName());
-    petsDB.close();
 }
 
 /*
@@ -188,6 +207,8 @@ void Owner::fillPets(){
  * @return All pets of the owner
 */
 vector<Pet> Owner::getPets(){
+
+
     return pets;
 }
 
@@ -196,9 +217,7 @@ vector<Pet> Owner::getPets(){
  * @param p Pet to be uploaded
 */
 void Owner::uploadPet(Pet p){
-    QSqlDatabase petsDB = QSqlDatabase::addDatabase("QSQLITE", "ownerCxn");
-    string fullName = "../../projectDB.sqlite";
-    petsDB.setDatabaseName(QString::fromStdString(fullName));
+
 
     QString s = "INSERT INTO pets(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio) VALUES(";
     s += QString::number(lastPetID + 1) + ", \"";    //arbitrary id
@@ -223,15 +242,16 @@ void Owner::uploadPet(Pet p){
 
     lastPetID += 1;
 
-    petsDB.removeDatabase(petsDB.connectionName());
-    petsDB.close();
+
 }
+
 
 /*
  * Creates a Pet object with the information present in the passed query
  * @param query A QSqlQuery object
  * @return A new Pet object with the retrieved information
 */
+
 Pet Owner::makePet(QStringList petData){
     //storing information in each line
     string name = petData.at(0).toStdString();
@@ -245,9 +265,10 @@ Pet Owner::makePet(QStringList petData){
     string shelter = petData.at(8).toStdString();
     string bio = petData.at(9).toStdString();
 
-    Pet p = Pet(name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+    Pet p = Pet( name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
     return p;
 }
+
 
 /*
  * Reads a txt file containing all the pets an owner wants to add into the database
@@ -269,4 +290,21 @@ void Owner::uploadPets(){
     }
 
     file.close();
+}
+
+
+void Owner::openDB(){
+    petsDB = QSqlDatabase::addDatabase("QSQLITE", "ownerCxn");
+    string fullName = dbName;
+    petsDB.setDatabaseName(QString::fromStdString(fullName));
+    if(!petsDB.open()){
+        std::cerr << "Database does not open -- "
+                  << petsDB.lastError().text().toStdString()
+                  << std::endl;
+
+        std::cerr << "  File -- " << fullName << std::endl;
+        exit(0);
+    } else {
+        std::cerr << "Opened database successfully (from Owner class)\n";
+    }
 }

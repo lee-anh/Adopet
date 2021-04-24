@@ -39,6 +39,10 @@ void PreferencesForm::loadPreferences(){
         findInVec(p.getAge()[i]);
     }
    //TODO: CURRENTLY SKIPPING GENDER
+    for(int i = 0; i < (int) p.getGender().size(); i ++){
+        findInVec(p.getGender()[i]);
+    }
+
     for(int i = 0; i < (int) p.getSize().size(); i ++){
         findInVec(p.getSize()[i]);
     }
@@ -135,13 +139,17 @@ void PreferencesForm::on_saveButton_clicked()
     //remove FIRST!!
     for(int i = 0; i < (int) toRemove.size(); i++){
 
+        //CHANGE HERE
         adopter->removePreference(toRemove[i].first, toRemove[i].second);
+
     }
 
     //then add
     for(int i = 0; i < (int) toAdd.size(); i++){
         //prevent duplicates
+        //CHANGE HERE
         adopter->removePreference(toAdd[i].first, toAdd[i].second);
+        //CHANGE HERE
         adopter->addPreference(toAdd[i].first, toAdd[i].second);
     }
 
@@ -152,6 +160,8 @@ void PreferencesForm::on_saveButton_clicked()
 
     ui->unsavedChangesLabel->clear();
     ui->savedLabel->setText("Your changes have been saved");
+
+    emit adopterChanged(adopter);
 }
 
 void PreferencesForm::clearCheckBoxes(){

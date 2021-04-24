@@ -24,18 +24,21 @@ void UserInfo::setAuth(Authentication *a){
     username = a->getAuthenticatedAdopter()->getUsername();
 }
 
+void UserInfo::createAccountClikced(){
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
 void UserInfo::adopterMyInfoClicked(){
     ui->stackedWidget->setCurrentIndex(1);
     firstTime = false;
 
-    ui->usernameLabel->setText("Username (unchangeable): " + QString::fromStdString(auth->getAuthenticatedAdopter()->getUsername()));
-    ui->passwordLabel->setText("Password (unchangeable): " + QString::fromStdString(auth->getAuthenticatedAdopter()->getPassword()));
+    clearAdopterInfo();
+
     ui->firstName->setText(QString::fromStdString(auth->getAuthenticatedAdopter()->getFirstName()));
     ui->lastName->setText(QString::fromStdString(auth->getAuthenticatedAdopter()->getLastName()));
     ui->emailAddress->setText(QString::fromStdString(auth->getAuthenticatedAdopter()->getEmailAddress()));
     //will have to check for leading zeros here
     ui->zipCode->setText(QString::fromStdString(to_string(auth->getAuthenticatedAdopter()->getZipCode())));
-
 
 }
 
@@ -43,6 +46,8 @@ void UserInfo::adopterMyInfoClicked(){
 void UserInfo::ownerMyInfoClicked(){
     ui->stackedWidget->setCurrentIndex(2);
     firstTime = false;
+
+    clearOwnerInfo();
 
     ui->nameOwner->setText(QString::fromStdString(auth->getAuthenticatedOwner()->getName()));
     ui->phoneNumberOwner->setText((QString::fromStdString(to_string(auth->getAuthenticatedOwner()->getPhoneNumber()))));
@@ -62,6 +67,7 @@ void UserInfo::on_continueButton_clicked()
     string pwdVer = ui->passwordVerification->text().toStdString();
     string type = ui->accountType->currentText().toStdString();
 
+    transform(uname.begin(), uname.end(), uname.begin(), ::tolower); //lowercase the username
     transform(type.begin(), type.end(), type.begin(), ::tolower); //lowercase the type
 
     if(uname == "" || pwd == "" || pwdVer == ""|| type == "select one"){
@@ -74,13 +80,15 @@ void UserInfo::on_continueButton_clicked()
             //to the my info page
             if(type == "adopter"){
                 //go to adopter info page
+                clearAdopterInfo();
                 ui->stackedWidget->setCurrentIndex(1);
-                ui->usernameLabel->setText("Username (unchangeable): " + QString::fromStdString(uname));
-                ui->passwordLabel->setText("Password (unchangeable): " + QString::fromStdString(pwd));
+
 
             } else {
                 //go to owner info page
+                clearOwnerInfo();
                 ui->stackedWidget->setCurrentIndex(2);
+
             }
 
             username = uname;
@@ -100,6 +108,8 @@ void UserInfo::on_saveButton_clicked()
     string lname = ui->lastName->text().toStdString();
     string email = ui->emailAddress->text().toStdString();
     string zip = ui->zipCode->text().toStdString();
+
+
     if(fname == "" || lname == "" || email == "" || zip == ""){
         ui->errorLabel2->setText("Missing field(s)");
     } else {
@@ -108,6 +118,7 @@ void UserInfo::on_saveButton_clicked()
             emit backClicked(); //back to the login page
         } else {
             auth->updateAdopter(username, fname, lname, email, zip);
+            ui->adopterSavedMessage->setText("Your changes have been saved");
         }
 
     }
@@ -132,15 +143,39 @@ void UserInfo::on_saveOwnerButton_clicked()
         ui->errorLabelOwner->setText("Missing field(s)");
     } else {
         if(firstTime == true){
-
-            //WILL HAVE TO EDIT IF TAKING AWAY OWNER TYPE
-            auth->insertOwnerToDB(username, name, phone, email, address, zip, "shelter");
-
+            auth->insertOwnerToDB(username, name, phone, email, address, zip);
             emit backClicked(); //back to the login page
         } else {
             auth->updateOwner(username, name, phone, email, address, zip);
+            ui->ownerSavedMessage->setText("Your changes have been saved");
         }
     }
 
 
+}
+
+void UserInfo::setFirstTime(bool b){
+    firstTime = b;
+}
+
+void UserInfo::clearAdopterInfo(){
+
+    ui->firstName->clear();
+    ui->lastName->clear();
+    ui->emailAddress->clear();
+    ui->zipCode->clear();
+
+    ui->adopterSavedMessage->clear();
+    ui->errorLabel2->clear();
+}
+
+void UserInfo::clearOwnerInfo(){
+    ui->nameOwner->clear();
+    ui->phoneNumberOwner->clear();
+    ui->emailOwner->clear();
+    ui->addressOwner->clear();
+    ui->zipOwner->clear();
+
+    ui->errorLabelOwner->clear();
+    ui->ownerSavedMessage->clear();
 }

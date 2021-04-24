@@ -32,20 +32,9 @@ protected:
     */
 };
 
-//Testing the creation of the object
-TEST(unitTest, ownerTypes){
-    Owner o1("Shelter Owner");
-    Owner o2("Foster Parent");
-    Owner o3("Invalid Owner");
-    ASSERT_EQ(o1.getOwnerType(), "Shelter Owner") << o1.getOwnerType() << " should be Shelter Owner";
-    ASSERT_EQ(o2.getOwnerType(), "Foster Parent") << o2.getOwnerType() << " should be Foster Parent";
-    ASSERT_NE(o1.getOwnerType(), o2.getOwnerType()) << o1.getOwnerType() << " and " << o2.getOwnerType() << " should not match";
-    ASSERT_EQ(o3.getOwnerType(), "") << o3.getOwnerType() << " should not exist";
-}
-
 //Testing object setters and getters
 TEST(unitTest, settersAndGetters){
-    Owner o1("Shelter Owner");
+    Owner o1;
     o1.setAddress("111 Quad Drive");
     o1.setEmail("example@gmail.com");
     o1.setName("John Doe");
@@ -61,7 +50,7 @@ TEST(unitTest, settersAndGetters){
 
 //Testing the function of filling in the owner's pets
 TEST(unitTest, fillPets){
-    Owner o1("Shelter Owner");
+    Owner o1;
     o1.setName("best friends");
 
     vector<Pet> before = o1.getPets();
@@ -77,13 +66,13 @@ TEST(unitTest, fillPets){
 /*
 //Testing the function of uploading a single pet onto the database
 TEST(unitTest, uploadPet){
-    Owner o1("Shelter Owner");
+    Owner o1;
     o1.setName("best friends");
 
     o1.fillPets();
     int petAmountBefore = o1.getPets().size();
 
-    Owner o2("Shelter Owner");
+    Owner o2;
     o2.setName("best friends");
     Pet p = Pet("qwerty", "dog", "newBreed", "adult", "large", "happy", "male", "kids", "best friends", "loren ipsum");
     o2.uploadPet(p);
@@ -100,7 +89,7 @@ TEST(unitTest, uploadPet){
 
 //Testing the function of uploading a single pet onto the database
 TEST(unitTest, uploadPets){
-    Owner o1("Shelter Owner");
+    Owner o1;
     o1.setName("best friends");
 
     o1.uploadPets();

@@ -101,7 +101,6 @@ public:
 
     /*!
      * \brief createOwner
-     * \param ownerType
      * \param name
      * \param address
      * \param zip
@@ -109,7 +108,7 @@ public:
      * \param email
      * \return
      */
-    Owner* createOwner(string ownerType, string name, string address, int zip, int phone, string email);
+    Owner* createOwner( string name, string address, int zip, int phone, string email);
 
     /*!
      * \brief insertOwnerToDB
@@ -119,9 +118,8 @@ public:
      * \param email
      * \param address
      * \param zip
-     * \param ownerType
      */
-    void insertOwnerToDB(string username, string name, string phone, string email, string address, string zip, string ownerType);
+    void insertOwnerToDB(string username, string name, string phone, string email, string address, string zip);
 
     /*!
      * \brief getAuthenticatedOwner
@@ -141,8 +139,6 @@ public:
      * \return
      */
     Owner updateOwner(string username, string name, string phone, string email, string address, string zip);
-
-
 
 private:
     //db stuff

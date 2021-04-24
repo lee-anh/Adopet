@@ -4,6 +4,7 @@
 using namespace std;
 
 int main(){
+    /*
     Pet p = Pet();
     p.setID(8);
     p.setName("noah");
@@ -14,5 +15,6 @@ int main(){
     for(int i = 0; i < (int) files.size(); i++){
         cout << "File: " << files.at(i) << endl;
     }
+    */
     return 0;
 }

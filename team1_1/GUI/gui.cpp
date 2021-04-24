@@ -6,8 +6,8 @@ GUI::GUI(QWidget *parent)
     , ui(new Ui::GUI)
 {
     ui->setupUi(this);
+    //DIFFERENT OS
 
-    //DIFFERENT UI system
 
     dbName = "../../../../../projectDB.sqlite";
 
@@ -22,6 +22,7 @@ GUI::GUI(QWidget *parent)
     ui->stackedWidget->addWidget(&fmForAdopters); //5
     ui->stackedWidget->addWidget(&uinfo);//6
     ui->stackedWidget->addWidget(&pform); //7
+    ui->stackedWidget->addWidget(&myPets);//8
 
     //Set the opening page
     int openingPage = 0; //login
@@ -39,6 +40,7 @@ GUI::GUI(QWidget *parent)
     connect(&myFavs, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
     connect(&fmForAdopters, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
     connect(&fmForAdopters, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
+    connect(&pform, SIGNAL(adopterChanged(Adopter*)), this, SLOT(updateAdopter(Adopter*)));
 }
 
 
@@ -76,9 +78,18 @@ void GUI::meetPet(Pet p){
     QString qs = "Meet " + QString::fromStdString(s);
     ui->petName->setText(qs);
 
-    //set picture CURRENTLY TEMP
-     QPixmap pixmap("../../../../../pictures/default.png");
-     ui->petPic->setPixmap(pixmap.scaled(200, 200, Qt::KeepAspectRatio));
+    //picture JUST THE FIRST ONE RIGHT NOW
+
+     if(p.getImageFiles().size() == 0){
+         //default picture
+         QPixmap pixmap("../../../../../pictures/default.png");
+         ui->petPic->setPixmap(pixmap.scaled(300, 300, Qt::KeepAspectRatio));
+     } else {
+         string photo = "../../../../../pictures/" + p.getImageFiles()[0];
+         QPixmap pix(QString::fromStdString(photo));
+         ui->petPic->setPixmap(pix.scaled(300, 300, Qt::KeepAspectRatio));
+     }
+
 
     //set attributes
     string sep = " - ";
@@ -121,6 +132,15 @@ void GUI::showNavAdopter(){
     ui->navHelpButton->setVisible(true);
     ui->exit->setVisible(true);
     ui->navMyInfoButton->setVisible(true);
+
+    ui->preferenceFromHome->setText("My Preferences");
+    ui->label1->setText("Set your preferences using a form or our fun quiz!");
+    ui->findMatchFromHome->setText("Find Match");
+    ui->label2->setText("Use our advanced matchmaking algorithm to find the pet that's perfect for you");
+    ui->manualSearchFromHome->setText("Manual Search");
+    ui->label3->setText("Take the wheel and manually search through our extensive pet database");
+    ui->myFavoritesFromHome->setText("My Favorites");
+    ui->label4->setText("View your favorite pets");
 }
 
 void GUI::hideNavOwner(){
@@ -131,6 +151,9 @@ void GUI::hideNavOwner(){
     ui->ownerHelp->setVisible(false);
     ui->ownerLogout->setVisible(false);
     ui->ownerUploadPet->setVisible(false);
+
+
+
 }
 
 void GUI::showNavOwner(){
@@ -141,6 +164,16 @@ void GUI::showNavOwner(){
     ui->ownerHelp->setVisible(true);
     ui->ownerLogout->setVisible(true);
     ui->ownerUploadPet->setVisible(true);
+
+
+    ui->preferenceFromHome->setText("My Info");
+    ui->label1->setText("View and edit the information that potential adopters will see about your shelter!");
+    ui->findMatchFromHome->setText("Upload Pets");
+    ui->label2->setText("Upload pets in bulk or one by one!");
+    ui->manualSearchFromHome->setText("My Pets");
+    ui->label3->setText("View and edit the pets that you've uploaded!");
+    ui->myFavoritesFromHome->setText("Find Match");
+    ui->label4->setText("Use our advanced matchmaking algorithm to adopters that are perfect for your pets");
 }
 
 void GUI::on_saveButton_clicked()
@@ -163,6 +196,7 @@ void GUI::on_exit_clicked()
     hideNavOwner();
     ui->stackedWidget->setCurrentIndex(0);
     previousPage = 0;
+    uinfo.setFirstTime(true);
 
 }
 
@@ -251,7 +285,7 @@ void GUI::on_navMyPreferences_clicked()
 {
     //to preferences form
     ui->stackedWidget->setCurrentIndex(7);
-    pform.setAdopter(auth.getAuthenticatedAdopter());
+    pform.setAdopter(adopter);
 
     pform.clearCheckBoxes(); //clear
     pform.loadPreferences(); //reload
@@ -259,23 +293,44 @@ void GUI::on_navMyPreferences_clicked()
 }
 
 
+void GUI::on_preferenceFromHome_clicked()
+{
+    if(userType == "adopter"){
+         on_navMyPreferences_clicked();
+    } else {
+        on_ownerMyInfo_clicked();
+    }
+
+}
+
 void GUI::on_findMatchFromHome_clicked()
 {
-    on_navFindMatchButton_clicked();
+    if(userType == "adopter"){
+        on_navFindMatchButton_clicked();
+    } else {
+        on_ownerUploadPet_clicked();
+    }
+
 }
 
 void GUI::on_manualSearchFromHome_clicked()
 {
-    on_navManualSearchButton_clicked();
+    if(userType == "adopter"){
+       on_navManualSearchButton_clicked();
+    } else {
+        on_ownerMyPets_clicked();
+    }
+
 }
 
 void GUI::on_myFavoritesFromHome_clicked()
 {
-    on_navMyFavoritesButton_clicked();
-}
-void GUI::on_preferenceFromHome_clicked()
-{
-    on_navMyPreferences_clicked();
+    if(userType == "adopter"){
+        on_navMyFavoritesButton_clicked();
+    } else {
+        on_ownerFindMatch_clicked();
+    }
+
 }
 
 void GUI::on_backButton_clicked()
@@ -305,8 +360,7 @@ void GUI::on_loginButton_clicked()
     string pwd = ui->password->text().toStdString();
     cout << uname << endl;
     cout << pwd << endl;
-    //int i = auth.logIn("user1", "password1"); //why is this giving me -1 here but not in the main of auth
-    //cout << i << endl;
+
     // 0 = adopter
     // 1 = owner
     // -1 = auth fail
@@ -314,17 +368,21 @@ void GUI::on_loginButton_clicked()
     if(auth.logIn(uname, pwd) == 0){
         uinfo.setAuth(&auth);
 
-        //adopter = auth.getAuthenticatedAdopter();
+        adopter = auth.getAuthenticatedAdopter();
         savedList = SavedList(dbName, uname);
         ui->stackedWidget->setCurrentIndex(2); //go to home screen
         previousPage = 0;
+        userType = "adopter";
         showNavAdopter();
+
     } else if (auth.logIn(uname, pwd) == 1){
         //OWNER
         uinfo.setAuth(&auth);
-       // owner = auth.getAuthenticatedOwner();
+        owner = auth.getAuthenticatedOwner();
+
         ui->stackedWidget->setCurrentIndex(2); //go to home screen
         previousPage = 0;
+        userType = "owner";
         showNavOwner();
     } else {
         ui->errorLine->setText("Username or password is not correct");
@@ -342,7 +400,45 @@ void GUI::on_createAccountButton_clicked()
     uinfo.setAuth(&auth);
 }
 
+void GUI::updateAdopter(Adopter *a){
+    adopter = a;
+}
+
+
+void GUI::on_ownerMyPets_clicked()
+{
+    //go to MyPets Page
+    ui->stackedWidget->setCurrentIndex(8);
+    myPets.setOwner(owner);
+    myPets.goToMyPets();
+}
+
+void GUI::on_ownerLogout_clicked()
+{
+    on_exit_clicked();
+}
 
 
 
+void GUI::on_ownerUploadPet_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(8);
+    myPets.setOwner(owner);
+    myPets.goToUploadPet();
+}
 
+void GUI::on_ownerMyInfo_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(6);
+    uinfo.ownerMyInfoClicked();
+}
+
+void GUI::on_ownerFindMatch_clicked()
+{
+    //INSERT HERE
+}
+
+void GUI::on_ownerHome_clicked()
+{
+    on_navHomeButton_clicked();
+}

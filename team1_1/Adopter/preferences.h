@@ -131,13 +131,10 @@ public:
      * \brief getGender
      * \return the gender in a string
      */
-    string getGender();
+    vector<string> getGender();
 
-    /*!
-     * \brief setGender
-     * \param g gender
-     */
-    void setGender(string g);
+    void addGender(string gw);
+    bool removeGender(string gw);
 
     vector<string> getGoodWith();
     void addGoodWith(string gw);
@@ -162,7 +159,7 @@ private:
     vector<string> age;
     vector<string> animalSize;
     vector<string> temperament;
-    string gender;
+    vector<string> gender;
     vector<string> goodWith;
     vector<string> shelter;
 };
