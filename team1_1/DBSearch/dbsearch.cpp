@@ -7,16 +7,7 @@ DBSearch::DBSearch()
 {
 
     cout << "default constructor called (DBSearch)";
-    /*
-    filepath = "../../projectDB.sqlite";
 
-    //Databse stuff
-    openDB();
-
-    //load keyword vectors
-    fillStaticVecs();
-    fillVecsFromDB();
-    */
 
 }
 

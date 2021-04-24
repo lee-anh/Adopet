@@ -19,12 +19,22 @@ public:
 
     PetGallery();
 
+
+    //for owner MyPets
+    PetGallery(int numPetsToDisplay, QPushButton* prev,
+               QPushButton* next, QLabel* pageLine,
+               vector<QLabel*> petNameLabels,
+               vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,
+               vector<Pet> petVec);
+
     //for my favorites and manual search
     PetGallery(int numPetsToDisplay, QPushButton* prev,
                QPushButton* next, QLabel* pageLine,
                vector<QLabel*> petNameLabels,
                vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,
                vector<QPushButton*> petSaves, vector<Pet> petVec);
+
+
 
     //for matchmaking
     PetGallery(int numPetsToDisplay, QPushButton* prev,
@@ -76,6 +86,11 @@ private:
 
     //conversion method
     void matchPetsToRegPets();
+
+    void petPictures();
+
+    QSqlDatabase petsDB;
+    void openDB();
 
 
 };

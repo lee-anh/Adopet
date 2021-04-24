@@ -45,10 +45,12 @@ Pet::Pet(int petId, string petName, string petSpecies, string petBreed,
     goodWith = petGoodWith;
     shelter = petShelter;
     bio = petBio;
+    fillImageFiles("../../../../../projectDB.sqlite");
 }
 
 Pet::~Pet(){
     //temperament.clear();
+
 }
 
 //getters and setters
@@ -153,9 +155,10 @@ void Pet::setPetID(int id){
 /*
  * Loops through the database and sets the pets image file name
 */
-void Pet::fillImageFiles(){
+void Pet::fillImageFiles(string dbName){
+
     QSqlDatabase petsDB = QSqlDatabase::addDatabase("QSQLITE", "mediaCxn");
-    string fullName = "../../projectDB.sqlite";
+    string fullName = dbName;
     petsDB.setDatabaseName(QString::fromStdString(fullName));
 
     if(petsDB.open()){
@@ -173,8 +176,10 @@ void Pet::fillImageFiles(){
         }
     }
 
-    petsDB.removeDatabase(petsDB.connectionName());
-    petsDB.close();
+    petsDB = QSqlDatabase();
+    QSqlDatabase::removeDatabase("mediaCxn");
+    //petsDB.close();
+
 }
 
 /*
@@ -183,4 +188,9 @@ void Pet::fillImageFiles(){
 */
 vector<string> Pet::getImageFiles(){
     return imageFiles;
+}
+
+
+void Pet::addImageFile(string file){
+    imageFiles.push_back(file);
 }

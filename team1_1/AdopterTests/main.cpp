@@ -258,6 +258,7 @@ TEST(general, REMOVETEMPERAMENTFALSE) {
 
 }
 
+/*
 TEST(general, SETGENDER) {
 
     Preferences *p = new Preferences();
@@ -265,6 +266,7 @@ TEST(general, SETGENDER) {
     ASSERT_EQ(p->getGender(), "female");
 
 }
+*/
 
 
 

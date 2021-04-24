@@ -20,6 +20,7 @@
 #include "findmatchforadopters.h"
 #include "userinfo.h"
 #include "preferencesform.h"
+#include "mypets.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -40,10 +41,11 @@ private:
     QSqlDatabase db;
 
 
+
     SavedList savedList;
     Authentication auth;
-   // Adopter adopter;
-   // Owner owner;
+    Adopter *adopter;
+    Owner *owner;
 
     //other UI pages
     ManualSearch manSearch;
@@ -51,9 +53,10 @@ private:
     FindMatchForAdopters fmForAdopters;
     UserInfo uinfo;
     PreferencesForm pform;
+    MyPets myPets;
 
 
-    string currentUser; //currently not used
+    string userType; //currently not used
     string dbName;
 
     void meetPet(Pet p);
@@ -66,6 +69,9 @@ private:
     void hideNavOwner();
     void showNavOwner();
 
+    void showHomeOwner();
+
+
 
 
 
@@ -77,6 +83,7 @@ private slots:
     void moveToMeetMe(Pet sendPet, bool b);
     void heartPet(Pet p, bool b);
     void backToLogin();
+    void updateAdopter(Adopter *a);
 
 
     //save Button
@@ -113,5 +120,11 @@ private slots:
     void on_loginButton_clicked();
     void on_createAccountButton_clicked();
 
+    void on_ownerMyPets_clicked();
+    void on_ownerLogout_clicked();
+    void on_ownerUploadPet_clicked();
+    void on_ownerMyInfo_clicked();
+    void on_ownerFindMatch_clicked();
+    void on_ownerHome_clicked();
 };
 #endif // GUI_H
