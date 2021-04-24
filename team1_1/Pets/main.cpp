@@ -4,6 +4,7 @@
 using namespace std;
 
 int main(){
+
     Pet p = Pet();
     p.setID(8);
     p.setName("noah");
@@ -14,5 +15,10 @@ int main(){
     for(int i = 0; i < (int) files.size(); i++){
         cout << "File: " << files.at(i) << endl;
     }
+
+
+
+    //Pet p = Pet();
+    //p.getDistance(18042, 18055);
     return 0;
 }

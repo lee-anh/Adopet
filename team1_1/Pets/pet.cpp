@@ -184,3 +184,17 @@ void Pet::fillImageFiles(){
 vector<string> Pet::getImageFiles(){
     return imageFiles;
 }
+
+
+/* //trying out zipcode stuff
+int Pet::getDistance(int zipcode1, int zipcode2){
+    QNetworkAccessManager* manager = new QNetworkAccessManager();
+    //QUrl* url = new QUrl("https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/multi-distance.csv/18042/18055/mile");
+    QNetworkReply* reply = manager->get(QNetworkRequest(QUrl("https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/multi-distance.csv/18042/18055/mile")));
+    QString answer = reply->readAll();
+    qDebug() << answer;
+    //string link= "https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/multi-distance.csv/" + to_string(zipcode1) + "/" + to_string(zipcode2) + "/mile";
+    //request.setUrl(QUrl("https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/multi-distance.csv/18042/18055/mile"));
+    //QNetworkReply* reply = manager->get(request);
+}
+*/
