@@ -5,6 +5,10 @@
 #include <string>
 #include <vector>
 #include <QtSql>
+#include <QtNetwork/QNetworkRequest>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QUrl>
 
 using namespace std;
 
@@ -62,6 +66,9 @@ public:
     int getPetID();
     void setPetID(int id);
 
+
+    //trying out zipcode stuff
+    int getDistance(int zipcode1, int zipcode2);
 private:
     int id;
     string name;
@@ -76,6 +83,9 @@ private:
     string bio;
 
     vector<string> imageFiles;
+
+
+
 };
 
 #endif // PET_H
