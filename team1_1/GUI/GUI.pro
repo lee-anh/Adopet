@@ -12,6 +12,7 @@ QT += sql
 
 SOURCES += \
     findmatchforadopters.cpp \
+    findmatchforpets.cpp \
     main.cpp \
     gui.cpp \
     ../DBSearch/dbsearch.cpp \
@@ -33,6 +34,7 @@ SOURCES += \
 
 HEADERS += \
     findmatchforadopters.h \
+    findmatchforpets.h \
     gui.h \
     ../DBSearch/dbsearch.h \
     ../Pets/pet.h \
@@ -54,6 +56,7 @@ HEADERS += \
 
 FORMS += \
     findmatchforadopters.ui \
+    findmatchforpets.ui \
     gui.ui \
     manualsearch.ui \
     myfavorites.ui \

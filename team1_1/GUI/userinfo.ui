@@ -29,7 +29,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="createAccount">
       <layout class="QGridLayout" name="gridLayout">
@@ -83,7 +83,7 @@
              <item>
               <widget class="QLabel" name="label_3">
                <property name="text">
-                <string>Username</string>
+                <string>Username (not case-senstive)</string>
                </property>
               </widget>
              </item>
@@ -369,34 +369,7 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="usernameLabel">
-         <property name="text">
-          <string>username: exampleUser (not changeable)</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLabel" name="passwordLabel">
-         <property name="text">
-          <string>password: examplePassword (not changeable)</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <spacer name="horizontalSpacer_7">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>282</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="1" rowspan="2">
+       <item row="1" column="1" rowspan="2">
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
           <widget class="QLabel" name="label_8">
@@ -535,7 +508,7 @@
          </item>
         </layout>
        </item>
-       <item row="4" column="2">
+       <item row="2" column="2">
         <spacer name="horizontalSpacer_8">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -548,7 +521,7 @@
          </property>
         </spacer>
        </item>
-       <item row="5" column="1">
+       <item row="4" column="1">
         <widget class="QLabel" name="errorLabel2">
          <property name="styleSheet">
           <string notr="true">color:red;</string>
@@ -558,7 +531,30 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="1">
+       <item row="3" column="1">
+        <widget class="QLabel" name="adopterSavedMessage">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <spacer name="horizontalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>282</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="5" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
           <spacer name="horizontalSpacer_3">
@@ -614,6 +610,16 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLabel" name="errorLabelOwner">
+         <property name="styleSheet">
+          <string notr="true">color:red;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
        </item>
        <item row="1" column="1">
         <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -717,35 +723,6 @@
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QLabel" name="label_18">
-           <property name="text">
-            <string>Owner Type:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBox">
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(161, 212, 255)</string>
-           </property>
-           <item>
-            <property name="text">
-             <string>Select One</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Shelter</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Foster Owner</string>
-            </property>
-           </item>
-          </widget>
-         </item>
         </layout>
        </item>
        <item row="1" column="0">
@@ -776,7 +753,7 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
+       <item row="4" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
           <spacer name="horizontalSpacer_11">
@@ -813,13 +790,13 @@
          </item>
         </layout>
        </item>
-       <item row="2" column="1">
-        <widget class="QLabel" name="errorLabelOwner">
-         <property name="styleSheet">
-          <string notr="true">color:red;</string>
-         </property>
+       <item row="3" column="1">
+        <widget class="QLabel" name="ownerSavedMessage">
          <property name="text">
           <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>

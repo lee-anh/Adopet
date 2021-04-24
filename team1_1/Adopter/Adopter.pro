@@ -9,10 +9,8 @@ QT+=sql
 SOURCES += \
         adopter.cpp \
         main.cpp \
-        preferences.cpp \
-        savedpets.cpp
+        preferences.cpp
 
 HEADERS += \
     adopter.h \
-    preferences.h \
-    savedpets.h
+    preferences.h

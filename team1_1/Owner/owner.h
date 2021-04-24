@@ -16,10 +16,9 @@ class Owner{
 
 public:
     Owner();
-    Owner(string t);
-    Owner(string n, string oT, string a, int zip, int pN, string e);
-
-    string getOwnerType();          //Accessor function for owner type
+    Owner(string n, string a, int zip, int pN, string e);
+    Owner(string database, string n, string a, int zip, int pN, string e);
+    ~Owner();
     void setName(string n);         //Mutator function for name
     string getName();               //Accessor function for name
     void setAddress(string a);      //Mutator function for address
@@ -42,7 +41,6 @@ public:
 
 
 private:
-    string ownerType;                    //Either "Shelter Owner" or "Foster Parent"
     string name;
     string address;
     int zipCode;
@@ -51,6 +49,14 @@ private:
 
     vector<Pet> pets;                  //stores the pets of the owner
     int lastPetID;
+
+    void openDB();
+    QSqlDatabase petsDB;
+    string dbName;
+
+
+
+
 };
 
 #endif // OWNER_H

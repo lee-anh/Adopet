@@ -83,8 +83,9 @@ int Authentication::logIn(string username, string password){
 
         //load the right object
         if(userType == "adopter"){
-            toReturn = 0;
+
             loadAdopterFromDB(username, password);
+            toReturn = 0;
 
         } else if (userType == "owner"){
             loadOwnerFromDB(username);
@@ -176,7 +177,7 @@ void Authentication::loadAdopterFromDB(string username, string password){
  */
 Adopter* Authentication::createAdopter(string username, string pwd, string fname, string lname, string emailAdd, int zip){
     //create adopter object
-    Preferences pref = Preferences();//TODO: INCORPORATE SHAKH'S PREFERENCE CHANGES
+    Preferences pref = Preferences();
     authAdopter= new Adopter(dbName, username, pwd, fname, lname, emailAdd, zip);
 
 
@@ -267,7 +268,7 @@ void Authentication::loadOwnerFromDB(string username){
     //Step 1: queries the database
     if(db.open()){
         QSqlQuery qry = QSqlQuery(db);
-        string s = "SELECT name, phoneNumber, emailAddress, ownerAddress, zip, ownerType FROM owner WHERE username = \"" + username + "\"";
+        string s = "SELECT name, phoneNumber, emailAddress, ownerAddress, zip FROM owner WHERE username = \"" + username + "\"";
         QString qs = QString::fromStdString(s);
         qry.exec(qs);
 
@@ -276,7 +277,6 @@ void Authentication::loadOwnerFromDB(string username){
         string email = "";
         string address = "";
         int zip = 0;
-        string type = "";
 
         while(qry.next()){
             name = qry.value(0).toString().toStdString();
@@ -284,12 +284,11 @@ void Authentication::loadOwnerFromDB(string username){
             email = qry.value(2).toString().toStdString();
             address = qry.value(3).toString().toStdString();
             zip = qry.value(4).toInt();
-            type = qry.value(5).toString().toStdString();
         }
 
 
         //calls create owner method
-        createOwner(type, name, address, zip, num, email);
+        createOwner(name, address, zip, num, email);
 
     }
 
@@ -305,14 +304,14 @@ void Authentication::loadOwnerFromDB(string username){
  * \param email
  * \return
  */
-Owner* Authentication::createOwner(string ownerType, string name, string address, int zip, int phone, string email){
-    Owner *o = new Owner(name, ownerType, address, zip, phone, email);
+Owner* Authentication::createOwner(string name, string address, int zip, int phone, string email){
+    Owner *o = new Owner(dbName, name, address, zip, phone, email);
     authOwner = o;
     return o;
 }
 
 /*!
- * \brief insertOwnerToDB, adds a new owner user. Should be called w/ signUp
+ * \brief insertOwnerToDB, adds a new owner user. Sh\ould be called w/ signUp
  * \param username
  * \param name
  * \param phone
@@ -321,16 +320,17 @@ Owner* Authentication::createOwner(string ownerType, string name, string address
  * \param zip
  * \param ownerType
  */
-void Authentication::insertOwnerToDB(string username, string name, string phone, string email, string address, string zip, string ownerType){
+void Authentication::insertOwnerToDB(string username, string name, string phone, string email, string address, string zip){
     //int phoneNum = stoi(phone);
     int zipNum = stoi(zip);
 
     if(db.open()){
         QSqlQuery qry = QSqlQuery(db);
-        string s = "INSERT INTO owner(username, name, phoneNumber, emailAddress, ownerAddress, zip, ownerType) VALUES( \""
-        + username + "\", \"" + name + "\", \"" + phone + "\", \""
-        + email + "\", \"" + address + "\"," + to_string(zipNum) + ", \"" + ownerType +"\")";
 
+        string s = "INSERT INTO owner(username, name, phoneNumber, emailAddress, ownerAddress, zip) VALUES( \""
+        + username + "\", \"" + name + "\", \"" + phone + "\", \""
+        + email + "\", \"" + address + "\"," + to_string(zipNum) +")";
+        cout << s << endl;
         QString qs = QString::fromStdString(s);
         qry.exec(qs);
 

@@ -4,8 +4,9 @@
 
 using namespace std;
 
+/*
 void printPreference(vector<string> v){
-    for(int i = 0; i < v.size(); i++){
+    for(int i = 0; i < (int) v.size(); i++){
         cout << i << ": " << v.at(i) << endl;
     }
     cout << endl;
@@ -33,8 +34,9 @@ void printPreferences(Preferences p){
     cout << "Goodwith: " << endl;
     printPreference(p.getGoodWith());
 
-    cout << "Gender: " << p.getGender() << endl;
+
 }
+*/
 
 int main(){
     /*

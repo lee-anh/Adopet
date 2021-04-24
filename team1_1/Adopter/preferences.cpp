@@ -14,7 +14,7 @@ Preferences::Preferences()
     animalSize = vector<string>();
     temperament = vector<string>();
 
-    gender = "all";
+    gender = vector<string>();
 
 
 }
@@ -197,7 +197,7 @@ bool Preferences::removeTemperament(string temper){
  * \brief getGender
  * \return the gender in a string
  */
-string Preferences::getGender(){
+vector<string> Preferences::getGender(){
     return gender;
 }
 
@@ -205,16 +205,26 @@ string Preferences::getGender(){
  * \brief setGender
  * \param g gender
  */
-void Preferences::setGender(string g){
-    gender = g;
+void Preferences::addGender(string gw){
+    transform(gw.begin(), gw.end(), gw.begin(), ::tolower);
+    gender.push_back(gw);
 }
 
+bool Preferences::removeGender(string gw){
+    int genderSize = (int) gender.size();
+    for(int i = 0; i < genderSize; i++){
+        if(gender.at(i) == gw){
+            gender.erase(gender.begin()+i);
+            return true;
+        }
 
-//GoodWith
+    }
+    return false;
+}
+
 vector<string> Preferences::getGoodWith(){
     return goodWith;
 }
-
 
 void Preferences::addGoodWith(string gw){
     transform(gw.begin(), gw.end(), gw.begin(), ::tolower);
