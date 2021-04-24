@@ -6,13 +6,16 @@ QT += core
 QT += sql
 
 
-QMAKE_CXXFLAGS += --coverage
-QMAKE_LFLAGS += --coverage
+!macx{
+    QMAKE_CXXFLAGS += --coverage
+    QMAKE_LFLAGS += --coverage
+
+    LIBS += -lgcov
+}
 
 SOURCES += main.cpp
 
 LIBS += -pthread
-LIBS += -lgcov
 SOURCES += ../../gtest/googletest/src/gtest-all.cc
 
 INCLUDEPATH += ../../gtest \
