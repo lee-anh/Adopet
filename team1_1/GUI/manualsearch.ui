@@ -40,63 +40,6 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QGroupBox" name="species">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>180</y>
-     <width>101</width>
-     <height>141</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>Species</string>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QCheckBox" name="dogCheckBox">
-      <property name="text">
-       <string>Dog</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QCheckBox" name="catCheckBox">
-      <property name="text">
-       <string>Cat</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QCheckBox" name="rabbitCheckBox">
-      <property name="text">
-       <string>Rabbit</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QCheckBox" name="rodentCheckBox">
-      <property name="text">
-       <string>Rodent</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QCheckBox" name="fishCheckBox">
-      <property name="text">
-       <string>Fish</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QCheckBox" name="birdCheckBox">
-      <property name="text">
-       <string>Bird</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QGroupBox" name="age">
    <property name="geometry">
     <rect>
@@ -747,6 +690,63 @@
    <property name="text">
     <string>Surprise Me!</string>
    </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>190</y>
+     <width>101</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Species</string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QCheckBox" name="dogCheckBox">
+      <property name="text">
+       <string>Dog</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="catCheckBox">
+      <property name="text">
+       <string>Cat</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="rabbitCheckBox">
+      <property name="text">
+       <string>Rabbit</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="rodentCheckBox">
+      <property name="text">
+       <string>Rodent</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="fishCheckBox">
+      <property name="text">
+       <string>Fish</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="birdCheckBox">
+      <property name="text">
+       <string>Bird</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

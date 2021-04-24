@@ -4,19 +4,19 @@
 #include "gtest/gtest.h"
 
 
-class FooTest : public ::testing::Test {
+class PetsTest : public ::testing::Test {
 
  protected:
 
 
 
-    FooTest() {
+    PetsTest() {
 
 
 
      }
 
-     virtual ~FooTest() {
+     virtual ~PetsTest() {
 
      // You can do clean-up work that doesn't throw exceptions here.
 
@@ -52,7 +52,7 @@ class FooTest : public ::testing::Test {
 
 };
 
-TEST(unitTest, testTemperaments){
+TEST(PetsTest, testTemperaments){
     Pet* p = new Pet();
     p->setAge("4");
     p->setName("Davies");
@@ -69,7 +69,7 @@ TEST(unitTest, testTemperaments){
 
 
 //Testing object setters and getters
-TEST(unitTest, settersAndGetters){
+TEST(PetsTest, settersAndGetters){
     string age = "Young";
     string name = "Alex";
     string gender = "Male";

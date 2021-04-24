@@ -7,6 +7,30 @@ PetGallery::PetGallery()
 }
 
 
+//constructor used in MyPets (Owner)
+PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev,
+                        QPushButton* next,  QLabel* pageLine,
+                        vector<QLabel*> petNameLabels,
+                        vector<QLabel*> petPhotos,
+                        vector<QPushButton*> petLearnMore,
+                        vector<Pet> petVec){
+
+    numToDisplay = numPetsToDisplay;
+    previousButton = prev;
+    nextButton = next;
+    pageNum = pageLine;
+    nameLabels = petNameLabels;
+    picLabels = petPhotos;
+    learnMores = petLearnMore;
+    pets = petVec;
+    nextStartIndex = 0;
+    displayPetsPageNumber = 1;
+
+    petsToDisplay = vector<Pet>();
+    clearLabels();
+
+}
+
 
 //constructor used in my favorites and manual search
 PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev,
@@ -59,11 +83,14 @@ PetGallery::PetGallery(int numPetsToDisplay, QPushButton* prev,
 
     petsToDisplay = vector<Pet>();
     clearLabels();
+   // openDB();
+    //petPictures();
 }
 
 
 
 PetGallery::~PetGallery(){
+       petsDB.close();
 
 }
 
@@ -84,7 +111,7 @@ void PetGallery::displayPets(int start){
     nextButton->setVisible(true);
 
     for(int i = 0; i < numToDisplay; i++){
-        //clear the old labels and hide the old buttonsd
+        //clear the old labels and hide the old buttons
         nameLabels[i]->clear();
         picLabels[i]->clear();
         learnMores[i]->setVisible(false);
@@ -106,17 +133,28 @@ void PetGallery::displayPets(int start){
             QString qpetName = QString::fromStdString(s);
             nameLabels[i]->setText(qpetName);
 
-            //TEMP
-            picLabels[i]->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio));
+
+            //picture
+            if(pets[start].getImageFiles().size() == 0){
+                //default picture
+                picLabels[i]->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio));
+            } else {
+                string photo = "../../../../../pictures/" + pets[start].getImageFiles()[0];
+                QPixmap pix(QString::fromStdString(photo));
+                picLabels[i]->setPixmap(pix.scaled(150, 150, Qt::KeepAspectRatio));
+            }
+
 
             //learnMores
             learnMores[i]->setVisible(true);
+
+            //saveButton (if they exist)
             if(saveButtons.size() > 0){
                 saveButtons[i]->setVisible(true);
 
             }
 
-            //scores
+            //scores (for matchmaking only)
             if(matPets.size() > 0){
 
                 int score = matPets[start].second;
@@ -216,4 +254,47 @@ void PetGallery::matchPetsToRegPets(){
    for(int i = 0; i < (int) matPets.size(); i++){
        pets.push_back(matPets[i].first);
    }
+}
+
+void PetGallery::petPictures(){
+
+    if(petsDB.open()){
+        cerr << "Got here" << endl;
+        for(int i = 0; i < (int) pets.size(); i++){
+            QSqlQuery query = QSqlQuery(petsDB);
+
+
+            //CAN OPTIMIZE
+            QString s = "SELECT petID, filename, mediaType FROM media";
+            cout << s.toStdString() << endl;
+            query.exec(s);
+            while(query.next()){
+                int petID = query.value(0).toInt();
+                string filename = query.value(1).toString().toStdString();
+                string mediaType = query.value(2).toString().toStdString();
+
+                if(petID == pets[i].getID() && mediaType == "image") {
+                    pets[i].addImageFile(filename);
+                }
+            }
+        }
+    }
+
+
+}
+
+void PetGallery::openDB(){
+    QSqlDatabase petsDB = QSqlDatabase::addDatabase("QSQLITE", "mediaCxn");
+    string fullName = "../../../../../../projectDB.sqlite";
+    petsDB.setDatabaseName(QString::fromStdString(fullName));
+    if(!petsDB.open()){
+        std::cerr << "Database does not open -- "
+                  << petsDB.lastError().text().toStdString()
+                  << std::endl;
+
+        std::cerr << "  File -- " << fullName << std::endl;
+        exit(0);
+    } else {
+        std::cerr << "Opened database successfully (from PetGallery class)\n";
+    }
 }

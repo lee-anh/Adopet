@@ -121,7 +121,8 @@ private slots:
     void on_parrot_stateChanged(int arg1);
 
 
-
+signals:
+    void adopterChanged(Adopter *a);
 
 };
 

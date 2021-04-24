@@ -4,7 +4,8 @@
 using namespace std;
 
 int main(){
-
+  
+    /*
     Pet p = Pet();
     p.setID(8);
     p.setName("noah");
@@ -20,5 +21,7 @@ int main(){
 
     //Pet p = Pet();
     //p.getDistance(18042, 18055);
+    */
+  
     return 0;
 }

@@ -20,8 +20,12 @@ public:
     ~UserInfo();
 
     void setAuth(Authentication *a);
+    void createAccountClikced();
     void adopterMyInfoClicked();
     void ownerMyInfoClicked();
+
+
+    void setFirstTime(bool b);
 
 private slots:
     void on_continueButton_clicked();
@@ -39,6 +43,9 @@ private:
     string username;
     string password;
     bool firstTime;
+
+    void clearAdopterInfo();
+    void clearOwnerInfo();
 
 signals:
     void backClicked();

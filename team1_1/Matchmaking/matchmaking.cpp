@@ -18,6 +18,9 @@ Matchmaking::Matchmaking(string path, string n){
 }
 
 Matchmaking::~Matchmaking(){
+   // db = QSqlDatabase();
+   // QSqlDatabase::removeDatabase("matchmakingCxn");
+    closeDB();
 }
 
 /*
@@ -50,7 +53,7 @@ void Matchmaking::closeDB(){
     //QSqlDatabase::removeDatabase("matchmakingCxn");
     //cout << "Removed Connection\n";
 
-    db.removeDatabase(db.connectionName());
+   // db.removeDatabase(db.connectionName());
     db.close();
 }
 
@@ -264,7 +267,7 @@ Preferences Matchmaking::fillPreference(Preferences p, string attribute, string 
     else if(attributeType == "age") p.addAge(attribute);
     else if(attributeType == "size") p.addSize(attribute);
     else if(attributeType == "temperament") p.addTemperament(attribute);
-    else if(attributeType == "gender") p.setGender(attribute);
+    else if(attributeType == "gender") p.addGender(attribute);
     else if(attributeType == "goodWith") p.addGoodWith(attribute);
     else if(attributeType == "shelter") p.addShelter(attribute);
 
@@ -331,7 +334,8 @@ vector<pair<Pet, int>> Matchmaking::findMatchesForAdopter(string adopterName){
             currScore += getPetScore(adopterPreference.getSize(), pet.getSize());
             currScore += getPetScore(adopterPreference.getGoodWith(), pet.getGoodWith());
             currScore += getPetScore(adopterPreference.getShelter(), pet.getShelter());
-            if(adopterPreference.getGender() == pet.getGender() || adopterPreference.getGender() == "all") currScore++;
+            currScore += getPetScore(adopterPreference.getGender(), pet.getGender());
+           // if(adopterPreference.getGender() == pet.getGender() || adopterPreference.getGender() == "all") currScore++;
 
             petResults.push_back(make_pair(pet, (int)((double)currScore * 100 / 8)));
         }

@@ -151,7 +151,7 @@ TEST_F(FooTest, fillPreference){
     p = m.fillPreference(p, "cat", "species");
     p = m.fillPreference(p, "male", "gender");
 
-    ASSERT_EQ(p.getGender(), "male") << "Checking that the gender preference is set correctly";
+    ASSERT_EQ(p.getGender().at(0), "male") << "Checking that the gender preference is set correctly";
     ASSERT_EQ(p.getSpecies().size(), 3) << "Checking that the size of the species preference is set correctly";
 }
 

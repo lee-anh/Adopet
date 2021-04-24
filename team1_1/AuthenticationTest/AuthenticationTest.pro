@@ -23,10 +23,15 @@ INCLUDEPATH += ../../gtest \
  ../../gtest/googletest/include \
  ../../gtest/googletest/include/gtest
 
-SOURCES += \
-    ../Owner/owner.cpp \
-    ../Pets/pet.cpp
+HEADERS += ../Authentication/authentication.h \
+        authentication.h \
+        ../Adopter/adopter.h \
+        ../Adopter/preferences.h \
+        ../Owner/owner.h \
+        ../Pets/pet.h
 
-HEADERS += \
-    ../Owner/owner.h \
-    ../Pets/pet.h
+SOURCES += ../Authentication/authentication.cpp \
+        ../Adopter/adopter.cpp \
+        ../Adopter/preferences.cpp \
+        ../Owner/owner.cpp \
+        ../Pets/pet.cpp

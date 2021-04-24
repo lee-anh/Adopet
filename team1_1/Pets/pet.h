@@ -60,7 +60,8 @@ public:
     void setBio(string bi);
 
     vector<string> getImageFiles();
-    void fillImageFiles();
+    void fillImageFiles(string dbName);
+    void addImageFile(string file);
 
     int getPetID();
     void setPetID(int id);

@@ -4,6 +4,7 @@ SUBDIRS += \
     Adopter \
     AdopterTests \
     Authentication \
+    AuthenticationTest \
     DBSearch \
     DBSearchTest \
     GUI \
