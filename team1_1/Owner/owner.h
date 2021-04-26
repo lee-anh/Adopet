@@ -34,6 +34,7 @@ public:
     void fillPets();                //reads the database and retrieves the pets of the owner
     vector<Pet> getPets();          //Accessor function for pets
 
+    void removePet(Pet p);          //removes a Pet from all DBs and the owner
     void uploadPet(Pet p);          //uploads a Pet into the database one at a time
     void uploadPets();    //Reads animals from a txt file and fills up the vector
 

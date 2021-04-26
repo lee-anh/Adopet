@@ -122,6 +122,7 @@ public:
 
     void removePreference(string attr, string attrType);            //removes a preference from the adopter's preference list and the DB
     void addPreference(string attr, string attrType);            //adds a preference onto the adopter's preference list and the DB
+    void removePreferenceHelper(string attr, string attrType);           //helper method that removes the passed preference from the adopter's preference list
     void fillPreference(string attr, string attrType);           //fills the passed preference onto the adopter's preference list
     void fillPreferences();             //fills the adopter's preference list by accessing the DB
     Preferences getPreferences();              //accessor method for adopter's preference list

@@ -335,7 +335,6 @@ vector<pair<Pet, int>> Matchmaking::findMatchesForAdopter(string adopterName){
             currScore += getPetScore(adopterPreference.getGoodWith(), pet.getGoodWith());
             currScore += getPetScore(adopterPreference.getShelter(), pet.getShelter());
             currScore += getPetScore(adopterPreference.getGender(), pet.getGender());
-           // if(adopterPreference.getGender() == pet.getGender() || adopterPreference.getGender() == "all") currScore++;
 
             petResults.push_back(make_pair(pet, (int)((double)currScore * 100 / 8)));
         }

@@ -13,6 +13,8 @@ Adopter::Adopter()
     emailAddress = "null";
     zipcode = -1;
     preferenceList = Preferences();
+    //dbName = "../../projectDB.sqlite";
+    //openDB();
     //fillPreferences();
     cout << "default constructor called (adopter)" << endl;
 }
@@ -191,14 +193,30 @@ void Adopter::fillPreference(string attr, string attrType){
 }
 
 /*
+ * Helper method to remove the specific preference from the adopter's preference list
+ * @param attr Preference
+ * @param attrType Type of preference
+*/
+void Adopter::removePreferenceHelper(string attr, string attrType){
+    if(attrType == "species") preferenceList.removeSpecies(attr);
+    else if(attrType == "breed") preferenceList.removeBreed(attr);
+    else if(attrType == "age") preferenceList.removeAge(attr);
+    else if(attrType == "size") preferenceList.removeSize(attr);
+    else if(attrType == "temperament") preferenceList.removeTemperament(attr);
+    else if(attrType == "gender") preferenceList.removeGender(attr);
+    else if(attrType == "goodWith") preferenceList.removeGoodWith(attr);
+    else if(attrType == "shelter") preferenceList.removeShelter(attr);
+}
+
+/*
  * Goes through the preferences database and fills the preference list of the current adopter
 */
 void Adopter::fillPreferences(){
-
     if(prefDB.open()){
         QSqlQuery query = QSqlQuery(prefDB);
         QString s = "SELECT adopterUsername, attribute, attributeType FROM preferences";
         query.exec(s);
+
         while(query.next()){
             string name = query.value(0).toString().toStdString();
             string attribute = query.value(1).toString().toStdString();
@@ -207,8 +225,6 @@ void Adopter::fillPreferences(){
             if(name == username) fillPreference(attribute, attributeType);
         }
     }
-
-
 }
 
 /*
@@ -226,21 +242,17 @@ Preferences Adopter::getPreferences(){
  * @param attrType Type of preference
 */
 void Adopter::addPreference(string attr, string attrType){
-
     QString s = "INSERT INTO preferences(adopterUsername, attribute, attributeType) VALUES(\"";
     s += QString::fromStdString(username) + "\", \"";
     s += QString::fromStdString(attr) + "\", \"";
     s += QString::fromStdString(attrType) + "\")";
-
-    string addQuery = s.toStdString();
-   // cout << "add query is: " << addQuery << endl;
 
     if(prefDB.open()){
         QSqlQuery query = QSqlQuery(prefDB);
         query.exec(s);
     }
 
-
+    fillPreference(attr, attrType);
 }
 
 /*
@@ -249,7 +261,6 @@ void Adopter::addPreference(string attr, string attrType){
  * @param attrType Type of preference
 */
 void Adopter::removePreference(string attr, string attrType){
-
     QString s = "DELETE FROM preferences WHERE (adopterUsername = ";
     s += "\"" + QString::fromStdString(username) + "\" AND attribute = ";
     s += "\"" + QString::fromStdString(attr) + "\" AND attributeType = ";
@@ -260,6 +271,7 @@ void Adopter::removePreference(string attr, string attrType){
         query.exec(s);
     }
 
+    removePreferenceHelper(attr, attrType);
 }
 
 void Adopter::openDB(){

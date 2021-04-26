@@ -4,7 +4,7 @@
 
 using namespace std;
 
-/*
+
 void printPreference(vector<string> v){
     for(int i = 0; i < (int) v.size(); i++){
         cout << i << ": " << v.at(i) << endl;
@@ -36,18 +36,13 @@ void printPreferences(Preferences p){
 
 
 }
-*/
 
 int main(){
-    /*
     Adopter adopter = Adopter();
     adopter.setUsername("user1");
-    //printPreferences(adopter.getPreferences());
     adopter.fillPreferences();
-    adopter.removePreference("kids", "goodWith");
-    //cout << "FILLED PREFERENCES" << endl;
-    //cout << endl;
-    //printPreferences(adopter.getPreferences());
-    */
+    //adopter.removePreference("qwerty", "shelter");
+    printPreferences(adopter.getPreferences());
+
     return 0;
 }
