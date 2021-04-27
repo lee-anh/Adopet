@@ -6,8 +6,10 @@ ManualSearch::ManualSearch(QWidget *parent) :
     ui(new Ui::ManualSearch)
 {
     ui->setupUi(this);
-
+      
     QString os = QSysInfo::productVersion();
+    cout << os.toStdString() << endl;
+      
     if(os == "10.16"){
         search = new DBSearch("../../../../../projectDB.sqlite");
     } else {

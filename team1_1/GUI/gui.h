@@ -22,6 +22,7 @@
 #include "userinfo.h"
 #include "preferencesform.h"
 #include "mypets.h"
+#include "quiz.h"
 
 //QWidgets
 #include "logout.h"
@@ -60,6 +61,7 @@ private:
     PreferencesForm pform;
     MyPets myPets;
     MyFavoritesTwo myFavsList;
+    Quiz qz;
 
     //QDialogs
     Logout lg;
@@ -96,6 +98,7 @@ private slots:
     void toListMyFavorites();
     void toGalleryMyFavorites();
     void logOut();
+    void goToQuiz();
 
 
     //save Button

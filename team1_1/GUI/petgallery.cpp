@@ -199,7 +199,7 @@ void PetGallery::displayPets(int start){
                 //picture
                 if(pets[start].getImageFiles().size() == 0){
                     //default picture
-
+                    //CHANGE HERE                   
                     QString os = QSysInfo::productVersion();
                     if(os == "10.16"){
                         QPixmap pixmap("../../../../../pictures/default.png");
@@ -208,10 +208,7 @@ void PetGallery::displayPets(int start){
                         QPixmap pixmap("../../pictures/default.png");
                         picLabels[i]->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio));
                     }
-
-
                 } else {
-
                     QString os = QSysInfo::productVersion();
                     string photo;
 
@@ -220,7 +217,6 @@ void PetGallery::displayPets(int start){
                     } else {
                         photo = "../../pictures/" + pets[start].getImageFiles()[0];
                     }
-
 
                     QPixmap pix(QString::fromStdString(photo));
                     picLabels[i]->setPixmap(pix.scaled(150, 150, Qt::KeepAspectRatio));

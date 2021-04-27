@@ -11,7 +11,7 @@ GUI::GUI(QWidget *parent)
 
     QString os = QSysInfo::productVersion();
     cout << os.toStdString() << endl;
-
+      
     if(os == "10.16"){
         dbName = "../../../../../projectDB.sqlite";
     } else {
@@ -29,6 +29,7 @@ GUI::GUI(QWidget *parent)
     ui->stackedWidget->addWidget(&pform); //7
     ui->stackedWidget->addWidget(&myPets);//8
     ui->stackedWidget->addWidget(&myFavsList); //9
+    ui->stackedWidget->addWidget(&qz); //10
 
     //Set the opening page
     int openingPage = 0; //login
@@ -52,6 +53,7 @@ GUI::GUI(QWidget *parent)
     connect(&myFavsList, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
     connect(&myFavsList, SIGNAL(goToGallery()), this, SLOT(toGalleryMyFavorites()));
     connect(&lg, SIGNAL(timeToLogout()), this, SLOT(logOut()));
+    connect(&pform, SIGNAL(toQuiz()), this, SLOT(goToQuiz()));
 }
 
 
@@ -65,6 +67,7 @@ GUI::~GUI()
     ui->stackedWidget->removeWidget(&pform);
     ui->stackedWidget->removeWidget(&myPets);
     ui->stackedWidget->removeWidget(&myFavsList);
+    ui->stackedWidget->removeWidget(&qz);
     delete ui;
 
 }
@@ -98,12 +101,8 @@ void GUI::meetPet(Pet p){
      if(p.getImageFiles().size() == 0){
 
          //DIFFERENT OS
-         /*
          QString os = QSysInfo::productVersion();
-
-             //default picture
-             QPixmap pixmap("../../../../../pictures/default.png");
-             ui->petPic->setPixmap(pixmap.scaled(300, 300, Qt::KeepAspectRatio));
+           
          if(os == "10.16"){
              //default picture
              QPixmap pixmap("../../../../../pictures/default.png");
@@ -114,13 +113,8 @@ void GUI::meetPet(Pet p){
              ui->petPic->setPixmap(pixmap.scaled(300, 300, Qt::KeepAspectRatio));
 
          }
-         */
 
      } else {
-         //string photo = "../../../../../pictures/" + p.getImageFiles()[0];
-         string photo = "../../pictures/" + p.getImageFiles()[0];
-
-         /*
          QString os = QSysInfo::productVersion();
 
          if(os == "10.16"){
@@ -129,7 +123,6 @@ void GUI::meetPet(Pet p){
              photo =  "../../pictures/" + p.getImageFiles()[0];
 
          }
-         */
 
          QPixmap pix(QString::fromStdString(photo));
          ui->petPic->setPixmap(pix.scaled(300, 300, Qt::KeepAspectRatio));
@@ -300,6 +293,10 @@ void GUI::logOut(){
     uinfo.setFirstTime(true);
 }
 
+
+void GUI::goToQuiz(){
+    ui->stackedWidget->setCurrentIndex(10);
+}
 void GUI::on_navHomeButton_clicked()
 {
     //navigate to home screen

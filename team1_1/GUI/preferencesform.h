@@ -121,8 +121,11 @@ private slots:
     void on_parrot_stateChanged(int arg1);
 
 
+    void on_goToQuiz_clicked();
+
 signals:
     void adopterChanged(Adopter *a);
+    void toQuiz();
 
 };
 
