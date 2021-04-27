@@ -8,18 +8,26 @@ GUI::GUI(QWidget *parent)
     ui->setupUi(this);
 
     //DIFFERENT OS
-    QString os = QSysInfo::productVersion();
 
+   // QString os = QSysInfo::productVersion();
+   // cout << os.toStdString() << endl;
+
+
+    /*
     if(os == "10.16"){
         dbName = "../../../../../projectDB.sqlite";
     } else {
         dbName = "../../projectDB.sqlite";
 
     }
+    */
+
+
+
+    dbName = "../../../../../projectDB.sqlite";
 
 
     auth = Authentication(dbName);
-
 
     //dynamically add widgets to the stackedWidget
     ui->stackedWidget->addWidget(&manSearch); //3
@@ -98,8 +106,12 @@ void GUI::meetPet(Pet p){
      if(p.getImageFiles().size() == 0){
 
          //DIFFERENT OS
+         /*
          QString os = QSysInfo::productVersion();
 
+             //default picture
+             QPixmap pixmap("../../../../../pictures/default.png");
+             ui->petPic->setPixmap(pixmap.scaled(300, 300, Qt::KeepAspectRatio));
          if(os == "10.16"){
              //default picture
              QPixmap pixmap("../../../../../pictures/default.png");
@@ -110,10 +122,12 @@ void GUI::meetPet(Pet p){
              ui->petPic->setPixmap(pixmap.scaled(300, 300, Qt::KeepAspectRatio));
 
          }
+         */
 
      } else {
-         string photo = "";
+         string photo = "../../../../../pictures/" + p.getImageFiles()[0];
 
+         /*
          QString os = QSysInfo::productVersion();
 
          if(os == "10.16"){
@@ -122,6 +136,7 @@ void GUI::meetPet(Pet p){
              photo =  "../../pictures/" + p.getImageFiles()[0];
 
          }
+         */
 
          QPixmap pix(QString::fromStdString(photo));
          ui->petPic->setPixmap(pix.scaled(300, 300, Qt::KeepAspectRatio));
@@ -272,11 +287,8 @@ void GUI::backToLogin(){
 
 void GUI::toListMyFavorites(){
 
-   cout << "got to line 244 gui" << endl;
     myFavsList.setSavedList(savedList);
-    cout << "got to line 246 gui" << endl;
     myFavsList.showGal();
-    cout << "got to line 248 gui" << endl;
     //navigate to my favorites list screen
     ui->stackedWidget->setCurrentIndex(9);
     previousPage = 9;

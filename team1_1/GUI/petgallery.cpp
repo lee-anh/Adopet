@@ -191,7 +191,7 @@ void PetGallery::displayPets(int start){
 
 
             if(infoLabels.size() >0){
-                string info = pets[start].getSpecies() + " - " + pets[start].getGender() + " - good with " + pets[start].getGoodWith();
+                string info = pets[start].getSpecies() + " - " + pets[start].getBreed() + " - " + pets[start].getTemperament() + " - good with " + pets[start].getGoodWith();
                 infoLabels[i]->setText(QString::fromStdString(info));
             }
 
@@ -200,7 +200,11 @@ void PetGallery::displayPets(int start){
                 if(pets[start].getImageFiles().size() == 0){
                     //default picture
 
+                    QPixmap pixmap("../../../../../pictures/default.png");
+                    picLabels[i]->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio));
+                    /*
                     QString os = QSysInfo::productVersion();
+
 
                     if(os == "10.16"){
                         QPixmap pixmap("../../../../../pictures/default.png");
@@ -210,15 +214,19 @@ void PetGallery::displayPets(int start){
                         picLabels[i]->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio));
 
                     }
+                    */
 
                 } else {
-                    QString os = QSysInfo::productVersion();
-                    string photo = "";
+
+                    //QString os = QSysInfo::productVersion();
+                    string photo = "../../../../../pictures/" + pets[start].getImageFiles()[0];
+                    /*
                     if(os == "10.16"){
                         photo = "../../../../../pictures/" + pets[start].getImageFiles()[0];
                     } else {
                         photo = "../../pictures/" + pets[start].getImageFiles()[0];
                     }
+                    */
 
                     QPixmap pix(QString::fromStdString(photo));
                     picLabels[i]->setPixmap(pix.scaled(150, 150, Qt::KeepAspectRatio));

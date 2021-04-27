@@ -30,6 +30,7 @@ SOURCES += \
     petadopted.cpp \
     petgallery.cpp \
     preferencesform.cpp \
+    quiz.cpp \
     userinfo.cpp \
     ../Authentication/authentication.cpp \
     ../Owner/owner.cpp
@@ -54,6 +55,7 @@ HEADERS += \
     petadopted.h \
     petgallery.h \
     preferencesform.h \
+    quiz.h \
     userinfo.h \
     ../Authentication/authentication.h \
     ../Owner/owner.h
@@ -71,6 +73,7 @@ FORMS += \
     mypets.ui \
     petadopted.ui \
     preferencesform.ui \
+    quiz.ui \
     userinfo.ui
 
 # Default rules for deployment.

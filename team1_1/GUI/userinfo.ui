@@ -29,7 +29,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="createAccount">
       <layout class="QGridLayout" name="gridLayout">
@@ -83,7 +83,7 @@
              <item>
               <widget class="QLabel" name="label_3">
                <property name="text">
-                <string>Username (not case-senstive)</string>
+                <string>Username (case-senstive)</string>
                </property>
               </widget>
              </item>
