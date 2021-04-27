@@ -2,6 +2,14 @@
 #define FINDMATCHFORPETS_H
 
 #include <QWidget>
+#include <QLabel>
+#include <vector>
+
+#include "../Matchmaking/matchmaking.h"
+
+
+
+
 
 namespace Ui {
 class FindMatchForPets;
@@ -17,6 +25,11 @@ public:
 
 private:
     Ui::FindMatchForPets *ui;
+
+
+
+
+
 };
 
 #endif // FINDMATCHFORPETS_H

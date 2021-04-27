@@ -23,7 +23,6 @@ void MyFavorites::setSavedList(SavedList s){
 }
 
 void MyFavorites::showGal(){
-
     //pet gall must be initalized here b/c need the right saved list
     petgal = PetGallery(4, ui->previous, ui->next, ui->pageLine, {ui->name1, ui->name2, ui->name3, ui->name4},
                         {ui->pic1, ui->pic2, ui->pic3, ui->pic4},
@@ -32,6 +31,8 @@ void MyFavorites::showGal(){
                         sl.getPetVec());
     petgal.displayPets(0);
     loadSaveButtons({ui->save1, ui->save2, ui->save3, ui->save4});
+
+    ui->viewModeComboBox->setCurrentIndex(1);
 }
 
 
@@ -50,24 +51,21 @@ void MyFavorites::on_next_clicked()
 
 void MyFavorites::on_link1_clicked()
 {
-
     emit learnMoreClicked(petgal.getPet(0), ui->save1->isChecked());
 }
 
-void MyFavorites::on_link2_clicked(){
-
+void MyFavorites::on_link2_clicked()
+{
     emit learnMoreClicked(petgal.getPet(1), ui->save2->isChecked());
 }
 
 void MyFavorites::on_link3_clicked()
 {
-
     emit learnMoreClicked(petgal.getPet(2), ui->save3->isChecked());
 }
 
 void MyFavorites::on_link4_clicked()
 {
-
     emit learnMoreClicked(petgal.getPet(3), ui->save4->isChecked());
 }
 
@@ -122,5 +120,18 @@ void MyFavorites::loadSaveButtons(vector<QPushButton *> saveButtons){
                 saveButtons[i]->setStyleSheet("color: black");
             }
         }
+    }
+}
+
+
+
+
+
+void MyFavorites::on_viewModeComboBox_currentIndexChanged(int index)
+{
+    //go to list mode
+    if(index == 2){
+
+        emit toListMode();
     }
 }

@@ -320,10 +320,12 @@ Owner* Authentication::createOwner(string name, string address, int zip, int pho
  * \param zip
  * \param ownerType
  */
-void Authentication::insertOwnerToDB(string username, string name, string phone, string email, string address, string zip){
-    //int phoneNum = stoi(phone);
-    int zipNum = stoi(zip);
+bool Authentication::insertOwnerToDB(string username, string name, string phone, string email, string address, string zip){
 
+    int zipNum = stoi(zip);
+    if(checkShelterName(name) == true){
+        return false;
+    }
     if(db.open()){
         QSqlQuery qry = QSqlQuery(db);
 
@@ -335,6 +337,7 @@ void Authentication::insertOwnerToDB(string username, string name, string phone,
         qry.exec(qs);
 
     }
+    return true;
 }
 
 /*!
@@ -413,10 +416,31 @@ void Authentication::openDB(){
 bool Authentication::checkUsername(string username){
 
     if(db.open()){
-        cout << "ping" << endl;
+
         QSqlQuery qry = QSqlQuery(db);
         QString qs = "SELECT EXISTS(SELECT 1 FROM accounts WHERE username =";
         qs+= "\"" + QString::fromStdString(username) + "\"";
+        qs+=");";
+        qry.exec(qs);
+        while(qry.next()){
+            if (qry.value(0).toInt()==1){
+                return true; //the username already exists
+            } else if(qry.value(0).toInt() == 0){
+                return false;
+            }
+
+        }
+    }
+
+    return false;
+}
+
+bool Authentication::checkShelterName(string shelterName){
+    if(db.open()){
+
+        QSqlQuery qry = QSqlQuery(db);
+        QString qs = "SELECT EXISTS(SELECT 1 FROM owner WHERE name =";
+        qs+= "\"" + QString::fromStdString(shelterName) + "\"";
         qs+=");";
         qry.exec(qs);
         while(qry.next()){

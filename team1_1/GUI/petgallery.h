@@ -27,22 +27,36 @@ public:
                vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,
                vector<Pet> petVec);
 
-    //for my favorites and manual search
+    //for my favorites and manual search (gallery view)
     PetGallery(int numPetsToDisplay, QPushButton* prev,
                QPushButton* next, QLabel* pageLine,
                vector<QLabel*> petNameLabels,
                vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,
                vector<QPushButton*> petSaves, vector<Pet> petVec);
 
+    //for favorites, manual search, owner MyPets (list view)
+    PetGallery(bool b, int numPetsToDisplay, QPushButton* prev,
+               QPushButton* next, QLabel* pageLine,
+               vector<QLabel*> petNameLabels,
+               vector<QLabel*> petInfo,
+               vector<QPushButton*> petLearnMore,
+               vector<QPushButton*> petSaves, vector<Pet> petVec);
 
 
-    //for matchmaking
+    //for matchmaking (gallery view)
     PetGallery(int numPetsToDisplay, QPushButton* prev,
                QPushButton* next, QLabel* pageLine,
                vector<QLabel*> petNameLabels, vector<QLabel*> petPhotos,
                vector<QLabel*> petScores, vector<QPushButton*> petLearnMore,
                vector<QPushButton*> petSaves, vector<pair<Pet, int>> petVec);
 
+
+    //for matchmaking (list view)
+    PetGallery(bool b, int numPetsToDisplay, QPushButton* prev,
+               QPushButton* next, QLabel* pageLine,
+               vector<QLabel*> petNameLabels, vector<QLabel*> petInfo,
+               vector<QLabel*> petScores, vector<QPushButton*> petLearnMore,
+               vector<QPushButton*> petSaves, vector<pair<Pet, int>> petVec);
     ~PetGallery();
 
     void updatePetVec(vector<Pet> p);
@@ -71,6 +85,7 @@ private:
     vector<QLabel*> nameLabels;
     vector<QLabel*> picLabels;
     vector<QLabel*> scoreLabels;
+    vector<QLabel*> infoLabels;
 
     vector<QPushButton*> learnMores;
     vector <QPushButton*> saveButtons;
@@ -87,10 +102,8 @@ private:
     //conversion method
     void matchPetsToRegPets();
 
-    void petPictures();
 
-    QSqlDatabase petsDB;
-    void openDB();
+
 
 
 };

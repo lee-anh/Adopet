@@ -17,10 +17,15 @@
 //other UI pages
 #include "manualsearch.h"
 #include "myfavorites.h"
+#include "myfavoritestwo.h"
 #include "findmatchforadopters.h"
 #include "userinfo.h"
 #include "preferencesform.h"
 #include "mypets.h"
+
+//QWidgets
+#include "logout.h"
+
 
 
 QT_BEGIN_NAMESPACE
@@ -54,6 +59,10 @@ private:
     UserInfo uinfo;
     PreferencesForm pform;
     MyPets myPets;
+    MyFavoritesTwo myFavsList;
+
+    //QDialogs
+    Logout lg;
 
 
     string userType; //currently not used
@@ -84,6 +93,9 @@ private slots:
     void heartPet(Pet p, bool b);
     void backToLogin();
     void updateAdopter(Adopter *a);
+    void toListMyFavorites();
+    void toGalleryMyFavorites();
+    void logOut();
 
 
     //save Button

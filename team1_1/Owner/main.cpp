@@ -4,6 +4,9 @@
 using namespace std;
 
 int main(){
+    /*
+    vector<Pet> v =  o.getPets();
+
 
     Owner o = Owner("../../projectDB.sqlite", "best friends", "test", 01234, 1234567, "test");
 
@@ -15,6 +18,7 @@ int main(){
     for(int i = 0; i < (int) o.getPets().size(); i++){
         cout << o.getPets().at(i).getName() << endl;
     }
+    */
 
     return 0;
 }

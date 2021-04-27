@@ -32,7 +32,7 @@ PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev,
 }
 
 
-//constructor used in my favorites and manual search
+//constructor used in gallery view of my favorites and manual search
 PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev,
                         QPushButton* next,  QLabel* pageLine,
                         vector<QLabel*> petNameLabels,
@@ -57,7 +57,33 @@ PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev,
 
 }
 
-//constructor for matchmaking
+//list view of my favorites and Manual Search
+PetGallery:: PetGallery(bool b, int numPetsToDisplay, QPushButton* prev,
+                        QPushButton* next,  QLabel* pageLine,
+                        vector<QLabel*> petNameLabels,
+                        vector<QLabel*> petInfo,
+                        vector<QPushButton*> petLearnMore,
+                        vector<QPushButton*> petSaves, vector<Pet> petVec){
+
+    numToDisplay = numPetsToDisplay;
+    previousButton = prev;
+    nextButton = next;
+    pageNum = pageLine;
+    nameLabels = petNameLabels;
+    infoLabels = petInfo;
+    learnMores = petLearnMore;
+    saveButtons = petSaves;
+    pets = petVec;
+    nextStartIndex = 0;
+    displayPetsPageNumber = 1;
+
+    petsToDisplay = vector<Pet>();
+    clearLabels();
+
+}
+
+
+//constructor for matchmaking (gallery view)
 PetGallery::PetGallery(int numPetsToDisplay, QPushButton* prev,
                        QPushButton* next, QLabel* pageLine,
                        vector<QLabel*> petNameLabels,
@@ -83,15 +109,40 @@ PetGallery::PetGallery(int numPetsToDisplay, QPushButton* prev,
 
     petsToDisplay = vector<Pet>();
     clearLabels();
-   // openDB();
-    //petPictures();
+}
+
+//constructor for matchmaking (list view)
+PetGallery::PetGallery(bool b, int numPetsToDisplay, QPushButton* prev,
+                       QPushButton* next, QLabel* pageLine,
+                       vector<QLabel*> petNameLabels,
+                       vector<QLabel*> petInfo,
+                       vector<QLabel*> petScores,
+                       vector<QPushButton*> petLearnMore,
+                       vector<QPushButton*> petSaves, vector<pair<Pet, int>> petVec){
+    numToDisplay = numPetsToDisplay;
+    previousButton = prev;
+    nextButton = next;
+    pageNum = pageLine;
+    nameLabels = petNameLabels;
+    infoLabels = petInfo;
+    scoreLabels = petScores;
+    learnMores = petLearnMore;
+    saveButtons = petSaves;
+    matPets = petVec;
+
+    matchPetsToRegPets(); //convert vector
+
+    nextStartIndex = 0;
+    displayPetsPageNumber = 1;
+
+    petsToDisplay = vector<Pet>();
+    clearLabels();
 }
 
 
 
-PetGallery::~PetGallery(){
-       petsDB.close();
 
+PetGallery::~PetGallery(){
 }
 
 void PetGallery::updatePetVec(vector<Pet> p){
@@ -99,8 +150,7 @@ void PetGallery::updatePetVec(vector<Pet> p){
 }
 
 void PetGallery::displayPets(int start){
-    //default picture
-    QPixmap pixmap("../../../../../pictures/default.png");
+
     int counter = 0;
 
     //clear petsToDisplayVector
@@ -113,7 +163,13 @@ void PetGallery::displayPets(int start){
     for(int i = 0; i < numToDisplay; i++){
         //clear the old labels and hide the old buttons
         nameLabels[i]->clear();
-        picLabels[i]->clear();
+        if(picLabels.size() > 0){
+         picLabels[i]->clear();
+        }
+        if(infoLabels.size() > 0){
+            infoLabels[i]->clear();
+        }
+
         learnMores[i]->setVisible(false);
         if(saveButtons.size() > 0){
             saveButtons[i]->setVisible(false);
@@ -134,14 +190,47 @@ void PetGallery::displayPets(int start){
             nameLabels[i]->setText(qpetName);
 
 
-            //picture
-            if(pets[start].getImageFiles().size() == 0){
-                //default picture
-                picLabels[i]->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio));
-            } else {
-                string photo = "../../../../../pictures/" + pets[start].getImageFiles()[0];
-                QPixmap pix(QString::fromStdString(photo));
-                picLabels[i]->setPixmap(pix.scaled(150, 150, Qt::KeepAspectRatio));
+            if(infoLabels.size() >0){
+                string info = pets[start].getSpecies() + " - " + pets[start].getBreed() + " - " + pets[start].getTemperament() + " - good with " + pets[start].getGoodWith();
+                infoLabels[i]->setText(QString::fromStdString(info));
+            }
+
+            if(picLabels.size() > 0){
+                //picture
+                if(pets[start].getImageFiles().size() == 0){
+                    //default picture
+
+                    QPixmap pixmap("../../../../../pictures/default.png");
+                    picLabels[i]->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio));
+                    /*
+                    QString os = QSysInfo::productVersion();
+
+
+                    if(os == "10.16"){
+                        QPixmap pixmap("../../../../../pictures/default.png");
+                        picLabels[i]->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio));
+                    } else {
+                        QPixmap pixmap("../../pictures/default.png");
+                        picLabels[i]->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio));
+
+                    }
+                    */
+
+                } else {
+
+                    //QString os = QSysInfo::productVersion();
+                    string photo = "../../../../../pictures/" + pets[start].getImageFiles()[0];
+                    /*
+                    if(os == "10.16"){
+                        photo = "../../../../../pictures/" + pets[start].getImageFiles()[0];
+                    } else {
+                        photo = "../../pictures/" + pets[start].getImageFiles()[0];
+                    }
+                    */
+
+                    QPixmap pix(QString::fromStdString(photo));
+                    picLabels[i]->setPixmap(pix.scaled(150, 150, Qt::KeepAspectRatio));
+                }
             }
 
 
@@ -231,7 +320,17 @@ vector<Pet> PetGallery::getPetVec(){
 void PetGallery::clearLabels(){
     for(int i = 0; i < numToDisplay; i++){
         nameLabels[i]->clear();
-        picLabels[i]->clear();
+
+        //if there are pictures
+        if(picLabels.size() >0){
+            picLabels[i]->clear();
+        }
+
+        //if there are info labels
+        if(infoLabels.size() > 0){
+            infoLabels[i]->clear();
+        }
+
         learnMores[i]->setVisible(false);
 
         //if there are save buttons
@@ -256,45 +355,4 @@ void PetGallery::matchPetsToRegPets(){
    }
 }
 
-void PetGallery::petPictures(){
 
-    if(petsDB.open()){
-        cerr << "Got here" << endl;
-        for(int i = 0; i < (int) pets.size(); i++){
-            QSqlQuery query = QSqlQuery(petsDB);
-
-
-            //CAN OPTIMIZE
-            QString s = "SELECT petID, filename, mediaType FROM media";
-            cout << s.toStdString() << endl;
-            query.exec(s);
-            while(query.next()){
-                int petID = query.value(0).toInt();
-                string filename = query.value(1).toString().toStdString();
-                string mediaType = query.value(2).toString().toStdString();
-
-                if(petID == pets[i].getID() && mediaType == "image") {
-                    pets[i].addImageFile(filename);
-                }
-            }
-        }
-    }
-
-
-}
-
-void PetGallery::openDB(){
-    QSqlDatabase petsDB = QSqlDatabase::addDatabase("QSQLITE", "mediaCxn");
-    string fullName = "../../../../../../projectDB.sqlite";
-    petsDB.setDatabaseName(QString::fromStdString(fullName));
-    if(!petsDB.open()){
-        std::cerr << "Database does not open -- "
-                  << petsDB.lastError().text().toStdString()
-                  << std::endl;
-
-        std::cerr << "  File -- " << fullName << std::endl;
-        exit(0);
-    } else {
-        std::cerr << "Opened database successfully (from PetGallery class)\n";
-    }
-}
