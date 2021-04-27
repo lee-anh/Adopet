@@ -45,7 +45,8 @@ Pet::Pet(int petId, string petName, string petSpecies, string petBreed,
     goodWith = petGoodWith;
     shelter = petShelter;
     bio = petBio;
-    fillImageFiles("../../../../../projectDB.sqlite");
+    //fillImageFiles("../../../../../projectDB.sqlite");
+    fillImageFiles("../../projectDB.sqlite");
 }
 
 Pet::~Pet(){

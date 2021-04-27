@@ -35,7 +35,6 @@ void FindMatchForAdopters::setUser(string username){
         dbName = "../../../../../projectDB.sqlite";
     } else {
         dbName = "../../projectDB.sqlite";
-
     }
      mat = Matchmaking(dbName, user);
 
