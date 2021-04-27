@@ -110,16 +110,16 @@ void MyFavorites::saveButton(QPushButton* saveButton, int index){
 void MyFavorites::loadSaveButtons(vector<QPushButton *> saveButtons){
     for(int i = 0; i < (int) saveButtons.size(); i++){
         if((int) petgal.getPetVec().size() > i){
-        if(sl.isSavedPet(petgal.getPet(i)) == true){
-            saveButtons[i]->setChecked(true);
-            saveButtons[i]->setText("♥");
-            saveButtons[i]->setStyleSheet("color: red; border: none");
-        } else{
-            saveButtons[i]->setChecked(false);
-            saveButtons[i]->setText("♡");
-            saveButtons[i]->setStyleSheet("color: black");
+            if(sl.isSavedPet(petgal.getPet(i)) == true){
+                saveButtons[i]->setChecked(true);
+                saveButtons[i]->setText("♥");
+                saveButtons[i]->setStyleSheet("color: red; border: none");
+            } else{
+                saveButtons[i]->setChecked(false);
+                saveButtons[i]->setText("♡");
+                saveButtons[i]->setStyleSheet("color: black");
+            }
         }
-    }
     }
 }
 

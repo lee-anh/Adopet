@@ -7,7 +7,10 @@ int main(){
     /*
     vector<Pet> v =  o.getPets();
 
+
     Owner o = Owner("../../projectDB.sqlite", "best friends", "test", 01234, 1234567, "test");
+
+    vector<Pet> v =  o.getPets();
     //o.setName("best friends");
 
    // Pet p = Pet("qwerty", "dog", "newBreed", "adult", "large", "happy", "male", "kids", "best friends", "loren ipsum");
