@@ -23,7 +23,7 @@ GUI::GUI(QWidget *parent)
     */
 
 
-
+    //CHANGE HERE
     dbName = "../../../../../projectDB.sqlite";
 
 
@@ -37,6 +37,7 @@ GUI::GUI(QWidget *parent)
     ui->stackedWidget->addWidget(&pform); //7
     ui->stackedWidget->addWidget(&myPets);//8
     ui->stackedWidget->addWidget(&myFavsList); //9
+    ui->stackedWidget->addWidget(&qz); //10
 
     //Set the opening page
     int openingPage = 0; //login
@@ -60,6 +61,7 @@ GUI::GUI(QWidget *parent)
     connect(&myFavsList, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
     connect(&myFavsList, SIGNAL(goToGallery()), this, SLOT(toGalleryMyFavorites()));
     connect(&lg, SIGNAL(timeToLogout()), this, SLOT(logOut()));
+    connect(&pform, SIGNAL(toQuiz()), this, SLOT(goToQuiz()));
 }
 
 
@@ -73,6 +75,7 @@ GUI::~GUI()
     ui->stackedWidget->removeWidget(&pform);
     ui->stackedWidget->removeWidget(&myPets);
     ui->stackedWidget->removeWidget(&myFavsList);
+    ui->stackedWidget->removeWidget(&qz);
     delete ui;
 
 }
@@ -125,6 +128,7 @@ void GUI::meetPet(Pet p){
          */
 
      } else {
+         //CHANGE HERE
          string photo = "../../../../../pictures/" + p.getImageFiles()[0];
 
          /*
@@ -307,6 +311,10 @@ void GUI::logOut(){
     uinfo.setFirstTime(true);
 }
 
+
+void GUI::goToQuiz(){
+    ui->stackedWidget->setCurrentIndex(10);
+}
 void GUI::on_navHomeButton_clicked()
 {
     //navigate to home screen
