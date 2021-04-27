@@ -3,22 +3,24 @@
 
 using namespace std;
 
-int main(){
-    /*
-    vector<Pet> v =  o.getPets();
-
-
-    Owner o = Owner("../../projectDB.sqlite", "best friends", "test", 01234, 1234567, "test");
-
-    vector<Pet> v =  o.getPets();
-    //o.setName("best friends");
-
-   // Pet p = Pet("qwerty", "dog", "newBreed", "adult", "large", "happy", "male", "kids", "best friends", "loren ipsum");
-   // o.uploadPets();
-    for(int i = 0; i < (int) o.getPets().size(); i++){
-        cout << o.getPets().at(i).getName() << endl;
+void printPets(vector<Pet> p){
+    for(int i = 0; i < (int) p.size(); i++){
+        cout << p.at(i).getID() << ": " << p.at(i).getName() << endl;
     }
-    */
+    cout << endl;
+}
+
+int main(){
+    Owner o = Owner();
+    o.setName("best friends");
+
+    o.fillPets();
+
+    Pet p = Pet(101, "nameCHANGEDAGAIN", "species", "breedCHANGED", "age", "size", "temperament",
+                "gender", "goodWithCHANGED", "best friends", "bio");
+    o.removePet(p);
+
+    printPets(o.getPets());
 
     return 0;
 }

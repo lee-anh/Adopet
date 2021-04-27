@@ -254,8 +254,8 @@ void Preferences::addShelter(string s){
 }
 
 bool Preferences::removeShelter(string s){
-    int speciesSize = (int) species.size();
-    for(int i = 0; i < speciesSize; i++){
+    int shelterSize = (int) shelter.size();
+    for(int i = 0; i < shelterSize; i++){
         if(shelter.at(i) == s){
             shelter.erase(shelter.begin()+i);
             return true;
