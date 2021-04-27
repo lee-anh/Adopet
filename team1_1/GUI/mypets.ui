@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>555</height>
+    <width>924</width>
+    <height>579</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -19,8 +19,8 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
-   <item>
+  <layout class="QGridLayout" name="gridLayout_4">
+   <item row="0" column="0">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="minimumSize">
       <size>
@@ -34,26 +34,11 @@
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="gallery">
-      <layout class="QVBoxLayout" name="verticalLayout_6">
-       <item>
-        <widget class="QLabel" name="label">
-         <property name="font">
-          <font>
-           <pointsize>36</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>My Pets</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="1" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout_8">
          <item>
           <spacer name="horizontalSpacer_8">
@@ -76,12 +61,15 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox">
+          <widget class="QComboBox" name="viewMode">
            <property name="minimumSize">
             <size>
              <width>150</width>
              <height>0</height>
             </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(161, 212, 255)</string>
            </property>
            <item>
             <property name="text">
@@ -115,7 +103,7 @@
          </item>
         </layout>
        </item>
-       <item>
+       <item row="2" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
           <spacer name="horizontalSpacer_4">
@@ -390,7 +378,7 @@
          </item>
         </layout>
        </item>
-       <item>
+       <item row="3" column="0">
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
           <widget class="QLabel" name="pageLine">
@@ -448,6 +436,21 @@
          </item>
         </layout>
        </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <pointsize>36</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>My Pets</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
      <widget class="QWidget" name="uploadPet">
@@ -475,73 +478,775 @@
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>570</x>
-         <y>180</y>
-         <width>175</width>
-         <height>57</height>
+         <x>200</x>
+         <y>150</y>
+         <width>481</width>
+         <height>261</height>
         </rect>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_7">
+       <layout class="QHBoxLayout" name="horizontalLayout_11">
         <item>
-         <widget class="QPushButton" name="singleUploadButton">
-          <property name="text">
-           <string>Single Upload</string>
+         <widget class="QFrame" name="frame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
           </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <item>
+              <widget class="QPushButton" name="pushButton">
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>75</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(161, 212, 255)</string>
+               </property>
+               <property name="text">
+                <string>Bulk Upload</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>Upload multiple pets at once in a csv file.  Please make sure to follow the directions carefully to ensure the best experience!</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignHCenter|Qt::AlignTop</set>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Upload one pet at a time!</string>
+         <spacer name="horizontalSpacer_14">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-          <property name="alignment">
-           <set>Qt::AlignHCenter|Qt::AlignTop</set>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
           </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="layoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>100</x>
-         <y>170</y>
-         <width>332</width>
-         <height>87</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_8">
-        <item>
-         <widget class="QPushButton" name="pushButton">
-          <property name="text">
-           <string>Bulk Upload</string>
-          </property>
-         </widget>
+         </spacer>
         </item>
         <item>
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>Upload multiple pets at once in a csv file.  Please make sure to follow the directions carefully to ensure the best experience!</string>
+         <widget class="QFrame" name="frame_2">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
           </property>
-          <property name="alignment">
-           <set>Qt::AlignHCenter|Qt::AlignTop</set>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
           </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_16">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <item>
+              <widget class="QPushButton" name="singleUploadButton">
+               <property name="minimumSize">
+                <size>
+                 <width>200</width>
+                 <height>75</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(161, 212, 255)</string>
+               </property>
+               <property name="text">
+                <string>Single Upload</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Upload one pet at a time!</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignHCenter|Qt::AlignTop</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
       </widget>
      </widget>
      <widget class="QWidget" name="editPet">
-      <widget class="QLabel" name="title">
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="backButton">
+         <property name="text">
+          <string>&lt;- Back</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <spacer name="horizontalSpacer_12">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>258</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="title">
+         <property name="font">
+          <font>
+           <pointsize>36</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Upload/Edit Pet</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <spacer name="horizontalSpacer_13">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>257</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="1" colspan="3">
+        <widget class="QLabel" name="errorBarUploadPet">
+         <property name="styleSheet">
+          <string notr="true">color:red;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="4">
+        <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_10">
+           <item>
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>Name:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="name">
+             <property name="font">
+              <font>
+               <pointsize>20</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(161, 212, 255)</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_10">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="markAsAdopted">
+           <property name="text">
+            <string>Mark as Adopted!</string>
+           </property>
+           <property name="checkable">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_11">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="saveChangesButton">
+           <property name="text">
+            <string>Save Changes</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0" colspan="4">
+        <widget class="QScrollArea" name="scrollArea">
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>859</width>
+            <height>434</height>
+           </rect>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="0">
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="2" column="1">
+              <widget class="QGroupBox" name="age">
+               <property name="title">
+                <string>Age</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_12">
+                <item>
+                 <widget class="QComboBox" name="ageComboBox">
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(161, 212, 255)</string>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Select One</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Young</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Adult</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Senior</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QGroupBox" name="gender">
+               <property name="title">
+                <string>Gender</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_15">
+                <item>
+                 <widget class="QComboBox" name="genderComboBox">
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(161, 212, 255)</string>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Select One</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Male</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Female</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QGroupBox" name="species">
+               <property name="title">
+                <string>Species</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_9">
+                <item>
+                 <widget class="QComboBox" name="speciesComboBox">
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(161, 212, 255)</string>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Select One</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Dog</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Cat</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Rabbit</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Rodent</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Fish</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Bird</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Other</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_8">
+                  <property name="text">
+                   <string>If Other,  please specify: </string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="speciesLine">
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(161, 212, 255)</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QGroupBox" name="temperament">
+               <property name="title">
+                <string>Temperament</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_11">
+                <item>
+                 <widget class="QComboBox" name="temperamentComboBox">
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(161, 212, 255)</string>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Select One</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Happy</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Friendly</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Introverted</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Active</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Vigilant</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Other</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_10">
+                  <property name="text">
+                   <string>If Other,  please specify: </string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="temperamentLine">
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(161, 212, 255)</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QGroupBox" name="breed_3">
+               <property name="title">
+                <string>Good With</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_14">
+                <item>
+                 <widget class="QLabel" name="label_11">
+                  <property name="text">
+                   <string>If Other,  please specify: </string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="goodWithComboBox">
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(161, 212, 255)</string>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Select One</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Kids</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Animals</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Other</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="goodWithLine">
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(161, 212, 255)</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QGroupBox" name="size">
+               <property name="title">
+                <string>Size</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_13">
+                <item>
+                 <widget class="QComboBox" name="sizeComboBox">
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(161, 212, 255)</string>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Select One</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Small</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Medium</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Large</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QGroupBox" name="breed">
+               <property name="title">
+                <string>Breed</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_10">
+                <item>
+                 <widget class="QComboBox" name="breedComboBox">
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(161, 212, 255)</string>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Select One</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Sporting</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Hound</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Working</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Terrier</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Toy</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Non-sporting</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Herding</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Siamese</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Persian</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Maine Coon</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Ragdoll</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Rex</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Lionhead</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Californian</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Angora</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Silver Fox</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Hamster</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Guinea Pig</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Gerbil</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Mouse</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Rat</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Freshwater</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Saltwater</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Parakeet</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Lovebird</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Parrot</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Other</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_9">
+                  <property name="text">
+                   <string>If Other,  please specify: </string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="breedLine">
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(161, 212, 255)</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="0" column="1">
+            <layout class="QVBoxLayout" name="verticalLayout_20">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_18">
+               <item>
+                <widget class="QLabel" name="label_12">
+                 <property name="text">
+                  <string>Bio (Optional)</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QTextEdit" name="bioBox"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_19">
+               <item>
+                <widget class="QLabel" name="label_13">
+                 <property name="text">
+                  <string>Multimedia Files (Optional)</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPlainTextEdit" name="multimediaBox"/>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="bulkUpload">
+      <widget class="QLabel" name="label_6">
        <property name="geometry">
         <rect>
-         <x>330</x>
-         <y>0</y>
-         <width>261</width>
-         <height>61</height>
+         <x>320</x>
+         <y>40</y>
+         <width>231</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="font">
@@ -550,620 +1255,461 @@
         </font>
        </property>
        <property name="text">
-        <string>Upload/Edit Pet</string>
+        <string>Bulk Upload</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
-      <widget class="QPushButton" name="backButton">
+      <widget class="QPushButton" name="pushButton_2">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>20</y>
+         <x>360</x>
+         <y>380</y>
          <width>113</width>
          <height>32</height>
         </rect>
        </property>
        <property name="text">
-        <string>&lt;- Back</string>
+        <string>Upload</string>
        </property>
       </widget>
-      <widget class="QLabel" name="errorBarUploadPet">
+      <widget class="QLineEdit" name="lineEdit">
        <property name="geometry">
         <rect>
-         <x>160</x>
-         <y>60</y>
-         <width>511</width>
-         <height>21</height>
+         <x>250</x>
+         <y>340</y>
+         <width>321</width>
+         <height>31</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color:red;</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <string notr="true">background-color: rgb(161, 212, 255)</string>
        </property>
       </widget>
-      <widget class="QScrollArea" name="scrollArea">
+      <widget class="QLabel" name="label_14">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>190</y>
-         <width>821</width>
-         <height>331</height>
+         <x>250</x>
+         <y>310</y>
+         <width>60</width>
+         <height>16</height>
         </rect>
        </property>
-       <property name="widgetResizable">
+       <property name="text">
+        <string>Filename: </string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_15">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>130</y>
+         <width>611</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Directions: 
+ Upload a csv in the following format,  one pet per row</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+       </property>
+       <property name="wordWrap">
         <bool>true</bool>
        </property>
-       <widget class="QWidget" name="scrollAreaWidgetContents">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>804</width>
-          <height>434</height>
-         </rect>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_2">
-         <item row="0" column="0">
-          <layout class="QGridLayout" name="gridLayout">
-           <item row="2" column="1">
-            <widget class="QGroupBox" name="age">
-             <property name="title">
-              <string>Age</string>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="myPetsList">
+      <layout class="QVBoxLayout" name="verticalLayout_21">
+       <item>
+        <widget class="QLabel" name="label_16">
+         <property name="font">
+          <font>
+           <pointsize>36</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>My Pets</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_12">
+         <item>
+          <spacer name="horizontalSpacer_15">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_17">
+           <property name="text">
+            <string>View Mode:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="viewModea">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: rgb(161, 212, 255)</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>Select One</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Gallery</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>List</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_16">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_17">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_36">
+           <item>
+            <widget class="QLabel" name="name1a">
+             <property name="text">
+              <string>Name</string>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_12">
-              <item>
-               <widget class="QComboBox" name="ageComboBox">
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(161, 212, 255)</string>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Select One</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Young</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Adult</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Senior</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-             </layout>
             </widget>
            </item>
-           <item row="3" column="0">
-            <widget class="QGroupBox" name="gender">
-             <property name="title">
-              <string>Gender</string>
+           <item>
+            <widget class="QLabel" name="info1a">
+             <property name="text">
+              <string>Info</string>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_15">
-              <item>
-               <widget class="QComboBox" name="genderComboBox">
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(161, 212, 255)</string>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Select One</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Male</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Female</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-             </layout>
             </widget>
            </item>
-           <item row="0" column="0">
-            <widget class="QGroupBox" name="species">
-             <property name="title">
-              <string>Species</string>
+           <item>
+            <widget class="QPushButton" name="link1a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_9">
-              <item>
-               <widget class="QComboBox" name="speciesComboBox">
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(161, 212, 255)</string>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Select One</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Dog</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Cat</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Rabbit</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Rodent</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Fish</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Bird</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Other</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_8">
-                <property name="text">
-                 <string>If Other,  please specify: </string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="speciesLine"/>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QGroupBox" name="temperament">
-             <property name="title">
-              <string>Temperament</string>
+             <property name="text">
+              <string>Edit</string>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_11">
-              <item>
-               <widget class="QComboBox" name="temperamentComboBox">
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(161, 212, 255)</string>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Select One</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Happy</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Friendly</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Introverted</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Active</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Vigilant</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Other</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_10">
-                <property name="text">
-                 <string>If Other,  please specify: </string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="temperamentLine"/>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QGroupBox" name="breed_3">
-             <property name="title">
-              <string>Good With</string>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_14">
-              <item>
-               <widget class="QLabel" name="label_11">
-                <property name="text">
-                 <string>If Other,  please specify: </string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="goodWithComboBox">
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(161, 212, 255)</string>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Select One</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Kids</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Animals</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="lineEdit_4"/>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QGroupBox" name="size">
-             <property name="title">
-              <string>Size</string>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_13">
-              <item>
-               <widget class="QComboBox" name="sizeComboBox">
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(161, 212, 255)</string>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Select One</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Small</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Medium</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Large</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QGroupBox" name="breed">
-             <property name="title">
-              <string>Breed</string>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_10">
-              <item>
-               <widget class="QComboBox" name="breedComboBox">
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(161, 212, 255)</string>
-                </property>
-                <item>
-                 <property name="text">
-                  <string>Select One</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Sporting</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Hound</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Working</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Terrier</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Toy</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Non-sporting</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Herding</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Siamese</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Persian</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Maine Coon</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Ragdoll</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Rex</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Lionhead</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Californian</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Angora</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Silver Fox</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Hamster</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Guinea Pig</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Gerbil</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Mouse</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Rat</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Freshwater</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Saltwater</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Parakeet</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Lovebird</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Parrot</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Other</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_9">
-                <property name="text">
-                 <string>If Other,  please specify: </string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="breedLine"/>
-              </item>
-             </layout>
             </widget>
            </item>
           </layout>
          </item>
-         <item row="0" column="1">
-          <layout class="QVBoxLayout" name="verticalLayout_20">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_37">
            <item>
-            <layout class="QVBoxLayout" name="verticalLayout_18">
-             <item>
-              <widget class="QLabel" name="label_12">
-               <property name="text">
-                <string>Bio (Optional)</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QTextEdit" name="bioBox"/>
-             </item>
-            </layout>
+            <widget class="QLabel" name="name2a">
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </widget>
            </item>
            <item>
-            <layout class="QVBoxLayout" name="verticalLayout_19">
-             <item>
-              <widget class="QLabel" name="label_13">
-               <property name="text">
-                <string>Multimedia Files (Optional)</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPlainTextEdit" name="plainTextEdit"/>
-             </item>
-            </layout>
+            <widget class="QLabel" name="info2a">
+             <property name="text">
+              <string>Info</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="link2a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Edit</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_39">
+           <item>
+            <widget class="QLabel" name="name3a">
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="info3a">
+             <property name="text">
+              <string>Info</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="link3a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Edit</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_40">
+           <item>
+            <widget class="QLabel" name="name4a">
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="info4a">
+             <property name="text">
+              <string>Info</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="link4a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Edit</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_41">
+           <item>
+            <widget class="QLabel" name="name5a">
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="info5a">
+             <property name="text">
+              <string>Info</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="link5a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Edit</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_43">
+           <item>
+            <widget class="QLabel" name="name6a">
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="info6a">
+             <property name="text">
+              <string>Info</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="link6a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Edit</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_44">
+           <item>
+            <widget class="QLabel" name="name7a">
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="info7a">
+             <property name="text">
+              <string>Info</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="link7a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Edit</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_42">
+           <item>
+            <widget class="QLabel" name="name8a">
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="info8a">
+             <property name="text">
+              <string>Info</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="link8a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Edit</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
         </layout>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>110</y>
-         <width>791</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_9">
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_10">
-          <item>
-           <widget class="QLabel" name="label_7">
-            <property name="text">
-             <string>Name:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="name">
-            <property name="font">
-             <font>
-              <pointsize>20</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_10">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="markAsAdopted">
-          <property name="text">
-           <string>Mark as Adopted!</string>
-          </property>
-          <property name="checkable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_11">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="saveChangesButton">
-          <property name="text">
-           <string>Save Changes</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="pageLinea">
+         <property name="text">
+          <string>Showing page # out of # </string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_45">
+         <item>
+          <spacer name="horizontalSpacer_38">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="previousa">
+           <property name="text">
+            <string>&lt;-- Previous</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="nexta">
+           <property name="text">
+            <string>Next --&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_39">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>

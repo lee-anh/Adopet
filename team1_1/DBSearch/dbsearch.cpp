@@ -395,7 +395,7 @@ void DBSearch::fillVecsFromDB(){
     QSqlQuery query = QSqlQuery(dbSearchdb);
 
     //species
-    QString qs = "SELECT speciesType FROM species";
+    QString qs = "SELECT DISTINCT attribute FROM preferences WHERE attributeType = \"species\"";
     query.exec(qs);
     while(query.next()){
         string s = query.value(0).toString().toStdString();
@@ -403,7 +403,7 @@ void DBSearch::fillVecsFromDB(){
     }
 
     //breed
-    QString qs2 = "SELECT breedType FROM breed";
+    QString qs2 = "SELECT DISTINCT attribute FROM preferences WHERE attributeType = \"breed\"";
     query.exec(qs2);
     while(query.next()){
         string s = query.value(0).toString().toStdString();
@@ -411,7 +411,7 @@ void DBSearch::fillVecsFromDB(){
     }
 
     //temperament
-    QString qs3 = "SELECT temperamentType FROM temperament";
+    QString qs3 = "SELECT DISTINCT attribute FROM preferences WHERE attributeType = \"temperament\"";
     query.exec(qs3);
     while(query.next()){
         string s = query.value(0).toString().toStdString();
@@ -420,7 +420,7 @@ void DBSearch::fillVecsFromDB(){
 
 
     //goodWith
-    QString qs4 = "SELECT goodWithType FROM goodWith";
+    QString qs4 = "SELECT DISTINCT attribute FROM preferences WHERE attributeType = \"goodWith\"";
     query.exec(qs4);
     while(query.next()){
         string s = query.value(0).toString().toStdString();
@@ -429,7 +429,7 @@ void DBSearch::fillVecsFromDB(){
 
 
     //shelter
-    QString qs5 = "SELECT shelterType FROM shelter";
+    QString qs5 = "SELECT DISTINCT attribute FROM preferences WHERE attributeType = \"shelter\"";
     query.exec(qs5);
     while(query.next()){
         string s = query.value(0).toString().toStdString();

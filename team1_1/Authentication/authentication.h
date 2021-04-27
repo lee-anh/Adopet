@@ -119,7 +119,7 @@ public:
      * \param address
      * \param zip
      */
-    void insertOwnerToDB(string username, string name, string phone, string email, string address, string zip);
+    bool insertOwnerToDB(string username, string name, string phone, string email, string address, string zip);
 
     /*!
      * \brief getAuthenticatedOwner
@@ -156,6 +156,8 @@ private:
      * \return
      */
     bool checkUsername(string username);
+
+    bool checkShelterName(string shelterName);
 
     Adopter *authAdopter;
     Owner *authOwner;

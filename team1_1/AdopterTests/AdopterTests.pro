@@ -5,16 +5,18 @@ CONFIG -= app_bundle
 QT += core
 QT += sql
 
-!macx{
-    QMAKE_CXXFLAGS += --coverage
-    QMAKE_LFLAGS += --coverage
 
-    LIBS += -lgcov
-}
+QMAKE_CXXFLAGS += --coverage
+QMAKE_LFLAGS += --coverage
+
 
 SOURCES += main.cpp
 
 LIBS += -pthread
+!macx{
+    LIBS += -lgcov
+}
+
 
 SOURCES += ../../gtest/googletest/src/gtest-all.cc
 
@@ -30,3 +32,5 @@ HEADERS += ../Adopter/adopter.h \
 
 SOURCES += ../Adopter/adopter.cpp \
            ../Adopter/preferences.cpp
+
+

@@ -258,15 +258,15 @@ TEST(general, REMOVETEMPERAMENTFALSE) {
 
 }
 
-/*
+
 TEST(general, SETGENDER) {
 
     Preferences *p = new Preferences();
-    p->setGender("female");
-    ASSERT_EQ(p->getGender(), "female");
+    p->addGender("female");
+    ASSERT_EQ(p->getGender().at(0), "female");
 
 }
-*/
+
 
 
 TEST(general, ADOPTERSETTERS) {
