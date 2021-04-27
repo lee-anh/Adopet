@@ -9,22 +9,22 @@ GUI::GUI(QWidget *parent)
 
     //DIFFERENT OS
 
-   // QString os = QSysInfo::productVersion();
-   // cout << os.toStdString() << endl;
+    QString os = QSysInfo::productVersion();
+    cout << os.toStdString() << endl;
 
 
-    /*
+
     if(os == "10.16"){
         dbName = "../../../../../projectDB.sqlite";
     } else {
         dbName = "../../projectDB.sqlite";
 
     }
-    */
 
 
 
-    dbName = "../../../../../projectDB.sqlite";
+
+    //dbName = "../../../../../projectDB.sqlite";
 
 
     auth = Authentication(dbName);
