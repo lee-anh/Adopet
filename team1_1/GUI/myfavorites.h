@@ -28,7 +28,6 @@ private:
     Ui::MyFavorites *ui;
     SavedList sl;
     PetGallery petgal;
-    void clearLabels();
     void saveButton(QPushButton *saveButton, int index);
     void loadSaveButtons(vector<QPushButton*> saveButtons);
 
@@ -46,10 +45,13 @@ private slots:
     void on_save3_clicked();
     void on_save4_clicked();
 
+    void on_viewModeComboBox_currentIndexChanged(int index);
+
 signals:
 
     void learnMoreClicked(Pet sendPet, bool b);
     void heartClicked(Pet p, bool b);
+    void toListMode();
 
 
 

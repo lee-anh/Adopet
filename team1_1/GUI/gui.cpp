@@ -6,11 +6,16 @@ GUI::GUI(QWidget *parent)
     , ui(new Ui::GUI)
 {
     ui->setupUi(this);
+
     //DIFFERENT OS
+    QString os = QSysInfo::productVersion();
 
+    if(os == "10.16"){
+        dbName = "../../../../../projectDB.sqlite";
+    } else {
+        dbName = "../../projectDB.sqlite";
 
-    dbName = "../../../../../projectDB.sqlite";
-
+    }
 
 
     auth = Authentication(dbName);
@@ -23,6 +28,7 @@ GUI::GUI(QWidget *parent)
     ui->stackedWidget->addWidget(&uinfo);//6
     ui->stackedWidget->addWidget(&pform); //7
     ui->stackedWidget->addWidget(&myPets);//8
+    ui->stackedWidget->addWidget(&myFavsList); //9
 
     //Set the opening page
     int openingPage = 0; //login
@@ -41,6 +47,11 @@ GUI::GUI(QWidget *parent)
     connect(&fmForAdopters, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
     connect(&fmForAdopters, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
     connect(&pform, SIGNAL(adopterChanged(Adopter*)), this, SLOT(updateAdopter(Adopter*)));
+    connect(&myFavs, SIGNAL(toListMode()), this, SLOT(toListMyFavorites()));
+    connect(&myFavsList, SIGNAL(learnMoreClicked(Pet, bool)), this, SLOT(moveToMeetMe(Pet, bool)));
+    connect(&myFavsList, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
+    connect(&myFavsList, SIGNAL(goToGallery()), this, SLOT(toGalleryMyFavorites()));
+    connect(&lg, SIGNAL(timeToLogout()), this, SLOT(logOut()));
 }
 
 
@@ -50,6 +61,10 @@ GUI::~GUI()
     ui->stackedWidget->removeWidget(&manSearch);
     ui->stackedWidget->removeWidget(&myFavs);
     ui->stackedWidget->removeWidget(&fmForAdopters);
+    ui->stackedWidget->removeWidget(&uinfo);
+    ui->stackedWidget->removeWidget(&pform);
+    ui->stackedWidget->removeWidget(&myPets);
+    ui->stackedWidget->removeWidget(&myFavsList);
     delete ui;
 
 }
@@ -81,11 +96,33 @@ void GUI::meetPet(Pet p){
     //picture JUST THE FIRST ONE RIGHT NOW
 
      if(p.getImageFiles().size() == 0){
-         //default picture
-         QPixmap pixmap("../../../../../pictures/default.png");
-         ui->petPic->setPixmap(pixmap.scaled(300, 300, Qt::KeepAspectRatio));
+
+         //DIFFERENT OS
+         QString os = QSysInfo::productVersion();
+
+         if(os == "10.16"){
+             //default picture
+             QPixmap pixmap("../../../../../pictures/default.png");
+             ui->petPic->setPixmap(pixmap.scaled(300, 300, Qt::KeepAspectRatio));
+         } else {
+             //default picture
+             QPixmap pixmap("../../pictures/default.png");
+             ui->petPic->setPixmap(pixmap.scaled(300, 300, Qt::KeepAspectRatio));
+
+         }
+
      } else {
-         string photo = "../../../../../pictures/" + p.getImageFiles()[0];
+         string photo = "";
+
+         QString os = QSysInfo::productVersion();
+
+         if(os == "10.16"){
+             photo =  "../../../../../pictures/" + p.getImageFiles()[0];
+         } else {
+             photo =  "../../pictures/" + p.getImageFiles()[0];
+
+         }
+
          QPixmap pix(QString::fromStdString(photo));
          ui->petPic->setPixmap(pix.scaled(300, 300, Qt::KeepAspectRatio));
      }
@@ -191,12 +228,12 @@ void GUI::on_saveButton_clicked()
 
 void GUI::on_exit_clicked()
 {
-    //back to login page
-    hideNavAdopter();
-    hideNavOwner();
-    ui->stackedWidget->setCurrentIndex(0);
-    previousPage = 0;
-    uinfo.setFirstTime(true);
+
+    //QDialog
+    lg.setModal(true);
+    lg.exec();
+
+
 
 }
 
@@ -233,8 +270,30 @@ void GUI::backToLogin(){
 }
 
 
+void GUI::toListMyFavorites(){
 
+   cout << "got to line 244 gui" << endl;
+    myFavsList.setSavedList(savedList);
+    cout << "got to line 246 gui" << endl;
+    myFavsList.showGal();
+    cout << "got to line 248 gui" << endl;
+    //navigate to my favorites list screen
+    ui->stackedWidget->setCurrentIndex(9);
+    previousPage = 9;
+}
 
+void GUI::toGalleryMyFavorites(){
+    on_navMyFavoritesButton_clicked();
+}
+
+void GUI::logOut(){
+    //back to login page
+    hideNavAdopter();
+    hideNavOwner();
+    ui->stackedWidget->setCurrentIndex(0);
+    previousPage = 0;
+    uinfo.setFirstTime(true);
+}
 
 void GUI::on_navHomeButton_clicked()
 {

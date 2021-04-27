@@ -13,6 +13,7 @@ QT += sql
 SOURCES += \
     findmatchforadopters.cpp \
     findmatchforpets.cpp \
+    logout.cpp \
     main.cpp \
     gui.cpp \
     ../DBSearch/dbsearch.cpp \
@@ -23,7 +24,9 @@ SOURCES += \
     ../Adopter/preferences.cpp \
     manualsearch.cpp \
     myfavorites.cpp \
+    myfavoritestwo.cpp \
     mypets.cpp \
+    peoplelist.cpp \
     petadopted.cpp \
     petgallery.cpp \
     preferencesform.cpp \
@@ -42,9 +45,12 @@ HEADERS += \
     ../Matchmaking/matchmaking.h \
     ../Adopter/adopter.h \
     ../Adopter/preferences.h \
+    logout.h \
     manualsearch.h \
     myfavorites.h \
+    myfavoritestwo.h \
     mypets.h \
+    peoplelist.h \
     petadopted.h \
     petgallery.h \
     preferencesform.h \
@@ -58,8 +64,10 @@ FORMS += \
     findmatchforadopters.ui \
     findmatchforpets.ui \
     gui.ui \
+    logout.ui \
     manualsearch.ui \
     myfavorites.ui \
+    myfavoritestwo.ui \
     mypets.ui \
     petadopted.ui \
     preferencesform.ui \

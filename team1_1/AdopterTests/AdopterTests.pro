@@ -5,12 +5,10 @@ CONFIG -= app_bundle
 QT += core
 QT += sql
 
-!macx{
-    QMAKE_CXXFLAGS += --coverage
-    QMAKE_LFLAGS += --coverage
 
-    LIBS += -lgcov
-}
+QMAKE_CXXFLAGS += --coverage
+QMAKE_LFLAGS += --coverage
+
 
 SOURCES += main.cpp
 
@@ -30,3 +28,5 @@ HEADERS += ../Adopter/adopter.h \
 
 SOURCES += ../Adopter/adopter.cpp \
            ../Adopter/preferences.cpp
+
+

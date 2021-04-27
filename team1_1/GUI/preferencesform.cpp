@@ -121,6 +121,8 @@ void PreferencesForm::fillCheckBoxVec(){
     cb.push_back(make_pair("parakeet", ui->parakeet));
     cb.push_back(make_pair("lovebird", ui->lovebird));
     cb.push_back(make_pair("parrot", ui->lovebird));
+    cb.push_back(make_pair("kids", ui->kidsCheckBox));
+    cb.push_back(make_pair("animals", ui->animalsCheckBox));
 
 }
 

@@ -12,3 +12,14 @@ PetAdopted::~PetAdopted()
 {
     delete ui;
 }
+
+void PetAdopted::on_yes_clicked()
+{
+    //TODO Remove the pet
+   // emit yesAdopted();
+}
+
+void PetAdopted::on_no_clicked()
+{
+    this->close();
+}

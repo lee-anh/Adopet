@@ -6,12 +6,9 @@ QT += core
 QT += sql
 
 
-!macx{
-    QMAKE_CXXFLAGS += --coverage
-    QMAKE_LFLAGS += --coverage
+QMAKE_CXXFLAGS += --coverage
+QMAKE_LFLAGS += --coverage
 
-    LIBS += -lgcov
-}
 
 SOURCES += main.cpp
 

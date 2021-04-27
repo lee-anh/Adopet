@@ -25,6 +25,7 @@ void UserInfo::setAuth(Authentication *a){
 }
 
 void UserInfo::createAccountClikced(){
+
     ui->stackedWidget->setCurrentIndex(0);
 }
 
@@ -49,7 +50,9 @@ void UserInfo::ownerMyInfoClicked(){
 
     clearOwnerInfo();
 
-    ui->nameOwner->setText(QString::fromStdString(auth->getAuthenticatedOwner()->getName()));
+
+    ui->nameOwner->setVisible(false);
+    ui->shelterName->setText(QString::fromStdString(auth->getAuthenticatedOwner()->getName()));
     ui->phoneNumberOwner->setText((QString::fromStdString(to_string(auth->getAuthenticatedOwner()->getPhoneNumber()))));
     ui->emailOwner->setText(QString::fromStdString(auth->getAuthenticatedOwner()->getEmail()));
     ui->addressOwner->setText(QString::fromStdString(auth->getAuthenticatedOwner()->getAddress()));;
@@ -65,10 +68,7 @@ void UserInfo::on_continueButton_clicked()
     string uname = ui->username->text().toStdString();
     string pwd = ui->password->text().toStdString();
     string pwdVer = ui->passwordVerification->text().toStdString();
-    string type = ui->accountType->currentText().toStdString();
-
-    transform(uname.begin(), uname.end(), uname.begin(), ::tolower); //lowercase the username
-    transform(type.begin(), type.end(), type.begin(), ::tolower); //lowercase the type
+    string type = ui->accountType->currentText().toLower().toStdString();
 
     if(uname == "" || pwd == "" || pwdVer == ""|| type == "select one"){
         ui->errorLabel->setText("Missing field(s)");
@@ -88,6 +88,8 @@ void UserInfo::on_continueButton_clicked()
                 //go to owner info page
                 clearOwnerInfo();
                 ui->stackedWidget->setCurrentIndex(2);
+                ui->nameOwner->setVisible(true);
+
 
             }
 
@@ -133,21 +135,41 @@ void UserInfo::on_backButton_clicked()
 
 void UserInfo::on_saveOwnerButton_clicked()
 {
-    string name = ui->nameOwner->text().toStdString();
-    string phone = ui->phoneNumberOwner->text().toStdString();
-    string email = ui->emailOwner->text().toStdString();
-    string address = ui->addressOwner->text().toStdString();
-    string zip = ui->zipOwner->text().toStdString();
 
-    if(name == "" || phone == "" || address == "" || email == ""|| zip == ""){
-        ui->errorLabelOwner->setText("Missing field(s)");
-    } else {
-        if(firstTime == true){
-            auth->insertOwnerToDB(username, name, phone, email, address, zip);
-            emit backClicked(); //back to the login page
+    if(firstTime == true){
+        string name = ui->nameOwner->text().toLower().toStdString();
+        string phone = ui->phoneNumberOwner->text().toStdString();
+        string email = ui->emailOwner->text().toStdString();
+        string address = ui->addressOwner->text().toStdString();
+        string zip = ui->zipOwner->text().toStdString();
+
+        if(name == "" || phone == "" || address == "" || email == ""|| zip == ""){
+            ui->errorLabelOwner->setText("Missing field(s)");
         } else {
+
+            bool verified = auth->insertOwnerToDB(username, name, phone, email, address, zip);
+            if (verified == true){
+                emit backClicked(); //back to the login page
+
+            } else {
+                ui->errorLabelOwner->setText("Shelter name already taken. Choose another");
+            }
+
+        }
+    } else {
+        string name = ui->shelterName->text().toStdString();
+        string phone = ui->phoneNumberOwner->text().toStdString();
+        string email = ui->emailOwner->text().toStdString();
+        string address = ui->addressOwner->text().toStdString();
+        string zip = ui->zipOwner->text().toStdString();
+
+        if( phone == "" || address == "" || email == ""|| zip == ""){
+            ui->errorLabelOwner->setText("Missing field(s)");
+        } else {
+
             auth->updateOwner(username, name, phone, email, address, zip);
             ui->ownerSavedMessage->setText("Your changes have been saved");
+
         }
     }
 

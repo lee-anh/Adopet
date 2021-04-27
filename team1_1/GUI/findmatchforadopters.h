@@ -29,12 +29,17 @@ private:
     SavedList sl;
     string user;
 
+    void galleryMode();
+    void listMode();
+
     void clearLabels();
     void loadSaveButtons(vector<QPushButton *> saveButtons);
     void saveButton(QPushButton* saveButton, int index);
 
 
 private slots:
+
+    //GALLERY VIEW
     void on_previous_clicked();
     void on_next_clicked();
 
@@ -49,6 +54,31 @@ private slots:
     void on_save4_clicked();
 
     void on_generateMatchesButton_clicked();
+
+
+    //LIST VIEW
+    void on_previousa_clicked();
+    void on_nexta_clicked();
+
+    void on_link1a_clicked();
+    void on_link2a_clicked();
+    void on_link3a_clicked();
+    void on_link4a_clicked();
+    void on_link5a_clicked();
+    void on_link6a_clicked();
+
+    void on_save1a_clicked();
+    void on_save2a_clicked();
+    void on_save3a_clicked();
+    void on_save4a_clicked();
+    void on_save5a_clicked();
+    void on_save6a_clicked();
+
+    void on_generateMatchesButtona_clicked();
+
+    void on_viewMode_currentIndexChanged(int index);
+    void on_viewModea_currentIndexChanged(int index);
+
 
 signals:
     void learnMoreClicked(Pet sendPet, bool b);

@@ -15,6 +15,14 @@ public:
     explicit PetAdopted(QWidget *parent = nullptr);
     ~PetAdopted();
 
+private slots:
+    void on_yes_clicked();
+
+    void on_no_clicked();
+
+signals:
+   // void yesAdopted();
+
 private:
     Ui::PetAdopted *ui;
 };
