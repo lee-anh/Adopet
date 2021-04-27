@@ -202,12 +202,42 @@ vector<Pet> Owner::getPets(){
 }
 
 /*
+ * Updates the specified Pet with new information provided by the owner
+ * @param p Pet to be updated
+*/
+void Owner::updatePet(Pet p){
+    QString s = "UPDATE pets SET ";
+    s += "name = \"" + QString::fromStdString(p.getName()) + "\", ";
+    s += "species = \"" + QString::fromStdString(p.getSpecies()) + "\", ";
+    s += "breed = \"" + QString::fromStdString(p.getBreed()) + "\", ";
+    s += "age = \"" + QString::fromStdString(p.getAge()) + "\", ";
+    s += "size = \"" + QString::fromStdString(p.getSize()) + "\", ";
+    s += "temperament = \"" + QString::fromStdString(p.getTemperament()) + "\", ";
+    s += "gender = \"" + QString::fromStdString(p.getGender()) + "\", ";
+    s += "goodWith = \"" + QString::fromStdString(p.getGoodWith()) + "\", ";
+    s += "shelter = \"" + QString::fromStdString(p.getShelter()) + "\", ";
+    s += "bio = \"" + QString::fromStdString(p.getBio()) + "\" ";
+    s += "WHERE id = ";
+    s += QString::number(p.getID()) + "";
+    //cout << "query is: " << s.toStdString() << endl;
+
+    if(petsDB.open()){
+        QSqlQuery query = QSqlQuery(petsDB);
+        query.exec(s);
+    }
+
+    fillPets();
+}
+
+/*
  * Uploads one pet at a time into the database
  * @param p Pet to be uploaded
 */
 void Owner::uploadPet(Pet p){
+    p.setID(lastPetID + 1);
+
     QString s = "INSERT INTO pets(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio) VALUES(";
-    s += QString::number(lastPetID + 1) + ", \"";    //arbitrary id
+    s += QString::number(p.getID()) + ", \"";    //arbitrary id
     s += QString::fromStdString(p.getName()) + "\", \"";
     s += QString::fromStdString(p.getSpecies()) + "\", \"";
     s += QString::fromStdString(p.getBreed()) + "\", \"";
@@ -223,6 +253,8 @@ void Owner::uploadPet(Pet p){
         QSqlQuery query = QSqlQuery(petsDB);
         query.exec(s);
     }
+
+    pets.push_back(p);
 
     lastPetID += 1;
 }
@@ -232,25 +264,17 @@ void Owner::uploadPet(Pet p){
  * @param p Pet to be removed
 */
 void Owner::removePet(Pet p){
-    QString s = "INSERT INTO pets(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio) VALUES(";
-    s += QString::number(lastPetID + 1) + ", \"";    //arbitrary id
-    s += QString::fromStdString(p.getName()) + "\", \"";
-    s += QString::fromStdString(p.getSpecies()) + "\", \"";
-    s += QString::fromStdString(p.getBreed()) + "\", \"";
-    s += QString::fromStdString(p.getAge()) + "\", \"";
-    s += QString::fromStdString(p.getSize()) + "\", \"";
-    s += QString::fromStdString(p.getTemperament()) + "\", \"";
-    s += QString::fromStdString(p.getGender()) + "\", \"";
-    s += QString::fromStdString(p.getGoodWith()) + "\", \"";
-    s += QString::fromStdString(p.getShelter()) + "\", \"";
-    s += QString::fromStdString(p.getBio()) + "\")";
+    QString s = "DELETE FROM pets WHERE id = ";
+    s += QString::number(p.getID()) + "";
+    //cout << "query is: " << s.toStdString() << endl;
 
     if(petsDB.open()){
         QSqlQuery query = QSqlQuery(petsDB);
         query.exec(s);
     }
 
-    lastPetID += 1;
+    lastPetID = getLastPetID();
+    fillPets();
 }
 
 

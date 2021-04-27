@@ -16,9 +16,9 @@ int main(){
 
     o.fillPets();
 
-    Pet p = Pet("name", "species", "breed", "age", "size", "temperament",
-                "gender", "goodWith", "shelter", "bio");
-    o.uploadPet(p);
+    Pet p = Pet(101, "nameCHANGEDAGAIN", "species", "breedCHANGED", "age", "size", "temperament",
+                "gender", "goodWithCHANGED", "best friends", "bio");
+    o.removePet(p);
 
     printPets(o.getPets());
 
