@@ -200,6 +200,8 @@ void PetGallery::displayPets(int start){
                 if(pets[start].getImageFiles().size() == 0){
                     //default picture
 
+
+                    //CHANGE HERE
                     QPixmap pixmap("../../../../../pictures/default.png");
                     picLabels[i]->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio));
                     /*

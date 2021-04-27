@@ -343,3 +343,8 @@ void PreferencesForm::on_parrot_stateChanged(int arg1){
 }
 
 
+
+void PreferencesForm::on_goToQuiz_clicked()
+{
+    emit toQuiz();
+}
