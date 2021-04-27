@@ -11,17 +11,13 @@ GUI::GUI(QWidget *parent)
 
     QString os = QSysInfo::productVersion();
     cout << os.toStdString() << endl;
-
-
-
+      
     if(os == "10.16"){
         dbName = "../../../../../projectDB.sqlite";
     } else {
         dbName = "../../projectDB.sqlite";
 
     }
-
-
 
     auth = Authentication(dbName);
 
@@ -105,12 +101,8 @@ void GUI::meetPet(Pet p){
      if(p.getImageFiles().size() == 0){
 
          //DIFFERENT OS
-         /*
          QString os = QSysInfo::productVersion();
-
-             //default picture
-             QPixmap pixmap("../../../../../pictures/default.png");
-             ui->petPic->setPixmap(pixmap.scaled(300, 300, Qt::KeepAspectRatio));
+           
          if(os == "10.16"){
              //default picture
              QPixmap pixmap("../../../../../pictures/default.png");
@@ -121,13 +113,8 @@ void GUI::meetPet(Pet p){
              ui->petPic->setPixmap(pixmap.scaled(300, 300, Qt::KeepAspectRatio));
 
          }
-         */
 
      } else {
-         //CHANGE HERE
-         string photo = "../../../../../pictures/" + p.getImageFiles()[0];
-
-         /*
          QString os = QSysInfo::productVersion();
 
          if(os == "10.16"){
@@ -136,7 +123,6 @@ void GUI::meetPet(Pet p){
              photo =  "../../pictures/" + p.getImageFiles()[0];
 
          }
-         */
 
          QPixmap pix(QString::fromStdString(photo));
          ui->petPic->setPixmap(pix.scaled(300, 300, Qt::KeepAspectRatio));

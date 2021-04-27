@@ -61,12 +61,12 @@ void PetRandomizer::initializeNameVecs(){
     age = {"young", "adult","senior"};
     gender = {"male", "female"};
     size = {"small", "medium", "large"};
-    imageFileNames = {"bird1.jpeg", "bird2.jpeg", "bird3.jpeg", "bird4.jpeg",
-                     "cat1.jpeg", "cat2.jpeg", "cat3.jpeg", "cat4.jpeg",
-                     "dog1.jpeg", "dog2.jpeg", "dog3.jpeg", "dog4.jpeg",
-                     "fish1.jpeg", "fish2.jpeg", "fish3.jpeg", "fish4.jpeg",
-                     "rabbit1.jpeg", "rabbit2.jpeg", "rabbit3.jpeg", "rabbit4.jpeg",
-                     "rodent1.jpeg", "rodent2.jpeg", "rodent3.jpeg", "rodent4.jpeg"};
+    imageFileNames = {"bird1.jpeg", "bird2.jpeg", "bird3.jpeg", "bird4.jpeg", "bird5.jpeg", "bird6.jpeg", "bird7.jpeg", "bird8.jpeg",
+                     "cat1.jpeg", "cat2.jpeg", "cat3.jpeg", "cat4.jpeg", "cat5.jpeg", "cat6.jpeg", "cat7.jpeg", "cat8.jpeg",
+                     "dog1.jpeg", "dog2.jpeg", "dog3.jpeg", "dog4.jpeg", "dog5.jpeg", "dog6.jpeg", "dog7.jpeg", "dog8.jpeg",
+                     "fish1.jpeg", "fish2.jpeg", "fish3.jpeg", "fish4.jpeg", "fish5.jpeg", "fish6.jpeg", "fish7.jpeg", "fish8.jpeg",
+                     "rabbit1.jpeg", "rabbit2.jpeg", "rabbit3.jpeg", "rabbit4.jpeg", "rabbit5.jpeg", "rabbit6.jpeg", "rabbit7.jpeg", "rabbit8.jpeg",
+                     "rodent1.jpeg", "rodent2.jpeg", "rodent3.jpeg", "rodent4.jpeg", "rodent5.jpeg", "rodent6.jpeg", "rodent7.jpeg", "rodent8.jpeg"};
 
     if(db.open()){
         QSqlQuery query = QSqlQuery();
@@ -203,7 +203,7 @@ void PetRandomizer::writeToCSV(){
                  << "," << petGen << "," << petGoodWith << "," << petShelter << "," << "Lorem ipsum";
         writePetsCsv << "\n";
 
-        int rand9 = rand() % 4;
+        int rand9 = rand() % 8 + 1;
         for(int j = 0; j < rand9; j++){
             string fileName = getFileNameBySpecies(petSpecies);
             string mediaType = getMediaType(fileName);

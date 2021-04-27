@@ -6,15 +6,14 @@ ManualSearch::ManualSearch(QWidget *parent) :
     ui(new Ui::ManualSearch)
 {
     ui->setupUi(this);
-    //search = new DBSearch("../../../../../projectDB.sqlite");
-
+      
     QString os = QSysInfo::productVersion();
     cout << os.toStdString() << endl;
+      
     if(os == "10.16"){
         search = new DBSearch("../../../../../projectDB.sqlite");
     } else {
         search = new DBSearch("../../projectDB.sqlite");
-
     }
 
     //able to initalize petgal here b/c username doesn't matter
