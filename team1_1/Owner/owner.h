@@ -37,7 +37,7 @@ public:
     void updatePet(Pet p);          //updates a current Pet with new information
     void removePet(Pet p);          //removes a Pet from all DBs and the owner
     void uploadPet(Pet p);          //uploads a Pet into the database one at a time
-    void uploadPets();    //Reads animals from a txt file and fills up the vector
+    void uploadPets(string filename);    //Reads animals from a txt file and fills up the vector
 
     int getLastPetID();         //loops through the pets database and gets the last pet id
 

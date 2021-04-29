@@ -31,7 +31,10 @@ private:
     DBSearch *search;
     PetGallery petgal;
     SavedList sl;
+    void galleryMode();
+    void listMode();
 
+    string mode;
 
     void checkBoxSearch(string wordToSearch, string category, int arg1);
     void clearCheckBoxes();
@@ -100,6 +103,28 @@ private slots:
 
 
     void on_surpriseMe_clicked();
+
+    void on_viewModeComboBox_currentIndexChanged(int index);
+
+    void on_nexta_clicked();
+
+    void on_previousa_clicked();
+
+    //list mode
+    void on_link1a_clicked();
+    void on_link2a_clicked();
+    void on_link3a_clicked();
+    void on_link4a_clicked();
+    void on_link5a_clicked();
+    void on_link6a_clicked();
+
+    void on_save1a_clicked();
+    void on_save2a_clicked();
+    void on_save3a_clicked();
+    void on_save4a_clicked();
+    void on_save5a_clicked();
+    void on_save6a_clicked();
+
 
 signals:
     void learnMoreClicked(Pet sendPet);

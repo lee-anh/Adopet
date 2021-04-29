@@ -21,7 +21,7 @@ private slots:
     void on_no_clicked();
 
 signals:
-   // void yesAdopted();
+   void yesAdopted();
 
 private:
     Ui::PetAdopted *ui;

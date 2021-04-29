@@ -11,6 +11,7 @@ void printPets(vector<Pet> p){
 }
 
 int main(){
+    /*
     Owner o = Owner();
     o.setName("best friends");
 
@@ -21,6 +22,7 @@ int main(){
     o.removePet(p);
 
     printPets(o.getPets());
+    */
 
     return 0;
 }

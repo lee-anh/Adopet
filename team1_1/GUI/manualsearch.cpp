@@ -16,12 +16,8 @@ ManualSearch::ManualSearch(QWidget *parent) :
         search = new DBSearch("../../projectDB.sqlite");
     }
 
-    //able to initalize petgal here b/c username doesn't matter
-    petgal = PetGallery(3,ui->previous, ui->next, ui->pageLine, {ui->name1, ui->name2, ui->name3},
-                        {ui->pic1, ui->pic2, ui->pic3},
-                        {ui->link1, ui->link2, ui->link3},
-                        {ui->save1, ui->save2, ui->save3},
-                        search->getPetVec());
+    galleryMode();
+
 
     //manual search doesn't display any results when the user starts
     //search->runNewQuery();
@@ -41,9 +37,41 @@ ManualSearch::~ManualSearch()
     delete ui;
 }
 
+void ManualSearch::galleryMode(){
+    //able to initalize petgal here b/c username doesn't matter
+    petgal = PetGallery(3,ui->previous, ui->next, ui->pageLine, {ui->name1, ui->name2, ui->name3},
+                        {ui->pic1, ui->pic2, ui->pic3},
+                        {ui->link1, ui->link2, ui->link3},
+                        {ui->save1, ui->save2, ui->save3},
+                        search->getPetVec());
+    ui->stackedWidget_2->setCurrentIndex(0);
+    ui->pageLine->setText("Search for pets using search bar and checkboxes!");
+    mode = "gallery";
+    clearCheckBoxes();
+
+}
+
+void ManualSearch::listMode(){
+    petgal = PetGallery(true, 6, ui->previousa, ui->nexta, ui->pageLinea,
+                        {ui->name1a, ui->name2a, ui->name3a, ui->name4a, ui->name5a, ui->name6a},
+                        {ui->info1a, ui->info2a, ui->info3a, ui->info4a, ui->info5a, ui->info6a},
+                        {ui->link1a, ui->link2a, ui->link3a, ui->link4a, ui->link5a, ui->link6a},
+                        {ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a},
+                        search->getPetVec());
+    ui->stackedWidget_2->setCurrentIndex(1);
+    ui->pageLinea->setText("Search for pets using search bar and checkboxes!");
+    mode = "list";
+    clearCheckBoxes();
+
+}
+
 void ManualSearch::setSavedList(SavedList s){
     sl = s;
-    loadSaveButtons({ui->save1, ui->save2, ui->save3});
+    if(mode == "gallery"){
+        loadSaveButtons({ui->save1, ui->save2, ui->save3});
+    } else {
+        loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
+    }
 
 }
 
@@ -70,7 +98,11 @@ void ManualSearch::checkBoxSearch(string wordToSearch, string category, int arg1
     petgal.displayPets(0);
 
     //reload save buttons
-    loadSaveButtons({ui->save1, ui->save2, ui->save3});
+    if(mode == "gallery"){
+        loadSaveButtons({ui->save1, ui->save2, ui->save3});
+    } else {
+        loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
+    }
 
 }
 
@@ -202,7 +234,11 @@ void ManualSearch::on_searchButton_clicked()
     petgal.updatePetVec(search->getPetVec());
     petgal.displayPets(0);
     petgal.setPageNum(1);
-    loadSaveButtons({ui->save1, ui->save2, ui->save3});
+    if(mode == "gallery"){
+        loadSaveButtons({ui->save1, ui->save2, ui->save3});
+    } else {
+        loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
+    }
 }
 
 void ManualSearch::clearCheckBoxes(){
@@ -307,5 +343,98 @@ void ManualSearch::on_surpriseMe_clicked()
     petgal.updatePetVec(search->getPetVec());
     petgal.displayPets(0);
     petgal.setPageNum(1);
-    loadSaveButtons({ui->save1, ui->save2, ui->save3});
+    if(mode == "gallery"){
+        loadSaveButtons({ui->save1, ui->save2, ui->save3});
+    } else {
+        loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
+    }
 }
+
+void ManualSearch::on_viewModeComboBox_currentIndexChanged(int index)
+{
+    if(index == 1){
+        galleryMode();
+    } else if (index == 2){
+        listMode();
+    }
+}
+
+void ManualSearch::on_nexta_clicked()
+{
+    petgal.next();
+    loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
+}
+
+void ManualSearch::on_previousa_clicked()
+{
+    petgal.previous();
+    loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
+}
+
+void ManualSearch::on_link1a_clicked()
+{
+
+    emit learnMoreClicked(petgal.getPet(0), ui->save1a->isChecked());
+}
+
+void ManualSearch::on_link2a_clicked(){
+
+    emit learnMoreClicked(petgal.getPet(1), ui->save2a->isChecked());
+}
+
+void ManualSearch::on_link3a_clicked()
+{
+
+    emit learnMoreClicked(petgal.getPet(2), ui->save3a->isChecked());
+}
+void ManualSearch::on_link4a_clicked()
+{
+
+    emit learnMoreClicked(petgal.getPet(3), ui->save4a->isChecked());
+}
+
+void ManualSearch::on_link5a_clicked(){
+
+    emit learnMoreClicked(petgal.getPet(4), ui->save5a->isChecked());
+}
+
+void ManualSearch::on_link6a_clicked()
+{
+
+    emit learnMoreClicked(petgal.getPet(5), ui->save6a->isChecked());
+}
+
+
+void ManualSearch::on_save1a_clicked()
+{
+    saveButton(ui->save1a, 0);
+
+}
+
+void ManualSearch::on_save2a_clicked()
+{
+    saveButton(ui->save2a, 1);
+}
+
+void ManualSearch::on_save3a_clicked()
+{
+    saveButton(ui->save3a, 2);
+}
+
+void ManualSearch::on_save4a_clicked()
+{
+    saveButton(ui->save4a, 3);
+
+}
+
+void ManualSearch::on_save5a_clicked()
+{
+    saveButton(ui->save5a, 4);
+}
+
+void ManualSearch::on_save6a_clicked()
+{
+    saveButton(ui->save6a, 5);
+}
+
+

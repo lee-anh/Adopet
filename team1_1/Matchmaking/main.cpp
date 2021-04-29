@@ -3,6 +3,7 @@
 
 using namespace std;
 
+/*
 //checking if matchmaking for adopters works
 void checkPetMatches(){
     Matchmaking match = Matchmaking();
@@ -36,9 +37,11 @@ void checkAllShelterPetsMatches(){
     match.fillPets();
     match.findMatchesForPets(shelterName);
 }
+*/
 
 int main(){
-    checkPetMatches();
+    //checkPetMatches();
     //checkAdopterMatches();
     //checkAllShelterPetsMatches();
+    return 0;
 }
