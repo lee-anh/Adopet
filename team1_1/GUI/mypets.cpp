@@ -9,6 +9,10 @@ MyPets::MyPets(QWidget *parent) :
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
     previousPage = 0;
+
+    connect(&petAdopted, SIGNAL(yesAdopted()), this, SLOT(backToMyPets()));
+
+
 }
 
 MyPets::~MyPets()
@@ -35,11 +39,7 @@ void MyPets::goToMyPets(){
 
     //update pets from database
     owner->fillPets();
-
     galleryMode();
-
-
-
     mode = "edit";
 
 }
@@ -75,9 +75,15 @@ void MyPets::listMode(){
 void MyPets::on_markAsAdopted_clicked()
 {
     //QDialog
-     PetAdopted petAdopted;
      petAdopted.setModal(true);
      petAdopted.exec();
+
+}
+
+void MyPets::backToMyPets(){
+
+    owner->removePet(currentPet);
+    goToMyPets();
 }
 
 void MyPets::on_singleUploadButton_clicked()
@@ -126,12 +132,21 @@ void MyPets::on_saveChangesButton_clicked()
         ui->errorBarUploadPet->setText("Missing field(s)");
     } else {
         if(mode == "upload"){
-            int petID = owner->getLastPetID();
+            int petID = owner->getLastPetID() + 1;
             Pet p = Pet(petID, petName, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
             //add pet to the database
             owner->uploadPet(p);
+            ui->errorBarUploadPet->clear();
+            ui->savedLine->setText("Pet uploaded successfully");
+            currentPet = p;
+            mode = "edit";
         } else if (mode == "edit"){
-            //TODO
+            ui->errorBarUploadPet->clear();
+            ui->savedLine->setText("Your changes have been saved");
+            Pet p = Pet(currentPet.getID(), petName, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+            //update pet objects
+            petgal.updatePet(p);
+            owner->updatePet(p);
         }
     }
 
@@ -156,12 +171,13 @@ void MyPets::on_backButton_clicked()
 
 
 void MyPets::toEditPet(Pet p){
+    clearAll();
+    currentPet = p;
     ui->stackedWidget->setCurrentIndex(2);
 
     ui->title->setText("Edit Pet");
     string name = p.getName();
-    transform(name.begin(), name.end(), name.begin(), ::toupper);
-    ui->name->setText(QString::fromStdString(name));
+    ui->name->setText(QString::fromStdString(name).toUpper());
 
     getIndex(p.getSpecies(), "species");
     getIndex(p.getBreed(), "breed");
@@ -178,6 +194,7 @@ void MyPets::toEditPet(Pet p){
     }
 
     ui->multimediaBox->setPlainText(QString::fromStdString(image));
+    ui->errorBarUploadPet->clear();
 
 }
 
@@ -365,11 +382,14 @@ void MyPets::clearAll(){
 
     ui->bioBox->clear();
     ui->multimediaBox->clear();
+    ui->errorBarUploadPet->clear();
+    ui->savedLine->clear();
 
 }
 
 void MyPets::on_link1a_clicked()
 {
+    clearAll();
     whichPet = 0;
     toEditPet(petgal.getPet(0));
 
@@ -377,6 +397,7 @@ void MyPets::on_link1a_clicked()
 
 void MyPets::on_link2a_clicked()
 {
+    clearAll();
     whichPet = 1;
     toEditPet(petgal.getPet(1));
 
@@ -384,6 +405,7 @@ void MyPets::on_link2a_clicked()
 
 void MyPets::on_link3a_clicked()
 {
+    clearAll();
     whichPet = 2;
     toEditPet(petgal.getPet(2));
 
@@ -391,12 +413,14 @@ void MyPets::on_link3a_clicked()
 
 void MyPets::on_link4a_clicked()
 {
+    clearAll();
     whichPet = 3;
     toEditPet(petgal.getPet(3));
 
 }
 void MyPets::on_link5a_clicked()
 {
+    clearAll();
     whichPet = 4;
     toEditPet(petgal.getPet(4));
 
@@ -404,6 +428,7 @@ void MyPets::on_link5a_clicked()
 
 void MyPets::on_link6a_clicked()
 {
+    clearAll();
     whichPet = 5;
     toEditPet(petgal.getPet(5));
 
@@ -411,6 +436,7 @@ void MyPets::on_link6a_clicked()
 
 void MyPets::on_link7a_clicked()
 {
+    clearAll();
     whichPet = 6;
     toEditPet(petgal.getPet(6));
 
@@ -418,6 +444,7 @@ void MyPets::on_link7a_clicked()
 
 void MyPets::on_link8a_clicked()
 {
+    clearAll();
     whichPet = 7;
     toEditPet(petgal.getPet(7));
 
@@ -451,3 +478,78 @@ void MyPets::on_viewModea_currentIndexChanged(int index)
     }
 }
 
+
+void MyPets::on_speciesComboBox_currentIndexChanged(int index)
+{
+    ui->errorBarUploadPet->setText("You have unsaved changes");
+}
+
+void MyPets::on_breedComboBox_currentIndexChanged(int index)
+{
+    ui->errorBarUploadPet->setText("You have unsaved changes");
+}
+
+void MyPets::on_temperamentComboBox_currentIndexChanged(int index)
+{
+    ui->errorBarUploadPet->setText("You have unsaved changes");
+}
+void MyPets::on_genderComboBox_currentIndexChanged(int index)
+{
+    ui->errorBarUploadPet->setText("You have unsaved changes");
+}
+
+void MyPets::on_sizeComboBox_currentIndexChanged(int index)
+{
+    ui->errorBarUploadPet->setText("You have unsaved changes");
+}
+
+void MyPets::on_goodWithComboBox_currentIndexChanged(int index)
+{
+    ui->errorBarUploadPet->setText("You have unsaved changes");
+}
+void MyPets::on_ageComboBox_currentIndexChanged(int index)
+{
+    ui->errorBarUploadPet->setText("You have unsaved changes");
+}
+
+
+void MyPets::on_speciesLine_textEdited(const QString &arg1)
+{
+    ui->errorBarUploadPet->setText("You have unsaved changes");
+}
+
+void MyPets::on_breedLine_textEdited(const QString &arg1)
+{
+    ui->errorBarUploadPet->setText("You have unsaved changes");
+}
+void MyPets::on_temperamentLine_textEdited(const QString &arg1)
+{
+    ui->errorBarUploadPet->setText("You have unsaved changes");
+}
+
+void MyPets::on_goodWithLine_textEdited(const QString &arg1)
+{
+    ui->errorBarUploadPet->setText("You have unsaved changes");
+}
+
+void MyPets::on_bioBox_textChanged()
+{
+     ui->errorBarUploadPet->setText("You have unsaved changes");
+}
+
+void MyPets::on_multimediaBox_textChanged()
+{
+     ui->errorBarUploadPet->setText("You have unsaved changes");
+}
+
+void MyPets::on_toBulkUpload_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+}
+
+void MyPets::on_pushButton_3_clicked()
+{
+    TagGuide tg;
+    tg.setModal(true);
+    tg.exec();
+}

@@ -16,7 +16,9 @@ PetAdopted::~PetAdopted()
 void PetAdopted::on_yes_clicked()
 {
     //TODO Remove the pet
-   // emit yesAdopted();
+    this->close();
+    emit yesAdopted();
+
 }
 
 void PetAdopted::on_no_clicked()

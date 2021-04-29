@@ -8,6 +8,7 @@
 #include "../Owner/owner.h"
 #include "../Pets/pet.h"
 #include "petgallery.h"
+#include "tagguide.h"
 
 namespace Ui {
 class MyPets;
@@ -29,6 +30,7 @@ private:
     Ui::MyPets *ui;
     Owner *owner;
     PetGallery petgal;
+    PetAdopted petAdopted;
 
     int previousPage;
 
@@ -41,11 +43,15 @@ private:
 
     string mode;
     int whichPet;
+    Pet currentPet;
 
     void clearAll();
 
 private slots:
     void on_markAsAdopted_clicked();
+
+    //for signal
+    void backToMyPets();
 
 
     void on_singleUploadButton_clicked();
@@ -78,6 +84,22 @@ private slots:
 
 
     //list mode
+    void on_speciesComboBox_currentIndexChanged(int index);
+    void on_breedComboBox_currentIndexChanged(int index);
+    void on_temperamentComboBox_currentIndexChanged(int index);
+    void on_genderComboBox_currentIndexChanged(int index);
+    void on_sizeComboBox_currentIndexChanged(int index);
+    void on_goodWithComboBox_currentIndexChanged(int index);
+    void on_ageComboBox_currentIndexChanged(int index);
+    void on_speciesLine_textEdited(const QString &arg1);
+    void on_breedLine_textEdited(const QString &arg1);
+    void on_temperamentLine_textEdited(const QString &arg1);
+    void on_goodWithLine_textEdited(const QString &arg1);
+    void on_bioBox_textChanged();
+    void on_multimediaBox_textChanged();
+
+    void on_toBulkUpload_clicked();
+    void on_pushButton_3_clicked();
 };
 
 #endif // MYPETS_H

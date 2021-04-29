@@ -45,8 +45,14 @@ Pet::Pet(int petId, string petName, string petSpecies, string petBreed,
     goodWith = petGoodWith;
     shelter = petShelter;
     bio = petBio;
-    //fillImageFiles("../../../../../projectDB.sqlite");
-    fillImageFiles("../../projectDB.sqlite");
+
+    QString os = QSysInfo::productVersion();
+    if(os == "10.16"){
+        fillImageFiles("../../../../../projectDB.sqlite");
+    } else {
+        fillImageFiles("../../projectDB.sqlite");
+
+    }
 }
 
 Pet::~Pet(){

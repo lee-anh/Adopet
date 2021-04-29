@@ -23,6 +23,7 @@
 #include "preferencesform.h"
 #include "mypets.h"
 #include "quiz.h"
+#include "findmatchforpets.h"
 
 //QWidgets
 #include "logout.h"
@@ -62,6 +63,7 @@ private:
     MyPets myPets;
     MyFavoritesTwo myFavsList;
     Quiz qz;
+    FindMatchForPets fmForPets;
 
     //QDialogs
     Logout lg;

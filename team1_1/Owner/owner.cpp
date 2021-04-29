@@ -2,7 +2,7 @@
 
 Owner::Owner(){
     //default constructor
-    cout << "default constructor called (owner)" << endl;
+    //cout << "default constructor called (owner)" << endl;
 
     dbName = "../../projectDB.sqlite";
     openDB();
@@ -325,8 +325,8 @@ Pet Owner::makePet(QStringList petData){
  * Uploads all the pets into the database
  * @file Txt file that contains all the pets to be uploaded
 */
-void Owner::uploadPets(){
-    QFile file("./pets.txt");
+void Owner::uploadPets(string filename){
+    QFile file(QString::fromStdString(filename));
     if(!file.open(QIODevice::ReadOnly)) {
         cout << "Error: file not opened!\n";
     }

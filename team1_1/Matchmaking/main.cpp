@@ -3,6 +3,7 @@
 
 using namespace std;
 
+/*
 //checking if matchmaking for adopters works
 void checkPetMatches(){
     Matchmaking match = Matchmaking();
@@ -42,9 +43,12 @@ void checkAllShelterPetsMatches(){
              << "   Score: " << res.at(i).second.second << endl;
     }
 }
+*/
 
 int main(){
     //checkPetMatches();
     checkAdopterMatches();
+    //checkAdopterMatches();
     //checkAllShelterPetsMatches();
+    return 0;
 }
