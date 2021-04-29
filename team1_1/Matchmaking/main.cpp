@@ -34,11 +34,17 @@ void checkAllShelterPetsMatches(){
     cout << "Find matches for pets in the shelter: ";
     getline(cin, shelterName);
     match.fillPets();
-    match.findMatchesForPets(shelterName);
+    vector<pair<Pet, pair<Adopter, int>>> res = match.findMatchesForPets(shelterName);
+
+    for(int i = 0; i < (int)res.size(); i++){
+        cout << "Pet: " << res.at(i).first.getName()
+             << "   Adopter: " << res.at(i).second.first.getUsername()
+             << "   Score: " << res.at(i).second.second << endl;
+    }
 }
 
 int main(){
-    checkPetMatches();
+    //checkPetMatches();
     //checkAdopterMatches();
-    //checkAllShelterPetsMatches();
+    checkAllShelterPetsMatches();
 }

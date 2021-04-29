@@ -116,7 +116,7 @@ void GUI::meetPet(Pet p){
 
      } else {
          QString os = QSysInfo::productVersion();
-
+         string photo;
          if(os == "10.16"){
              photo =  "../../../../../pictures/" + p.getImageFiles()[0];
          } else {

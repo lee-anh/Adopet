@@ -168,8 +168,10 @@ vector<pair<Adopter, int>> Matchmaking::findBestMatchForPet(Pet p){
 
 /*
  * Loops through all the pets in the vector and finds adopters whose preference match the pet.
+ * @param shelterName Name of the shelter whose pets will be matched
+ * @return a vector of pets and respective matches
 */
-void Matchmaking::findMatchesForPets(string shelterName){
+vector<pair<Pet, pair<Adopter, int>>> Matchmaking::findMatchesForPets(string shelterName){
     //filling out a vector with pets in the given shelter
     vector<Pet> currShelterPets;
     for(int i = 0; i < (int)allPets.size(); i++){
@@ -179,10 +181,14 @@ void Matchmaking::findMatchesForPets(string shelterName){
     //getting matches for each pet in the said shelter
     for(int i = 0; i < (int)currShelterPets.size(); i++){
         vector<pair<Adopter, int>> tempMatches = findBestMatchForPet(currShelterPets.at(i));
-        cout << "Match for " << currShelterPets.at(i).getName()
-             << " - Adopter: " << tempMatches.at(0).first.getUsername()
-             << "   Score: " << tempMatches.at(0).second << endl;
+        allResultsForPets.push_back(make_pair(currShelterPets.at(i), tempMatches.at(0)));
+
+        //cout << "Match for " << currShelterPets.at(i).getName()
+          //   << " - Adopter: " << tempMatches.at(0).first.getUsername()
+            // << "   Score: " << tempMatches.at(0).second << endl;
     }
+
+    return allResultsForPets;
 }
 
 /*
