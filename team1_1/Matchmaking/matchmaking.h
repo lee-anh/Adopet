@@ -19,7 +19,7 @@ public:
     void closeDB();                                                                      //closes the database
     void fillPets();                                                                     //stores all the pets in the DB in the vector
     Pet makePet(QSqlQuery query);                                                                      //makes and retrieves a Pet by passing the query in a DB
-    void findMatchesForPets(string shelterName);                                         //finds matching potential adopters for all pets in the DB
+    vector<pair<Pet, pair<Adopter, int>>> findMatchesForPets(string shelterName);                                         //finds matching potential adopters for all pets in the DB
     vector<pair<Adopter, int>> findBestMatchForPet(Pet p);                             //finds the best adopter match for the specified pet
     vector<pair<Adopter, int>> findMatchesForPet(Pet p);                                                      //finds the matching potential adopters based on pet attributes
     vector<pair<Adopter, int>> findMatchesForPet(int petID);                                                 // finds the pet with the given name and finds adopter matches for it
@@ -41,6 +41,7 @@ public:
 private:
     vector<pair<Pet, int>> petResults;
     vector<pair<Adopter, int>> adopterResults;
+    vector<pair<Pet, pair<Adopter, int>>> allResultsForPets;
     vector<Pet> allPets;
     QSqlDatabase db;
 
