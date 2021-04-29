@@ -303,6 +303,19 @@ Pet PetGallery::getPet(int pos){
     return petsToDisplay[pos];
 }
 
+void PetGallery::updatePet(Pet p){
+    for(int i = 0; i < (int) petsToDisplay.size(); i++){
+        if(petsToDisplay.at(i).getID() == p.getID()){
+            petsToDisplay.at(i) = p;
+        }
+    }
+    for(int j = 0; j < (int) pets.size(); j++){
+        if(pets.at(j).getID() == p.getID()){
+            pets.at(j) = p;
+        }
+    }
+}
+
 vector<Pet> PetGallery::getPetVec(){
     return pets;
 }

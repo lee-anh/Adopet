@@ -11,7 +11,7 @@ SavedList::SavedList()
     dbName =  "../../projectDB.sqlite";
    // openDB();
    // loadList();
-    cout << "default constructor called" <<endl;
+    //cout << "default constructor called (saved list)" <<endl;
 }
 
 SavedList::SavedList(string username){
@@ -59,7 +59,7 @@ void SavedList::savePet(int petID){
         QSqlQuery query = QSqlQuery(dbSL);
         query.exec(qry);
     }
-    cout << qry.toStdString() << endl;
+   // cout << qry.toStdString() << endl;
 
 }
 

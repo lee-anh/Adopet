@@ -20,6 +20,7 @@ public:
     ~UserInfo();
 
     void setAuth(Authentication *a);
+    void setAuth(Authentication *a, string uname);
     void createAccountClikced();
     void adopterMyInfoClicked();
     void ownerMyInfoClicked();
@@ -46,6 +47,7 @@ private:
 
     void clearAdopterInfo();
     void clearOwnerInfo();
+    void clearCreateAccount();
 
 signals:
     void backClicked();

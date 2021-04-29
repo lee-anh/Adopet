@@ -124,7 +124,23 @@ void Matchmaking::fillPets(){
 */
 vector<pair<Adopter, int>> Matchmaking::fillAdopterResults(string name, int score, vector<pair<Adopter, int>> res){
     Adopter adopter = Adopter();
+
     adopter.setUsername(name);
+
+    /*
+    if(db.open()){
+        QSqlQuery query = QSqlQuery(db);
+        QString s = "SELECT emailAddress FROM adopter WHERE username = \"" + QString::fromStdString(name) + "\"";
+        query.exec(s);
+        while(query.next()){
+            adopter.setEmailAddress(query.value(0).toString().toStdString());
+        }
+
+    }
+    */
+
+
+
     res.push_back(make_pair(adopter, score));
     return res;
 }
@@ -137,9 +153,10 @@ vector<pair<Adopter, int>> Matchmaking::fillAdopterResults(string name, int scor
 */
 vector<pair<Adopter, int>> Matchmaking::findBestMatchForPet(Pet p){
     vector<pair<Adopter, int>> tempAdopterResults;
+    //tempAdopterResults.clear();
     if(db.open()){
         QSqlQuery query = QSqlQuery(db);
-        QString s = "SELECT * FROM preferences";
+        QString s = "SELECT adopterUsername, attribute, attributeType FROM preferences";
         query.exec(s);
         string userName = "";
         //need to handle score change and userName change
@@ -190,9 +207,12 @@ void Matchmaking::findMatchesForPets(string shelterName){
  * @param name Name of pet
  * @return Vector of Adopters with their scores
 */
-vector<pair<Adopter, int>> Matchmaking::findMatchesForPet(string name){
+vector<pair<Adopter, int>> Matchmaking::findMatchesForPet(int petID){
     for(int i = 0; i < (int)allPets.size(); i++){
-        if(allPets.at(i).getName() == name) return findMatchesForPet(allPets.at(i));
+        if(allPets.at(i).getID() == petID) {
+            //cout << "Got to 213 matchmaking" << endl;
+            return findMatchesForPet(allPets.at(i));
+        }
     }
     return adopterResults;
 }

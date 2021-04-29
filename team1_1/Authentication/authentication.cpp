@@ -23,6 +23,7 @@ Authentication::Authentication(string dbfilepath)
     dbName = dbfilepath;
     openDB();
 
+
     //temporary instance variable assignments
     //authOwner = Owner();
     //authAdopter = NULL;
@@ -455,3 +456,4 @@ bool Authentication::checkShelterName(string shelterName){
 
     return false;
 }
+
