@@ -45,6 +45,6 @@ void checkAllShelterPetsMatches(){
 
 int main(){
     //checkPetMatches();
-    //checkAdopterMatches();
-    checkAllShelterPetsMatches();
+    checkAdopterMatches();
+    //checkAllShelterPetsMatches();
 }
