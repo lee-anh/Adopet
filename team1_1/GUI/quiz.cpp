@@ -11,6 +11,7 @@ Quiz::Quiz(QWidget *parent) :
     ui->finishquiz->setVisible(false);
     currentPageNum = 0;
     ui->stackedWidget->setCurrentIndex(currentPageNum);
+    pref = new Preferences();
 }
 
 Quiz::~Quiz()
@@ -32,11 +33,15 @@ void Quiz::on_nextpage_clicked()
 void Quiz::on_previouspage_clicked()
 {
     if(currentPageNum==0){
+        emit backToPreference(*pref);
         return;
     }
     currentPageNum--;
     displayQuiz();
 }
+
+
+
 
 void Quiz::displayQuiz(){
     ui->stackedWidget->setCurrentIndex(currentPageNum);
@@ -53,6 +58,8 @@ void Quiz::displayQuiz(){
     }
 }
 
-void Quiz::setPreference(Preferences* p){
-    pref = p;
+
+void Quiz::on_finishquiz_clicked()
+{
+    emit backToPreference(*pref);
 }

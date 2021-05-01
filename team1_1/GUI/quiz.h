@@ -16,12 +16,16 @@ public:
     explicit Quiz(QWidget *parent = nullptr);
     ~Quiz();
     void displayQuiz();
-    void setPreference(Preferences *p);
+    void saveQuiz();
 
 private slots:
     void on_nextpage_clicked();
-
     void on_previouspage_clicked();
+
+    void on_finishquiz_clicked();
+
+signals:
+    void backToPreference(Preferences p);
 
 private:
     Ui::Quiz *ui;

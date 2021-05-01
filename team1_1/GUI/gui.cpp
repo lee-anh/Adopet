@@ -59,6 +59,7 @@ GUI::GUI(QWidget *parent)
     connect(&pform, SIGNAL(toQuiz()), this, SLOT(goToQuiz()));
     connect(&unsave, SIGNAL(unsavePet()), this, SLOT(unheartPet()));
     connect(&myPets, SIGNAL(goToMeetPet(Pet)), this, SLOT(goToMeetMe(Pet)));
+    connect(&qz, SIGNAL(backToPreference(Preferences)), this, SLOT(quizToPreference(Preferences)));
 
 
     cout << "After signals and slots" << endl;
@@ -338,8 +339,6 @@ void GUI::logOut(){
 
 void GUI::goToQuiz(){
     ui->stackedWidget->setCurrentIndex(10);
-    Preferences pref = adopter->getPreferences();
-    qz.setPreference(&pref);
 }
 
 
@@ -353,6 +352,12 @@ void GUI::goToMeetMe(Pet p){
     ui->stackedWidget->setCurrentIndex(1);
     meetPet(p);
     previousPage = 8;
+}
+
+void GUI::quizToPreference(Preferences pf){
+    //adopter->setPreference(pf);
+    ui->stackedWidget->setCurrentIndex(7);
+    on_navMyPreferences_clicked();
 }
 
 void GUI::on_navHomeButton_clicked()
@@ -408,7 +413,6 @@ void GUI::on_navMyPreferences_clicked()
 
     pform.clearCheckBoxes(); //clear
     pform.loadPreferences(); //reload
-
 }
 
 
