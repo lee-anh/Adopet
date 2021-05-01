@@ -68,6 +68,7 @@ public:
 
     void setPageNum(int p);
     Pet getPet(int pos);
+    void updatePet(Pet p);
 
     vector<Pet> getPetVec();
 

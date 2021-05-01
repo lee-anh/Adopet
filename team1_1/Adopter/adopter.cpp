@@ -16,7 +16,7 @@ Adopter::Adopter()
     //dbName = "../../projectDB.sqlite";
     //openDB();
     //fillPreferences();
-    cout << "default constructor called (adopter)" << endl;
+    //cout << "default constructor called (adopter)" << endl;
 }
 
 /*!

@@ -72,6 +72,7 @@ void DBSearch::search(string s){
             word = word + x;
         }
         words.push_back(word);
+        cout << word << endl;
     }
 
     for(int i = 0; i < (int) words.size(); i++){
@@ -80,10 +81,12 @@ void DBSearch::search(string s){
 
     //species
     for(int i = 0; i < (int) mainSpecies.size(); i++){
+
         if(s == mainSpecies.at(i)){
             attributeToSearch = "species";
             break;
         }
+
     }
 
     //breed
@@ -170,6 +173,7 @@ void DBSearch::search(string s){
 
     //add to attributes to search for
     addToAttributes(s, attributeToSearch);
+
 
     }
    // return true; //TODO
@@ -266,6 +270,7 @@ string DBSearch::createQuery(){
             }
         }
     }
+    //cout << query << endl;
 
     return query;
 }
@@ -395,7 +400,7 @@ void DBSearch::fillVecsFromDB(){
     QSqlQuery query = QSqlQuery(dbSearchdb);
 
     //species
-    QString qs = "SELECT DISTINCT attribute FROM preferences WHERE attributeType = \"species\"";
+    QString qs = "SELECT DISTINCT species FROM pets";
     query.exec(qs);
     while(query.next()){
         string s = query.value(0).toString().toStdString();
@@ -403,7 +408,7 @@ void DBSearch::fillVecsFromDB(){
     }
 
     //breed
-    QString qs2 = "SELECT DISTINCT attribute FROM preferences WHERE attributeType = \"breed\"";
+    QString qs2 = "SELECT DISTINCT breed FROM pets";
     query.exec(qs2);
     while(query.next()){
         string s = query.value(0).toString().toStdString();
@@ -411,7 +416,7 @@ void DBSearch::fillVecsFromDB(){
     }
 
     //temperament
-    QString qs3 = "SELECT DISTINCT attribute FROM preferences WHERE attributeType = \"temperament\"";
+    QString qs3 = "SELECT DISTINCT temperament FROM pets";
     query.exec(qs3);
     while(query.next()){
         string s = query.value(0).toString().toStdString();
@@ -420,7 +425,7 @@ void DBSearch::fillVecsFromDB(){
 
 
     //goodWith
-    QString qs4 = "SELECT DISTINCT attribute FROM preferences WHERE attributeType = \"goodWith\"";
+    QString qs4 = "SELECT DISTINCT goodWith FROM pets";
     query.exec(qs4);
     while(query.next()){
         string s = query.value(0).toString().toStdString();
@@ -429,7 +434,7 @@ void DBSearch::fillVecsFromDB(){
 
 
     //shelter
-    QString qs5 = "SELECT DISTINCT attribute FROM preferences WHERE attributeType = \"shelter\"";
+    QString qs5 = "SELECT DISTINCT shelter FROM pets";
     query.exec(qs5);
     while(query.next()){
         string s = query.value(0).toString().toStdString();
@@ -492,3 +497,29 @@ int DBSearch::getIndex(string category){
     }
 }
 
+/*
+bool DBSearch::match(char *first, char *second){
+    //PULLED FROM https://www.geeksforgeeks.org/wildcard-character-matching/
+    // If we reach at the end of both strings, we are done
+        if (*first == '\0' && *second == '\0')
+            return true;
+
+        // Make sure that the characters after '*' are present
+        // in second string. This function assumes that the first
+        // string will not contain two consecutive '*'
+        if (*first == '*' && *(first+1) != '\0' && *second == '\0')
+            return false;
+
+        // If the first string contains '?', or current characters
+        // of both strings match
+        if (*first == '?' || *first == *second)
+            return match(first+1, second+1);
+
+        // If there is *, then there are two possibilities
+        // a) We consider current character of second string
+        // b) We ignore current character of second string.
+        if (*first == '*')
+            return match(first+1, second) || match(first, second+1);
+        return false;
+}
+*/

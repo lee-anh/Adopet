@@ -20,13 +20,30 @@ UserInfo::~UserInfo()
 }
 
 void UserInfo::setAuth(Authentication *a){
+    cout << "uinfo 23" << endl;
     auth = a;
+    cout << "uinfo 25" << endl;
     username = a->getAuthenticatedAdopter()->getUsername();
+    cout << "uinfo 27" << endl;
+}
+
+void UserInfo::setAuth(Authentication *a, string uname){
+    auth = a;
+    username = uname;
 }
 
 void UserInfo::createAccountClikced(){
 
+    //goes to create account page
+    clearCreateAccount();
     ui->stackedWidget->setCurrentIndex(0);
+    firstTime = true;
+
+    //owner stuff
+    ui->shelterName->clear();
+    ui->nameOwner->setVisible(true);
+
+
 }
 
 void UserInfo::adopterMyInfoClicked(){
@@ -200,4 +217,11 @@ void UserInfo::clearOwnerInfo(){
 
     ui->errorLabelOwner->clear();
     ui->ownerSavedMessage->clear();
+}
+
+void UserInfo::clearCreateAccount(){
+    ui->username->clear();
+    ui->password->clear();
+    ui->passwordVerification->clear();
+    ui->accountType->setCurrentIndex(0);
 }

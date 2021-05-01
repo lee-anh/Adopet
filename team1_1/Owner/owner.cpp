@@ -2,7 +2,7 @@
 
 Owner::Owner(){
     //default constructor
-    cout << "default constructor called (owner)" << endl;
+    //cout << "default constructor called (owner)" << endl;
 
     dbName = "../../projectDB.sqlite";
     openDB();
@@ -236,26 +236,39 @@ void Owner::updatePet(Pet p){
 void Owner::uploadPet(Pet p){
     p.setID(lastPetID + 1);
 
-    QString s = "INSERT INTO pets(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio) VALUES(";
-    s += QString::number(p.getID()) + ", \"";    //arbitrary id
-    s += QString::fromStdString(p.getName()) + "\", \"";
-    s += QString::fromStdString(p.getSpecies()) + "\", \"";
-    s += QString::fromStdString(p.getBreed()) + "\", \"";
-    s += QString::fromStdString(p.getAge()) + "\", \"";
-    s += QString::fromStdString(p.getSize()) + "\", \"";
-    s += QString::fromStdString(p.getTemperament()) + "\", \"";
-    s += QString::fromStdString(p.getGender()) + "\", \"";
-    s += QString::fromStdString(p.getGoodWith()) + "\", \"";
-    s += QString::fromStdString(p.getShelter()) + "\", \"";
-    s += QString::fromStdString(p.getBio()) + "\")";
+    QString s1 = "INSERT INTO pets(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio) VALUES(";
+    s1 += QString::number(p.getID()) + ", \"";
+    s1 += QString::fromStdString(p.getName()) + "\", \"";
+    s1 += QString::fromStdString(p.getSpecies()) + "\", \"";
+    s1 += QString::fromStdString(p.getBreed()) + "\", \"";
+    s1 += QString::fromStdString(p.getAge()) + "\", \"";
+    s1 += QString::fromStdString(p.getSize()) + "\", \"";
+    s1 += QString::fromStdString(p.getTemperament()) + "\", \"";
+    s1 += QString::fromStdString(p.getGender()) + "\", \"";
+    s1 += QString::fromStdString(p.getGoodWith()) + "\", \"";
+    s1 += QString::fromStdString(p.getShelter()) + "\", \"";
+    s1 += QString::fromStdString(p.getBio()) + "\")";
 
     if(petsDB.open()){
         QSqlQuery query = QSqlQuery(petsDB);
-        query.exec(s);
+        query.exec(s1);
+    }
+
+    //uploading the images of the pet into the media DB
+    vector<string> images = p.getImageFiles();
+    for(int i = 0; i < (int)images.size(); i++){
+        QString s2 = "INSERT INTO media(petID, filename, mediaType) VALUES(";
+        s2 += QString::number(p.getID()) + ", \"";
+        s2 += QString::fromStdString(images.at(i)) + "\", \"";
+        s2 += QString::fromStdString("image") + "\")";
+
+        if(petsDB.open()){
+            QSqlQuery query = QSqlQuery(petsDB);
+            query.exec(s2);
+        }
     }
 
     pets.push_back(p);
-
     lastPetID += 1;
 }
 
@@ -264,13 +277,18 @@ void Owner::uploadPet(Pet p){
  * @param p Pet to be removed
 */
 void Owner::removePet(Pet p){
-    QString s = "DELETE FROM pets WHERE id = ";
-    s += QString::number(p.getID()) + "";
-    //cout << "query is: " << s.toStdString() << endl;
+    QString s1 = "DELETE FROM pets WHERE id = ";
+    s1 += QString::number(p.getID()) + "";
+    //cout << "query is: " << s1.toStdString() << endl;
+
+    QString s2 = "DELETE FROM media WHERE petID = ";
+    s2 += QString::number(p.getID()) + "";
+    //cout << "query is: " << s2.toStdString() << endl;
 
     if(petsDB.open()){
         QSqlQuery query = QSqlQuery(petsDB);
-        query.exec(s);
+        query.exec(s1);
+        query.exec(s2);
     }
 
     lastPetID = getLastPetID();
@@ -307,8 +325,8 @@ Pet Owner::makePet(QStringList petData){
  * Uploads all the pets into the database
  * @file Txt file that contains all the pets to be uploaded
 */
-void Owner::uploadPets(){
-    QFile file("./pets.txt");
+void Owner::uploadPets(string filename){
+    QFile file(QString::fromStdString(filename));
     if(!file.open(QIODevice::ReadOnly)) {
         cout << "Error: file not opened!\n";
     }

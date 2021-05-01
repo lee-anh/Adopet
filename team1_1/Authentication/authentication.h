@@ -140,6 +140,7 @@ public:
      */
     Owner updateOwner(string username, string name, string phone, string email, string address, string zip);
 
+
 private:
     //db stuff
     QSqlDatabase db;
@@ -161,6 +162,7 @@ private:
 
     Adopter *authAdopter;
     Owner *authOwner;
+
 
 
 };

@@ -9,6 +9,7 @@ GUI::GUI(QWidget *parent)
 
     //DIFFERENT OS
 
+    /*
     QString os = QSysInfo::productVersion();
     cout << os.toStdString() << endl;
       
@@ -18,6 +19,9 @@ GUI::GUI(QWidget *parent)
         dbName = "../../projectDB.sqlite";
 
     }
+    */
+
+    dbName = "../../../../../projectDB.sqlite";
 
     auth = Authentication(dbName);
 
@@ -30,7 +34,9 @@ GUI::GUI(QWidget *parent)
     ui->stackedWidget->addWidget(&myPets);//8
     ui->stackedWidget->addWidget(&myFavsList); //9
     ui->stackedWidget->addWidget(&qz); //10
+    ui->stackedWidget->addWidget(&fmForPets); //10
 
+    cout << "After adding widgets" << endl;
     //Set the opening page
     int openingPage = 0; //login
     hideNavAdopter();
@@ -53,7 +59,9 @@ GUI::GUI(QWidget *parent)
     connect(&myFavsList, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
     connect(&myFavsList, SIGNAL(goToGallery()), this, SLOT(toGalleryMyFavorites()));
     connect(&lg, SIGNAL(timeToLogout()), this, SLOT(logOut()));
-    connect(&pform, SIGNAL(()), this, SLOT(goToQuiz()));
+    connect(&pform, SIGNAL(toQuiz()), this, SLOT(goToQuiz()));
+
+    cout << "After signals and slots" << endl;
 }
 
 
@@ -68,6 +76,8 @@ GUI::~GUI()
     ui->stackedWidget->removeWidget(&myPets);
     ui->stackedWidget->removeWidget(&myFavsList);
     ui->stackedWidget->removeWidget(&qz);
+    ui->stackedWidget->removeWidget(&fmForPets);
+
     delete ui;
 
 }
@@ -441,9 +451,12 @@ void GUI::on_loginButton_clicked()
 
     } else if (auth.logIn(uname, pwd) == 1){
         //OWNER
-        uinfo.setAuth(&auth);
+        cout << "Line 451" << endl;
+        uinfo.setAuth(&auth, uname);
+        cout << "Line 453" << endl;
         owner = auth.getAuthenticatedOwner();
 
+        cout << "Line 456" << endl;
         ui->stackedWidget->setCurrentIndex(2); //go to home screen
         previousPage = 0;
         userType = "owner";
@@ -460,6 +473,7 @@ void GUI::on_loginButton_clicked()
 void GUI::on_createAccountButton_clicked()
 {
     //to create account page (userinfo.ui)
+    uinfo.createAccountClikced();
     ui->stackedWidget->setCurrentIndex(6);
     uinfo.setAuth(&auth);
 }
@@ -499,7 +513,8 @@ void GUI::on_ownerMyInfo_clicked()
 
 void GUI::on_ownerFindMatch_clicked()
 {
-    //INSERT HERE
+    ui->stackedWidget->setCurrentIndex(11);
+    fmForPets.forOnePet(owner);
 }
 
 void GUI::on_ownerHome_clicked()
