@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 
 QT += core
 QT += sql
+QT += network
 
 SOURCES += \
         main.cpp \
@@ -14,3 +15,6 @@ HEADERS += \
 
 HEADERS += ../Pets/pet.h
 SOURCES += ../Pets/pet.cpp
+
+HEADERS += ../Owner/owner.h
+SOURCES += ../Owner/owner.cpp

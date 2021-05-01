@@ -83,6 +83,13 @@ void PetRandomizer::initializeNameVecs(){
                      "rabbit1.jpeg", "rabbit2.jpeg", "rabbit3.jpeg", "rabbit4.jpeg", "rabbit5.jpeg", "rabbit6.jpeg", "rabbit7.jpeg", "rabbit8.jpeg",
                      "rodent1.jpeg", "rodent2.jpeg", "rodent3.jpeg", "rodent4.jpeg", "rodent5.jpeg", "rodent6.jpeg", "rodent7.jpeg", "rodent8.jpeg"};
 
+    videoFileNames = {"bird1.mp4", "bird2.mp4",
+                      "cat1.mp4", "cat2.mp4",
+                      "dog1.mp4", "dog2.mp4",
+                      "fish1.mp4", "fish2.mp4",
+                      "rabbit1.mp4", "rabbit2.mp4",
+                      "rodent1.mp4", "rodent2.mp4"};
+
     if(db.open()){
         QSqlQuery query = QSqlQuery();
 
@@ -137,12 +144,12 @@ void PetRandomizer::initializeNameVecs(){
 
 /*
  * Loops through the existing media files and
- * gets the the file names pertaining to a specific pet species.
- * Returns a randomized media file name that depicts the specific pet species
+ * gets the the image file names pertaining to a specific pet species.
+ * Returns a randomized image file name that depicts the specific pet species
  * @param petSpecies Pet species that the files relate to
- * @return Randomized media file name
+ * @return Randomized image file name
 */
-string PetRandomizer::getFileNameBySpecies(string petSpecies){
+string PetRandomizer::getImageFileNameBySpecies(string petSpecies){
     vector<string> speciesRelatedFiles;
 
     for(int i = 0; i < (int)imageFileNames.size(); i++){
@@ -151,6 +158,30 @@ string PetRandomizer::getFileNameBySpecies(string petSpecies){
 
         int start = 0;
         int end = fileName.size() - 6;
+        string imageSpecies = fileName.substr(start, end);
+        if(imageSpecies == petSpecies) speciesRelatedFiles.push_back(fileName);
+    }
+
+    int random = rand() % (int) speciesRelatedFiles.size();
+    return speciesRelatedFiles.at(random);
+}
+
+/*
+ * Loops through the existing video files and
+ * gets the the video file names pertaining to a specific pet species.
+ * Returns a randomized video file name that depicts the specific pet species
+ * @param petSpecies Pet species that the files relate to
+ * @return Randomized video file name
+*/
+string PetRandomizer::getVideoFileNameBySpecies(string petSpecies){
+    vector<string> speciesRelatedFiles;
+
+    for(int i = 0; i < (int)videoFileNames.size(); i++){
+        //turning char* to string
+        string fileName = videoFileNames.at(i);
+
+        int start = 0;
+        int end = fileName.size() - 5;
         string imageSpecies = fileName.substr(start, end);
         if(imageSpecies == petSpecies) speciesRelatedFiles.push_back(fileName);
     }
@@ -218,12 +249,18 @@ void PetRandomizer::writeToCSV(){
                  << "," << petGen << "," << petGoodWith << "," << petShelter << "," << "Lorem ipsum";
         writePetsCsv << "\n";
 
+        //randomizing images
         int rand9 = rand() % 8 + 1;
         for(int j = 0; j < rand9; j++){
-            string fileName = getFileNameBySpecies(petSpecies);
-            string mediaType = getMediaType(fileName);
-            writeMediaCsv << i << "," << fileName << "," << mediaType << "\n";
+            string fileName = getImageFileNameBySpecies(petSpecies);
+            writeMediaCsv << i << "," << fileName << ",image" << "\n";
+        }
 
+        //randomizing videos
+        int rand10 = rand() % 2 + 1;
+        for(int k = 0; k < rand10; k++){
+            string fileName = getVideoFileNameBySpecies(petSpecies);
+            writeMediaCsv << i << "," << fileName << ",video" << "\n";
         }
     }
 

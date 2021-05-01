@@ -4,24 +4,29 @@
 using namespace std;
 
 int main(){
-  
     /*
     Pet p = Pet();
-    p.setID(8);
-    p.setName("noah");
-    p.fillImageFiles();
+    p.setID(1);
+    p.setName("levi");
+    p.fillMediaFiles("../../projectDB.sqlite");
 
-    vector<string> files = p.getImageFiles();
-    cout << "Pet: " << p.getName() << endl;
-    for(int i = 0; i < (int) files.size(); i++){
-        cout << "File: " << files.at(i) << endl;
+    vector<string> imageFiles = p.getImageFiles();
+    vector<string> videoFiles = p.getVideoFiles();
+    cout << "Pet : " << p.getName() << endl;
+
+    cout << "Pet Images: " << endl;
+    for(int i = 0; i < (int) imageFiles.size(); i++){
+        cout << "File: " << imageFiles.at(i) << endl;
     }
 
+    cout << "Pet Videos: " << endl;
+    for(int i = 0; i < (int) videoFiles.size(); i++){
+        cout << "File: " << videoFiles.at(i) << endl;
+    }
 
- */
+    */
     //Pet p = Pet();
     //p.getDistance(18042, 18055);
 
-  
     return 0;
 }

@@ -1,11 +1,13 @@
 #include "peoplerandomizer.h"
 
+
 /*!
  * \brief PeopleRandomizer default constructor
  * 10 users are created
  */
 PeopleRandomizer::PeopleRandomizer()
 {
+
     //default 10 people are created
     numOfPeople = 10;
     initalizeNameVecs();

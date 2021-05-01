@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "../Pets/pet.h"
+class Pet;
 
 //include animal/pets
 
@@ -55,10 +56,6 @@ private:
     void openDB();
     QSqlDatabase petsDB;
     string dbName;
-
-
-
-
 };
 
 #endif // OWNER_H

@@ -4,7 +4,7 @@ CONFIG -= app_bundle
 
 QT+=core
 QT+=sql
-
+QT += network
 
 SOURCES += \
         adopter.cpp \

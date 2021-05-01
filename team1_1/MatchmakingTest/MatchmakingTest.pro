@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 
 QT += core
 QT += sql
+QT += network
 
 
 QMAKE_CXXFLAGS += --coverage
@@ -35,3 +36,6 @@ SOURCES += \
         ../Adopter/preferences.cpp \
         ../Adopter/adopter.cpp \
         ../Pets/pet.cpp
+
+HEADERS += ../Owner/owner.h
+SOURCES += ../Owner/owner.cpp
