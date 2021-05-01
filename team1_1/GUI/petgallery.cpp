@@ -1,13 +1,27 @@
 
 #include "petgallery.h"
 
+
+/*!
+ * \brief PetGallery default constructor
+ */
 PetGallery::PetGallery()
 {
     //default constructor, don't use
 }
 
 
-//constructor used in MyPets (Owner)
+/*!
+ * \brief PetGallery, constructor for MyPets (owner)
+ * \param numPetsToDisplay
+ * \param prev, button
+ * \param next, button
+ * \param pageLine, label
+ * \param petNameLabels, name labels
+ * \param petPhotos, photo labels
+ * \param petLearnMore, buttons
+ * \param petVec, pet to display
+ */
 PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev,
                         QPushButton* next,  QLabel* pageLine,
                         vector<QLabel*> petNameLabels,
@@ -32,7 +46,19 @@ PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev,
 }
 
 
-//constructor used in gallery view of my favorites and manual search
+/*!
+ * \brief PetGallery construcotr for my favorites and manual search
+ * (Gallery view)
+ * \param numPetsToDisplay
+ * \param prev, button
+ * \param next, button
+ * \param pageLine, label
+ * \param petNameLabels, name labels
+ * \param petPhotos, photo labels
+ * \param petLearnMore, buttons
+ * \param petSaves, buttons
+ * \param petVec, pets to display
+ */
 PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev,
                         QPushButton* next,  QLabel* pageLine,
                         vector<QLabel*> petNameLabels,
@@ -57,7 +83,20 @@ PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev,
 
 }
 
-//list view of my favorites and Manual Search
+/*!
+ * \brief PetGallery constructor for My favorites, manual search, MyPets
+ * (List views)
+ * \param b, bool to differentiate the constructor
+ * \param numPetsToDisplay
+ * \param prev, button
+ * \param next, button
+ * \param pageLine, label
+ * \param petNameLabels, name labels
+ * \param petInfo, info labels
+ * \param petLearnMore, buttons
+ * \param petSaves, buttons,
+ * \param petVec, pets to display
+ */
 PetGallery:: PetGallery(bool b, int numPetsToDisplay, QPushButton* prev,
                         QPushButton* next,  QLabel* pageLine,
                         vector<QLabel*> petNameLabels,
@@ -83,7 +122,19 @@ PetGallery:: PetGallery(bool b, int numPetsToDisplay, QPushButton* prev,
 }
 
 
-//constructor for matchmaking (gallery view)
+/*!
+ * \brief PetGallery constructor for matchmaking (gallery view)
+ * \param numPetsToDisplay
+ * \param prev, button
+ * \param next, button
+ * \param pageLine, label
+ * \param petNameLabels, name labels
+ * \param petPhotos, photo labels
+ * \param petScores, score labels
+ * \param petLearnMore, buttons
+ * \param petSaves, button
+ * \param petVec, pets to display
+ */
 PetGallery::PetGallery(int numPetsToDisplay, QPushButton* prev,
                        QPushButton* next, QLabel* pageLine,
                        vector<QLabel*> petNameLabels,
@@ -111,7 +162,20 @@ PetGallery::PetGallery(int numPetsToDisplay, QPushButton* prev,
     clearLabels();
 }
 
-//constructor for matchmaking (list view)
+/*!
+ * \brief PetGallery constructor for matchmaking (list view)
+ * \param b, bool to differentiate constructor
+ * \param numPetsToDisplay
+ * \param prev, button
+ * \param next, button
+ * \param pageLine, label
+ * \param petNameLabels, name label
+ * \param petInfo, info label
+ * \param petScores, score label
+ * \param petLearnMore, buttons
+ * \param petSaves, buttons
+ * \param petVec, pets to display
+ */
 PetGallery::PetGallery(bool b, int numPetsToDisplay, QPushButton* prev,
                        QPushButton* next, QLabel* pageLine,
                        vector<QLabel*> petNameLabels,
@@ -141,14 +205,27 @@ PetGallery::PetGallery(bool b, int numPetsToDisplay, QPushButton* prev,
 
 
 
-
+/*!
+ * \brief PetGallery destructor
+ */
 PetGallery::~PetGallery(){
 }
 
+
+/*!
+ * \brief updatePetVec, updates the pets to display
+ * \param p vector of pets to display
+ */
 void PetGallery::updatePetVec(vector<Pet> p){
     pets = p;
 }
 
+
+/*!
+ * \brief displayPets, displays the pets
+ * updates all the associated labels and buttons
+ * \param start, starting index
+ */
 void PetGallery::displayPets(int start){
 
     int counter = 0;
@@ -266,6 +343,9 @@ void PetGallery::displayPets(int start){
 
 }
 
+/*!
+ * \brief next, advances pet gallery
+ */
 void PetGallery::next(){
     if(nextStartIndex + 1 < (int) pets.size()){
         displayPetsPageNumber++;
@@ -276,7 +356,9 @@ void PetGallery::next(){
 
 }
 
-
+/*!
+ * \brief previous, goes back on pet gallery
+ */
 void PetGallery::previous(){
     int startMod =  nextStartIndex % numToDisplay;
     if(nextStartIndex - numToDisplay < 0){
@@ -295,14 +377,28 @@ void PetGallery::previous(){
 }
 
 
+/*!
+ * \brief setPageNum, set a page number
+ * \param p, page number
+ */
 void PetGallery::setPageNum(int p){
     displayPetsPageNumber = p;
 }
 
+
+/*!
+ * \brief getPet, gets a pet object that's being displayed
+ * \param pos, position of pet to get
+ * \return
+ */
 Pet PetGallery::getPet(int pos){
     return petsToDisplay[pos];
 }
 
+/*!
+ * \brief updatePet, update a pet's info in this class's pet vector
+ * \param p, new pet object
+ */
 void PetGallery::updatePet(Pet p){
     for(int i = 0; i < (int) petsToDisplay.size(); i++){
         if(petsToDisplay.at(i).getID() == p.getID()){
@@ -316,10 +412,18 @@ void PetGallery::updatePet(Pet p){
     }
 }
 
+
+/*!
+ * \brief getPetVec, get the pet vector of all the pets in the class
+ * \return, vector of pets
+ */
 vector<Pet> PetGallery::getPetVec(){
     return pets;
 }
 
+/*!
+ * \brief clearLabels, clear all labels used in the pet display
+ */
 void PetGallery::clearLabels(){
     for(int i = 0; i < numToDisplay; i++){
         nameLabels[i]->clear();
@@ -351,6 +455,12 @@ void PetGallery::clearLabels(){
     nextButton->setVisible(false);
 }
 
+
+/*!
+ * \brief matchPetsToRegPets, converts a more complex vector
+ * to a simple vector of pets
+ *
+ */
 void PetGallery::matchPetsToRegPets(){
     pets = vector<Pet>();
    for(int i = 0; i < (int) matPets.size(); i++){

@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <vector>
+#include <QCompleter>
 
 #include "../Matchmaking/matchmaking.h"
 #include "../Owner/owner.h"
@@ -25,8 +26,8 @@ class FindMatchForPets : public QWidget
 public:
     explicit FindMatchForPets(QWidget *parent = nullptr);
     ~FindMatchForPets();
+    void toMainPage(Owner* owner);
 
-    void forOnePet(Owner* owner);
 
 
 private slots:
@@ -36,12 +37,28 @@ private slots:
 
     void on_nextOne_clicked();
 
+    void on_previousAll_clicked();
+
+    void on_nextAll_clicked();
+
+    void on_toAllPets_clicked();
+
+    void on_toOnePet_clicked();
+
 private:
     Ui::FindMatchForPets *ui;
 
+    Owner* currentOwner;
+
+    void forOnePet(Owner* owner);
+    void forMultiPets(Owner* owner);
+
     Matchmaking mat;
 
+    void setup();
     void displayPeople(int start);
+
+    void displayPeopleMulti(int start);
     void next();
     void previous();
 
@@ -52,6 +69,8 @@ private:
     int nextStartIndex;
     int displayPageNumber;
 
+    string mode;
+
 
     QPushButton* previousButton;
     QPushButton* nextButton;
@@ -60,8 +79,11 @@ private:
     vector<QLabel*> nameLabels;
     vector<QLabel*> scoreLabels;
     vector<QLabel*> infoLabels;
+    vector<QLabel*> petNameLabels;
 
     vector<pair<Adopter, int>> matResults;
+
+    vector<pair<Pet, pair<Adopter, int>>> multiMat;
 
 
 

@@ -5,23 +5,33 @@
 
 using namespace std;
 
+
+/*!
+ * \brief SavedList defaul constructor
+ */
 SavedList::SavedList()
 {
     username = "default User";
-    dbName =  "../../projectDB.sqlite";
-   // openDB();
-   // loadList();
     //cout << "default constructor called (saved list)" <<endl;
 }
 
+/*!
+ * \brief SavedList alternate constructor
+ * \param username
+ */
 SavedList::SavedList(string username){
     this->username = username;
     dbName = "../../projectDB.sqlite";
-    cout << "other constructor called" << endl;
+    cout << "alternate constructor called" << endl;
     openDB();
     loadList();
 }
 
+/*!
+ * \brief SavedList database constructor
+ * \param databaseFilepath
+ * \param username
+ */
 SavedList::SavedList(string databaseFilePath, string username){
     this->username = username;
     dbName = databaseFilePath;
@@ -29,17 +39,20 @@ SavedList::SavedList(string databaseFilePath, string username){
     loadList();
 }
 
-SavedList::SavedList(QSqlDatabase d){
-    dbSL = d;
-    loadList();
-}
 
+/*!
+ * \brief SavedList destructor
+ */
 SavedList::~SavedList(){
     savedPets.clear();
     closeDB();
 
 }
 
+/*!
+ * \brief savePet adds a pet to the saved list
+ * \param p
+ */
 void SavedList::savePet(Pet p){
     //push to vector
     Pet temp = p;
@@ -49,7 +62,10 @@ void SavedList::savePet(Pet p){
     savePet(temp.getID());
 }
 
-
+/*!
+ * \brief savePet is a helper
+ * \param petID
+ */
 void SavedList::savePet(int petID){
 
     QString qry = "INSERT INTO savedPets(username, petID) VALUES(\"";
@@ -63,6 +79,10 @@ void SavedList::savePet(int petID){
 
 }
 
+/*!
+ * \brief unsavePet removes a pet from the saved list
+ * \param p
+ */
 void SavedList::unsavePet(Pet p){
     //remove from vector
     for(int i = 0; i < (int) savedPets.size(); i++){
@@ -76,6 +96,10 @@ void SavedList::unsavePet(Pet p){
 
 }
 
+/*!
+ * \brief unsavePet is a helper method
+ * \param petID
+ */
 void SavedList::unsavePet(int petID){
 
     QString qry = "DELETE FROM savedPets WHERE username = \"" +
@@ -92,6 +116,51 @@ void SavedList::unsavePet(int petID){
 
 }
 
+
+/*!
+ * \brief setUsername
+ * \param username
+ */
+void SavedList::setUsername(string username){
+    this->username = username;
+}
+
+/*!
+ * \brief getPetVec returns the current saved pets
+ * \return
+ */
+vector<Pet> SavedList::getPetVec(){
+    return savedPets;
+}
+
+
+/*!
+ * \brief printVec prints out the current saved pets
+ */
+void SavedList::printVec(){
+    for(int i = 0; i < (int) savedPets.size(); i++){
+        cout << savedPets[i].getName() << endl;
+    }
+}
+
+/*!
+ * \brief isSavedPet checks if a certain pet is saved or not
+ * \param p
+ * \return
+ */
+bool SavedList::isSavedPet(Pet p){
+    for(int i = 0; i < (int) savedPets.size(); i++){
+        if(savedPets[i].getID() == p.getID()){
+            return true;
+            }
+    }
+    return false;
+}
+
+
+/*!
+ * \brief loadList loads the saved pets form the database
+ */
 void SavedList::loadList(){
 
     savedPets.clear();
@@ -134,12 +203,9 @@ void SavedList::loadList(){
     }
 }
 
-void SavedList::setUsername(string username){
-    this->username = username;
-}
-
-
-
+/*!
+ * \brief openDB opens a connection to the database
+ */
 void SavedList::openDB(){
     dbSL = QSqlDatabase::addDatabase("QSQLITE", "savedListsCxn");
     string fullName = dbName;
@@ -156,25 +222,10 @@ void SavedList::openDB(){
     }
 }
 
+/*!
+ * \brief closeDB clses connection to the database
+ */
 void SavedList::closeDB(){
     dbSL.close();
 }
 
-vector<Pet> SavedList::getPetVec(){
-    return savedPets;
-}
-
-void SavedList::printVec(){
-    for(int i = 0; i < (int) savedPets.size(); i++){
-        cout << savedPets[i].getName() << endl;
-    }
-}
-
-bool SavedList::isSavedPet(Pet p){
-    for(int i = 0; i < (int) savedPets.size(); i++){
-        if(savedPets[i].getID() == p.getID()){
-            return true;
-            }
-    }
-    return false;
-}

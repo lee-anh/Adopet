@@ -1,6 +1,11 @@
 #include "userinfo.h"
 #include "ui_userinfo.h"
 
+
+/*!
+ * \brief UserInfo constructor
+ * \param parent
+ */
 UserInfo::UserInfo(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::UserInfo)
@@ -14,25 +19,41 @@ UserInfo::UserInfo(QWidget *parent) :
 
 }
 
+/*!
+ * \brief UserInfo destructor
+ */
 UserInfo::~UserInfo()
 {
     delete ui;
 }
 
+/*!
+ * \brief setAuth, for adopters
+ * \param a, pointer to authentication object
+ */
 void UserInfo::setAuth(Authentication *a){
-    cout << "uinfo 23" << endl;
     auth = a;
-    cout << "uinfo 25" << endl;
     username = a->getAuthenticatedAdopter()->getUsername();
-    cout << "uinfo 27" << endl;
+
 }
 
+
+/*!
+ * \brief setAuth, for owners
+ * \param a, pointer to authentication object
+ * \param uname, username of the user
+ */
 void UserInfo::setAuth(Authentication *a, string uname){
     auth = a;
     username = uname;
 }
 
-void UserInfo::createAccountClikced(){
+
+/*!
+ * \brief createAccountClicked, sets up create account objects
+ * for both adopter and owners
+ */
+void UserInfo::createAccountClicked(){
 
     //goes to create account page
     clearCreateAccount();
@@ -46,6 +67,10 @@ void UserInfo::createAccountClikced(){
 
 }
 
+/*!
+ * \brief adopterMyInfoClicked, sets up additional info objects
+ * for adopters
+ */
 void UserInfo::adopterMyInfoClicked(){
     ui->stackedWidget->setCurrentIndex(1);
     firstTime = false;
@@ -61,6 +86,10 @@ void UserInfo::adopterMyInfoClicked(){
 }
 
 
+/*!
+ * \brief ownerMyInfoClicked, sets up additional info objects
+ * for owners
+ */
 void UserInfo::ownerMyInfoClicked(){
     ui->stackedWidget->setCurrentIndex(2);
     firstTime = false;
@@ -79,6 +108,23 @@ void UserInfo::ownerMyInfoClicked(){
 
 }
 
+/*!
+ * \brief setFirstTime, indicate whether it's the first time
+ * a user is using the system
+ * \param b, true if first time, false if not
+ */
+void UserInfo::setFirstTime(bool b){
+    firstTime = b;
+}
+
+void UserInfo::helpAdopter(){
+    ui->stackedWidget->setCurrentIndex(3);
+}
+
+/*!
+ * \brief on_continueButton_clicked, go to next create account page
+ * for both adopters and owners
+ */
 void UserInfo::on_continueButton_clicked()
 {
 
@@ -121,6 +167,10 @@ void UserInfo::on_continueButton_clicked()
 
 }
 
+/*!
+ * \brief on_saveButton_clicked, save changes made to user info
+ * for adopters
+ */
 void UserInfo::on_saveButton_clicked()
 {
     string fname = ui->firstName->text().toStdString();
@@ -145,11 +195,19 @@ void UserInfo::on_saveButton_clicked()
 
 }
 
+/*!
+ * \brief on_backButton_clicked, back to previous page
+ */
 void UserInfo::on_backButton_clicked()
 {
     emit backClicked(); //back to the login page
 }
 
+
+/*!
+ * \brief on_saveOwnerButton_clicked, save changes made to user info
+ * for owners
+ */
 void UserInfo::on_saveOwnerButton_clicked()
 {
 
@@ -193,10 +251,10 @@ void UserInfo::on_saveOwnerButton_clicked()
 
 }
 
-void UserInfo::setFirstTime(bool b){
-    firstTime = b;
-}
 
+/*!
+ * \brief clearAdopterInfo, clears associated gui objects
+ */
 void UserInfo::clearAdopterInfo(){
 
     ui->firstName->clear();
@@ -208,6 +266,9 @@ void UserInfo::clearAdopterInfo(){
     ui->errorLabel2->clear();
 }
 
+/*!
+ * \brief clearOwnerInfo, clears associated gui objects
+ */
 void UserInfo::clearOwnerInfo(){
     ui->nameOwner->clear();
     ui->phoneNumberOwner->clear();
@@ -219,6 +280,9 @@ void UserInfo::clearOwnerInfo(){
     ui->ownerSavedMessage->clear();
 }
 
+/*!
+ * \brief clearCreateAccount, clears associated gui objects
+ */
 void UserInfo::clearCreateAccount(){
     ui->username->clear();
     ui->password->clear();

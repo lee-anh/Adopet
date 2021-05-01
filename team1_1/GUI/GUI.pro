@@ -5,7 +5,10 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++11
 QT += core
 QT += sql
+
+QT += multimedia
 QT += network
+
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -27,12 +30,12 @@ SOURCES += \
     myfavorites.cpp \
     myfavoritestwo.cpp \
     mypets.cpp \
-    peoplelist.cpp \
     petadopted.cpp \
     petgallery.cpp \
     preferencesform.cpp \
     quiz.cpp \
     tagguide.cpp \
+    unsavepet.cpp \
     userinfo.cpp \
     ../Authentication/authentication.cpp \
     ../Owner/owner.cpp
@@ -53,12 +56,12 @@ HEADERS += \
     myfavorites.h \
     myfavoritestwo.h \
     mypets.h \
-    peoplelist.h \
     petadopted.h \
     petgallery.h \
     preferencesform.h \
     quiz.h \
     tagguide.h \
+    unsavepet.h \
     userinfo.h \
     ../Authentication/authentication.h \
     ../Owner/owner.h
@@ -78,6 +81,7 @@ FORMS += \
     preferencesform.ui \
     quiz.ui \
     tagguide.ui \
+    unsavepet.ui \
     userinfo.ui
 
 # Default rules for deployment.

@@ -57,6 +57,9 @@ GUI::GUI(QWidget *parent)
     connect(&myFavsList, SIGNAL(goToGallery()), this, SLOT(toGalleryMyFavorites()));
     connect(&lg, SIGNAL(timeToLogout()), this, SLOT(logOut()));
     connect(&pform, SIGNAL(toQuiz()), this, SLOT(goToQuiz()));
+    connect(&unsave, SIGNAL(unsavePet()), this, SLOT(unheartPet()));
+    connect(&myPets, SIGNAL(goToMeetPet(Pet)), this, SLOT(goToMeetMe(Pet)));
+
 
     cout << "After signals and slots" << endl;
 }
@@ -112,6 +115,15 @@ void GUI::meetPet(Pet p){
            
          if(os == "10.16"){
              //default picture
+
+             /*
+             QMediaPlayer *player = new QMediaPlayer();
+             //connect(player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
+             player->setMedia(QUrl::fromLocalFile("../../../../../pictures/dog1.mp4"));
+             player->setVolume(50);
+             player->play();
+             */
+
              QPixmap pixmap("../../../../../pictures/default.png");
              ui->petPic->setPixmap(pixmap.scaled(300, 300, Qt::KeepAspectRatio));
          } else {
@@ -122,17 +134,8 @@ void GUI::meetPet(Pet p){
          }
 
      } else {
-         QString os = QSysInfo::productVersion();
-         string photo;
-         if(os == "10.16"){
-             photo =  "../../../../../pictures/" + p.getImageFiles()[0];
-         } else {
-             photo =  "../../pictures/" + p.getImageFiles()[0];
-
-         }
-
-         QPixmap pix(QString::fromStdString(photo));
-         ui->petPic->setPixmap(pix.scaled(300, 300, Qt::KeepAspectRatio));
+         mediaCarosel = 0;
+         displayPicture(0);
      }
 
 
@@ -154,6 +157,35 @@ void GUI::meetPet(Pet p){
 
 
 }
+
+void GUI::displayPicture(int i){
+    QString os = QSysInfo::productVersion();
+    string photo;
+    if(os == "10.16"){
+        photo =  "../../../../../pictures/" + petToMeet.getImageFiles().at(i);
+    } else {
+        photo =  "../../pictures/" + petToMeet.getImageFiles().at(i);
+
+    }
+
+    QPixmap pix(QString::fromStdString(photo));
+    ui->petPic->setPixmap(pix.scaled(300, 300, Qt::KeepAspectRatio));
+}
+void GUI::on_right_clicked()
+{
+    if(mediaCarosel+1 < (int) petToMeet.getImageFiles().size()){
+        mediaCarosel++;
+        displayPicture(mediaCarosel);
+    }
+}
+void GUI::on_left_clicked()
+{
+    if(mediaCarosel-1 >= 0){
+        mediaCarosel--;
+        displayPicture(mediaCarosel);
+    }
+}
+
 
 
 
@@ -224,9 +256,13 @@ void GUI::showNavOwner(){
 void GUI::on_saveButton_clicked()
 {
     if(ui->saveButton->isChecked() == false){
+        unsave.setModal(true);
+        unsave.exec();
+        /*
         savedList.unsavePet(petToMeet); //update database
         ui->saveButton->setText("♡");
         ui->saveButton->setStyleSheet("color: black");
+        */
     } else if (ui->saveButton->isChecked() == true){
         savedList.savePet(petToMeet); //update database
         ui->saveButton->setText("♥");
@@ -272,7 +308,6 @@ void GUI::heartPet(Pet p, bool b){
 
 }
 
-
 void GUI::backToLogin(){
     ui->stackedWidget->setCurrentIndex(0);
 }
@@ -307,6 +342,19 @@ void GUI::goToQuiz(){
     qz.setPreference(&pref);
 }
 
+
+void GUI::unheartPet(){
+    savedList.unsavePet(petToMeet); //update database
+    ui->saveButton->setText("♡");
+    ui->saveButton->setStyleSheet("color: black");
+}
+
+void GUI::goToMeetMe(Pet p){
+    ui->stackedWidget->setCurrentIndex(1);
+    meetPet(p);
+    previousPage = 8;
+}
+
 void GUI::on_navHomeButton_clicked()
 {
     //navigate to home screen
@@ -319,7 +367,7 @@ void GUI::on_navFindMatchButton_clicked()
     //navigate to find match screen
     ui->stackedWidget->setCurrentIndex(5);
     fmForAdopters.setSavedList(savedList);
-    fmForAdopters.setUser("user1");
+    fmForAdopters.setUser(username);
     previousPage = 5;
 }
 
@@ -441,6 +489,7 @@ void GUI::on_loginButton_clicked()
 
         adopter = auth.getAuthenticatedAdopter();
         savedList = SavedList(dbName, uname);
+        username = uname;
         ui->stackedWidget->setCurrentIndex(2); //go to home screen
         previousPage = 0;
         userType = "adopter";
@@ -451,6 +500,7 @@ void GUI::on_loginButton_clicked()
         cout << "Line 451" << endl;
         uinfo.setAuth(&auth, uname);
         cout << "Line 453" << endl;
+        username = uname;
         owner = auth.getAuthenticatedOwner();
 
         cout << "Line 456" << endl;
@@ -470,7 +520,7 @@ void GUI::on_loginButton_clicked()
 void GUI::on_createAccountButton_clicked()
 {
     //to create account page (userinfo.ui)
-    uinfo.createAccountClikced();
+    uinfo.createAccountClicked();
     ui->stackedWidget->setCurrentIndex(6);
     uinfo.setAuth(&auth);
 }
@@ -511,10 +561,19 @@ void GUI::on_ownerMyInfo_clicked()
 void GUI::on_ownerFindMatch_clicked()
 {
     ui->stackedWidget->setCurrentIndex(11);
-    fmForPets.forOnePet(owner);
+    fmForPets.toMainPage(owner);
 }
 
 void GUI::on_ownerHome_clicked()
 {
     on_navHomeButton_clicked();
+}
+
+
+
+
+void GUI::on_navHelpButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(6);
+    uinfo.helpAdopter();
 }

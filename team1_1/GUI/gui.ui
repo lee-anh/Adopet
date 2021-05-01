@@ -228,19 +228,6 @@
       </layout>
      </widget>
      <widget class="QWidget" name="MeetPetPage">
-      <widget class="QLabel" name="petPic">
-       <property name="geometry">
-        <rect>
-         <x>50</x>
-         <y>180</y>
-         <width>311</width>
-         <height>291</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>picture of Pet</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="petBio">
        <property name="geometry">
         <rect>
@@ -340,7 +327,7 @@
       <widget class="QLabel" name="petAttributes">
        <property name="geometry">
         <rect>
-         <x>430</x>
+         <x>490</x>
          <y>170</y>
          <width>341</width>
          <height>91</height>
@@ -370,6 +357,69 @@
        <property name="text">
         <string>Bio</string>
        </property>
+      </widget>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>190</y>
+         <width>432</width>
+         <height>302</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QPushButton" name="left">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>250</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border:none;</string>
+          </property>
+          <property name="text">
+           <string>&lt;</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="petPic">
+          <property name="minimumSize">
+           <size>
+            <width>300</width>
+            <height>300</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>picture of Pet</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="right">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>250</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border:none;</string>
+          </property>
+          <property name="text">
+           <string>&gt;</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
      <widget class="QWidget" name="page">

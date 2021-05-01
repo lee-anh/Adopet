@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QtSql>
 #include <vector>
+#include <QMediaPlayer>
 
 //classes that we need
 #include "../DBSearch/dbsearch.h"
@@ -25,8 +26,9 @@
 #include "quiz.h"
 #include "findmatchforpets.h"
 
-//QWidgets
+//QDialogs
 #include "logout.h"
+#include "unsavepet.h"
 
 
 
@@ -67,12 +69,17 @@ private:
 
     //QDialogs
     Logout lg;
+    UnsavePet unsave;
 
 
-    string userType; //currently not used
+    string userType;
+    string username;
     string dbName;
 
     void meetPet(Pet p);
+    void displayPicture(int i);
+    int mediaCarosel;
+
     Pet petToMeet;
     int previousPage;
 
@@ -101,6 +108,9 @@ private slots:
     void toGalleryMyFavorites();
     void logOut();
     void goToQuiz();
+    void unheartPet();
+    void goToMeetMe(Pet p);
+
 
 
     //save Button
@@ -143,5 +153,8 @@ private slots:
     void on_ownerMyInfo_clicked();
     void on_ownerFindMatch_clicked();
     void on_ownerHome_clicked();
+    void on_right_clicked();
+    void on_left_clicked();
+    void on_navHelpButton_clicked();
 };
 #endif // GUI_H

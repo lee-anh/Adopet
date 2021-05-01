@@ -120,12 +120,55 @@ public:
      */
     void setZipCode(int zip);
 
-    void removePreference(string attr, string attrType);            //removes a preference from the adopter's preference list and the DB
-    void addPreference(string attr, string attrType);            //adds a preference onto the adopter's preference list and the DB
-    void removePreferenceHelper(string attr, string attrType);           //helper method that removes the passed preference from the adopter's preference list
-    void fillPreference(string attr, string attrType);           //fills the passed preference onto the adopter's preference list
-    void fillPreferences();             //fills the adopter's preference list by accessing the DB
-    Preferences getPreferences();              //accessor method for adopter's preference list
+
+
+
+
+    /*!
+     * \brief fillPreference fills the passed preference
+     *  onto the adopter's preference list
+     * \param attr
+     * \param attrType
+     */
+    void fillPreference(string attr, string attrType);
+
+    /*!
+     * \brief fillPreferences fills the adopter's preference list
+     *  by accessing the DB
+     */
+    void fillPreferences();
+
+    /*!
+     * \brief removePreferenceHelper helper method
+     * removes the passed preference from the adopter's preference list
+     * \param attr
+     * \param attrType
+     */
+    void removePreferenceHelper(string attr, string attrType);
+
+    /*!
+     * \brief getPreferences accessor method for adopter's preference list
+     * \return
+     */
+    Preferences getPreferences();
+
+    /*!
+     * \brief addPreference adds a preference
+     * onto the adopter's preference list and the DB
+     * \param attr
+     * \param attrType
+     */
+    void addPreference(string attr, string attrType);
+
+    /*!
+     * \brief removePreference removes a preference
+     * from the adopter's preference list and the DB
+     * \param attr
+     * \param attrType
+     */
+    void removePreference(string attr, string attrType);
+
+
 
 
 private:
@@ -140,6 +183,9 @@ private:
     Preferences preferenceList;
 
     //database stuff
+    /*!
+     * \brief openDB, opens a connection to the database
+     */
     void openDB();
     string dbName;
     QSqlDatabase prefDB;

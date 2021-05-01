@@ -1,6 +1,13 @@
 #include "peoplerandomizer.h"
 
-PeopleRandomizer::PeopleRandomizer(){
+
+/*!
+ * \brief PeopleRandomizer default constructor
+ * 10 users are created
+ */
+PeopleRandomizer::PeopleRandomizer()
+{
+
     //default 10 people are created
     numOfPeople = 10;
     initalizeNameVecs();
@@ -21,6 +28,10 @@ PeopleRandomizer::PeopleRandomizer(){
 
 }
 
+/*!
+ * \brief PeopleRandomizer main constructor
+ * \param num number of users to create
+ */
 PeopleRandomizer::PeopleRandomizer(int num){
     numOfPeople = num;
     initalizeNameVecs();
@@ -41,10 +52,16 @@ PeopleRandomizer::PeopleRandomizer(int num){
 
 }
 
+/*!
+ * \brief PeopleRandomizer destructor
+ */
 PeopleRandomizer::~PeopleRandomizer(){
 
 }
 
+/*!
+ * \brief writeToCSV, write generated info to a csv
+ */
 void PeopleRandomizer::writeToCSV(){
     int counter = 1;
     while(counter <= numOfPeople){
@@ -89,8 +106,7 @@ void PeopleRandomizer::writeToCSV(){
         userSpecies.erase(unique(userSpecies.begin(), userSpecies.end()), userSpecies.end());
 
 
-        //BREED IS A LITTLE MORE COMPLICATED
-        //make sure the breed has a species type that fits a user species preference
+
         vector<string> userBreed = vector<string>();
         int breedRand = (rand() % breed.size()) + 1;
 
@@ -103,34 +119,9 @@ void PeopleRandomizer::writeToCSV(){
             userBreed.push_back(toAdd);
         }
 
-        /*
-        for(int i = 0;  i < breedRand; i++){
-            int rand2 = rand() % breed.size();
-
-            bool stop = false;
-            string toAdd;
-            while(stop == false){
-                string spec = breed.at(rand2).second;
-                for(int j = 0; j < (int) userSpecies.size(); j++){
-                    if(spec == userSpecies.at(j)){
-                        toAdd = breed.at(rand2).first;
-
-                    }
-                }
-                rand2 = rand() % breed.size();
-
-            }
-
-            userBreed.push_back(toAdd);
-        }
-        */
-
         //get rid of duplicates
         sort(userBreed.begin(), userBreed.end());
         userBreed.erase(unique(userBreed.begin(), userBreed.end()), userBreed.end());
-
-
-
 
 
         //age
@@ -269,7 +260,9 @@ void PeopleRandomizer::writeToCSV(){
 
 
 
-
+/*!
+ * \brief openDB opens a connection to the database
+ */
 void PeopleRandomizer::openDB(){
     db = QSqlDatabase::addDatabase("QSQLITE");
     string fullName = "../../projectDB.sqlite";
@@ -286,6 +279,9 @@ void PeopleRandomizer::openDB(){
     }
 }
 
+/*!
+ * \brief loadDBVecs load tag info frm database
+ */
 void PeopleRandomizer::loadDBVecs(){
     if(db.open()){
         QSqlQuery query = QSqlQuery();
@@ -337,6 +333,9 @@ void PeopleRandomizer::loadDBVecs(){
     }
 }
 
+/*!
+ * \brief initalizeNameVecs choose names for the users
+ */
 void PeopleRandomizer::initalizeNameVecs(){
     firstNames = {
        "Oliver", "Liam", "Ethan", "Aiden", "Gabriel", "Caleb", "Theo", "Owen",
@@ -362,6 +361,7 @@ void PeopleRandomizer::initalizeNameVecs(){
 }
 
 
+/*
 void PeopleRandomizer::speciesTest(){
     vector<string> userSpecies = vector<string>();
     //how many to add
@@ -383,3 +383,4 @@ void PeopleRandomizer::speciesTest(){
     }
 
 }
+*/

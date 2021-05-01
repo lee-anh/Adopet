@@ -9,7 +9,6 @@ int main()
     /*
     PeopleRandomizer *test = new PeopleRandomizer(10);
     test->writeToCSV();
-    test->speciesTest();
     delete test;
     */
 

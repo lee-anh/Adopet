@@ -13,28 +13,76 @@
 
 using namespace std;
 
+/*!
+ * \brief The PetGallery class creates a pet display
+ * Used in classes like MyFavorites, ManualSearch, MyPets, and FindMatch
+ * for easy display of pets given different QWidget objects
+ */
 class PetGallery
 {
 public:
 
+    /*!
+     * \brief PetGallery default constructor
+     */
     PetGallery();
 
 
-    //for owner MyPets
+
+    /*!
+     * \brief PetGallery, constructor for MyPets (owner)
+     * \param numPetsToDisplay
+     * \param prev
+     * \param next
+     * \param pageLine
+     * \param petNameLabels
+     * \param petPhotos
+     * \param petLearnMore
+     * \param petVec
+     */
     PetGallery(int numPetsToDisplay, QPushButton* prev,
                QPushButton* next, QLabel* pageLine,
                vector<QLabel*> petNameLabels,
-               vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,
+               vector<QLabel*> petPhotos,
+               vector<QPushButton*> petLearnMore,
                vector<Pet> petVec);
 
-    //for my favorites and manual search (gallery view)
+
+
+    /*!
+     * \brief PetGallery construcotr for my favorites and manual search
+     * (Gallery view)
+     * \param numPetsToDisplay
+     * \param prev
+     * \param next
+     * \param pageLine
+     * \param petNameLabels
+     * \param petPhotos
+     * \param petLearnMore
+     * \param petSaves
+     * \param petVec
+     */
     PetGallery(int numPetsToDisplay, QPushButton* prev,
                QPushButton* next, QLabel* pageLine,
                vector<QLabel*> petNameLabels,
                vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,
                vector<QPushButton*> petSaves, vector<Pet> petVec);
 
-    //for favorites, manual search, owner MyPets (list view)
+
+    /*!
+     * \brief PetGallery constructor for My favorites, manual search, MyPets
+     * (List views)
+     * \param b
+     * \param numPetsToDisplay
+     * \param prev
+     * \param next
+     * \param pageLine
+     * \param petNameLabels
+     * \param petInfo
+     * \param petLearnMore
+     * \param petSaves
+     * \param petVec
+     */
     PetGallery(bool b, int numPetsToDisplay, QPushButton* prev,
                QPushButton* next, QLabel* pageLine,
                vector<QLabel*> petNameLabels,
@@ -43,7 +91,19 @@ public:
                vector<QPushButton*> petSaves, vector<Pet> petVec);
 
 
-    //for matchmaking (gallery view)
+    /*!
+     * \brief PetGallery constructor for matchmaking (gallery view)
+     * \param numPetsToDisplay
+     * \param prev
+     * \param next
+     * \param pageLine
+     * \param petNameLabels
+     * \param petPhotos
+     * \param petScores
+     * \param petLearnMore
+     * \param petSaves
+     * \param petVec
+     */
     PetGallery(int numPetsToDisplay, QPushButton* prev,
                QPushButton* next, QLabel* pageLine,
                vector<QLabel*> petNameLabels, vector<QLabel*> petPhotos,
@@ -51,27 +111,84 @@ public:
                vector<QPushButton*> petSaves, vector<pair<Pet, int>> petVec);
 
 
-    //for matchmaking (list view)
+    /*!
+     * \brief PetGallery constructor for matchmaking (list view)
+     * \param b
+     * \param numPetsToDisplay
+     * \param prev
+     * \param next
+     * \param pageLine
+     * \param petNameLabels
+     * \param petInfo
+     * \param petScores
+     * \param petLearnMore
+     * \param petSaves
+     * \param petVec
+     */
     PetGallery(bool b, int numPetsToDisplay, QPushButton* prev,
                QPushButton* next, QLabel* pageLine,
                vector<QLabel*> petNameLabels, vector<QLabel*> petInfo,
                vector<QLabel*> petScores, vector<QPushButton*> petLearnMore,
                vector<QPushButton*> petSaves, vector<pair<Pet, int>> petVec);
+    /*!
+     * \brief PetGallery destructor
+     */
     ~PetGallery();
 
+
+    /*!
+     * \brief updatePetVec, updates the pets to display
+     * \param p
+     */
     void updatePetVec(vector<Pet> p);
 
+
+    /*!
+     * \brief displayPets
+     * \param start
+     */
     void displayPets(int start);
+
+    /*!
+     * \brief next, advances pet gallery
+     */
     void next();
+
+    /*!
+     * \brief previous, goes back on pet gallery
+     */
     void previous();
 
 
+    /*!
+     * \brief setPageNum, set a page number
+     * \param p
+     */
     void setPageNum(int p);
+
+    /*!
+     * \brief getPet, gets a pet object that's being displayed
+     * \param pos
+     * \return
+     */
     Pet getPet(int pos);
+
+    /*!
+     * \brief updatePet, update a pet's info in this class's pet vector
+     * \param p
+     */
     void updatePet(Pet p);
 
+    /*!
+     * \brief getPetVec, get the pet vector of all the pets in the class
+     * \return
+     */
     vector<Pet> getPetVec();
 
+
+    /*!
+     * \brief clearLabels, clear all labels used in the pet display
+     */
     void clearLabels();
 
 
@@ -88,6 +205,7 @@ private:
     vector<QLabel*> scoreLabels;
     vector<QLabel*> infoLabels;
 
+    vector<QPushButton*> previews;
     vector<QPushButton*> learnMores;
     vector <QPushButton*> saveButtons;
 
@@ -100,7 +218,10 @@ private:
     int nextStartIndex;
     int displayPetsPageNumber;
 
-    //conversion method
+    /*!
+     * \brief matchPetsToRegPets, converts a more complex vector to a simple one
+     *
+     */
     void matchPetsToRegPets();
 
 

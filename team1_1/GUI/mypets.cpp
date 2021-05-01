@@ -53,6 +53,7 @@ void MyPets::galleryMode(){
                         {ui->name1, ui->name2, ui->name3, ui->name4},
                         {ui->pic1, ui->pic2, ui->pic3, ui->pic4},
                         {ui->link1, ui->link2, ui->link3, ui->link4},
+                        {ui->prev1, ui->prev2, ui->prev3, ui->prev4},
                         owner->getPets());
     petgal.displayPets(0);
 }
@@ -552,4 +553,69 @@ void MyPets::on_pushButton_3_clicked()
     TagGuide tg;
     tg.setModal(true);
     tg.exec();
+}
+
+void MyPets::on_bulkUpload_2_clicked()
+{
+
+    QString os = QSysInfo::productVersion();
+    cout << os.toStdString() << endl;
+    string filename;
+    if(os == "10.16"){
+        filename = "../../../../../csvs/" + ui->fileName->text().toStdString();
+    } else {
+        filename = "../../csvs/" + ui->fileName->text().toStdString();
+
+    }
+    owner->uploadPets(filename);
+}
+
+void MyPets::on_prev1_clicked()
+{
+    emit goToMeetPet(petgal.getPet(0));
+}
+void MyPets::on_prev2_clicked()
+{
+    emit goToMeetPet(petgal.getPet(1));
+}
+void MyPets::on_prev3_clicked()
+{
+    emit goToMeetPet(petgal.getPet(2));
+}
+void MyPets::on_prev4_clicked()
+{
+    emit goToMeetPet(petgal.getPet(3));
+}
+
+void MyPets::on_prev1a_clicked()
+{
+    emit goToMeetPet(petgal.getPet(0));
+}
+void MyPets::on_prev2a_clicked()
+{
+    emit goToMeetPet(petgal.getPet(1));
+}
+void MyPets::on_prev3a_clicked()
+{
+    emit goToMeetPet(petgal.getPet(2));
+}
+void MyPets::on_prev4a_clicked()
+{
+    emit goToMeetPet(petgal.getPet(3));
+}
+void MyPets::on_prev5a_clicked()
+{
+    emit goToMeetPet(petgal.getPet(4));
+}
+void MyPets::on_prev6a_clicked()
+{
+    emit goToMeetPet(petgal.getPet(5));
+}
+void MyPets::on_prev7a_clicked()
+{
+    emit goToMeetPet(petgal.getPet(6));
+}
+void MyPets::on_prev8a_clicked()
+{
+    emit goToMeetPet(petgal.getPet(7));
 }
