@@ -53,7 +53,7 @@ GUI::GUI(QWidget *parent)
     connect(&myFavsList, SIGNAL(heartClicked(Pet, bool)), this, SLOT(heartPet(Pet, bool)));
     connect(&myFavsList, SIGNAL(goToGallery()), this, SLOT(toGalleryMyFavorites()));
     connect(&lg, SIGNAL(timeToLogout()), this, SLOT(logOut()));
-    connect(&pform, SIGNAL(toQuiz()), this, SLOT(goToQuiz()));
+    connect(&pform, SIGNAL(()), this, SLOT(goToQuiz()));
 }
 
 
@@ -116,7 +116,7 @@ void GUI::meetPet(Pet p){
 
      } else {
          QString os = QSysInfo::productVersion();
-
+         string photo;
          if(os == "10.16"){
              photo =  "../../../../../pictures/" + p.getImageFiles()[0];
          } else {
@@ -296,7 +296,10 @@ void GUI::logOut(){
 
 void GUI::goToQuiz(){
     ui->stackedWidget->setCurrentIndex(10);
+    Preferences pref = adopter->getPreferences();
+    qz.setPreference(&pref);
 }
+
 void GUI::on_navHomeButton_clicked()
 {
     //navigate to home screen
