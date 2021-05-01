@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 
 QT += core
 QT += sql
+QT += network
 
 SOURCES += main.cpp \
     owner.cpp \

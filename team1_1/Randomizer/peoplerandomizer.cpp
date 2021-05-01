@@ -1,7 +1,6 @@
 #include "peoplerandomizer.h"
 
-PeopleRandomizer::PeopleRandomizer()
-{
+PeopleRandomizer::PeopleRandomizer(){
     //default 10 people are created
     numOfPeople = 10;
     initalizeNameVecs();

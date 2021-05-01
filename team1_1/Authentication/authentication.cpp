@@ -287,10 +287,8 @@ void Authentication::loadOwnerFromDB(string username){
             zip = qry.value(4).toInt();
         }
 
-
         //calls create owner method
         createOwner(name, address, zip, num, email);
-
     }
 
 }

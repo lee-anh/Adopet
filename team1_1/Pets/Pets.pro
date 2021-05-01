@@ -8,7 +8,10 @@ QT += network
 
 SOURCES += \
         main.cpp \
-        pet.cpp
+        pet.cpp \
+        ../Owner/owner.cpp
 
 HEADERS += \
-    pet.h
+    pet.h \
+    ../Owner/owner.h
+
