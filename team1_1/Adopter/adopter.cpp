@@ -13,10 +13,6 @@ Adopter::Adopter()
     emailAddress = "null";
     zipcode = -1;
     preferenceList = Preferences();
-    //dbName = "../../projectDB.sqlite";
-    //openDB();
-    //fillPreferences();
-    //cout << "default constructor called (adopter)" << endl;
 }
 
 /*!
@@ -176,11 +172,14 @@ void Adopter::setZipCode(int zip){
     zipcode = zip;
 }
 
-/*
+
+
+/*!
+ * \brief fillPreference
  * Adds the specific preference onto the adopter's preference list
- * @param attr Preference
- * @param attrType Type of preference
-*/
+ * \param attr Preference
+ * \param attrType Type of preference
+ */
 void Adopter::fillPreference(string attr, string attrType){
     if(attrType == "species") preferenceList.addSpecies(attr);
     else if(attrType == "breed") preferenceList.addBreed(attr);
@@ -192,25 +191,13 @@ void Adopter::fillPreference(string attr, string attrType){
     else if(attrType == "shelter") preferenceList.addShelter(attr);
 }
 
-/*
- * Helper method to remove the specific preference from the adopter's preference list
- * @param attr Preference
- * @param attrType Type of preference
-*/
-void Adopter::removePreferenceHelper(string attr, string attrType){
-    if(attrType == "species") preferenceList.removeSpecies(attr);
-    else if(attrType == "breed") preferenceList.removeBreed(attr);
-    else if(attrType == "age") preferenceList.removeAge(attr);
-    else if(attrType == "size") preferenceList.removeSize(attr);
-    else if(attrType == "temperament") preferenceList.removeTemperament(attr);
-    else if(attrType == "gender") preferenceList.removeGender(attr);
-    else if(attrType == "goodWith") preferenceList.removeGoodWith(attr);
-    else if(attrType == "shelter") preferenceList.removeShelter(attr);
-}
 
-/*
+
+/*!
+ * \brief fillPreferences
  * Goes through the preferences database and fills the preference list of the current adopter
-*/
+ *
+ */
 void Adopter::fillPreferences(){
     if(prefDB.open()){
         QSqlQuery query = QSqlQuery(prefDB);
@@ -227,20 +214,44 @@ void Adopter::fillPreferences(){
     }
 }
 
-/*
- * Accessor method that returns the preference of the current adopter
- * @return Preferences object
-*/
+
+/*!
+ * \brief removePreferenceHelper
+ * Helper method to remove the specific preference from the adopter's preference list
+ *
+ * \param attr Preference
+ * \param attrType Type of preference
+ */
+void Adopter::removePreferenceHelper(string attr, string attrType){
+    if(attrType == "species") preferenceList.removeSpecies(attr);
+    else if(attrType == "breed") preferenceList.removeBreed(attr);
+    else if(attrType == "age") preferenceList.removeAge(attr);
+    else if(attrType == "size") preferenceList.removeSize(attr);
+    else if(attrType == "temperament") preferenceList.removeTemperament(attr);
+    else if(attrType == "gender") preferenceList.removeGender(attr);
+    else if(attrType == "goodWith") preferenceList.removeGoodWith(attr);
+    else if(attrType == "shelter") preferenceList.removeShelter(attr);
+}
+
+
+
+/*!
+ * \brief getPreferences accessor method for adopter's preference list
+ * \return Preference object
+ */
 Preferences Adopter::getPreferences(){
     return preferenceList;
 }
 
 
-/*
- * Adds a preference onto the adopter's preference list and the preference database
- * @param attr Preference to be added
- * @param attrType Type of preference
-*/
+
+/*!
+ * \brief addPreference
+ * Adds a preference onto the adopter's
+ *  preference list and the preference database
+ *  \param attr Preference to be added
+ * \param attrType Type of preference
+ */
 void Adopter::addPreference(string attr, string attrType){
     QString s = "INSERT INTO preferences(adopterUsername, attribute, attributeType) VALUES(\"";
     s += QString::fromStdString(username) + "\", \"";
@@ -255,11 +266,13 @@ void Adopter::addPreference(string attr, string attrType){
     fillPreference(attr, attrType);
 }
 
-/*
- * Removes a preference from the adopter's preference list and the preference database
- * @param attr Preference to be removed
- * @param attrType Type of preference
-*/
+/*!
+ * \brief removePreference Removes a preference from the
+ * adopter's preference list and the preference database
+ *
+ * \param attr Preference to be removed
+ * \param attrType Type of preference
+ */
 void Adopter::removePreference(string attr, string attrType){
     QString s = "DELETE FROM preferences WHERE (adopterUsername = ";
     s += "\"" + QString::fromStdString(username) + "\" AND attribute = ";
@@ -274,6 +287,10 @@ void Adopter::removePreference(string attr, string attrType){
     removePreferenceHelper(attr, attrType);
 }
 
+
+/*!
+ * \brief openDB, opens a connection to the database
+ */
 void Adopter::openDB(){
     prefDB = QSqlDatabase::addDatabase("QSQLITE", "adopterCxn");
     string fullName = dbName;

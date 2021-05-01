@@ -49,6 +49,21 @@ void PetRandomizer::openDB(){
 
 void PetRandomizer::initializeNameVecs(){
     names = {
+        "bailey", "max", "charlie", "buddy", "rocky", "jake", "jack", "toby", "cody",
+        "buster", "duke", "cooper", "riley", "harley", "bear", "tucker", "murphy",
+        "lucky", "sam", "oscar", "teddy", "winston", "sammy", "bella",
+        "molly", "daisy", "maggie", "sophie", "sadie", "lola", "zoe", "abby",
+        "coco", "sasha", "angel", "princess", "annie", "rosie", "ruby", "rusty",
+        "shadow", "gizmo", "bentley", "zeus", "baxter", "bandit", "gus", "samson",
+        "rudy", "louie", "hunter", "casey", "rocco", "sparky", "joey", "bruno",
+        "beau", "dakota", "maximus", "romeo", "boomer", "luke", "lady", "missy",
+        "katie" "mia", "zoey", "madison", "stella", "penny", "belle", "samantha",
+        "holly", "lexi", "lulu", "meimei", "brandy", "jasmine", "shelby", "sandy",
+        "roxie", "pepper", "poppy", "heidi", "dixie", "honey", "rey", "kylo", "han",
+        "poe", "leia", "anakin", "padme", "obi-wan", "chewie", "yoda", "olaf",
+        "elsa", "maggie", "homer", "spock", "kirk", "uhura", "scottie", "bennie",
+        "jelly", "jam", "prince", "king", "queen", "cassie", "xavier", "manny",
+        "squishy", "snoopy", "orion", "sophie", "raj", "watson", "bobum", "boba",
        "oliver", "liam", "ethan", "aiden", "gabriel", "caleb", "theo", "owen",
         "elijah", "henry", "jackson", "grayson", "levi", "ben", "miles", "alex",
         "sebastian", "leo", "landon", "emmett", "everett", "milo", "jasper",
@@ -56,7 +71,7 @@ void PetRandomizer::initializeNameVecs(){
         "aurora", "violet", "luna", "hazel", "chloe", "aria", "scarlett",
         "abigail", "freya", "adeline", "sophia", "nora", "adelaide", "emma",
         "mila", "lily", "grace", "maeve", "ivy", "ella", "audrey",
-        "genevieve", "iris", "isabelle", "lucy"
+        "genevieve", "iris", "isabelle", "lucy", "minty", "nick", "sugar", "puff"
     };
     age = {"young", "adult","senior"};
     gender = {"male", "female"};

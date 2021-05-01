@@ -29,7 +29,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="createAccount">
       <layout class="QGridLayout" name="gridLayout">
@@ -813,6 +813,94 @@
           <size>
            <width>282</width>
            <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page">
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item>
+        <spacer name="verticalSpacer_12">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>36</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_18">
+         <property name="font">
+          <font>
+           <pointsize>36</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Help</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_11">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>35</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_19">
+         <property name="text">
+          <string>How do I adopt a pet?
+At the bottom of each pet’s “Meet Me” page, there should be contact information for the shelter or foster parent that the pet belongs to. Simply reach out to the current owner via email, telephone, or mail and follow their adoption process. 
+
+How does the Find Match algorithm work? 
+The matchmaking algorithm takes your preferences that you entered in the preference form or preferences quiz and compares them with the attributes of every single pet in our database. For best results, please enter your preferences first, then use the matchmaking algorithm.
+
+Why am I seeing 0% Match for all the matches?
+You likely didn’t enter your preferences before hit “Generate Matches”. Please go to My Preferences and fill out your preferences. 
+
+How do I use the Manual Search Feature?
+You can use the search bar, the checkboxes on the left hand side of the page, or both. For best results, search using the search bar first, then refine your search using the checkboxes on the side.
+Pro tip: Use the List view so that you can see more information about each animal you search for on the main manual search page. 
+
+I can’t find one of the pets that I saved before. What happened to it? 
+The pet that you save likely got adopted and is now off the market. 
+
+Any other questions? Please contact ESC Tech at liucl@lafayette.edu
+</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_10">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>36</height>
           </size>
          </property>
         </spacer>

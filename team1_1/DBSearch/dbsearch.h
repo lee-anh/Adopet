@@ -142,7 +142,6 @@ private:
      */
     int getIndex(string category);
 
-   // bool match(char *first, char *second);
 
     //vectors of keywords
     vector<string> mainSpecies; //from DB

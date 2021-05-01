@@ -31,7 +31,7 @@ public:
     ~Authentication();
 
     /*!
-     * \brief logIn
+     * \brief logIn, method to login to the system
      * \param username
      * \param password
      * \return
@@ -39,7 +39,7 @@ public:
     int logIn(string username, string password);
 
     /*!
-     * \brief signUp
+     * \brief signUp, method to sign up
      * \param username
      * \param password
      * \param accountType
@@ -48,14 +48,14 @@ public:
     bool signUp(string username, string password, string accountType);
 
     /*!
-     * \brief loadAdopterFromDB
+     * \brief loadAdopterFromDB, loads an adopter from the database
      * \param username
      * \param password
      */
     void loadAdopterFromDB(string username, string password);
 
     /*!
-     * \brief createAdopter
+     * \brief createAdopter creates an adopter object
      * \param username
      * \param pwd
      * \param fname
@@ -67,7 +67,7 @@ public:
     Adopter* createAdopter(string username, string pwd, string fname, string lname, string emailAdd, int zip);
 
     /*!
-     * \brief insertAdopterToDB
+     * \brief insertAdopterToDB, inserted an adopter to the database
      * \param username
      * \param fname
      * \param lname
@@ -77,13 +77,13 @@ public:
     void insertAdopterToDB(string username, string fname, string lname, string emailAdd, string zip);
 
     /*!
-     * \brief getAuthenticatedAdopter
+     * \brief getAuthenticatedAdopter, returns the current adopter object
      * \return
      */
     Adopter* getAuthenticatedAdopter();
 
     /*!
-     * \brief updateAdopter
+     * \brief updateAdopter updates the adopter's info
      * \param username
      * \param fname
      * \param lname
@@ -94,13 +94,13 @@ public:
     Adopter updateAdopter(string username, string fname, string lname, string emailAdd, string zip);
 
     /*!
-     * \brief loadOwnerFromDB
+     * \brief loadOwnerFromDB, loads an owner from the database
      * \param username
      */
     void loadOwnerFromDB(string username);
 
     /*!
-     * \brief createOwner
+     * \brief createOwner, creates and Owner object
      * \param name
      * \param address
      * \param zip
@@ -111,7 +111,7 @@ public:
     Owner* createOwner( string name, string address, int zip, int phone, string email);
 
     /*!
-     * \brief insertOwnerToDB
+     * \brief insertOwnerToDB, inserts owner to DB
      * \param username
      * \param name
      * \param phone
@@ -122,7 +122,7 @@ public:
     bool insertOwnerToDB(string username, string name, string phone, string email, string address, string zip);
 
     /*!
-     * \brief getAuthenticatedOwner
+     * \brief getAuthenticatedOwner, get the current owner object
      * \return
      */
     Owner* getAuthenticatedOwner();
@@ -146,18 +146,23 @@ private:
     QSqlDatabase db;
 
     /*!
-     * \brief openDB
+     * \brief openDB, opens a connection to the database
      */
     void openDB();
     string dbName;
 
     /*!
-     * \brief checkUsername
+     * \brief checkUsername, checks that a username is unique
      * \param username
      * \return
      */
     bool checkUsername(string username);
 
+    /*!
+     * \brief checkShelterName, checks that a shelter name is unique
+     * \param shelterName
+     * \return
+     */
     bool checkShelterName(string shelterName);
 
     Adopter *authAdopter;

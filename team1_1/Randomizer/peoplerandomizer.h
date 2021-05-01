@@ -9,16 +9,34 @@
 #include <time.h>
 using namespace std;
 
+/*!
+ * \brief The PeopleRandomizer class outputs a csv of dummy adopters
+ */
 class PeopleRandomizer
 {
 public:
+
+    /*!
+     * \brief PeopleRandomizer default constructor
+     */
     PeopleRandomizer();
+
+    /*!
+     * \brief PeopleRandomizer main constructor
+     * \param num
+     */
     PeopleRandomizer(int num);
+
+    /*!
+     * \brief PeopleRandomizer destructor
+     */
     ~PeopleRandomizer();
 
+    /*!
+     * \brief writeToCSV, write generated info to a csv
+     */
     void writeToCSV();
 
-    void speciesTest();
 
 
 
@@ -32,10 +50,22 @@ private:
 
     //Database stuff
     QSqlDatabase db;
+    /*!
+     * \brief openDB opens a connection to the database
+     */
     void openDB();
 
-    void initalizeNameVecs();
+    /*!
+     * \brief loadDBVecs load tag info frm database
+     */
     void loadDBVecs();
+
+    /*!
+     * \brief initalizeNameVecs choose names for the users
+     */
+    void initalizeNameVecs();
+
+
 
 
 

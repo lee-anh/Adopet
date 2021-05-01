@@ -47,6 +47,13 @@ private:
 
     void clearAll();
 
+signals:
+    /*!
+     * \brief goToMeetPet, preview pet
+     * \param p
+     */
+    void goToMeetPet(Pet p);
+
 private slots:
     void on_markAsAdopted_clicked();
 
@@ -100,6 +107,21 @@ private slots:
 
     void on_toBulkUpload_clicked();
     void on_pushButton_3_clicked();
+    void on_bulkUpload_2_clicked();
+    void on_prev1_clicked();
+    void on_prev2_clicked();
+    void on_prev3_clicked();
+    void on_prev4_clicked();
+
+    void on_prev1a_clicked();
+    void on_prev2a_clicked();
+    void on_prev3a_clicked();
+    void on_prev4a_clicked();
+    void on_prev5a_clicked();
+    void on_prev6a_clicked();
+    void on_prev7a_clicked();
+    void on_prev8a_clicked();
+
 };
 
 #endif // MYPETS_H

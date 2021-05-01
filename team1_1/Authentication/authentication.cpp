@@ -436,6 +436,11 @@ bool Authentication::checkUsername(string username){
     return false;
 }
 
+/*!
+ * \brief checkShelterName, checks that a shelter name is unique
+ * \param shelterName
+ * \return true if not unique, false if unique
+ */
 bool Authentication::checkShelterName(string shelterName){
     if(db.open()){
 

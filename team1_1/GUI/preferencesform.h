@@ -11,17 +11,42 @@ namespace Ui {
 class PreferencesForm;
 }
 
+/*!
+ * \brief The PreferencesForm class creates a widget where adopters
+ * can set their preferences
+ */
 class PreferencesForm : public QWidget
 {
     Q_OBJECT
 
 public:
+
+    /*!
+     * \brief PreferencesForm constructor
+     * \param parent
+     */
     explicit PreferencesForm(QWidget *parent = nullptr);
+    /*!
+     * \brief PreferencesForm destructor
+     */
     ~PreferencesForm();
 
 
+    /*!
+      * \brief setAdopter, set adopter object that the preferences
+      * will belong to
+      * \param a
+      */
      void setAdopter(Adopter *a);
+
+     /*!
+      * \brief loadPreferences, checks the right checkboxes
+      */
      void loadPreferences();
+
+     /*!
+      * \brief clearCheckBoxes, clears all preference checkboxes
+      */
      void clearCheckBoxes();
 
 private:
@@ -32,9 +57,23 @@ private:
     vector<pair<string, string>> toRemove;
     vector<pair<string, QCheckBox*>> cb;
 
+    /*!
+     * \brief fillCheckBoxVec, helper method to class methods
+     */
     void fillCheckBoxVec();
+
+    /*!
+     * \brief findInVec, checks corresponding checkbox given attribute
+     * \param attribute
+     */
     void findInVec(string attribute);
 
+    /*!
+     * \brief checkBoxChange handles any checkbox state changes
+     * \param attribute
+     * \param category
+     * \param arg1
+     */
     void checkBoxChange(string attribute, string category, int arg1);
 
 

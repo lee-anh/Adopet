@@ -34,7 +34,7 @@
       </font>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="gallery">
       <layout class="QGridLayout" name="gridLayout_5">
@@ -172,6 +172,13 @@
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="prev1">
+             <property name="text">
+              <string>Preview</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
@@ -232,6 +239,13 @@
              </property>
              <property name="text">
               <string>Edit</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="prev2">
+             <property name="text">
+              <string>Preview</string>
              </property>
             </widget>
            </item>
@@ -298,6 +312,13 @@
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="prev3">
+             <property name="text">
+              <string>Preview</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
@@ -358,6 +379,13 @@
              </property>
              <property name="text">
               <string>Edit</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="prev4">
+             <property name="text">
+              <string>Preview</string>
              </property>
             </widget>
            </item>
@@ -1381,7 +1409,7 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
          </column>
          <column>
           <property name="text">
-           <string>Media</string>
+           <string>Bio</string>
           </property>
          </column>
          <column>
@@ -1436,7 +1464,7 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
          </item>
          <item row="0" column="9">
           <property name="text">
-           <string>rufusBestFriends.jpeg</string>
+           <string>Rufus loves to play catch and run.</string>
           </property>
          </item>
          <item row="0" column="10">
@@ -1491,7 +1519,7 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
          </item>
          <item row="1" column="9">
           <property name="text">
-           <string>maisyBestFriends.jpeg</string>
+           <string>Maisy is shy, but loving. She's fully vaccinated and healthy</string>
           </property>
          </item>
         </widget>
@@ -1531,12 +1559,12 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
              <item>
               <widget class="QLabel" name="label_14">
                <property name="text">
-                <string>Filename: </string>
+                <string>Filename (csv or txt files only!) </string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit">
+              <widget class="QLineEdit" name="fileName">
                <property name="styleSheet">
                 <string notr="true">background-color: rgb(161, 212, 255)</string>
                </property>
@@ -1575,7 +1603,7 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
             </spacer>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_2">
+            <widget class="QPushButton" name="bulkUpload_2">
              <property name="text">
               <string>Upload</string>
              </property>
@@ -1614,8 +1642,8 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
       </layout>
      </widget>
      <widget class="QWidget" name="myPetsList">
-      <layout class="QVBoxLayout" name="verticalLayout_21">
-       <item>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="0" column="0">
         <widget class="QLabel" name="label_16">
          <property name="font">
           <font>
@@ -1630,7 +1658,7 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
          </property>
         </widget>
        </item>
-       <item>
+       <item row="1" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout_12">
          <item>
           <spacer name="horizontalSpacer_15">
@@ -1695,12 +1723,18 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
          </item>
         </layout>
        </item>
-       <item>
+       <item row="2" column="0">
         <layout class="QVBoxLayout" name="verticalLayout_17">
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_36">
            <item>
             <widget class="QLabel" name="name1a">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="text">
               <string>Name</string>
              </property>
@@ -1726,12 +1760,31 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="prev1a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Preview</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_37">
            <item>
             <widget class="QLabel" name="name2a">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="text">
               <string>Name</string>
              </property>
@@ -1757,12 +1810,31 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="prev2a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Preview</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_39">
            <item>
             <widget class="QLabel" name="name3a">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="text">
               <string>Name</string>
              </property>
@@ -1788,12 +1860,31 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="prev3a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Preview</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_40">
            <item>
             <widget class="QLabel" name="name4a">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="text">
               <string>Name</string>
              </property>
@@ -1819,12 +1910,31 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="prev4a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Preview</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_41">
            <item>
             <widget class="QLabel" name="name5a">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="text">
               <string>Name</string>
              </property>
@@ -1850,12 +1960,31 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="prev5a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Preview</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_43">
            <item>
             <widget class="QLabel" name="name6a">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="text">
               <string>Name</string>
              </property>
@@ -1881,12 +2010,31 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="prev6a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Preview</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_44">
            <item>
             <widget class="QLabel" name="name7a">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="text">
               <string>Name</string>
              </property>
@@ -1912,12 +2060,31 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="prev7a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Preview</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_42">
            <item>
             <widget class="QLabel" name="name8a">
+             <property name="maximumSize">
+              <size>
+               <width>200</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="text">
               <string>Name</string>
              </property>
@@ -1943,11 +2110,24 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="prev8a">
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Preview</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
         </layout>
        </item>
-       <item>
+       <item row="3" column="0">
         <widget class="QLabel" name="pageLinea">
          <property name="text">
           <string>Showing page # out of # </string>
@@ -1957,7 +2137,7 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
          </property>
         </widget>
        </item>
-       <item>
+       <item row="4" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout_45">
          <item>
           <spacer name="horizontalSpacer_38">

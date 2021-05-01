@@ -1,6 +1,11 @@
 #include "preferencesform.h"
 #include "ui_preferencesform.h"
 
+
+/*!
+ * \brief PreferencesForm constructor
+ * \param parent
+ */
 PreferencesForm::PreferencesForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PreferencesForm)
@@ -13,19 +18,29 @@ PreferencesForm::PreferencesForm(QWidget *parent) :
 
 }
 
+/*!
+ * \brief PreferencesForm destructor
+ */
 PreferencesForm::~PreferencesForm()
 {
     delete ui;
 }
 
 
+
+/*!
+  * \brief setAdopter, set adopter object that the preferences
+  * will belong to
+  * \param a, pointer to adopter object
+  */
 void PreferencesForm::setAdopter(Adopter *a){
     adopter = a;
 }
 
-
+/*!
+ * \brief loadPreferences, checks the right checkboxes
+ */
 void PreferencesForm::loadPreferences(){
-    //static b/c just need to read from it
 
     Preferences p = adopter->getPreferences();
 
@@ -38,7 +53,7 @@ void PreferencesForm::loadPreferences(){
     for(int i = 0; i < (int) p.getAge().size(); i ++){
         findInVec(p.getAge()[i]);
     }
-   //TODO: CURRENTLY SKIPPING GENDER
+   //gender
     for(int i = 0; i < (int) p.getGender().size(); i ++){
         findInVec(p.getGender()[i]);
     }
@@ -70,8 +85,20 @@ void PreferencesForm::loadPreferences(){
 
 }
 
+/*!
+ * \brief clearCheckBoxes, clears all preference checkboxes
+ */
+void PreferencesForm::clearCheckBoxes(){
+    for (int i = 0; i < (int) cb.size(); i++){
+        cb[i].second->setChecked(false);
+    }
+}
 
-
+/*!
+ * \brief fillCheckBoxVec, helper method to class methods
+ * fills in a vector with strings and buttons to easily access those
+ * checkboxes throughout the class
+ */
 void PreferencesForm::fillCheckBoxVec(){
     cb = vector<pair<string, QCheckBox*>>();
     cb.push_back(make_pair("dog", ui->dogCheckBox));
@@ -126,6 +153,11 @@ void PreferencesForm::fillCheckBoxVec(){
 
 }
 
+
+/*!
+ * \brief findInVec, checks corresponding checkbox given attribute
+ * \param attribute, attribute to find and check off
+ */
 void PreferencesForm::findInVec(string attribute){
     for(int i = 0; i < (int) cb.size(); i++){
         if(attribute == cb[i].first){
@@ -135,13 +167,19 @@ void PreferencesForm::findInVec(string attribute){
 
 }
 
+/*!
+ * \brief checkBoxChange handles any checkbox state changes
+ * \param attribute to change
+ * \param category, attribute's category
+ * \param arg1, 0 = unchecked, 1 = partially checked, 2 = checked
+ */
 void PreferencesForm::on_saveButton_clicked()
 {
 
     //remove FIRST!!
     for(int i = 0; i < (int) toRemove.size(); i++){
 
-        //CHANGE HERE
+        //then change
         adopter->removePreference(toRemove[i].first, toRemove[i].second);
 
     }
@@ -166,14 +204,15 @@ void PreferencesForm::on_saveButton_clicked()
     emit adopterChanged(adopter);
 }
 
-void PreferencesForm::clearCheckBoxes(){
-    for (int i = 0; i < (int) cb.size(); i++){
-        cb[i].second->setChecked(false);
-    }
-}
 
+
+/*!
+ * \brief checkBoxChange handles any checkbox state changes
+ * \param attribute, new attribute
+ * \param category, attribute's category
+ * \param arg1,  0 = unchecked, 1 = partially checked, 2 = checked
+ */
 void PreferencesForm::checkBoxChange(string attribute, string category, int arg1){
-    //ACTUALLY: Move these to temporary storage  - a vector?
 
     // 0 unchecked
     // 1 partially checked
