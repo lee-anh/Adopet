@@ -44,65 +44,59 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="firstPage">
-      <widget class="QLabel" name="label_2">
-       <property name="geometry">
-        <rect>
-         <x>370</x>
-         <y>20</y>
-         <width>201</width>
-         <height>71</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Put questions here </string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="checkBox">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>370</y>
-         <width>86</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>CheckBox</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_4">
        <property name="geometry">
         <rect>
-         <x>70</x>
-         <y>90</y>
-         <width>221</width>
-         <height>211</height>
+         <x>260</x>
+         <y>20</y>
+         <width>371</width>
+         <height>81</height>
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string>Will your pet have safe and easy access to outdoor space?</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QRadioButton" name="radioButton">
        <property name="geometry">
         <rect>
-         <x>680</x>
-         <y>430</y>
-         <width>113</width>
-         <height>32</height>
+         <x>230</x>
+         <y>120</y>
+         <width>99</width>
+         <height>21</height>
         </rect>
        </property>
        <property name="text">
-        <string>PushButton</string>
+        <string>Yes</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_2">
+       <property name="geometry">
+        <rect>
+         <x>370</x>
+         <y>120</y>
+         <width>99</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>No</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_3">
+       <property name="geometry">
+        <rect>
+         <x>510</x>
+         <y>120</y>
+         <width>191</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Yes but with my permission</string>
        </property>
       </widget>
      </widget>
@@ -110,17 +104,280 @@
       <widget class="QLabel" name="label_3">
        <property name="geometry">
         <rect>
-         <x>290</x>
+         <x>300</x>
          <y>40</y>
-         <width>281</width>
+         <width>441</width>
          <height>31</height>
         </rect>
        </property>
        <property name="text">
-        <string>Second page of questions</string>
+        <string>Do you spend a lot of time away from home?</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_4">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>90</y>
+         <width>99</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Yes</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_5">
+       <property name="geometry">
+        <rect>
+         <x>550</x>
+         <y>90</y>
+         <width>99</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>No</string>
        </property>
       </widget>
      </widget>
+     <widget class="QWidget" name="page">
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>20</y>
+         <width>281</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>How mature do you want your pet to be?</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_11">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>60</y>
+         <width>85</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Old</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_12">
+       <property name="geometry">
+        <rect>
+         <x>300</x>
+         <y>60</y>
+         <width>85</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Young</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_13">
+       <property name="geometry">
+        <rect>
+         <x>400</x>
+         <y>60</y>
+         <width>85</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Adult</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_14">
+       <property name="geometry">
+        <rect>
+         <x>530</x>
+         <y>60</y>
+         <width>111</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>No Preference</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_4">
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>20</y>
+         <width>351</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>How social is your home scene?</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_15">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>60</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Frequent Guests</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_16">
+       <property name="geometry">
+        <rect>
+         <x>490</x>
+         <y>60</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Large Family</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_17">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>100</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Small Family</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_18">
+       <property name="geometry">
+        <rect>
+         <x>490</x>
+         <y>100</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Only me</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_5">
+      <widget class="QLabel" name="label_8">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>30</y>
+         <width>351</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Do you live with children?</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_6">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>90</y>
+         <width>99</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Yes</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_7">
+       <property name="geometry">
+        <rect>
+         <x>470</x>
+         <y>90</y>
+         <width>99</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>No</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_6">
+      <widget class="QLabel" name="label_9">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>20</y>
+         <width>351</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Do you own another pet?</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_8">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>80</y>
+         <width>99</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Yes</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_9">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>80</y>
+         <width>99</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>No</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="nextpage">
+     <property name="text">
+      <string>Next Page</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="previouspage">
+     <property name="text">
+      <string>Previous Page</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="finishquiz">
+     <property name="text">
+      <string>Finish Quiz</string>
+     </property>
     </widget>
    </item>
   </layout>

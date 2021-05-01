@@ -9,7 +9,7 @@ GUI::GUI(QWidget *parent)
 
     //DIFFERENT OS
 
-    /*
+
     QString os = QSysInfo::productVersion();
     cout << os.toStdString() << endl;
       
@@ -19,9 +19,9 @@ GUI::GUI(QWidget *parent)
         dbName = "../../projectDB.sqlite";
 
     }
-    */
 
-    dbName = "../../../../../projectDB.sqlite";
+
+    //dbName = "../../../../../projectDB.sqlite";
 
     auth = Authentication(dbName);
 
@@ -306,7 +306,10 @@ void GUI::logOut(){
 
 void GUI::goToQuiz(){
     ui->stackedWidget->setCurrentIndex(10);
+    Preferences pref = adopter->getPreferences();
+    qz.setPreference(&pref);
 }
+
 void GUI::on_navHomeButton_clicked()
 {
     //navigate to home screen
