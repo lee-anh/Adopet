@@ -18,6 +18,8 @@ GUI::GUI(QWidget *parent)
         dbName = "../../projectDB.sqlite";
     }
 
+    //dbName = "../../../../../projectDB.sqlite";
+
     auth = Authentication(dbName);
 
     //dynamically add widgets to the stackedWidget
@@ -301,7 +303,10 @@ void GUI::logOut(){
 
 void GUI::goToQuiz(){
     ui->stackedWidget->setCurrentIndex(10);
+    Preferences pref = adopter->getPreferences();
+    qz.setPreference(&pref);
 }
+
 void GUI::on_navHomeButton_clicked()
 {
     //navigate to home screen
