@@ -12,6 +12,9 @@
 
 using namespace std;
 
+#include "../Owner/owner.h"
+class Owner;
+
 class Pet
 {
 public:
@@ -59,14 +62,18 @@ public:
     string getBio();
     void setBio(string bi);
 
+    void fillMediaFiles(string dbName);
+
     vector<string> getImageFiles();
-    void fillImageFiles(string dbName);
     void addImageFile(string file);
+
+    vector<string> getVideoFiles();
+    void addVideoFile(string file);
 
     int getPetID();
     void setPetID(int id);
 
-
+    Owner getOwner(string dbName);
     //trying out zipcode stuff
     int getDistance(int zipcode1, int zipcode2);
 private:
@@ -83,9 +90,7 @@ private:
     string bio;
 
     vector<string> imageFiles;
-
-
-
+    vector<string> videoFiles;
 };
 
 #endif // PET_H

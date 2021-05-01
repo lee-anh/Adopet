@@ -15,7 +15,7 @@ Owner::Owner(string n, string a, int zip, int pN, string e){
     zipCode = zip;
     phoneNumber = pN;
     email = e;
-    cout << "wrong constructor called (owner)" << endl;
+    cout << "simple constructor called (owner)" << endl;
     //openDB();
     //lastPetID = getLastPetID();
 }

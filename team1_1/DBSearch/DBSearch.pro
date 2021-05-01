@@ -9,8 +9,10 @@ QT += network
 SOURCES += \
         dbsearch.cpp \
         main.cpp \
-        ../Pets/pet.cpp
+        ../Pets/pet.cpp \
+        ../Owner/owner.cpp
 
 HEADERS += \
     dbsearch.h \
-    ../Pets/pet.h
+    ../Pets/pet.h \
+    ../Owner/owner.h

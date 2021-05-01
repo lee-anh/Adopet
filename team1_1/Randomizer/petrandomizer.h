@@ -18,7 +18,8 @@ public:
 
     void writeToCSV();
 
-    string getFileNameBySpecies(string petSpecies);     //gets the media file name of a specific pet based on its species
+    string getImageFileNameBySpecies(string petSpecies);     //gets the image file name of a specific pet based on its species
+    string getVideoFileNameBySpecies(string petSpecies);     //gets the video file name of a specific pet based on its species
     string getMediaType(string fileName);               //returns either "image" or "video" depending on file type
 
 
@@ -40,8 +41,8 @@ private:
     vector<string> age;
     vector<string> gender;
     vector<string> size;
-    vector<string> imageFileNames;
-
+    vector<string> imageFileNames;    
+    vector<string> videoFileNames;
 
     //read from DB
     vector<string> species;

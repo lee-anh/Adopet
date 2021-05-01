@@ -23,7 +23,7 @@ create table accounts(
 create table owner(
       username CHAR NOT NULL UNIQUE,
       name     CHAR NOT NULL UNIQUE,
-      phoneNumber CHAR NOT NULL,
+      phoneNumber INT NOT NULL,
       emailAddress CHAR NOT NULL,
       ownerAddress CHAR NOT NULL, 
       zip         INT NOT NULL

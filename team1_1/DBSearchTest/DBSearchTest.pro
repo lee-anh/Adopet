@@ -30,3 +30,6 @@ SOURCES += ../DBSearch/dbsearch.cpp
 
 HEADERS += ../Pets/pet.h
 SOURCES += ../Pets/pet.cpp
+
+HEADERS += ../Owner/owner.h
+SOURCES += ../Owner/owner.cpp
