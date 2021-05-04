@@ -3,7 +3,7 @@
 
 using namespace std;
 
-/*
+
 //checking if matchmaking for adopters works
 void checkPetMatches(){
     Matchmaking match = Matchmaking();
@@ -15,6 +15,7 @@ void checkPetMatches(){
     match.showPetResults();
 }
 
+/*
 //checking if finding matches for pets work
 void checkAdopterMatches(){
     Matchmaking match = Matchmaking();
@@ -26,7 +27,7 @@ void checkAdopterMatches(){
     match.findMatchesForPet(petName);
     match.showAdopterResults();
 }
-
+*/
 //checking if finding matches for all pets in a specific shelter work
 void checkAllShelterPetsMatches(){
     Matchmaking match = Matchmaking();
@@ -37,18 +38,18 @@ void checkAllShelterPetsMatches(){
     match.fillPets();
     vector<pair<Pet, pair<Adopter, int>>> res = match.findMatchesForPets(shelterName);
 
+
     for(int i = 0; i < (int)res.size(); i++){
         cout << "Pet: " << res.at(i).first.getName()
-             << "   Adopter: " << res.at(i).second.first.getUsername()
+             << "   Adopter: " << res.at(i).second.first.getFirstName() << " " << res.at(i).second.first.getLastName()
              << "   Score: " << res.at(i).second.second << endl;
     }
 }
-*/
 
 int main(){
     //checkPetMatches();
     //checkAdopterMatches();
     //checkAdopterMatches();
-    //checkAllShelterPetsMatches();
+    checkAllShelterPetsMatches();
     return 0;
 }

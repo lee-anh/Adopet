@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QtSql>
 #include <vector>
-#include <QMediaPlayer>
+//#include <QMediaPlayer>
 
 //classes that we need
 #include "../DBSearch/dbsearch.h"
