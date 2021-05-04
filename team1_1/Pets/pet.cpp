@@ -60,7 +60,7 @@ Pet::~Pet(){
 
 }
 
-//getters and setters
+//imaters and setters
 int Pet::getID(){
     return id;
 }
