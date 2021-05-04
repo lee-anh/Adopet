@@ -47,6 +47,8 @@ private:
 
     void clearAll();
 
+    vector<string> mediaParser(string s);
+
 signals:
     /*!
      * \brief goToMeetPet, preview pet

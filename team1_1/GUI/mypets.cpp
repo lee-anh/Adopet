@@ -116,6 +116,7 @@ void MyPets::on_saveChangesButton_clicked()
     string media = ui->multimediaBox->toPlainText().toStdString();
 
     //TODO NEED TO PROCESS MEDIA
+    //mediaParser(media);
 
 
     if (species == "other"){
@@ -389,6 +390,20 @@ void MyPets::clearAll(){
     ui->errorBarUploadPet->clear();
     ui->savedLine->clear();
 
+}
+
+vector<string> MyPets::mediaParser(string s){
+    vector<string> words;
+    string word;
+    for(int i = 0; (int) s.size(); i++){
+        if(s[i] == ',' || s[i] == ' '){
+            words.push_back(word);
+            cout << word << endl;
+            word = ""; //clear the word
+        } else {
+            word = word + s[i];
+        }
+    }
 }
 
 void MyPets::on_link1a_clicked()

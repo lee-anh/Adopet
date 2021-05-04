@@ -28,7 +28,7 @@ GUI::GUI(QWidget *parent)
     }
 
 
-  //  dbName = "../../../../../projectDB.sqlite";
+    //dbName = "../../../../../projectDB.sqlite";
 
     auth = Authentication(dbName);
 
@@ -43,7 +43,7 @@ GUI::GUI(QWidget *parent)
     ui->stackedWidget->addWidget(&qz); //10
     ui->stackedWidget->addWidget(&fmForPets); //10
 
-    cout << "After adding widgets" << endl;
+
     //Set the opening page
     int openingPage = 0; //login
     hideNavAdopter();
@@ -71,7 +71,6 @@ GUI::GUI(QWidget *parent)
     connect(&myPets, SIGNAL(goToMeetPet(Pet)), this, SLOT(goToMeetMe(Pet)));
 
 
-    cout << "After signals and slots" << endl;
 }
 
 
@@ -164,7 +163,8 @@ void GUI::meetPet(Pet p){
     QString qbio = QString::fromStdString(bio);
     ui->petBio->setText(qbio);
 
-    //TODO - shelter info and link to shelter bio?
+    //TODO - shelter info
+
 
 
 
