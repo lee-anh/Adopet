@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_16">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="unsavedChangesLabel">
      <property name="font">
@@ -70,8 +70,17 @@
      </item>
      <item>
       <widget class="QPushButton" name="goToQuiz">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(247, 250, 170);</string>
+       </property>
        <property name="text">
-        <string>Take a Fun Quiz Instead!</string>
+        <string>Take a Fun Quiz!</string>
        </property>
       </widget>
      </item>
@@ -101,7 +110,7 @@
         <x>0</x>
         <y>0</y>
         <width>859</width>
-        <height>660</height>
+        <height>702</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_46">
@@ -1185,6 +1194,43 @@
             </item>
            </layout>
           </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <spacer name="horizontalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="clearAll">
+           <property name="text">
+            <string>Clear All</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </item>

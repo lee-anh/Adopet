@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>UnsavePet</class>
- <widget class="QDialog" name="UnsavePet">
+ <class>TakeQuiz</class>
+ <widget class="QDialog" name="TakeQuiz">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -15,14 +15,14 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <spacer name="verticalSpacer">
+    <spacer name="verticalSpacer_3">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>44</height>
+       <height>51</height>
       </size>
      </property>
     </spacer>
@@ -35,8 +35,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Are you sure you want to unsave this pet? 
-Doing so will remove the pet from My Favorites.</string>
+      <string>Are you sure you want to take the quiz? Doing so will reset your preferences!</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -47,14 +46,14 @@ Doing so will remove the pet from My Favorites.</string>
     </widget>
    </item>
    <item>
-    <spacer name="verticalSpacer_2">
+    <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>43</height>
+       <height>51</height>
       </size>
      </property>
     </spacer>
@@ -75,14 +74,14 @@ Doing so will remove the pet from My Favorites.</string>
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="no">
+      <widget class="QPushButton" name="No">
        <property name="text">
         <string>No</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="yes">
+      <widget class="QPushButton" name="Yes">
        <property name="text">
         <string>Yes</string>
        </property>
@@ -104,14 +103,14 @@ Doing so will remove the pet from My Favorites.</string>
     </layout>
    </item>
    <item>
-    <spacer name="verticalSpacer_3">
+    <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>44</height>
+       <height>51</height>
       </size>
      </property>
     </spacer>

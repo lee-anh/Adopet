@@ -37,6 +37,7 @@ SOURCES += \
     preferencesform.cpp \
     quiz.cpp \
     tagguide.cpp \
+    takequiz.cpp \
     unsavepet.cpp \
     userinfo.cpp \
     ../Authentication/authentication.cpp \
@@ -64,6 +65,7 @@ HEADERS += \
     preferencesform.h \
     quiz.h \
     tagguide.h \
+    takequiz.h \
     unsavepet.h \
     userinfo.h \
     ../Authentication/authentication.h \
@@ -85,6 +87,7 @@ FORMS += \
     preferencesform.ui \
     quiz.ui \
     tagguide.ui \
+    takequiz.ui \
     unsavepet.ui \
     userinfo.ui \
     videoplayer.ui

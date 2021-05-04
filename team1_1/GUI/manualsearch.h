@@ -126,6 +126,8 @@ private slots:
     void on_save6a_clicked();
 
 
+    void on_searchBar_returnPressed();
+
 signals:
     void learnMoreClicked(Pet sendPet);
     void learnMoreClicked(Pet sendPet, bool b);
