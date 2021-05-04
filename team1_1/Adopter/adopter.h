@@ -168,7 +168,12 @@ public:
      */
     void removePreference(string attr, string attrType);
 
-
+    /*!
+     * \brief setPreference set the preference as
+     * the passed preference
+     * \param pf: the new preference
+     */
+    void setPreference(Preferences pf);
 
 
 private:

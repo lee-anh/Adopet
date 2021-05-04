@@ -60,7 +60,7 @@ Pet::~Pet(){
 
 }
 
-//getters and setters
+//imaters and setters
 int Pet::getID(){
     return id;
 }
@@ -257,21 +257,28 @@ Owner Pet::getOwner(string dbName){
     return Owner();
 }
 
-
 /*
+void Pet::afterRequest(QNetworkReply* reply){
+    QString res = reply->readAll();
+    qDebug() << res;
+}
+
 //trying out zipcode stuff
 int Pet::getDistance(int zipcode1, int zipcode2){
     cout << "Zipcode 1 is: " << zipcode1 << endl;
     cout << "Zipcode 2 is: " << zipcode2 << endl;
 
     QNetworkAccessManager* manager = new QNetworkAccessManager();
-    QUrl url = QUrl("https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/distance.csv/18042/18055/mile");
-    QNetworkReply* reply = manager->get(QNetworkRequest(url));
-    QString answer = reply->readAll();
-    qDebug() << answer;
+    //QUrl url = QUrl("https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/distance.csv/18042/18055/mile");
+    connect(manager, &QNetworkAccessManager::finished, &Pet::afterRequest);
+    QString urlLink = "https://www.google.com";
+    QUrl url = QUrl(urlLink);
+    QNetworkRequest request(url);
+    manager->get(request);
     //string link= "https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/multi-distance.csv/" + to_string(zipcode1) + "/" + to_string(zipcode2) + "/mile";
     //request.setUrl(QUrl("https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/multi-distance.csv/18042/18055/mile"));
     //QNetworkReply* reply = manager->get(request);
     return 0;
 }
 */
+

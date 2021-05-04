@@ -335,7 +335,7 @@ void Owner::uploadPets(string filename){
 
     while(!in.atEnd()) {
         QString line = in.readLine();
-        QStringList petData = line.split(",");
+        QStringList petData = line.split(","); //loren ipsum, bird1.jpeg bird2.jpeg
         uploadPet(makePet(petData));
     }
 

@@ -5,8 +5,10 @@
 #include <QLabel>
 #include <QtSql>
 #include <vector>
+
 #include <QMediaPlayer>
 #include <QVideoWidget>
+
 
 //classes that we need
 #include "../DBSearch/dbsearch.h"
@@ -113,7 +115,7 @@ private slots:
     void goToQuiz();
     void unheartPet();
     void goToMeetMe(Pet p);
-
+    void quizToPreference(Preferences pf);
 
 
     //save Button

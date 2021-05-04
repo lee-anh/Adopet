@@ -8,6 +8,7 @@ QT += sql
 
 QT += multimedia
 QT += multimediawidgets
+
 QT += network
 
 

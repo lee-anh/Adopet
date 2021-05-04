@@ -75,7 +75,10 @@ public:
 
     Owner getOwner(string dbName);
     //trying out zipcode stuff
+
+    void afterRequest(QNetworkReply* reply);
     int getDistance(int zipcode1, int zipcode2);
+
 private:
     int id;
     string name;

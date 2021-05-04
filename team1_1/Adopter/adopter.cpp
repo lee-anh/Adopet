@@ -287,6 +287,10 @@ void Adopter::removePreference(string attr, string attrType){
     removePreferenceHelper(attr, attrType);
 }
 
+void Adopter::setPreference(Preferences pf){
+    preferenceList = pf;
+}
+
 
 /*!
  * \brief openDB, opens a connection to the database
