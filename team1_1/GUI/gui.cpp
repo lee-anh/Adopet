@@ -355,7 +355,7 @@ void GUI::goToMeetMe(Pet p){
 }
 
 void GUI::quizToPreference(Preferences pf){
-    //adopter->setPreference(pf);
+    adopter->setPreference(pf);
     ui->stackedWidget->setCurrentIndex(7);
     on_navMyPreferences_clicked();
 }
