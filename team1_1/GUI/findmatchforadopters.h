@@ -207,10 +207,6 @@ private slots:
      */
     void on_save6a_clicked();
 
-    /*!
-     * \brief on_generateMatchesButtona_clicked
-     */
-    void on_generateMatchesButtona_clicked();
 
     /*!
      * \brief on_viewMode_currentIndexChanged
@@ -224,10 +220,7 @@ private slots:
      */
     void on_viewModea_currentIndexChanged(int index);
 
-    /*!
-     * \brief on_generateMatchesButton_clicked
-     */
-    void on_generateMatchesButton_clicked();
+
 
 
 

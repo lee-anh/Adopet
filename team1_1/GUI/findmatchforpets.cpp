@@ -21,6 +21,7 @@ void FindMatchForPets::toMainPage(Owner *owner){
 
 void FindMatchForPets::setup(){
 
+
     QString os = QSysInfo::productVersion();
 
     string dbName;
@@ -32,6 +33,7 @@ void FindMatchForPets::setup(){
     }
     mat = Matchmaking(dbName, "temp username");
     mat.fillPets();
+
 }
 void FindMatchForPets::forOnePet(Owner* owner){
 
@@ -41,14 +43,19 @@ void FindMatchForPets::forOnePet(Owner* owner){
     setup();
     //load all the choices into the combo box
     owner->fillPets();
+
+    /*
     for(int i = 0; i < (int) owner->getPets().size(); i++){
         ui->petComboBox->addItem(QString::fromStdString(owner->getPets().at(i).getName()).toUpper(), owner->getPets().at(i).getID());
     }
+    */
 
     QStringList wordList;
     for(int i = 0; i < (int) owner->getPets().size(); i++){
-       QString s = QString::fromStdString(owner->getPets().at(i).getName()).toUpper() + ", ID: " + QString::number(owner->getPets().at(i).getID());
+       QString s =  QString::fromStdString(owner->getPets().at(i).getName()).toUpper() + ",  ID:" + QString::number(owner->getPets().at(i).getID());
        wordList << s;
+       QString sPlus  = " " + s;
+       wordList << sPlus;
     }
 
 
@@ -56,7 +63,7 @@ void FindMatchForPets::forOnePet(Owner* owner){
     completer->setCaseSensitivity(Qt::CaseInsensitive);
     ui->petName->setCompleter(completer);
 
-
+    ui->petName->clear();
 
 
 
@@ -65,6 +72,8 @@ void FindMatchForPets::forOnePet(Owner* owner){
     infoLabels = {ui->email1, ui->email2, ui->email3, ui->email4, ui->email5};
     scoreLabels = {ui->match1, ui->match2, ui->match3, ui->match4, ui->match5};
 
+    clearAll();
+    displayPageNumber = 1;
     numToDisplay = 5;
 
 
@@ -93,11 +102,15 @@ void FindMatchForPets::displayPeople(int start){
     int counter = 0;
     ui->previousOne->setVisible(true);
     ui->nextOne->setVisible(true);
+    ui->name->setVisible(true);
+    ui->email->setVisible(true);
+    ui->match->setVisible(true);
 
     for(int i = 0; i < numToDisplay; i++){
         nameLabels[i]->clear();
         infoLabels[i]->clear();
         scoreLabels[i]->clear();
+
 
 
         if(start < (int) matResults.size()){
@@ -127,6 +140,7 @@ void FindMatchForPets::displayPeopleMulti(int start){
     int counter = 0;
     ui->previousAll->setVisible(true);
     ui->previousOne->setVisible(true);
+
 
     for(int i = 0; i < numToDisplay; i++){
         nameLabels[i]->clear();
@@ -215,6 +229,34 @@ void FindMatchForPets::setPageNum(int p){
     displayPageNumber = p;
 }
 
+void FindMatchForPets::clearAll(){
+    for(int i = 0; i < (int) nameLabels.size(); i++){
+        nameLabels.at(i)->clear();
+    }
+    for(int i = 0; i < (int) scoreLabels.size(); i++){
+        scoreLabels.at(i)->clear();
+
+    }
+    for(int i = 0; i < (int) infoLabels.size(); i++){
+        infoLabels.at(i)->clear();
+    }
+
+    for(int i = 0; i < (int) petNameLabels.size(); i++){
+        petNameLabels.at(i)->clear();
+    }
+
+    ui->pageLine->clear();
+    ui->pageLineAll->clear();
+
+    ui->previousOne->setVisible(false);
+    ui->nextOne->setVisible(false);
+
+    ui->name->setVisible(false);
+    ui->email->setVisible(false);
+    ui->match->setVisible(false);
+
+}
+
 
 
 void FindMatchForPets::on_searchOne_clicked()
@@ -222,9 +264,29 @@ void FindMatchForPets::on_searchOne_clicked()
 
     displayPageNumber = 1;
 
-    matResults = mat.findMatchesForPet(ui->petComboBox->currentData().toInt());
+    string toParse = ui->petName->text().toStdString();
+    string idString;
+    int counter = 0;
+    for(int i = 0; i < (int)toParse.size(); i++){
+        if(counter > 0){
+            idString  = idString + toParse[i];
+        }
+        if(toParse[i] == ':'){
+            counter++;
+        }
 
-    displayPeople(0);
+    }
+
+    if (idString.size() > 0){
+        int id = stoi(idString);
+
+        matResults = mat.findMatchesForPet(id);
+        displayPeople(0);
+    } else {
+       ui->pageLine->setText("No animal matched your search.");
+    }
+
+
 
 }
 

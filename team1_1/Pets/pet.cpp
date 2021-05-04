@@ -177,8 +177,11 @@ void Pet::fillMediaFiles(string dbName){
             string filename = query.value(1).toString().toStdString();
             string mediaType = query.value(2).toString().toStdString();
 
-            if(petID == id && mediaType == "image") imageFiles.push_back(filename);
-            else if(petID == id && mediaType == "video") videoFiles.push_back(filename);
+            if(petID == id && mediaType == "image") {
+                imageFiles.push_back(filename);
+            } else if(petID == id && mediaType == "video") {
+                videoFiles.push_back(filename);
+            }
         }
     }
 
@@ -251,6 +254,7 @@ Owner Pet::getOwner(string dbName){
             return o;
         }
     }
+    return Owner();
 }
 
 /*

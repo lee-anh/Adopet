@@ -63,6 +63,7 @@ private:
     void previous();
 
     void setPageNum(int p);
+    void clearAll();
 
 
     int numToDisplay;

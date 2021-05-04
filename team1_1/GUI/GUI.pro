@@ -6,7 +6,9 @@ CONFIG += c++11
 QT += core
 QT += sql
 
-#QT += multimedia
+QT += multimedia
+QT += multimediawidgets
+
 QT += network
 
 
@@ -38,7 +40,8 @@ SOURCES += \
     unsavepet.cpp \
     userinfo.cpp \
     ../Authentication/authentication.cpp \
-    ../Owner/owner.cpp
+    ../Owner/owner.cpp \
+    videoplayer.cpp
 
 
 HEADERS += \
@@ -64,7 +67,8 @@ HEADERS += \
     unsavepet.h \
     userinfo.h \
     ../Authentication/authentication.h \
-    ../Owner/owner.h
+    ../Owner/owner.h \
+    videoplayer.h
 
 
 
@@ -82,7 +86,8 @@ FORMS += \
     quiz.ui \
     tagguide.ui \
     unsavepet.ui \
-    userinfo.ui
+    userinfo.ui \
+    videoplayer.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

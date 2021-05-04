@@ -43,7 +43,7 @@ void MyFavorites::showGal(){
                         {ui->pic1, ui->pic2, ui->pic3, ui->pic4},
                         {ui->link1, ui->link2, ui->link3, ui->link4},
                         {ui->save1, ui->save2, ui->save3, ui->save4},
-                        sl.getPetVec());
+                        sl.getPetVec(), true);
     petgal.displayPets(0);
     loadSaveButtons({ui->save1, ui->save2, ui->save3, ui->save4});
 

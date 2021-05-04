@@ -27,6 +27,10 @@ UserInfo::~UserInfo()
     delete ui;
 }
 
+void UserInfo::setAuth(Authentication *a, bool b){
+    auth = a;
+}
+
 /*!
  * \brief setAuth, for adopters
  * \param a, pointer to authentication object
@@ -117,8 +121,18 @@ void UserInfo::setFirstTime(bool b){
     firstTime = b;
 }
 
+/*!
+ * \brief helpAdopter navigates to the help page for adopters
+ */
 void UserInfo::helpAdopter(){
     ui->stackedWidget->setCurrentIndex(3);
+}
+
+/*!
+ * \brief helpOwner navigates to the help page for owners
+ */
+void UserInfo::helpOwner(){
+    ui->stackedWidget->setCurrentIndex(4);
 }
 
 /*!
@@ -179,14 +193,20 @@ void UserInfo::on_saveButton_clicked()
     string zip = ui->zipCode->text().toStdString();
 
 
+    bool zDigits = all_of(zip.begin(), zip.end(), ::isdigit);
+
     if(fname == "" || lname == "" || email == "" || zip == ""){
         ui->errorLabel2->setText("Missing field(s)");
+    } else if (zDigits == false){
+        ui->errorLabel2->setText("Invalid format for zipcode");
+        return;
     } else {
         if(firstTime == true){
             auth->insertAdopterToDB(username, fname, lname, email, zip);
             emit backClicked(); //back to the login page
         } else {
             auth->updateAdopter(username, fname, lname, email, zip);
+            ui->errorLabel2->clear();
             ui->adopterSavedMessage->setText("Your changes have been saved");
         }
 
@@ -218,8 +238,15 @@ void UserInfo::on_saveOwnerButton_clicked()
         string address = ui->addressOwner->text().toStdString();
         string zip = ui->zipOwner->text().toStdString();
 
+        bool pDigits = all_of(phone.begin(), phone.end(), ::isdigit);
+        bool zDigits = all_of(zip.begin(), zip.end(), ::isdigit);
+
+
         if(name == "" || phone == "" || address == "" || email == ""|| zip == ""){
             ui->errorLabelOwner->setText("Missing field(s)");
+        } else if (pDigits == false || zDigits == false){
+            ui->errorLabelOwner->setText("Invalid format for phone or zip or both");
+            return;
         } else {
 
             bool verified = auth->insertOwnerToDB(username, name, phone, email, address, zip);
@@ -238,11 +265,18 @@ void UserInfo::on_saveOwnerButton_clicked()
         string address = ui->addressOwner->text().toStdString();
         string zip = ui->zipOwner->text().toStdString();
 
+        bool pDigits = all_of(phone.begin(), phone.end(), ::isdigit);
+        bool zDigits = all_of(zip.begin(), zip.end(), ::isdigit);
+
         if( phone == "" || address == "" || email == ""|| zip == ""){
             ui->errorLabelOwner->setText("Missing field(s)");
+        } else if (pDigits == false || zDigits == false){
+            ui->errorLabelOwner->setText("Invalid format for phone or zip or both");
+            return;
         } else {
 
             auth->updateOwner(username, name, phone, email, address, zip);
+            ui->errorLabelOwner->clear();
             ui->ownerSavedMessage->setText("Your changes have been saved");
 
         }
