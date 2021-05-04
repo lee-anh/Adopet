@@ -45,6 +45,7 @@ void MyPets::goToMyPets(){
 }
 
 void MyPets::galleryMode(){
+    ui->viewMode->setCurrentIndex(1);
     //go to myPets page (gallery)
     ui->stackedWidget->setCurrentIndex(0);
     previousPage = 0;
@@ -54,18 +55,19 @@ void MyPets::galleryMode(){
                         {ui->pic1, ui->pic2, ui->pic3, ui->pic4},
                         {ui->link1, ui->link2, ui->link3, ui->link4},
                         {ui->prev1, ui->prev2, ui->prev3, ui->prev4},
-                        owner->getPets());
+                        owner->getPets(), false);
     petgal.displayPets(0);
 }
 
 
 void MyPets::listMode(){
+    ui->viewModea->setCurrentIndex(2);
     //go to myPets page (list)
     ui->stackedWidget->setCurrentIndex(4);
     previousPage = 4;
 
 
-    petgal = PetGallery(true, 8, ui->previousa, ui->nexta, ui->pageLinea,
+    petgal = PetGallery(false, 8, ui->previousa, ui->nexta, ui->pageLinea,
                         {ui->name1a, ui->name2a, ui->name3a, ui->name4a, ui->name5a, ui->name6a, ui->name7a, ui->name8a},
                         {ui->info1a, ui->info2a, ui->info3a, ui->info4a, ui->info5a, ui->info6a, ui->info7a, ui->info8a},
                         {ui->link1a, ui->link2a, ui->link3a, ui->link4a, ui->link5a, ui->link6a, ui->link7a, ui->link8a},
@@ -111,8 +113,9 @@ void MyPets::on_saveChangesButton_clicked()
     string goodWith = ui->goodWithComboBox->currentText().toLower().toStdString();
     string shelter = owner->getName();
     string bio = ui->bioBox->toPlainText().toStdString(); //can be empty
+    string media = ui->multimediaBox->toPlainText().toStdString();
 
-    //TODO NEED MEDIA
+    //TODO NEED TO PROCESS MEDIA
 
 
     if (species == "other"){

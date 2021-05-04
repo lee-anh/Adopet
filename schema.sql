@@ -94,3 +94,4 @@ create table shelter (
 .import "csvs/accounts.csv" accounts
 .import "csvs/adopters.csv" adopter
 .import "csvs/preferences.csv" preferences
+.import "csvs/owner.csv" owner

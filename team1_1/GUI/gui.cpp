@@ -10,15 +10,25 @@ GUI::GUI(QWidget *parent)
     //DIFFERENT OS
 
     QString os = QSysInfo::productVersion();
-    cout << os.toStdString() << endl;
-      
+
     if(os == "10.16"){
         dbName = "../../../../../projectDB.sqlite";
+        QPixmap pixmap("../../../../../pictures/default.png");
+        ui->logo->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio));
+        ui->logoAdopter->setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio));
+        ui->logoOwner->setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio));
     } else {
+        //default picture
         dbName = "../../projectDB.sqlite";
+        QPixmap pixmap("../../pictures/default.png");
+        ui->logo->setPixmap(pixmap.scaled(150, 150, Qt::KeepAspectRatio));
+        ui->logoAdopter->setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio));
+        ui->logoOwner->setPixmap(pixmap.scaled(50, 50, Qt::KeepAspectRatio));
+
     }
 
-    //dbName = "../../../../../projectDB.sqlite";
+
+  //  dbName = "../../../../../projectDB.sqlite";
 
     auth = Authentication(dbName);
 
@@ -106,24 +116,13 @@ void GUI::meetPet(Pet p){
     QString qs = "Meet " + QString::fromStdString(s);
     ui->petName->setText(qs);
 
-    //picture JUST THE FIRST ONE RIGHT NOW
-
+    //images
      if(p.getImageFiles().size() == 0){
 
          //DIFFERENT OS
          QString os = QSysInfo::productVersion();
            
          if(os == "10.16"){
-             //default picture
-
-             /*
-             QMediaPlayer *player = new QMediaPlayer();
-             //connect(player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
-             player->setMedia(QUrl::fromLocalFile("../../../../../pictures/dog1.mp4"));
-             player->setVolume(50);
-             player->play();
-             */
-
              QPixmap pixmap("../../../../../pictures/default.png");
              ui->petPic->setPixmap(pixmap.scaled(300, 300, Qt::KeepAspectRatio));
          } else {
@@ -138,6 +137,19 @@ void GUI::meetPet(Pet p){
          displayPicture(0);
      }
 
+
+     //video
+     if(petToMeet.getVideoFiles().size() > 0){
+         //default picture
+         vp = new VideoPlayer;
+         cout << petToMeet.getVideoFiles().size() << endl;
+         string videoFile = "/Users/claireliu/CS250/project/team_1_1/videos/" + petToMeet.getVideoFiles().at(0);
+
+         vp->setUrl(QUrl::fromLocalFile(QString::fromStdString(videoFile)));
+         vp->show();
+
+
+     }
 
     //set attributes
     string sep = " - ";
@@ -180,9 +192,11 @@ void GUI::on_right_clicked()
 }
 void GUI::on_left_clicked()
 {
-    if(mediaCarosel-1 >= 0){
-        mediaCarosel--;
-        displayPicture(mediaCarosel);
+    if(petToMeet.getImageFiles().size() > 0){
+        if(mediaCarosel-1 >= 0){
+            mediaCarosel--;
+            displayPicture(mediaCarosel);
+        }
     }
 }
 
@@ -190,6 +204,8 @@ void GUI::on_left_clicked()
 
 
 void GUI::hideNavAdopter(){
+    ui->logoAdopter->setVisible(false);
+    ui->titleAdopter->setVisible(false);
     ui->navFindMatchButton->setVisible(false);
     ui->navHomeButton->setVisible(false);
     ui->navManualSearchButton->setVisible(false);
@@ -201,6 +217,8 @@ void GUI::hideNavAdopter(){
 }
 
 void GUI::showNavAdopter(){
+    ui->logoAdopter->setVisible(true);
+    ui->titleAdopter->setVisible(true);
     ui->navFindMatchButton->setVisible(true);
     ui->navHomeButton->setVisible(true);
     ui->navManualSearchButton->setVisible(true);
@@ -221,6 +239,8 @@ void GUI::showNavAdopter(){
 }
 
 void GUI::hideNavOwner(){
+    ui->titleOwner->setVisible(false);
+    ui->logoOwner->setVisible(false);
     ui->ownerHome->setVisible(false);
     ui->ownerMyInfo->setVisible(false);
     ui->ownerMyPets->setVisible(false);
@@ -234,6 +254,8 @@ void GUI::hideNavOwner(){
 }
 
 void GUI::showNavOwner(){
+    ui->titleOwner->setVisible(true);
+    ui->logoOwner->setVisible(true);
     ui->ownerHome->setVisible(true);
     ui->ownerMyInfo->setVisible(true);
     ui->ownerMyPets->setVisible(true);
@@ -454,6 +476,9 @@ void GUI::on_myFavoritesFromHome_clicked()
 
 void GUI::on_backButton_clicked()
 {
+    vp->pause();
+    vp->close();
+
     //reset heart button
     ui->saveButton->setChecked(false);
     ui->saveButton->setText("♡");
@@ -522,7 +547,7 @@ void GUI::on_createAccountButton_clicked()
     //to create account page (userinfo.ui)
     uinfo.createAccountClicked();
     ui->stackedWidget->setCurrentIndex(6);
-    uinfo.setAuth(&auth);
+    uinfo.setAuth(&auth, true);
 }
 
 void GUI::updateAdopter(Adopter *a){
@@ -570,10 +595,14 @@ void GUI::on_ownerHome_clicked()
 }
 
 
-
-
 void GUI::on_navHelpButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(6);
     uinfo.helpAdopter();
+}
+
+void GUI::on_ownerHelp_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(6);
+    uinfo.helpOwner();
 }

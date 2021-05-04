@@ -472,7 +472,7 @@
           </font>
          </property>
          <property name="text">
-          <string>My Pets</string>
+          <string>♥♡♥♡♥♡ My Pets ♡♥♡♥♡♥</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -1651,7 +1651,7 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
           </font>
          </property>
          <property name="text">
-          <string>My Pets</string>
+          <string>♥♡♥♡♥♡ My Pets ♡♥♡♥♡♥</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

@@ -29,28 +29,9 @@ public:
 
 
 
-    /*!
-     * \brief PetGallery, constructor for MyPets (owner)
-     * \param numPetsToDisplay
-     * \param prev
-     * \param next
-     * \param pageLine
-     * \param petNameLabels
-     * \param petPhotos
-     * \param petLearnMore
-     * \param petVec
-     */
-    PetGallery(int numPetsToDisplay, QPushButton* prev,
-               QPushButton* next, QLabel* pageLine,
-               vector<QLabel*> petNameLabels,
-               vector<QLabel*> petPhotos,
-               vector<QPushButton*> petLearnMore,
-               vector<Pet> petVec);
-
-
 
     /*!
-     * \brief PetGallery construcotr for my favorites and manual search
+     * \brief PetGallery constructor for my favorites and manual search
      * (Gallery view)
      * \param numPetsToDisplay
      * \param prev
@@ -66,7 +47,7 @@ public:
                QPushButton* next, QLabel* pageLine,
                vector<QLabel*> petNameLabels,
                vector<QLabel*> petPhotos, vector<QPushButton*> petLearnMore,
-               vector<QPushButton*> petSaves, vector<Pet> petVec);
+               vector<QPushButton*> petSaves, vector<Pet> petVec, bool b);
 
 
     /*!
@@ -217,6 +198,8 @@ private:
 
     int nextStartIndex;
     int displayPetsPageNumber;
+
+    bool mode; //false if owner, true if adopter
 
     /*!
      * \brief matchPetsToRegPets, converts a more complex vector to a simple one

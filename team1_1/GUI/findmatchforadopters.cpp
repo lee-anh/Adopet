@@ -58,13 +58,14 @@ void FindMatchForAdopters::setUser(string username){
 
     galleryMode();
 
+
 }
 
 /*!
  * \brief galleryMode for pet display, initalize the pet gallery
  */
 void FindMatchForAdopters::galleryMode(){
-
+    ui->viewMode->setCurrentIndex(1);
     petgal = PetGallery(4, ui->previous, ui->next, ui->pageLine,
                         {ui->name1, ui->name2, ui->name3, ui->name4},
                         {ui->pic1, ui->pic2, ui->pic3, ui->pic4},
@@ -74,6 +75,12 @@ void FindMatchForAdopters::galleryMode(){
                         mat.findMatchesForAdopter(user));
 
     ui->stackedWidget->setCurrentIndex(0); //gallery mode
+
+    petgal.setPageNum(1);
+    petgal.displayPets(0);
+
+    loadSaveButtons({ui->save1, ui->save2, ui->save3, ui->save4});
+
 }
 
 
@@ -81,6 +88,7 @@ void FindMatchForAdopters::galleryMode(){
  * \brief listMode for pet display, intialize the pet gallery
  */
 void FindMatchForAdopters::listMode(){
+    ui->viewModea->setCurrentIndex(2);
     petgal = PetGallery(true, 6, ui->previousa, ui->nexta, ui->pageLinea,
                         {ui->name1a, ui->name2a, ui->name3a, ui->name4a, ui->name5a, ui->name6a},
                         {ui->info1a, ui->info2a, ui->info3a, ui->info4a, ui->info5a, ui->info6a},
@@ -90,6 +98,11 @@ void FindMatchForAdopters::listMode(){
                         mat.findMatchesForAdopter(user));
 
     ui->stackedWidget->setCurrentIndex(1); //list mode
+
+    petgal.setPageNum(1);
+    petgal.displayPets(0);
+
+    loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
 }
 
 
@@ -361,34 +374,6 @@ void FindMatchForAdopters::on_save6a_clicked()
 }
 
 
-
-
-/*!
- * \brief on_generateMatchesButtona_clicked
- */
-void FindMatchForAdopters::on_generateMatchesButton_clicked()
-{
-    //order is important here - set page num then display pets
-    petgal.setPageNum(1);
-    petgal.displayPets(0);
-
-    loadSaveButtons({ui->save1, ui->save2, ui->save3, ui->save4});
-}
-
-
-/*!
- * \brief on_generateMatchesButtona_clicked
- */
-void FindMatchForAdopters::on_generateMatchesButtona_clicked()
-{
-    //order is important here - set page num then display pets
-    petgal.setPageNum(1);
-    petgal.displayPets(0);
-
-    loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
-}
-
-
 /*!
  * \brief on_viewMode_currentIndexChanged
  * \param index
@@ -399,6 +384,7 @@ void FindMatchForAdopters::on_viewMode_currentIndexChanged(int index)
     if(index == 2){
         ui->stackedWidget->setCurrentIndex(1);
         listMode();
+
     }
 }
 

@@ -11,43 +11,10 @@ PetGallery::PetGallery()
 }
 
 
-/*!
- * \brief PetGallery, constructor for MyPets (owner)
- * \param numPetsToDisplay
- * \param prev, button
- * \param next, button
- * \param pageLine, label
- * \param petNameLabels, name labels
- * \param petPhotos, photo labels
- * \param petLearnMore, buttons
- * \param petVec, pet to display
- */
-PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev,
-                        QPushButton* next,  QLabel* pageLine,
-                        vector<QLabel*> petNameLabels,
-                        vector<QLabel*> petPhotos,
-                        vector<QPushButton*> petLearnMore,
-                        vector<Pet> petVec){
-
-    numToDisplay = numPetsToDisplay;
-    previousButton = prev;
-    nextButton = next;
-    pageNum = pageLine;
-    nameLabels = petNameLabels;
-    picLabels = petPhotos;
-    learnMores = petLearnMore;
-    pets = petVec;
-    nextStartIndex = 0;
-    displayPetsPageNumber = 1;
-
-    petsToDisplay = vector<Pet>();
-    clearLabels();
-
-}
 
 
 /*!
- * \brief PetGallery construcotr for my favorites and manual search
+ * \brief PetGallery constructor for my favorites, manual search, my pets
  * (Gallery view)
  * \param numPetsToDisplay
  * \param prev, button
@@ -64,8 +31,9 @@ PetGallery:: PetGallery(int numPetsToDisplay, QPushButton* prev,
                         vector<QLabel*> petNameLabels,
                         vector<QLabel*> petPhotos,
                         vector<QPushButton*> petLearnMore,
-                        vector<QPushButton*> petSaves, vector<Pet> petVec){
+                        vector<QPushButton*> petSaves, vector<Pet> petVec, bool b){
 
+    mode = b;
     numToDisplay = numPetsToDisplay;
     previousButton = prev;
     nextButton = next;
@@ -104,6 +72,7 @@ PetGallery:: PetGallery(bool b, int numPetsToDisplay, QPushButton* prev,
                         vector<QPushButton*> petLearnMore,
                         vector<QPushButton*> petSaves, vector<Pet> petVec){
 
+    mode = b;
     numToDisplay = numPetsToDisplay;
     previousButton = prev;
     nextButton = next;
@@ -142,6 +111,7 @@ PetGallery::PetGallery(int numPetsToDisplay, QPushButton* prev,
                        vector<QLabel*> petScores,
                        vector<QPushButton*> petLearnMore,
                        vector<QPushButton*> petSaves, vector<pair<Pet, int>> petVec){
+    mode = true;
     numToDisplay = numPetsToDisplay;
     previousButton = prev;
     nextButton = next;
@@ -183,6 +153,7 @@ PetGallery::PetGallery(bool b, int numPetsToDisplay, QPushButton* prev,
                        vector<QLabel*> petScores,
                        vector<QPushButton*> petLearnMore,
                        vector<QPushButton*> petSaves, vector<pair<Pet, int>> petVec){
+    mode = true;
     numToDisplay = numPetsToDisplay;
     previousButton = prev;
     nextButton = next;
@@ -262,9 +233,15 @@ void PetGallery::displayPets(int start){
 
             //name
             string s = pets[start].getName();
-            transform(s.begin(), s.end(), s.begin(), ::toupper);
-            QString qpetName = QString::fromStdString(s);
+           // transform(s.begin(), s.end(), s.begin(), ::toupper);
+            QString qpetName = QString::fromStdString(s).toUpper();
             nameLabels[i]->setText(qpetName);
+
+            if(mode == false){
+                string es = s + "  ID: " + to_string(pets[start].getID());
+                QString esq = QString::fromStdString(es).toUpper();
+                nameLabels[i]->setText(esq);
+            }
 
 
             if(infoLabels.size() >0){

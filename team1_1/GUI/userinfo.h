@@ -31,6 +31,8 @@ public:
      */
     ~UserInfo();
 
+
+    void setAuth(Authentication *a, bool b);
     /*!
      * \brief setAuth, for adopters
      * \param a
@@ -75,6 +77,11 @@ public:
      * \brief helpAdopter navigates to the help page for adopters
      */
     void helpAdopter();
+
+    /*!
+     * \brief helpOwner navigates to the help page for owners
+     */
+    void helpOwner();
 
 private slots:
     /*!

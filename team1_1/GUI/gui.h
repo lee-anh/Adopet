@@ -6,6 +6,7 @@
 #include <QtSql>
 #include <vector>
 #include <QMediaPlayer>
+#include <QVideoWidget>
 
 //classes that we need
 #include "../DBSearch/dbsearch.h"
@@ -25,6 +26,7 @@
 #include "mypets.h"
 #include "quiz.h"
 #include "findmatchforpets.h"
+#include "videoplayer.h"
 
 //QDialogs
 #include "logout.h"
@@ -66,6 +68,7 @@ private:
     MyFavoritesTwo myFavsList;
     Quiz qz;
     FindMatchForPets fmForPets;
+    VideoPlayer *vp;
 
     //QDialogs
     Logout lg;
@@ -156,5 +159,6 @@ private slots:
     void on_right_clicked();
     void on_left_clicked();
     void on_navHelpButton_clicked();
+    void on_ownerHelp_clicked();
 };
 #endif // GUI_H

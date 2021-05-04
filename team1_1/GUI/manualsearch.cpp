@@ -38,12 +38,13 @@ ManualSearch::~ManualSearch()
 }
 
 void ManualSearch::galleryMode(){
+    ui->viewModeComboBox->setCurrentIndex(1);
     //able to initalize petgal here b/c username doesn't matter
     petgal = PetGallery(3,ui->previous, ui->next, ui->pageLine, {ui->name1, ui->name2, ui->name3},
                         {ui->pic1, ui->pic2, ui->pic3},
                         {ui->link1, ui->link2, ui->link3},
                         {ui->save1, ui->save2, ui->save3},
-                        search->getPetVec());
+                        search->getPetVec(), true);
     ui->stackedWidget_2->setCurrentIndex(0);
     ui->pageLine->setText("Search for pets using search bar and checkboxes!");
     mode = "gallery";
@@ -52,6 +53,7 @@ void ManualSearch::galleryMode(){
 }
 
 void ManualSearch::listMode(){
+    ui->viewModeComboBox->setCurrentIndex(2);
     petgal = PetGallery(true, 6, ui->previousa, ui->nexta, ui->pageLinea,
                         {ui->name1a, ui->name2a, ui->name3a, ui->name4a, ui->name5a, ui->name6a},
                         {ui->info1a, ui->info2a, ui->info3a, ui->info4a, ui->info5a, ui->info6a},
