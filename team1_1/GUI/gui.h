@@ -110,7 +110,7 @@ private slots:
     void goToQuiz();
     void unheartPet();
     void goToMeetMe(Pet p);
-
+    void quizToPreference(Preferences pf);
 
 
     //save Button
