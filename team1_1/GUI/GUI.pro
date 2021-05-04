@@ -6,7 +6,7 @@ CONFIG += c++11
 QT += core
 QT += sql
 
-QT += multimedia
+#QT += multimedia
 QT += network
 
 

@@ -126,35 +126,50 @@ vector<pair<Adopter, int>> Matchmaking::fillAdopterResults(string name, int scor
     Adopter adopter = Adopter();
     adopter.setUsername(name);
 
+    QSqlDatabase dbInner = QSqlDatabase::addDatabase("QSQLITE", "matchmakingInnerCxn");
+    string fullName = dbName;
+    dbInner.setDatabaseName(QString::fromStdString(fullName));
+
     //filling adopter information
-    if(db.open()){
-        QSqlQuery query = QSqlQuery(db);
+    if(dbInner.open()){
+        QSqlQuery q = QSqlQuery(dbInner);
         QString s = "SELECT firstName FROM adopter WHERE username = \"" + QString::fromStdString(name) + "\"";
-        query.exec(s);
-        while(query.next()){
-            adopter.setFirstName(query.value(0).toString().toStdString());
+        q.exec(s);
+        while(q.next()){
+            adopter.setFirstName(q.value(0).toString().toStdString());
         }
 
         s = "SELECT lastName FROM adopter WHERE username = \"" + QString::fromStdString(name) + "\"";
-        query.exec(s);
-        while(query.next()){
-            adopter.setLastName(query.value(0).toString().toStdString());
+        q.exec(s);
+        while(q.next()){
+            adopter.setLastName(q.value(0).toString().toStdString());
         }
 
         s = "SELECT emailAddress FROM adopter WHERE username = \"" + QString::fromStdString(name) + "\"";
-        query.exec(s);
-        while(query.next()){
-            adopter.setEmailAddress(query.value(0).toString().toStdString());
+        q.exec(s);
+        while(q.next()){
+            adopter.setEmailAddress(q.value(0).toString().toStdString());
         }
 
         s = "SELECT zip FROM adopter WHERE username = \"" + QString::fromStdString(name) + "\"";
-        query.exec(s);
-        while(query.next()){
-            adopter.setZipCode(query.value(0).toInt());
+        q.exec(s);
+        while(q.next()){
+            adopter.setZipCode(q.value(0).toInt());
         }
     }
+    dbInner.close();
 
     res.push_back(make_pair(adopter, score));
+    /*
+    cout << "Current Adopter: " << endl;
+    cout << "Username: " << adopter.getUsername() << endl;
+    cout << "First Name: " << adopter.getFirstName() << endl;
+    cout << "Last Name: " << adopter.getLastName() << endl;
+    cout << "Email Address: " << adopter.getEmailAddress() << endl;
+    cout << "Zip: " << adopter.getZipCode() << endl;
+    cout << endl;
+    cout << endl;
+    */
     return res;
 }
 
@@ -175,6 +190,7 @@ vector<pair<Adopter, int>> Matchmaking::findBestMatchForPet(Pet p){
         int currScore = 0;
         while(query.next()){
             string newUserName = query.value(0).toString().toStdString();
+            //cout << "Current user in query: " << newUserName << endl;
 
             if(userName != newUserName){
                 if(userName != ""){
