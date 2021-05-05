@@ -6,8 +6,8 @@
 #include <QtSql>
 #include <vector>
 
-#include <QMediaPlayer>
-#include <QVideoWidget>
+//#include <QMediaPlayer>
+//#include <QVideoWidget>
 
 
 //classes that we need
@@ -70,7 +70,7 @@ private:
     MyFavoritesTwo myFavsList;
     Quiz qz;
     FindMatchForPets fmForPets;
-    VideoPlayer *vp;
+    //VideoPlayer *vp;
 
     //QDialogs
     Logout lg;
