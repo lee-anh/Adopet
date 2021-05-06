@@ -270,7 +270,7 @@ string DBSearch::createQuery(){
             }
         }
     }
-    //cout << query << endl;
+    cout << query << endl;
 
     return query;
 }

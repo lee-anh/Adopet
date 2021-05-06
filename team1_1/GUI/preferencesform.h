@@ -6,6 +6,7 @@
 
 
 #include "../Adopter/adopter.h"
+#include "takequiz.h"
 
 namespace Ui {
 class PreferencesForm;
@@ -52,6 +53,7 @@ public:
 private:
     Ui::PreferencesForm *ui;
     Adopter *adopter;
+    TakeQuiz tq;
 
     vector<pair<string, string>> toAdd;
     vector<pair<string, string>> toRemove;
@@ -161,6 +163,10 @@ private slots:
 
 
     void on_goToQuiz_clicked();
+
+    void on_clearAll_clicked();
+
+    void goToQuiz();
 
 signals:
     void adopterChanged(Adopter *a);

@@ -440,3 +440,8 @@ void ManualSearch::on_save6a_clicked()
 }
 
 
+
+void ManualSearch::on_searchBar_returnPressed()
+{
+    on_searchButton_clicked();
+}

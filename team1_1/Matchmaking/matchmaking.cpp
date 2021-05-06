@@ -157,7 +157,9 @@ vector<pair<Adopter, int>> Matchmaking::fillAdopterResults(string name, int scor
             adopter.setZipCode(q.value(0).toInt());
         }
     }
-    dbInner.close();
+    dbInner=QSqlDatabase();
+    QSqlDatabase::removeDatabase("matchmakingInnerCxn");
+    //dbInner.close();
 
     res.push_back(make_pair(adopter, score));
     /*

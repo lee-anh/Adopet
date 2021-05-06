@@ -66,6 +66,7 @@ public:
 
     vector<string> getImageFiles();
     void addImageFile(string file);
+    void preventDupMedia();
 
     vector<string> getVideoFiles();
     void addVideoFile(string file);
@@ -92,8 +93,11 @@ private:
     string shelter;
     string bio;
 
+    string database;
     vector<string> imageFiles;
     vector<string> videoFiles;
+
+
 };
 
 #endif // PET_H
