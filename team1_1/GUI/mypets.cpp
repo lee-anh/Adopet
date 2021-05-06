@@ -114,9 +114,12 @@ void MyPets::on_saveChangesButton_clicked()
     string shelter = owner->getName();
     string bio = ui->bioBox->toPlainText().toStdString(); //can be empty
     string media = ui->multimediaBox->toPlainText().toStdString();
+    string vid = ui->videoFile->text().toStdString();
 
     //TODO NEED TO PROCESS MEDIA
-    //mediaParser(media);
+    currentPet.preventDupMedia();
+    imageProcessor(media);
+    videoProcessor(vid);
 
 
     if (species == "other"){
@@ -199,6 +202,9 @@ void MyPets::toEditPet(Pet p){
     }
 
     ui->multimediaBox->setPlainText(QString::fromStdString(image));
+    if(p.getVideoFiles().size() > 0){
+        ui->videoFile->setText(QString::fromStdString(p.getVideoFiles().at(0)));
+    }
     ui->errorBarUploadPet->clear();
 
 }
@@ -387,25 +393,55 @@ void MyPets::clearAll(){
 
     ui->bioBox->clear();
     ui->multimediaBox->clear();
+    ui->videoFile->clear();
     ui->errorBarUploadPet->clear();
     ui->savedLine->clear();
 
 }
 
-vector<string> MyPets::mediaParser(string s){
-    vector<string> words;
-    string word;
-    for(int i = 0; (int) s.size(); i++){
-        if(s[i] == ',' || s[i] == ' '){
-            words.push_back(word);
-            cout << word << endl;
+void MyPets::imageProcessor(string s){
+
+    vector<string> words = vector<string>();
+    string word = "";
+    for(int i = 0; i < (int) s.size(); i++){
+        if(s.at(i) == ',' || s.at(i) == ' '){
+            if (word.size() > 1)
+            {
+               words.push_back(word);
+            }
             word = ""; //clear the word
         } else {
             word = word + s[i];
         }
     }
+
+    //last word
+    if(word.size() > 1){
+        words.push_back(word);
+    }
+
+    for(int i = 0; i < (int) words.size(); i++){
+        int ext = words.at(i).size();
+        if(words.at(i).size() > 4){
+            if(words.at(i).at(ext-4) == 'j'&& words.at(i).at(ext-3) == 'p'&& words.at(i).at(ext-2) == 'e'&& words.at(i).at(ext-1) == 'g'){
+                currentPet.addImageFile(words.at(i));
+            }
+        }
+
+    }
+
+
 }
 
+
+void MyPets::videoProcessor(string s){
+    if(s.size() > 3){
+        int ext = s.size();
+        if(s.at(ext-3) == 'm' && s.at(ext-2) == 'p' && s.at(ext-1) =='4'){
+            currentPet.addVideoFile(s);
+        }
+    }
+}
 void MyPets::on_link1a_clicked()
 {
     clearAll();
@@ -560,6 +596,10 @@ void MyPets::on_multimediaBox_textChanged()
 {
      ui->errorBarUploadPet->setText("You have unsaved changes");
 }
+void MyPets::on_videoFile_textChanged(const QString &arg1)
+{
+     ui->errorBarUploadPet->setText("You have unsaved changes");
+}
 
 void MyPets::on_toBulkUpload_clicked()
 {
@@ -637,3 +677,4 @@ void MyPets::on_prev8a_clicked()
 {
     emit goToMeetPet(petgal.getPet(7));
 }
+

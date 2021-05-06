@@ -16,6 +16,8 @@ PreferencesForm::PreferencesForm(QWidget *parent) :
     toAdd = vector<pair<string, string>>();
     toRemove = vector<pair<string, string>>();
 
+    connect(&tq, SIGNAL(takeQuiz()), this, SLOT(goToQuiz()));
+
 }
 
 /*!
@@ -35,6 +37,7 @@ PreferencesForm::~PreferencesForm()
   */
 void PreferencesForm::setAdopter(Adopter *a){
     adopter = a;
+
 }
 
 /*!
@@ -42,7 +45,10 @@ void PreferencesForm::setAdopter(Adopter *a){
  */
 void PreferencesForm::loadPreferences(){
 
+
     Preferences p = adopter->getPreferences();
+    clearCheckBoxes();
+
 
     //species
     for(int i = 0; i < (int) p.getSpecies().size(); i ++){
@@ -79,6 +85,8 @@ void PreferencesForm::loadPreferences(){
     for(int i = 0; i < (int) p.getBreed().size(); i ++){
         findInVec(p.getBreed()[i]);
     }
+
+    on_saveButton_clicked(); //make sure everything is synced up
 
     ui->unsavedChangesLabel->clear();
     //cout << "loaded preferences" << endl;
@@ -224,6 +232,7 @@ void PreferencesForm::checkBoxChange(string attribute, string category, int arg1
     } else if (arg1 == 0){
         toRemove.push_back(make_pair(attribute, category));
     }
+    ui->savedLabel->clear();
     ui->unsavedChangesLabel->setText("You have unsaved changes!");
 
 }
@@ -385,5 +394,16 @@ void PreferencesForm::on_parrot_stateChanged(int arg1){
 
 void PreferencesForm::on_goToQuiz_clicked()
 {
+
+    tq.setModal(true);
+    tq.exec();
+
+}
+
+void PreferencesForm::on_clearAll_clicked()
+{
+    clearCheckBoxes();
+}
+void PreferencesForm::goToQuiz(){
     emit toQuiz();
 }
