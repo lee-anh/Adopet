@@ -1164,22 +1164,6 @@
      </item>
     </layout>
    </item>
-   <item row="4" column="2">
-    <widget class="QPushButton" name="surpriseMe">
-     <property name="minimumSize">
-      <size>
-       <width>150</width>
-       <height>50</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(247, 250, 170);</string>
-     </property>
-     <property name="text">
-      <string>Surprise Me!</string>
-     </property>
-    </widget>
-   </item>
    <item row="3" column="1" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout_21">
      <item>
@@ -1193,6 +1177,22 @@
       <widget class="QPushButton" name="searchButton">
        <property name="text">
         <string>Search</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="surpriseMe">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(247, 250, 170);</string>
+       </property>
+       <property name="text">
+        <string>Surprise Me!</string>
        </property>
       </widget>
      </item>

@@ -142,6 +142,12 @@ private:
      */
     int getIndex(string category);
 
+    /*!
+     * \brief getConstraints, accessor method for constrains
+     * \return
+     */
+    string getConstraints();
+
 
     //vectors of keywords
     vector<string> mainSpecies; //from DB

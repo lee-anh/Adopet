@@ -6,10 +6,8 @@
 #include <QtSql>
 #include <vector>
 
-/*
-#include <QMediaPlayer>
-#include <QVideoWidget>
-*/
+//#include <QMediaPlayer>
+//#include <QVideoWidget>
 
 //classes that we need
 #include "../DBSearch/dbsearch.h"

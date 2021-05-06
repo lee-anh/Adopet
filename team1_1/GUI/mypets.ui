@@ -34,7 +34,7 @@
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="gallery">
       <layout class="QGridLayout" name="gridLayout_5">
@@ -744,7 +744,7 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>0</y>
+            <y>-65</y>
             <width>859</width>
             <height>434</height>
            </rect>
@@ -1233,12 +1233,22 @@
                <item>
                 <widget class="QLabel" name="label_13">
                  <property name="text">
-                  <string>Multimedia Files (Optional)</string>
+                  <string>Image Files (Optional,  jpegs only,  files separated by commas)</string>
                  </property>
                 </widget>
                </item>
                <item>
                 <widget class="QPlainTextEdit" name="multimediaBox"/>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_18">
+                 <property name="text">
+                  <string>Video File (Optional,  ony one,  mp4 only)</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="videoFile"/>
                </item>
               </layout>
              </item>

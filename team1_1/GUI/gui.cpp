@@ -93,8 +93,6 @@ GUI::~GUI()
 }
 
 
-
-
 void GUI::meetPet(Pet p){
     petToMeet = p;
 
@@ -138,6 +136,7 @@ void GUI::meetPet(Pet p){
      }
 
 
+     /*
      //video
      /*
      if(petToMeet.getVideoFiles().size() > 0){
@@ -151,8 +150,7 @@ void GUI::meetPet(Pet p){
 
 
      }
-     */
-
+*/
     //set attributes
     string sep = " - ";
     string attributes = p.getSpecies() + sep +  p.getBreed() +
@@ -166,11 +164,13 @@ void GUI::meetPet(Pet p){
     QString qbio = QString::fromStdString(bio);
     ui->petBio->setText(qbio);
 
-    //TODO - shelter info
+    //shelter info
+    QString shelInfo = "INTERESTED? Contact " + QString::fromStdString(petToMeet.getOwner(dbName).getName()).toUpper() +
+            "\nEmail:" + QString::fromStdString(petToMeet.getOwner(dbName).getEmail()) +
+            "\nPhone: " + QString::number(petToMeet.getOwner(dbName).getPhoneNumber()) +
+            "\nAddress: " + QString::fromStdString(petToMeet.getOwner(dbName).getAddress());
 
-
-
-
+    ui->shelterInfo->setText(shelInfo);
 }
 
 void GUI::displayPicture(int i){
@@ -363,6 +363,7 @@ void GUI::logOut(){
 
 void GUI::goToQuiz(){
     ui->stackedWidget->setCurrentIndex(10);
+    qz.startQuiz();
 }
 
 
@@ -482,10 +483,10 @@ void GUI::on_myFavoritesFromHome_clicked()
 
 void GUI::on_backButton_clicked()
 {
-    /*
-    vp->pause();
-    vp->close();
-    */
+  
+    //TODO: check if active before closing?
+    //vp->pause();
+    //vp->close();
 
     //reset heart button
     ui->saveButton->setChecked(false);

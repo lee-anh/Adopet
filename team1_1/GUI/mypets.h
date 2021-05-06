@@ -47,7 +47,8 @@ private:
 
     void clearAll();
 
-    vector<string> mediaParser(string s);
+    void imageProcessor(string s);
+    void videoProcessor(string s);
 
 signals:
     /*!
@@ -104,6 +105,7 @@ private slots:
     void on_breedLine_textEdited(const QString &arg1);
     void on_temperamentLine_textEdited(const QString &arg1);
     void on_goodWithLine_textEdited(const QString &arg1);
+    void on_videoFile_textChanged(const QString &arg1);
     void on_bioBox_textChanged();
     void on_multimediaBox_textChanged();
 
@@ -123,6 +125,7 @@ private slots:
     void on_prev6a_clicked();
     void on_prev7a_clicked();
     void on_prev8a_clicked();
+
 
 };
 

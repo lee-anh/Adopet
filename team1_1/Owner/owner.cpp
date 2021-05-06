@@ -303,20 +303,26 @@ void Owner::removePet(Pet p){
 */
 
 Pet Owner::makePet(QStringList petData){
-    //storing information in each line
-    string name = petData.at(0).toStdString();
-    string species = petData.at(1).toStdString();
-    string breed = petData.at(2).toStdString();
-    string age = petData.at(3).toStdString();
-    string size = petData.at(4).toStdString();
-    string temperament = petData.at(5).toStdString();
-    string gender = petData.at(6).toStdString();
-    string goodWith = petData.at(7).toStdString();
-    string shelter = petData.at(8).toStdString();
-    string bio = petData.at(9).toStdString();
+    if(petData.size() != 10) {
+        cout << "File content is not formatted correctly! A certain pet field is missing" << endl;
+        return Pet();
+    }
+    else {
+        //storing information in each line
+        string name = petData.at(0).toStdString();
+        string species = petData.at(1).toStdString();
+        string breed = petData.at(2).toStdString();
+        string age = petData.at(3).toStdString();
+        string size = petData.at(4).toStdString();
+        string temperament = petData.at(5).toStdString();
+        string gender = petData.at(6).toStdString();
+        string goodWith = petData.at(7).toStdString();
+        string shelter = petData.at(8).toStdString();
+        string bio = petData.at(9).toStdString();
 
-    Pet p = Pet( name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
-    return p;
+        Pet p = Pet( name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+        return p;
+    }
 }
 
 

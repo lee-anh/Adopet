@@ -48,9 +48,11 @@ Pet::Pet(int petId, string petName, string petSpecies, string petBreed,
 
     QString os = QSysInfo::productVersion();
     if(os == "10.16"){
-        fillMediaFiles("../../../../../projectDB.sqlite");
+        database = "../../../../../projectDB.sqlite";
+        fillMediaFiles(database);
     } else {
-        fillMediaFiles("../../projectDB.sqlite");
+        database = "../../projectDB.sqlite";
+        fillMediaFiles(database);
 
     }
 }
@@ -203,9 +205,41 @@ vector<string> Pet::getImageFiles(){
  * @file Image file to be added
 */
 void Pet::addImageFile(string file){
+    QSqlDatabase petsDB = QSqlDatabase::addDatabase("QSQLITE", "shelterCxn");
+    petsDB.setDatabaseName(QString::fromStdString(database));
+
+    if(petsDB.open()){
+        QSqlQuery query = QSqlQuery(petsDB);
+
+        QString s = "INSERT INTO media (petID, filename, mediaType) VALUES("+
+                QString::number(getID()) + ", \"" + QString::fromStdString(file) +
+                "\", \"image\")";
+
+        query.exec(s);
+
+        petsDB = QSqlDatabase();
+        QSqlDatabase::removeDatabase("mediaCxn");
+
+
+    }
     imageFiles.push_back(file);
 }
 
+void Pet::preventDupMedia(){
+    QSqlDatabase petsDB = QSqlDatabase::addDatabase("QSQLITE", "shelterCxn");
+    petsDB.setDatabaseName(QString::fromStdString(database));
+
+    if(petsDB.open()){
+        QSqlQuery query = QSqlQuery(petsDB);
+        QString r = "DELETE FROM media WHERE petID = " + QString::number(getID()); //prevent duplicates
+        query.exec(r);
+
+        petsDB = QSqlDatabase();
+        QSqlDatabase::removeDatabase("shelterCxn");
+
+
+    }
+}
 /*
  * Accessor method that retrieves video files
  * @return The pet's image files
@@ -219,6 +253,22 @@ vector<string> Pet::getVideoFiles(){
  * @file Image file to be added
 */
 void Pet::addVideoFile(string file){
+    QSqlDatabase petsDB = QSqlDatabase::addDatabase("QSQLITE", "shelterCxn");
+    petsDB.setDatabaseName(QString::fromStdString(database));
+
+    if(petsDB.open()){
+        QSqlQuery query = QSqlQuery(petsDB);
+
+        QString s = "INSERT INTO media (petID, filename, mediaType) VALUES("+
+                QString::number(getID()) + ", \"" + QString::fromStdString(file) +
+                "\", \"video\")";
+
+        query.exec(s);
+
+        petsDB = QSqlDatabase();
+        QSqlDatabase::removeDatabase("shelterCxn");
+       }
+
     videoFiles.push_back(file);
 }
 
@@ -250,7 +300,7 @@ Owner Pet::getOwner(string dbName){
             Owner o = Owner(name, ownerAddress, zip, phoneNumber, emailAddress);
 
             petsDB = QSqlDatabase();
-            QSqlDatabase::removeDatabase("mediaCxn");
+            QSqlDatabase::removeDatabase("shelterCxn");
             return o;
         }
     }
@@ -262,6 +312,7 @@ void Pet::afterRequest(QNetworkReply* reply){
     QString res = reply->readAll();
     qDebug() << res;
 }
+*/
 
 //trying out zipcode stuff
 int Pet::getDistance(int zipcode1, int zipcode2){
@@ -270,15 +321,19 @@ int Pet::getDistance(int zipcode1, int zipcode2){
 
     QNetworkAccessManager* manager = new QNetworkAccessManager();
     //QUrl url = QUrl("https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/distance.csv/18042/18055/mile");
-    connect(manager, &QNetworkAccessManager::finished, &Pet::afterRequest);
-    QString urlLink = "https://www.google.com";
+    //connect(manager, &QNetworkAccessManager::finished, &Pet::afterRequest);
+    QString urlLink = "https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/distance.csv/18042/18055/mile";
     QUrl url = QUrl(urlLink);
     QNetworkRequest request(url);
-    manager->get(request);
+    QNetworkReply* reply = manager->get(request);
+    QString res = reply->readAll();
+    qDebug() << res;
     //string link= "https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/multi-distance.csv/" + to_string(zipcode1) + "/" + to_string(zipcode2) + "/mile";
     //request.setUrl(QUrl("https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/multi-distance.csv/18042/18055/mile"));
     //QNetworkReply* reply = manager->get(request);
     return 0;
 }
-*/
+
+
+
 
