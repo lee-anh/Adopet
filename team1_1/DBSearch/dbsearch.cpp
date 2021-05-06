@@ -71,114 +71,110 @@ void DBSearch::search(string s){
         } else {
             word = word + x;
         }
-        words.push_back(word);
         cout << word << endl;
     }
+    words.push_back(word);
 
     for(int i = 0; i < (int) words.size(); i++){
         s = words[i];
-    string attributeToSearch = "";
+        string attributeToSearch = "";
 
-    //species
-    for(int i = 0; i < (int) mainSpecies.size(); i++){
+        //species
+        for(int i = 0; i < (int) mainSpecies.size(); i++){
 
-        if(s == mainSpecies.at(i)){
-            attributeToSearch = "species";
-            break;
-        }
-
-    }
-
-    //breed
-    if(attributeToSearch == ""){
-        for(int i = 0; i < (int) mainBreeds.size(); i++){
-            if(s == mainBreeds.at(i)){
-                attributeToSearch = "breed";
+            if(s == mainSpecies.at(i)){
+                attributeToSearch = "species";
                 break;
             }
-        }
-    }
 
-    //age
-    if(attributeToSearch == ""){
-        for(int i = 0; i < (int) mainAges.size(); i++){
-            if(s == mainAges.at(i)){
-                attributeToSearch = "age";
-                break;
+        }
+
+        //breed
+        if(attributeToSearch == ""){
+            for(int i = 0; i < (int) mainBreeds.size(); i++){
+                if(s == mainBreeds.at(i)){
+                    attributeToSearch = "breed";
+                    break;
+                }
             }
         }
-    }
 
-    //size
-    if(attributeToSearch == ""){
-        for(int i = 0; i < (int) mainSizes.size(); i++){
-            if(s == mainSizes.at(i)){
-                attributeToSearch = "size";
-                break;
+        //age
+        if(attributeToSearch == ""){
+            for(int i = 0; i < (int) mainAges.size(); i++){
+                if(s == mainAges.at(i)){
+                    attributeToSearch = "age";
+                    break;
+                }
             }
         }
-    }
 
-    //temperament
-    if(attributeToSearch == ""){
-        for(int i = 0; i < (int) mainTemperaments.size(); i++){
-            if(s == mainTemperaments.at(i)){
-                attributeToSearch = "temperament";
-                break;
+        //size
+        if(attributeToSearch == ""){
+            for(int i = 0; i < (int) mainSizes.size(); i++){
+                if(s == mainSizes.at(i)){
+                    attributeToSearch = "size";
+                    break;
+                }
             }
         }
-    }
 
-    //gender
-    if(attributeToSearch == ""){
-        for(int i = 0; i < (int) mainGenders.size(); i++){
-            if(s == mainGenders.at(i)){
-                attributeToSearch = "gender";
-                break;
+        //temperament
+        if(attributeToSearch == ""){
+            for(int i = 0; i < (int) mainTemperaments.size(); i++){
+                if(s == mainTemperaments.at(i)){
+                    attributeToSearch = "temperament";
+                    break;
+                }
             }
         }
-    }
 
-    //goodWith
-    if(attributeToSearch == ""){
-        for(int i = 0; i < (int) mainGoodWith.size(); i++){
-            if(s == mainGoodWith.at(i)){
-                attributeToSearch = "goodWith";
-                break;
+        //gender
+        if(attributeToSearch == ""){
+            for(int i = 0; i < (int) mainGenders.size(); i++){
+                if(s == mainGenders.at(i)){
+                    attributeToSearch = "gender";
+                    break;
+                }
             }
         }
-    }
 
-
-    //shelter
-    if(attributeToSearch == ""){
-        for(int i = 0; i < (int) mainShelters.size(); i++){
-            if(s == mainShelters.at(i)){
-                attributeToSearch = "shelter";
-                break;
+        //goodWith
+        if(attributeToSearch == ""){
+            for(int i = 0; i < (int) mainGoodWith.size(); i++){
+                if(s == mainGoodWith.at(i)){
+                    attributeToSearch = "goodWith";
+                    break;
+                }
             }
         }
-    }
 
-    //name
-    if(attributeToSearch == ""){
-        for(int i = 0; i < (int) names.size(); i++){
-            if(s == names.at(i)){
-                attributeToSearch = "name";
-                break;
+
+        //shelter
+        if(attributeToSearch == ""){
+            for(int i = 0; i < (int) mainShelters.size(); i++){
+                if(s == mainShelters.at(i)){
+                    attributeToSearch = "shelter";
+                    break;
+                }
             }
         }
-    }
 
+        //name
+        if(attributeToSearch == ""){
+            for(int i = 0; i < (int) names.size(); i++){
+                if(s == names.at(i)){
+                    attributeToSearch = "name";
+                    break;
+                }
+            }
+        }
 
-    //add to attributes to search for
-    addToAttributes(s, attributeToSearch);
-
-
-    }
+        //cout << "adding this attribute to constraints: " << s << endl;
+        //add to attributes to search for
+        addToAttributes(s, attributeToSearch);
+   }
    // return true; //TODO
-
-
 }
 
 
@@ -195,6 +191,8 @@ bool DBSearch::addToAttributes(string attribute, string category){
         return false;
     }
     //else
+
+    //cout << "pushing this attribute to constraints: " << attribute << endl;
     constraints[index].push_back(attribute);
     return true;
 }
@@ -252,6 +250,7 @@ string DBSearch::createQuery(){
     string query = "SELECT id, name, species, breed, age, "
         "size, temperament, gender, goodWith, shelter, bio FROM pets ";
     int first = 0;
+
     for(int i = 0; i < (int) constraints.size(); i++){
         vector<string> temp = constraints[i];
         if(first == 0 && temp.size() > 0){
@@ -270,11 +269,26 @@ string DBSearch::createQuery(){
             }
         }
     }
+    cout << getConstraints() << endl;
     cout << query << endl;
 
     return query;
 }
 
+/*!
+ * \brief getter method to retrieve the contents of constraints
+ * \return string that contains all the key words searched for
+ */
+string DBSearch::getConstraints(){
+    string s = "";
+    for(int i = 0; i < (int) constraints.size(); i++){
+        vector<string> temp = constraints[i];
+        for(int j = 0; j < (int) temp.size(); j++){
+            s += temp[j] + "-";
+        }
+    }
+    return s.substr(0, s.size() - 1);
+}
 
 /*!
  * \brief queryDB, helper method to runNewQuery()

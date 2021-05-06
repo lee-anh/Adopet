@@ -312,6 +312,7 @@ void Pet::afterRequest(QNetworkReply* reply){
     QString res = reply->readAll();
     qDebug() << res;
 }
+*/
 
 //trying out zipcode stuff
 int Pet::getDistance(int zipcode1, int zipcode2){
@@ -320,17 +321,19 @@ int Pet::getDistance(int zipcode1, int zipcode2){
 
     QNetworkAccessManager* manager = new QNetworkAccessManager();
     //QUrl url = QUrl("https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/distance.csv/18042/18055/mile");
-    connect(manager, &QNetworkAccessManager::finished, &Pet::afterRequest);
-    QString urlLink = "https://www.google.com";
+    //connect(manager, &QNetworkAccessManager::finished, &Pet::afterRequest);
+    QString urlLink = "https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/distance.csv/18042/18055/mile";
     QUrl url = QUrl(urlLink);
     QNetworkRequest request(url);
-    manager->get(request);
+    QNetworkReply* reply = manager->get(request);
+    QString res = reply->readAll();
+    qDebug() << res;
     //string link= "https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/multi-distance.csv/" + to_string(zipcode1) + "/" + to_string(zipcode2) + "/mile";
     //request.setUrl(QUrl("https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/multi-distance.csv/18042/18055/mile"));
     //QNetworkReply* reply = manager->get(request);
     return 0;
 }
-*/
+
 
 
 

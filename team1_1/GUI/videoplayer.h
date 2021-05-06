@@ -48,10 +48,11 @@
 **
 ****************************************************************************/
 
+/*
 #ifndef VIDEOPLAYER_H
 #define VIDEOPLAYER_H
 
-#include <qmediaplayer.h>
+//#include <qmediaplayer.h>
 
 #include <QtGui/QMovie>
 #include <QtWidgets/QWidget>
@@ -78,17 +79,18 @@ public slots:
     void play();
 
 private slots:
-    void mediaStateChanged(QMediaPlayer::State state);
+    //void mediaStateChanged(QMediaPlayer::State state);
     void positionChanged(qint64 position);
     void durationChanged(qint64 duration);
     void setPosition(int position);
     void handleError();
 
 private:
-    QMediaPlayer mediaPlayer;
+   // QMediaPlayer mediaPlayer;
     QAbstractButton *playButton;
     QSlider *positionSlider;
     QLabel *errorLabel;
 };
 
 #endif
+*/

@@ -136,6 +136,7 @@ void GUI::meetPet(Pet p){
      }
 
 
+     /*
      //video
      if(petToMeet.getVideoFiles().size() > 0){
          //default picture
@@ -148,7 +149,7 @@ void GUI::meetPet(Pet p){
 
 
      }
-
+*/
     //set attributes
     string sep = " - ";
     string attributes = p.getSpecies() + sep +  p.getBreed() +
@@ -481,9 +482,7 @@ void GUI::on_myFavoritesFromHome_clicked()
 
 void GUI::on_backButton_clicked()
 {
-
-
-
+  
     //TODO: check if active before closing?
     //vp->pause();
     //vp->close();
