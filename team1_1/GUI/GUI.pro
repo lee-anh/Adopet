@@ -7,7 +7,7 @@ QT += core
 QT += sql
 
 QT += multimedia
-QT += multimediawidgets
+#QT += multimediawidgets
 
 QT += network
 

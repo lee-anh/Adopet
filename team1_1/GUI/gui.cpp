@@ -139,6 +139,7 @@ void GUI::meetPet(Pet p){
 
 
      //video
+     /*
      if(petToMeet.getVideoFiles().size() > 0){
          //default picture
          vp = new VideoPlayer;
@@ -150,6 +151,7 @@ void GUI::meetPet(Pet p){
 
 
      }
+     */
 
     //set attributes
     string sep = " - ";
@@ -480,8 +482,10 @@ void GUI::on_myFavoritesFromHome_clicked()
 
 void GUI::on_backButton_clicked()
 {
+    /*
     vp->pause();
     vp->close();
+    */
 
     //reset heart button
     ui->saveButton->setChecked(false);

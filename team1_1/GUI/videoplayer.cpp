@@ -48,6 +48,7 @@
 **
 ****************************************************************************/
 
+/*
 #include "videoplayer.h"
 
 #include <QtWidgets>
@@ -113,19 +114,6 @@ VideoPlayer::~VideoPlayer()
 
 void VideoPlayer::openFile()
 {
-    /*
-    QFileDialog fileDialog(this);
-    fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
-    fileDialog.setWindowTitle(tr("Open Movie"));
-    QStringList supportedMimeTypes = mediaPlayer.supportedMimeTypes();
-    if (!supportedMimeTypes.isEmpty())
-        fileDialog.setMimeTypeFilters(supportedMimeTypes);
-    fileDialog.setDirectory(QStandardPaths::standardLocations(QStandardPaths::MoviesLocation).value(0, QDir::homePath()));
-    if (fileDialog.exec() == QDialog::Accepted)
-        setUrl(fileDialog.selectedUrls().constFirst());
-        */
-   // setUrl(QUrl::fromLocalFile("/Users/claireliu/CS250/project/team_1_1/videos/dog1.mp4"));
-   // setUrl(QUrl::fromLocalFile("../../../../../videos/dog1.mp4"));
 }
 
 void VideoPlayer::setUrl(const QUrl &url)
@@ -191,3 +179,4 @@ void VideoPlayer::handleError()
         message += errorString;
     errorLabel->setText(message);
 }
+*/

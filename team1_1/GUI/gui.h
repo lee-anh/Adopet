@@ -6,9 +6,10 @@
 #include <QtSql>
 #include <vector>
 
+/*
 #include <QMediaPlayer>
 #include <QVideoWidget>
-
+*/
 
 //classes that we need
 #include "../DBSearch/dbsearch.h"
@@ -28,7 +29,7 @@
 #include "mypets.h"
 #include "quiz.h"
 #include "findmatchforpets.h"
-#include "videoplayer.h"
+//#include "videoplayer.h"
 
 //QDialogs
 #include "logout.h"
@@ -70,7 +71,7 @@ private:
     MyFavoritesTwo myFavsList;
     Quiz qz;
     FindMatchForPets fmForPets;
-    VideoPlayer *vp;
+    //VideoPlayer *vp;
 
     //QDialogs
     Logout lg;
