@@ -13,6 +13,7 @@ QMAKE_LFLAGS += --coverage
 SOURCES += main.cpp
 
 LIBS += -pthread
+
 !macx{
     LIBS += -lgcov
 }

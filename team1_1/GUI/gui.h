@@ -9,7 +9,6 @@
 //#include <QMediaPlayer>
 //#include <QVideoWidget>
 
-
 //classes that we need
 #include "../DBSearch/dbsearch.h"
 #include "../Pets/pet.h"
@@ -28,7 +27,7 @@
 #include "mypets.h"
 #include "quiz.h"
 #include "findmatchforpets.h"
-#include "videoplayer.h"
+//#include "videoplayer.h"
 
 //QDialogs
 #include "logout.h"

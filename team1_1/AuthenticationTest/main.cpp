@@ -7,6 +7,7 @@
 #include "../Adopter/preferences.h"
 #include "../Owner/owner.h"
 #include "../Pets/pet.h"
+#include <QtSql>
 
 
 class AuthTest : public ::testing::Test {
@@ -38,18 +39,38 @@ class AuthTest : public ::testing::Test {
      // Code here will be called immediately after the constructor (right
 
      // before each test).
+        auth = Authentication("../../testDB.sqlite");
 
      }
 
      virtual void TearDown() {
+        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE","authTestConnection");
+        string fullName = "../../testDB.sqlite";
+        db.setDatabaseName(QString::fromStdString(fullName));
+        if(!db.open()){
+            std::cerr << "Database does not open -- "
+                      << db.lastError().text().toStdString()
+                      << std::endl;
 
-     // Code here will be called immediately after each test (right
+            std::cerr << "  File -- " << fullName << std::endl;
+            exit(0);
+        } else {
+            std::cerr << "Opened database successfully (from Authentication class)\n";
+        }
 
-     // before the destructor).
-
+        if(db.open()){
+            QSqlQuery qry = QSqlQuery(db);
+            QString qs = "DELETE FROM accounts WHERE username=\"user11\";" ;
+            qry.exec(qs);
+            cout << "Deleted user 11" << endl;
+            qs = "DELETE FROM accounts WHERE username=\"user12\";" ;
+            qry.exec(qs);
+            cout << "Deleted user 12" << endl;
+        }
      }
 
      // Objects declared here can be used by all tests in the test case for Foo.
+    Authentication auth;
 
 
 
@@ -57,25 +78,22 @@ class AuthTest : public ::testing::Test {
 
 };
 
-TEST(AuthTest, testLogin){
-    Authentication auth = Authentication("../../testDB.sqlite");
+TEST_F(AuthTest, testLogin){
     int login = auth.logIn("user1","password1");
     EXPECT_EQ(login,0) << "Should grant access " << login << "should be 0"<< endl;
 }
 
-TEST(AuthTest, testLoginFail){
-    Authentication auth = Authentication("../../testDB.sqlite");
-    int login = auth.logIn("user10","password10");
-    EXPECT_EQ(login,0) << "Should grant access " << login << "should be 0" << endl;
+TEST_F(AuthTest, testLoginFail){
+    int login = auth.logIn("user11","password10");
+    EXPECT_EQ(login,-1) << "Should not grant access " << login << "should be -1" << endl;
 }
 
 
 //Testing object setters and getters
-TEST(AuthTest, signUpAdopter){
-    Authentication auth = Authentication("../../testDB.sqlite");
-    bool signup = auth.signUp("user10","password10", "adopter");
+TEST_F(AuthTest, signUpAdopter){
+    bool signup = auth.signUp("user11","password11", "adopter");
     EXPECT_EQ(signup,true) << "Should create new adopter " << signup << "should be 1" << endl;
-    int login = auth.logIn("user10","password10");
+    int login = auth.logIn("user11","password11");
     EXPECT_EQ(login,0) << "Should grant access " << login << "should be 0" << endl;
     Adopter* adpt = auth.getAuthenticatedAdopter();
     if(!adpt){
@@ -83,12 +101,11 @@ TEST(AuthTest, signUpAdopter){
     }
 }
 
-TEST(AuthTest, signUpOwner){
-    Authentication auth = Authentication("../../testDB.sqlite");
-    bool signup = auth.signUp("user11","password11", "owner");
-    EXPECT_EQ(signup,0) << "Should create new owner " << signup << "should be 1" << endl;
-    int login = auth.logIn("user11","password11");
-    EXPECT_EQ(login,0) << "Should grant access " << login << "should be 0" << endl;
+TEST_F(AuthTest, signUpOwner){
+    bool signup = auth.signUp("user12","password12", "owner");
+    EXPECT_EQ(signup,true) << "Should create new owner " << signup << "should be 1" << endl;
+    int login = auth.logIn("user12","password12");
+    EXPECT_EQ(login,1) << "Should grant access " << login << "should be 1" << endl;
     Owner* owner = auth.getAuthenticatedOwner();
     if(!owner){
         FAIL() << "Owner is null even already signed up!" << endl;
@@ -96,14 +113,31 @@ TEST(AuthTest, signUpOwner){
 
 }
 
-TEST(AuthTest, signUpAdopterFail){
-    Authentication auth = Authentication("../../testDB.sqlite");
+TEST_F(AuthTest, signUpAdopterFail){
     bool signup = auth.signUp("user10","password10", "adopter");
-    EXPECT_EQ(signup,false) << "Should create new adopter " << signup << "should be 1" << endl;
+    EXPECT_EQ(signup,false) << "Should not create new adopter " << signup << "should be 0" << endl;
 }
 
-TEST(AuthTest, signUpOwnerFail){
+TEST_F(AuthTest, signUpOwnerFail){
+    bool signup = auth.signUp("user10","password10", "owner");
+    EXPECT_EQ(signup,false) << "Should not create new adopter " << signup << "should be 0" << endl;
+}
 
+
+TEST_F(AuthTest, updateAdopter){
+    auth.signUp("user11","password11", "adopter");
+    auth.logIn("user11","password11");
+    auth.updateAdopter("user11", "Evan", "Vu", "vuc@laf.edu", "18042");
+    Adopter* adptr = auth.getAuthenticatedAdopter();
+    EXPECT_EQ(adptr->getFirstName(),"Evan");
+}
+
+TEST_F(AuthTest, updateOwner){
+    auth.signUp("user12","password12", "owner");
+    auth.logIn("user12","password12");
+    auth.updateOwner("user12", "Cuong", "12345", "vuc@laf.edu", "111 Quad Drive", "18042");
+    Owner* adptr = auth.getAuthenticatedOwner();
+    EXPECT_EQ(adptr->getName(),"Cuong");
 }
 
 

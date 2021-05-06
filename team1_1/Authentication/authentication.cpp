@@ -242,17 +242,19 @@ Adopter Authentication::updateAdopter(string username, string fname, string lnam
                 "\", lastName = \"" + QString::fromStdString(lname) +
                 "\", emailAddress = \"" + QString::fromStdString(emailAdd) +
                 "\", zip = " + QString::number(zp) + " WHERE username = \""
-                 + QString::fromStdString(username) + "\"";
-
+                 + QString::fromStdString(username) + "\";";
         qry.exec(qs);
         cout << qs.toStdString() << endl;
     }
-
     //update local object
     authAdopter->setFirstName(fname);
+    cout << fname << endl;
     authAdopter->setLastName(lname);
+    cout << lname << endl;
     authAdopter->setEmailAddress(emailAdd);
+    cout << emailAdd << endl;
     authAdopter->setZipCode(zp);
+    cout << zp << endl;
     return *authAdopter;
 }
 
