@@ -237,21 +237,22 @@ void Pet::setBio(string bi){
     bio = bi;
 }
 
+
 /*
  * Accessor method for pet id
  * @return pet id
 */
-int Pet::getPetID(){
-    return id;
-}
+//int Pet::getPetID(){
+  //  return id;
+//}
 
 /*
  * Setter method for pet id
  * @param pet id
 */
-void Pet::setPetID(int id){
-    this->id = id;
-}
+//void Pet::setPetID(int id){
+  //  this->id = id;
+//}
 
 /*
  * Loops through the database and sets the pets media files

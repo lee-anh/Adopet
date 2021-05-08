@@ -361,27 +361,3 @@ void PeopleRandomizer::initalizeNameVecs(){
     size = {"small", "medium", "large"};
 }
 
-
-/*
-void PeopleRandomizer::speciesTest(){
-    vector<string> userSpecies = vector<string>();
-    //how many to add
-    int speciesRand = (rand() % species.size()) + 1;
-
-    for(int i = 0;  i < speciesRand; i++){
-        int speciesRand1 = rand() % species.size();
-
-        string toAdd = species.at(speciesRand1);
-        userSpecies.push_back(toAdd);
-    }
-
-    //get rid of duplicates
-    sort(userSpecies.begin(), userSpecies.end());
-    userSpecies.erase(unique(userSpecies.begin(), userSpecies.end()), userSpecies.end());
-
-    for(int i = 0; i < (int) userSpecies.size(); i++){
-        cout << userSpecies.at(i) << endl;
-    }
-
-}
-*/

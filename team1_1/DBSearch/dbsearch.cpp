@@ -356,23 +356,6 @@ void DBSearch::printMatchingVec(){
     }
 }
 
-/*
-vector<string> DBSearch::searchingFor(){
-    vector<string> toReturn = vector<string>();
-    for(int i = 0; i < (int) constraints.size(); i++){
-        string s = "";
-        if(constraints[i].size() > 0){
-            s = attributes[i] + " - ";
-        }
-        for(int j = 0; i < (int) constraints[i].size(); j++){
-            s = s + constraints[i][j];
-        }
-        toReturn.push_back(s);
-    }
-    return toReturn;
-}
-*/
-
 
 /*!
  * \brief randomShuffle the matchingPets vector

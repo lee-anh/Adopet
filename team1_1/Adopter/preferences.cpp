@@ -5,9 +5,6 @@
  */
 Preferences::Preferences()
 {
-    //default setting will be all the different pets
-    //so if the array is empty, then it's all of them?
-    //WILL NEED TO CHECK IF THE USER SELECTS ALL OF THEM!!! (use the size? doing dyamic?)
     species = vector<string>();
     breed = vector<string>();
     age = vector<string>();

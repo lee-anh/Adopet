@@ -61,8 +61,8 @@ public:
     string getBio();
     void setBio(string bi);
 
-    int getPetID();
-    void setPetID(int id);
+    //int getPetID();
+    //void setPetID(int id);
 
     void fillMediaFiles(string dbName);             //loops through the DB and fills in the pet's media information
 
