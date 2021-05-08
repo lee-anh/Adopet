@@ -321,6 +321,9 @@ Pet Owner::makePet(QStringList petData){
         string bio = petData.at(9).toStdString();
 
         Pet p = Pet( name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+        p.setPetID(lastPetID + 1);
+        lastPetID += 1;
+
         return p;
     }
 }
@@ -331,7 +334,7 @@ Pet Owner::makePet(QStringList petData){
  * Uploads all the pets into the database
  * @file Txt file that contains all the pets to be uploaded
 */
-void Owner::uploadPets(string filename){
+bool Owner::uploadPets(string filename){
     QFile file(QString::fromStdString(filename));
     if(!file.open(QIODevice::ReadOnly)) {
         cout << "Error: file not opened!\n";
@@ -342,8 +345,15 @@ void Owner::uploadPets(string filename){
     while(!in.atEnd()) {
         QString line = in.readLine();
         QStringList petData = line.split(","); //loren ipsum, bird1.jpeg bird2.jpeg
-        uploadPet(makePet(petData));
+        Pet p = makePet(petData);
+        if(p.getName() != "") {
+            uploadPet(makePet(petData));
+        } else {
+            return false;
+        }
+
     }
+    return true;
 
     file.close();
 }

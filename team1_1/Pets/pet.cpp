@@ -7,7 +7,7 @@ Pet::Pet()
     name = "";
     species = "";
     breed = "";
-    age = -1;
+    age = "";
     size ="";
     temperament = "";
     gender = "";
@@ -319,6 +319,28 @@ int Pet::getDistance(int zipcode1, int zipcode2){
     cout << "Zipcode 1 is: " << zipcode1 << endl;
     cout << "Zipcode 2 is: " << zipcode2 << endl;
 
+    /*
+
+    QNetworkAccessManager* manager = new QNetworkAccessManager();
+    //QUrl url = QUrl("https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/distance.csv/18042/18055/mile");
+    //connect(manager, &QNetworkAccessManager::finished, this, &Pet::replyFinished);
+    connect(manager, &QNetworkAccessManager::finished, this, [&](QNetworkReply *reply){
+        QByteArray data = reply->readAll();
+        QString str = QString::fromLatin1(data);
+    }
+
+    QNetworkReply* reply = manager->get(QNetworkRequest(QUrl("https://www.zipcodeapi.com/rest/2SGf0OrfGHFzxZlcQDqpLCs0DatJiQXqCSI9RqPMy7J0Ms0HopAxuDBG5R12oHXr/distance.json/01721/02446/mile")));
+
+    //QNetworkReply* reply = manager->get(request);
+    QString res = reply->readAll();
+    qDebug() << res;
+    //string link= "https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/multi-distance.csv/" + to_string(zipcode1) + "/" + to_string(zipcode2) + "/mile";
+    //request.setUrl(QUrl("https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/multi-distance.csv/18042/18055/mile"));
+    //QNetworkReply* reply = manager->get(request);
+      */
+
+
+    /*
     QNetworkAccessManager* manager = new QNetworkAccessManager();
     //QUrl url = QUrl("https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/distance.csv/18042/18055/mile");
     //connect(manager, &QNetworkAccessManager::finished, &Pet::afterRequest);
@@ -331,6 +353,8 @@ int Pet::getDistance(int zipcode1, int zipcode2){
     //string link= "https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/multi-distance.csv/" + to_string(zipcode1) + "/" + to_string(zipcode2) + "/mile";
     //request.setUrl(QUrl("https://www.zipcodeapi.com/rest/FV614NtEuZYNXon9VgYDlqO54JdD9XVESVJ9AAxpwOXRdJ5rPcvS5fud8YNwu6Dd/multi-distance.csv/18042/18055/mile"));
     //QNetworkReply* reply = manager->get(request);
+
+    */
     return 0;
 }
 
