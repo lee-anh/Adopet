@@ -195,6 +195,7 @@ void SavedList::loadList(){
                 string goodWith = queryPets.value(8).toString().toStdString();
                 string shelter = queryPets.value(9).toString().toStdString();
                 string bio = queryPets.value(10).toString().toStdString();
+                //creating a pet from information above
                 Pet p = Pet(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
 
                 savedPets.push_back(p);

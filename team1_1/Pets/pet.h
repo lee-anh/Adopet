@@ -28,7 +28,6 @@ public:
     ~Pet();
 
     //getters and setters
-
     int getID();
     void setID(int petID);
 
@@ -62,21 +61,21 @@ public:
     string getBio();
     void setBio(string bi);
 
-    void fillMediaFiles(string dbName);
-
-    vector<string> getImageFiles();
-    void addImageFile(string file);
-    void preventDupMedia();
-
-    vector<string> getVideoFiles();
-    void addVideoFile(string file);
-
     int getPetID();
     void setPetID(int id);
 
-    Owner getOwner(string dbName);
-    //trying out zipcode stuff
+    void fillMediaFiles(string dbName);             //loops through the DB and fills in the pet's media information
 
+    vector<string> getImageFiles();             //accessor method for pet's image files
+    void addImageFile(string file);             //adds a new file onto the pet's image file list
+    void preventDupMedia();                     //prevents duplicate files from occurring
+
+    vector<string> getVideoFiles();             //accessor method for pet's video files
+    void addVideoFile(string file);             //adds a new file onto the pet's video file list
+
+    Owner getOwner(string dbName);              //gets the pet's current owner
+
+    //trying out zipcode stuff
     void afterRequest(QNetworkReply* reply);
     int getDistance(int zipcode1, int zipcode2);
 

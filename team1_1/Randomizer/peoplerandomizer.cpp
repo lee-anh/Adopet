@@ -337,6 +337,7 @@ void PeopleRandomizer::loadDBVecs(){
  * \brief initalizeNameVecs choose names for the users
  */
 void PeopleRandomizer::initalizeNameVecs(){
+    //static information, arbitrarily chosen
     firstNames = {
        "Oliver", "Liam", "Ethan", "Aiden", "Gabriel", "Caleb", "Theo", "Owen",
         "Elijah", "Henry", "Jackson", "Grayson", "Levi", "Ben", "Miles", "Alex",

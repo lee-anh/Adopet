@@ -39,10 +39,7 @@ Adopter::Adopter(string db, string uname, string pwd, string fname, string lname
     openDB();
     fillPreferences();
     cout << "Adopter database constructor called" << endl;
-
 }
-
-
 
 /*!
  * \brief Adopter alternate constructor
@@ -63,14 +60,12 @@ Adopter::Adopter(string uname, string pwd, string fname, string lname,
     emailAddress = email;
     zipcode = zip;
     preferenceList = p;
-
 }
 
 /*!
  * \brief Adopter destructor
  */
 Adopter::~Adopter(){
-
    // prefDB.removeDatabase(prefDB.connectionName());
     prefDB.close();
 }
@@ -172,8 +167,6 @@ void Adopter::setZipCode(int zip){
     zipcode = zip;
 }
 
-
-
 /*!
  * \brief fillPreference
  * Adds the specific preference onto the adopter's preference list
@@ -190,8 +183,6 @@ void Adopter::fillPreference(string attr, string attrType){
     else if(attrType == "goodWith") preferenceList.addGoodWith(attr);
     else if(attrType == "shelter") preferenceList.addShelter(attr);
 }
-
-
 
 /*!
  * \brief fillPreferences
@@ -214,7 +205,6 @@ void Adopter::fillPreferences(){
     }
 }
 
-
 /*!
  * \brief removePreferenceHelper
  * Helper method to remove the specific preference from the adopter's preference list
@@ -233,8 +223,6 @@ void Adopter::removePreferenceHelper(string attr, string attrType){
     else if(attrType == "shelter") preferenceList.removeShelter(attr);
 }
 
-
-
 /*!
  * \brief getPreferences accessor method for adopter's preference list
  * \return Preference object
@@ -242,8 +230,6 @@ void Adopter::removePreferenceHelper(string attr, string attrType){
 Preferences Adopter::getPreferences(){
     return preferenceList;
 }
-
-
 
 /*!
  * \brief addPreference
@@ -287,6 +273,10 @@ void Adopter::removePreference(string attr, string attrType){
     removePreferenceHelper(attr, attrType);
 }
 
+/*!
+ * \brief setPreference, setter method for preference list
+ * \param pf Preference object to set the current list
+ */
 void Adopter::setPreference(Preferences pf){
     preferenceList = pf;
 }

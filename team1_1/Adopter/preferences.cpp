@@ -13,10 +13,7 @@ Preferences::Preferences()
     age = vector<string>();
     animalSize = vector<string>();
     temperament = vector<string>();
-
     gender = vector<string>();
-
-
 }
 
 /*!
@@ -60,8 +57,6 @@ bool Preferences::removeSpecies(string s){
     }
     return false;
 }
-
-
 
 //Breed
 /*!
@@ -133,15 +128,28 @@ bool Preferences::removeAge(string a){
 }
 
 //Size
+/*!
+ * \brief getSize
+ * \return  the size vector
+ */
 vector<string> Preferences::getSize(){
     return animalSize;
 }
 
+/*!
+ * \brief addSize
+ * \param s size to add
+ */
 void Preferences::addSize(string sz){
     animalSize.push_back(sz);
 
 }
 
+/*!
+ * \brief removeSize
+ * \param s size to remove
+ * \return true if size was removed sucessfully, false if not
+ */
 bool Preferences::removeSize(string sz){
     int animalSizeSize = (int) animalSize.size();
     for(int i = 0; i < animalSizeSize; i++){
@@ -203,13 +211,18 @@ vector<string> Preferences::getGender(){
 
 /*!
  * \brief setGender
- * \param g gender
+ * \param g gender to add
  */
 void Preferences::addGender(string gw){
     transform(gw.begin(), gw.end(), gw.begin(), ::tolower);
     gender.push_back(gw);
 }
 
+/*!
+ * \brief removeGender
+ * \param s gender to remove
+ * \return true if gender was removed sucessfully, false if not
+ */
 bool Preferences::removeGender(string gw){
     int genderSize = (int) gender.size();
     for(int i = 0; i < genderSize; i++){
@@ -222,15 +235,29 @@ bool Preferences::removeGender(string gw){
     return false;
 }
 
+//GoodWith
+/*!
+ * \brief getGoodWith
+ * \return  the goodWith vector
+ */
 vector<string> Preferences::getGoodWith(){
     return goodWith;
 }
 
+/*!
+ * \brief addGoodWith
+ * \param s goodWith attribute to add
+ */
 void Preferences::addGoodWith(string gw){
     transform(gw.begin(), gw.end(), gw.begin(), ::tolower);
     goodWith.push_back(gw);
 }
 
+/*!
+ * \brief removeGoodWith
+ * \param s goodWith preference to remove
+ * \return true if goodWith preference was removed sucessfully, false if not
+ */
 bool Preferences::removeGoodWith(string gw){
     int goodWithSize = (int) goodWith.size();
     for(int i = 0; i < goodWithSize; i++){
@@ -244,15 +271,28 @@ bool Preferences::removeGoodWith(string gw){
 }
 
 //Shelter
+/*!
+ * \brief getShelter
+ * \return  the shetler vector
+ */
 vector<string> Preferences::getShelter(){
     return shelter;
 }
 
+/*!
+ * \brief addShelter
+ * \param s shelter to add
+ */
 void Preferences::addShelter(string s){
     transform(s.begin(), s.end(), s.begin(), ::tolower);
     shelter.push_back(s);
 }
 
+/*!
+ * \brief removeShelter
+ * \param s shelter to remove
+ * \return true if shelter was removed sucessfully, false if not
+ */
 bool Preferences::removeShelter(string s){
     int shelterSize = (int) shelter.size();
     for(int i = 0; i < shelterSize; i++){
