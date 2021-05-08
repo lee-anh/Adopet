@@ -28,6 +28,7 @@
 #include "quiz.h"
 #include "findmatchforpets.h"
 //#include "videoplayer.h"
+#include "zip.h"
 
 //QDialogs
 #include "logout.h"
@@ -69,6 +70,7 @@ private:
     MyFavoritesTwo myFavsList;
     Quiz qz;
     FindMatchForPets fmForPets;
+    Zip zp;
     //VideoPlayer *vp;
 
     //QDialogs
@@ -161,5 +163,7 @@ private slots:
     void on_left_clicked();
     void on_navHelpButton_clicked();
     void on_ownerHelp_clicked();
+    void on_password_returnPressed();
+    void on_pushButton_clicked();
 };
 #endif // GUI_H

@@ -16,7 +16,7 @@ public:
     PetRandomizer(int num);
     ~PetRandomizer();
 
-    void writeToCSV();
+    void writeToCSV();                                  //writes in the randomized data into the csv files
 
     string getImageFileNameBySpecies(string petSpecies);     //gets the image file name of a specific pet based on its species
     string getVideoFileNameBySpecies(string petSpecies);     //gets the video file name of a specific pet based on its species
@@ -31,10 +31,9 @@ private:
 
     //Database stuff
     QSqlDatabase db;
-    void openDB();
+    void openDB();          //opens a database connection
 
-    void initializeNameVecs();
-    void loadDBVecs();
+    void initializeNameVecs(); //initializes vectors with static information
 
     //vectors that don't change
     vector<string> names;

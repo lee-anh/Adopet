@@ -236,6 +236,7 @@ void Owner::updatePet(Pet p){
 void Owner::uploadPet(Pet p){
     p.setID(lastPetID + 1);
 
+    //using given pet information in the query
     QString s1 = "INSERT INTO pets(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio) VALUES(";
     s1 += QString::number(p.getID()) + ", \"";
     s1 += QString::fromStdString(p.getName()) + "\", \"";
@@ -277,10 +278,12 @@ void Owner::uploadPet(Pet p){
  * @param p Pet to be removed
 */
 void Owner::removePet(Pet p){
+    //removing from pets
     QString s1 = "DELETE FROM pets WHERE id = ";
     s1 += QString::number(p.getID()) + "";
     //cout << "query is: " << s1.toStdString() << endl;
 
+    //removing from media
     QString s2 = "DELETE FROM media WHERE petID = ";
     s2 += QString::number(p.getID()) + "";
     //cout << "query is: " << s2.toStdString() << endl;
@@ -303,6 +306,7 @@ void Owner::removePet(Pet p){
 */
 
 Pet Owner::makePet(QStringList petData){
+    //checking if the passed qstringlist contains the correct amount of fields
     if(petData.size() != 10) {
         cout << "File content is not formatted correctly! A certain pet field is missing" << endl;
         return Pet();
@@ -321,6 +325,9 @@ Pet Owner::makePet(QStringList petData){
         string bio = petData.at(9).toStdString();
 
         Pet p = Pet( name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+        p.setPetID(lastPetID + 1);
+        lastPetID += 1;
+
         return p;
     }
 }
@@ -331,7 +338,7 @@ Pet Owner::makePet(QStringList petData){
  * Uploads all the pets into the database
  * @file Txt file that contains all the pets to be uploaded
 */
-void Owner::uploadPets(string filename){
+bool Owner::uploadPets(string filename){
     QFile file(QString::fromStdString(filename));
     if(!file.open(QIODevice::ReadOnly)) {
         cout << "Error: file not opened!\n";
@@ -342,8 +349,15 @@ void Owner::uploadPets(string filename){
     while(!in.atEnd()) {
         QString line = in.readLine();
         QStringList petData = line.split(","); //loren ipsum, bird1.jpeg bird2.jpeg
-        uploadPet(makePet(petData));
+        Pet p = makePet(petData);
+        if(p.getName() != "") {
+            uploadPet(makePet(petData));
+        } else {
+            return false;
+        }
+
     }
+    return true;
 
     file.close();
 }

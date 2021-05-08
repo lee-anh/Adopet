@@ -99,16 +99,65 @@ private slots:
     void on_parrot_stateChanged(int arg1);
 
 
+    void on_toyDog_toggled(bool checked);
+
+    void on_workingDog_toggled(bool checked);
+
+    void on_nonsportingDog_toggled(bool checked);
+
+    void on_terrierDog_toggled(bool checked);
+
+    void on_houndDog_toggled(bool checked);
+
+    void on_sportingDog_toggled(bool checked);
+
+    void on_herdingDogs_toggled(bool checked);
+
+    void on_lionHeadCaliRabbit_toggled(bool checked);
+
+    void on_angoraRabbit_toggled(bool checked);
+
+    void on_silverFoxRabbit_toggled(bool checked);
+
+    void on_mouseRodent_toggled(bool checked);
+
+    void on_ratRodent_toggled(bool checked);
+
+    void on_guineaPigRodent_toggled(bool checked);
+
+    void on_hamsterRodent_toggled(bool checked);
+
+    void on_gerbilRodent_toggled(bool checked);
+
+    void on_parakeetBird_toggled(bool checked);
+
+    void on_lovebirdBird_toggled(bool checked);
+
+    void on_parrotBird_toggled(bool checked);
+
+    void on_saltwaterFish_toggled(bool checked);
+
+    void on_freshwaterFish_toggled(bool checked);
+
 signals:
     void backToPreference(Preferences p);
 
 private:
     Ui::Quiz *ui;
     int currentPageNum;
+    int lastPage;
     Preferences *pref;
+
+    QWidget *dog;
+    QWidget *cat;
+    QWidget *rabbit;
+    QWidget *rodent;
+    QWidget *fish;
+    QWidget *bird;
 
     void speciesCheckbox(string s, int arg1);
     void breedsCheckbox(string s, int arg1);
+    void breedRadio(string s, bool b);
 };
 
 #endif // QUIZ_H

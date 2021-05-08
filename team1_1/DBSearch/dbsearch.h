@@ -108,6 +108,11 @@ public:
      * \brief randomShuffle the matchingPets
      */
     void randomShuffle();
+    /*!
+     * \brief getConstraints, accessor method for constrains
+     * \return
+     */
+    string getConstraints();
 
 
 
@@ -142,11 +147,7 @@ private:
      */
     int getIndex(string category);
 
-    /*!
-     * \brief getConstraints, accessor method for constrains
-     * \return
-     */
-    string getConstraints();
+
 
 
     //vectors of keywords

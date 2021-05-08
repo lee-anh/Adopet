@@ -45,6 +45,8 @@ private slots:
 
     void on_toOnePet_clicked();
 
+    void on_petName_returnPressed();
+
 private:
     Ui::FindMatchForPets *ui;
 

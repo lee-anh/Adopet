@@ -41,7 +41,8 @@ GUI::GUI(QWidget *parent)
     ui->stackedWidget->addWidget(&myPets);//8
     ui->stackedWidget->addWidget(&myFavsList); //9
     ui->stackedWidget->addWidget(&qz); //10
-    ui->stackedWidget->addWidget(&fmForPets); //10
+    ui->stackedWidget->addWidget(&fmForPets); //11
+    ui->stackedWidget->addWidget(&zp); //12
 
 
     //Set the opening page
@@ -614,4 +615,17 @@ void GUI::on_ownerHelp_clicked()
 {
     ui->stackedWidget->setCurrentIndex(6);
     uinfo.helpOwner();
+}
+
+void GUI::on_password_returnPressed()
+{
+    on_loginButton_clicked();
+}
+
+void GUI::on_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(12);
+    zp.zip("01721", "20");
+    zp.getZipCodes();
+
 }

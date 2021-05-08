@@ -22,6 +22,9 @@ void Quiz::startQuiz(){
     ui->previouspage->setVisible(false);
     ui->nextpage->setVisible(true);
 
+
+    //CURRENTLY OMITTIN DIRECT BREED QUESTIONS
+
     ui->dogs->setVisible(false);
     ui->cats->setVisible(false);
     ui->rabbits->setVisible(false);
@@ -29,7 +32,16 @@ void Quiz::startQuiz(){
     ui->fish->setVisible(false);
     ui->birds->setVisible(false);
 
+    dog = ui->stackedWidget->widget(5);
+    cat = ui->stackedWidget->widget(6);
+    rabbit = ui->stackedWidget->widget(7);
+    rodent = ui->stackedWidget->widget(8);
+    fish = ui->stackedWidget->widget(10);
+    bird = ui->stackedWidget->widget(9);
+
+    ui->stackedWidget->removeWidget(ui->stackedWidget->widget(1));
     currentPageNum = 0;
+    lastPage = 3;
     ui->stackedWidget->setCurrentIndex(currentPageNum);
 
 
@@ -66,7 +78,7 @@ void Quiz::startQuiz(){
 
 void Quiz::on_nextpage_clicked()
 {
-    if(currentPageNum==4){
+    if(currentPageNum==lastPage){
         return;
     }
     if(currentPageNum == 1){
@@ -92,7 +104,7 @@ void Quiz::on_previouspage_clicked()
 void Quiz::displayQuiz(){
     ui->stackedWidget->setCurrentIndex(currentPageNum);
 
-    if (currentPageNum==4){ //last page
+    if (currentPageNum == lastPage){ //last page
         ui->finishquiz->setVisible(true);
         ui->nextpage->setVisible(false);
         ui->previouspage->setVisible(true);
@@ -109,37 +121,86 @@ void Quiz::speciesCheckbox(string s, int arg1){
     // 0 unchecked
     // 1 partially checked
     // 2 checked
+    int page = 0;
+
+
+
     if(arg1 == 2){
         pref->removeSpecies(s);
         pref->addSpecies(s);
 
         if(s == "dog"){
             ui->dogs->setVisible(true);
+            page++;
+            ui->stackedWidget->insertWidget(page, dog);
+            lastPage++;
         } else if (s == "cat"){
             ui->cats->setVisible(true);
+            page++;
+            ui->stackedWidget->insertWidget(page, cat);
+            lastPage++;
         } else if (s == "rabbit"){
             ui->rabbits->setVisible(true);
+            page++;
+            ui->stackedWidget->insertWidget(page, rabbit);
+            lastPage++;
         } else if (s == "rodent"){
             ui->rodents->setVisible(true);
+            page++;
+            ui->stackedWidget->insertWidget(page, rodent);
+            lastPage++;
         } else if (s == "fish"){
             ui->fish->setVisible(true);
+            page++;
+            ui->stackedWidget->insertWidget(page, fish);
+            lastPage++;
         } else if (s == "bird"){
             ui->birds->setVisible(true);
+            page++;
+            ui->stackedWidget->insertWidget(page, bird);
+            lastPage++;
         }
     } else if (arg1 == 0){
         pref->removeSpecies(s);
         if(s == "dog"){
             ui->dogs->setVisible(false);
+            page--;
+            ui->stackedWidget->removeWidget(dog);
+            lastPage--;
         } else if (s == "cat"){
             ui->cats->setVisible(false);
+
+            page--;
+            ui->stackedWidget->removeWidget(cat);
+            lastPage--;
+
         } else if (s == "rabbit"){
             ui->rabbits->setVisible(false);
+
+            page--;
+            ui->stackedWidget->removeWidget(rabbit);
+            lastPage--;
+
         } else if (s == "rodent"){
             ui->rodents->setVisible(false);
+
+            page--;
+            ui->stackedWidget->removeWidget(rodent);
+            lastPage--;
+
         } else if (s == "fish"){
             ui->fish->setVisible(false);
+
+            page--;
+            ui->stackedWidget->removeWidget(fish);
+            lastPage--;
+
         } else if (s == "bird"){
             ui->birds->setVisible(false);
+
+            page--;
+            ui->stackedWidget->removeWidget(bird);
+            lastPage--;
         }
     }
 }
@@ -150,6 +211,15 @@ void Quiz::breedsCheckbox(string s, int arg1){
         pref->removeBreed(s);
         pref->addBreed(s);
     } else if(arg1 == 0){
+        pref->removeBreed(s);
+    }
+}
+
+void Quiz::breedRadio(string s, bool b){
+    if(b == true){
+        pref->removeBreed(s);
+        pref->addBreed(s);
+    } else {
         pref->removeBreed(s);
     }
 }
@@ -492,3 +562,104 @@ void Quiz::on_parrot_stateChanged(int arg1){
     breedsCheckbox("parrot", arg1);
 }
 
+
+void Quiz::on_toyDog_toggled(bool checked)
+{
+    breedRadio("toy", checked);
+}
+
+void Quiz::on_workingDog_toggled(bool checked)
+{
+    breedRadio("working", checked);
+}
+
+void Quiz::on_nonsportingDog_toggled(bool checked)
+{
+    breedRadio("non-sporting", checked);
+}
+
+void Quiz::on_terrierDog_toggled(bool checked)
+{
+    breedRadio("terrier", checked);
+}
+
+void Quiz::on_houndDog_toggled(bool checked)
+{
+    breedRadio("hound", checked);
+}
+
+void Quiz::on_sportingDog_toggled(bool checked)
+{
+    breedRadio("sporting", checked);
+}
+
+void Quiz::on_herdingDogs_toggled(bool checked)
+{
+    breedRadio("herding", checked);
+}
+
+void Quiz::on_lionHeadCaliRabbit_toggled(bool checked)
+{
+    breedRadio("lionhead", checked);
+    breedRadio("californian", checked);
+}
+
+void Quiz::on_angoraRabbit_toggled(bool checked)
+{
+    breedRadio("angora", checked);
+}
+
+void Quiz::on_silverFoxRabbit_toggled(bool checked)
+{
+    breedRadio("silver fox", checked);
+}
+
+void Quiz::on_mouseRodent_toggled(bool checked)
+{
+    breedRadio("mouse", checked);
+}
+
+void Quiz::on_ratRodent_toggled(bool checked)
+{
+    breedRadio("rat", checked);
+}
+
+void Quiz::on_guineaPigRodent_toggled(bool checked)
+{
+    breedRadio("guinea pig", checked);
+}
+
+void Quiz::on_hamsterRodent_toggled(bool checked)
+{
+    breedRadio("hamster", checked);
+}
+
+void Quiz::on_gerbilRodent_toggled(bool checked)
+{
+    breedRadio("gerbil", checked);
+}
+
+void Quiz::on_parakeetBird_toggled(bool checked)
+{
+    breedRadio("parakeet", checked);
+}
+
+void Quiz::on_lovebirdBird_toggled(bool checked)
+{
+    breedRadio("lovebird", checked);
+}
+
+void Quiz::on_parrotBird_toggled(bool checked)
+{
+    breedRadio("parrot", checked);
+}
+
+void Quiz::on_saltwaterFish_toggled(bool checked)
+{
+    breedRadio("saltwater", checked);
+}
+
+void Quiz::on_freshwaterFish_toggled(bool checked)
+{
+    breedRadio("freshwater", checked);
+}

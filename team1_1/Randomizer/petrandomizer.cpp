@@ -31,6 +31,9 @@ PetRandomizer::PetRandomizer(int num){
     srand(time(0));
 }
 
+/*
+ * Opening a database connection
+*/
 void PetRandomizer::openDB(){
     db = QSqlDatabase::addDatabase("QSQLITE");
     string fullName = "../../projectDB.sqlite";
@@ -47,7 +50,11 @@ void PetRandomizer::openDB(){
     }
 }
 
+/*
+ * Initializing vectors that hold information to randomize from.
+*/
 void PetRandomizer::initializeNameVecs(){
+    //static information, arbitrarily chosen
     names = {
         "bailey", "max", "charlie", "buddy", "rocky", "jake", "jack", "toby", "cody",
         "buster", "duke", "cooper", "riley", "harley", "bear", "tucker", "murphy",
@@ -213,11 +220,14 @@ string PetRandomizer::getMediaType(string fileName){
     else return "video";
 }
 
-
+/*
+ * Fills up the media and pets csv files with the randomized data
+*/
 void PetRandomizer::writeToCSV(){
     writeMediaCsv.open("../../csvs/media.csv", ios_base::app);
     writePetsCsv.open("../../csvs/pets.csv", ios_base::app);
     for(int i=1; i<numOfPets+1;i++){
+        //randomizing pet tags
         int rand1 = rand() % (int) names.size();
         string petName = names.at(rand1);
 

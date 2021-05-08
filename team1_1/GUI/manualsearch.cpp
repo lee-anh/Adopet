@@ -23,6 +23,7 @@ ManualSearch::ManualSearch(QWidget *parent) :
     //search->runNewQuery();
     petgal.updatePetVec(search->getPetVec());
     ui->pageLine->setText("Search for pets using search bar and checkboxes!");
+    ui->searchingFor->clear();
     //petgal.displayPets(0);
 
 
@@ -218,6 +219,12 @@ void ManualSearch::on_searchButton_clicked()
     search->search(searchString);
     search->runNewQuery();
 
+    cout << search->getConstraints() << endl;
+
+    ui->searchingFor->setText("Searching for: " + QString::fromStdString(search->getConstraints()));
+
+
+
     /*
     string s = "";
     if(search->searchingFor().size() > 0){
@@ -354,10 +361,14 @@ void ManualSearch::on_surpriseMe_clicked()
 
 void ManualSearch::on_viewModeComboBox_currentIndexChanged(int index)
 {
+
     if(index == 1){
+        ui->searchingFor->clear();
         galleryMode();
     } else if (index == 2){
+        ui->searchingFor->clear();
         listMode();
+
     }
 }
 

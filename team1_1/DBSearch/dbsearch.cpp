@@ -73,8 +73,10 @@ void DBSearch::search(string s){
         }
         cout << word << endl;
     }
+    //adding the word as a search option
     words.push_back(word);
 
+    //checking if the words are keywords (matching pet tags)
     for(int i = 0; i < (int) words.size(); i++){
         s = words[i];
         string attributeToSearch = "";
@@ -251,6 +253,7 @@ string DBSearch::createQuery(){
         "size, temperament, gender, goodWith, shelter, bio FROM pets ";
     int first = 0;
 
+    //setting up the query specifications based on user's search
     for(int i = 0; i < (int) constraints.size(); i++){
         vector<string> temp = constraints[i];
         if(first == 0 && temp.size() > 0){
@@ -284,7 +287,7 @@ string DBSearch::getConstraints(){
     for(int i = 0; i < (int) constraints.size(); i++){
         vector<string> temp = constraints[i];
         for(int j = 0; j < (int) temp.size(); j++){
-            s += temp[j] + "-";
+            s += temp[j] + ", ";
         }
     }
     return s.substr(0, s.size() - 1);
@@ -315,8 +318,7 @@ int DBSearch::queryDB(string qry){
             string shelter = query.value(9).toString().toStdString();
             string bio = query.value(10).toString().toStdString();
 
-
-
+            //creating a pet with the information above
             Pet p = Pet(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
             matchingPets.push_back(p);
             count++;
@@ -353,23 +355,6 @@ void DBSearch::printMatchingVec(){
         cout << matchingPets.at(i).getName() << endl;
     }
 }
-
-/*
-vector<string> DBSearch::searchingFor(){
-    vector<string> toReturn = vector<string>();
-    for(int i = 0; i < (int) constraints.size(); i++){
-        string s = "";
-        if(constraints[i].size() > 0){
-            s = attributes[i] + " - ";
-        }
-        for(int j = 0; i < (int) constraints[i].size(); j++){
-            s = s + constraints[i][j];
-        }
-        toReturn.push_back(s);
-    }
-    return toReturn;
-}
-*/
 
 
 /*!

@@ -126,6 +126,7 @@ vector<pair<Adopter, int>> Matchmaking::fillAdopterResults(string name, int scor
     Adopter adopter = Adopter();
     adopter.setUsername(name);
 
+    //creating an inner db connection, in order to not clash with the one already opened
     QSqlDatabase dbInner = QSqlDatabase::addDatabase("QSQLITE", "matchmakingInnerCxn");
     string fullName = dbName;
     dbInner.setDatabaseName(QString::fromStdString(fullName));
@@ -188,12 +189,12 @@ vector<pair<Adopter, int>> Matchmaking::findBestMatchForPet(Pet p){
         QString s = "SELECT adopterUsername, attribute, attributeType FROM preferences";
         query.exec(s);
         string userName = "";
-        //need to handle score change and userName change
         int currScore = 0;
         while(query.next()){
             string newUserName = query.value(0).toString().toStdString();
             //cout << "Current user in query: " << newUserName << endl;
 
+            //when a new user is encountered, the previous one is stored with their score
             if(userName != newUserName){
                 if(userName != ""){
                     tempAdopterResults = fillAdopterResults(userName, (int)((double)currScore * 100 / 8), tempAdopterResults);
@@ -289,11 +290,11 @@ vector<pair<Adopter, int>> Matchmaking::findMatchesForPet(Pet p){
         QString s = "SELECT * FROM preferences";
         query.exec(s);
         string userName = "";
-        //need to handle score change and userName change
         int currScore = 0;
         while(query.next()){
             string newUserName = query.value(0).toString().toStdString();
 
+            //when a new user is encountered, the previous one is stored with their score
             if(userName != newUserName){
                 if(userName != ""){
                     adopterResults = fillAdopterResults(userName, (int)((double)currScore * 100 / 8), adopterResults);
@@ -402,6 +403,92 @@ vector<pair<Pet, int>> Matchmaking::findMatchesForAdopter(string adopterName){
     sort(petResults.begin(), petResults.end(), customPetResultSort);
     return petResults;
 }
+
+vector<pair<Pet, int>> Matchmaking::findMatchesForAdopterDistance(string adopterName){
+
+    petResults.clear();
+
+
+    Preferences adopterPreference = fillPreferences(adopterName);
+
+    vector<string> zips = parseFile();
+    if(db.open()){
+        QSqlQuery query = QSqlQuery(db);
+        QString s = "SELECT * FROM pets";
+        query.exec(s);
+        while(query.next()){
+            int currScore = 0;
+            Pet pet = makePet(query);
+            int zip = pet.getOwner("../../../../../projectDB.sqlite").getZipCode();
+            string zipString = to_string(zip);
+            for(int i = 0; i < (int) zips.size(); i++){
+                if(zips.at(i) == zipString){
+                    //gathering the scores based on whether it matches user preferences
+                    currScore += getPetScore(adopterPreference.getSpecies(), pet.getSpecies());
+                    currScore += getPetScore(adopterPreference.getBreed(), pet.getBreed());
+                    currScore += getPetScore(adopterPreference.getAge(), pet.getAge());
+                    currScore += getPetScore(adopterPreference.getTemperament(), pet.getTemperament());
+                    currScore += getPetScore(adopterPreference.getSize(), pet.getSize());
+                    currScore += getPetScore(adopterPreference.getGoodWith(), pet.getGoodWith());
+                    currScore += getPetScore(adopterPreference.getShelter(), pet.getShelter());
+                    currScore += getPetScore(adopterPreference.getGender(), pet.getGender());
+
+                    petResults.push_back(make_pair(pet, (int)((double)currScore * 100 / 8)));
+                }
+            }
+
+        }
+    }
+    sort(petResults.begin(), petResults.end(), customPetResultSort);
+    return petResults;
+}
+
+
+vector<string> Matchmaking::parseFile(){
+
+    vector<string> zips;
+
+
+    QString os = QSysInfo::productVersion();
+
+    QString filename;
+    if(os == "10.16"){
+        filename = "../../../../../csvs/zip.txt";
+
+    } else {
+        //default picture
+        filename = "../../csvs/zip.txt";
+
+    }
+    QFile file(filename);
+    if(!file.open(QIODevice::ReadOnly)){
+        cerr << "Error: file not opened" << endl;
+    }
+    QTextStream in(&file);
+
+    int lineNumber = 0;
+    while(!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList zipOutput = line.split(",");
+        if(lineNumber != 0){
+            string zip = zipOutput.at(0).toStdString();
+            zips.push_back(zip);
+        }
+        lineNumber++;
+
+    }
+
+    file.close();
+    for(int i = 0; i < (int) zips.size(); i++){
+        cout << "From zips" << zips.at(i) << endl;
+    }
+
+
+
+    return zips;
+
+}
+
 
 /*
  * Prints out the pet result - sorted vector of animals based on score

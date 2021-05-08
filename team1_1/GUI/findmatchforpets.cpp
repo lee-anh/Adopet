@@ -319,3 +319,8 @@ void FindMatchForPets::on_toOnePet_clicked()
 {
     forOnePet(currentOwner);
 }
+
+void FindMatchForPets::on_petName_returnPressed()
+{
+    on_searchOne_clicked();
+}
