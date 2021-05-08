@@ -69,8 +69,8 @@ TEST(general, ADDSPECIES) {
     p->addSpecies(c);
     string check = p->getSpecies().at(0);
     string check2 = p->getSpecies().at(1);
-    ASSERT_EQ(check, "dog");
-    ASSERT_EQ(check2, "cat");
+    EXPECT_EQ(check, "dog");
+    EXPECT_EQ(check2, "cat");
 
 }
 
@@ -83,10 +83,10 @@ TEST(general, REMOVESPECIESTRUE) {
     p->addSpecies("turtle");
 
 
-    ASSERT_EQ(p->removeSpecies("cat"), true);
+    EXPECT_EQ(p->removeSpecies("cat"), true);
 
     //make sure cat has been removed
-    ASSERT_EQ(p->getSpecies().at(1), "turtle");
+    EXPECT_EQ(p->getSpecies().at(1), "turtle");
 
 }
 
@@ -97,7 +97,7 @@ TEST(general, REMOVESPECIESFALSE) {
     p->addSpecies("dog");
     p->addSpecies("cat");
 
-    ASSERT_EQ(p->removeSpecies("turtle"), false);
+    EXPECT_EQ(p->removeSpecies("turtle"), false);
 
 }
 
@@ -108,8 +108,8 @@ TEST(general, ADDBREED) {
     p->addBreed("boston terrier");
     string check = p->getBreed().at(0);
     string check2 = p->getBreed().at(1);
-    ASSERT_EQ(check, "golden retriever");
-    ASSERT_EQ(check2, "boston terrier");
+    EXPECT_EQ(check, "golden retriever");
+    EXPECT_EQ(check2, "boston terrier");
 
 }
 
@@ -122,10 +122,10 @@ TEST(general, REMOVEBREEDTRUE) {
     p->addBreed("chiwawa");
 
 
-    ASSERT_EQ(p->removeBreed("golden retriever"), true);
+    EXPECT_EQ(p->removeBreed("golden retriever"), true);
 
     //make sure boston terrier has been removed
-    ASSERT_EQ(p->getBreed().at(0), "boston terrier");
+    EXPECT_EQ(p->getBreed().at(0), "boston terrier");
 
 }
 
@@ -137,7 +137,7 @@ TEST(general, REMOVEBREEDFALSE) {
     p->addBreed("boston terrier");
     p->addBreed("chiwawa");
 
-    ASSERT_EQ(p->removeBreed("maine coon"), false);
+    EXPECT_EQ(p->removeBreed("maine coon"), false);
 
 }
 
@@ -150,8 +150,8 @@ TEST(general, ADDAGE) {
     p->addAge("young");
     p->addAge("old");
 
-    ASSERT_EQ(p->getAge().at(0), "young");
-    ASSERT_EQ(p->getAge().at(1), "old");
+    EXPECT_EQ(p->getAge().at(0), "young");
+    EXPECT_EQ(p->getAge().at(1), "old");
 
 }
 
@@ -163,10 +163,10 @@ TEST(general, REMOVEAGETRUE) {
     p->addAge("young");
     p->addAge("adult");
 
-    ASSERT_EQ(p->removeAge("adult"), true);
+    EXPECT_EQ(p->removeAge("adult"), true);
 
     //make sure cat has been removed
-    ASSERT_EQ(p->getAge().size(), 2);
+    EXPECT_EQ(p->getAge().size(), 2);
 
 }
 
@@ -178,7 +178,7 @@ TEST(general, REMOVEAGEFALSE) {
     p->addAge("young");
     p->addAge("adult");
 
-    ASSERT_EQ(p->removeAge("dead"), false);
+    EXPECT_EQ(p->removeAge("dead"), false);
 
 }
 
@@ -188,8 +188,8 @@ TEST(general, ADDSIZE) {
     p->addSize("small");
     p->addSize("large");
 
-    ASSERT_EQ(p->getSize().at(0), "small");
-    ASSERT_EQ(p->getSize().at(1), "large");
+    EXPECT_EQ(p->getSize().at(0), "small");
+    EXPECT_EQ(p->getSize().at(1), "large");
 
 }
 
@@ -201,10 +201,10 @@ TEST(general, REMOVEADDTRUE) {
     p->addSize("large");
     p->addSize("medium");
 
-    ASSERT_EQ(p->removeSize("large"), true);
+    EXPECT_EQ(p->removeSize("large"), true);
 
     //make sure cat has been removed
-    ASSERT_EQ(p->getSize().size(), 2);
+    EXPECT_EQ(p->getSize().size(), 2);
 
 }
 
@@ -216,7 +216,7 @@ TEST(general, REMOVESIZEFALSE) {
     p->addSize("large");
     p->addSize("medium");
 
-    ASSERT_EQ(p->removeSize("mini"), false);
+    EXPECT_EQ(p->removeSize("mini"), false);
 
 }
 
@@ -226,8 +226,8 @@ TEST(general, ADDTEMPERAMENT) {
     p->addTemperament("happy");
     p->addTemperament("hyper");
 
-    ASSERT_EQ(p->getTemperament().at(0), "happy");
-    ASSERT_EQ(p->getTemperament().at(1), "hyper");
+    EXPECT_EQ(p->getTemperament().at(0), "happy");
+    EXPECT_EQ(p->getTemperament().at(1), "hyper");
 
 }
 
@@ -239,10 +239,10 @@ TEST(general, REMOVETEMPERAMENTTRUE) {
     p->addTemperament("hyper");
     p->addTemperament("timid");
 
-    ASSERT_EQ(p->removeTemperament("happy"), true);
+    EXPECT_EQ(p->removeTemperament("happy"), true);
 
     //make sure cat has been removed
-    ASSERT_EQ(p->getTemperament().size(), 2);
+    EXPECT_EQ(p->getTemperament().size(), 2);
 
 }
 
@@ -254,7 +254,7 @@ TEST(general, REMOVETEMPERAMENTFALSE) {
     p->addTemperament("hyper");
     p->addTemperament("timid");
 
-    ASSERT_EQ(p->removeTemperament("annoying"), false);
+    EXPECT_EQ(p->removeTemperament("annoying"), false);
 
 }
 
@@ -263,7 +263,7 @@ TEST(general, SETGENDER) {
 
     Preferences *p = new Preferences();
     p->addGender("female");
-    ASSERT_EQ(p->getGender().at(0), "female");
+    EXPECT_EQ(p->getGender().at(0), "female");
 
 }
 
@@ -278,18 +278,76 @@ TEST(general, ADOPTERSETTERS) {
     a->setEmailAddress("francis@gmail.com");
     a->setZipCode(55555);
 
-    ASSERT_EQ(a->getUsername(), "m.francis");
-    ASSERT_EQ(a->getPassword(), "scaryfairy");
-    ASSERT_EQ(a->getFirstName(), "Millie");
-    ASSERT_EQ(a->getLastName(), "Francis");
-    ASSERT_EQ(a->getEmailAddress(), "francis@gmail.com");
-    ASSERT_EQ(a->getZipCode(), 55555);
+    EXPECT_EQ(a->getUsername(), "m.francis");
+    EXPECT_EQ(a->getPassword(), "scaryfairy");
+    EXPECT_EQ(a->getFirstName(), "Millie");
+    EXPECT_EQ(a->getLastName(), "Francis");
+    EXPECT_EQ(a->getEmailAddress(), "francis@gmail.com");
+    EXPECT_EQ(a->getZipCode(), 55555);
 
 
 }
 
+TEST(general, FILLPREF){
+    Adopter *a = new Adopter();
+    a->fillPreference("dog", "species");
+    a->fillPreference("beagle", "breed");
+    a->fillPreference("medium", "size");
+    a->fillPreference("friendly", "temperament");
+    a->fillPreference("male","gender");
+    a->fillPreference("kids","goodWith");
+    a->fillPreference("PetsShelter","shelter");
+    a->fillPreference("young","age");
 
+    Preferences p = a->getPreferences();
+    EXPECT_EQ(p.getAge().at(0),"young");
+    EXPECT_EQ(p.getTemperament().at(0),"friendly");
+    EXPECT_EQ(p.getBreed().at(0),"beagle");
+    EXPECT_EQ(p.getShelter().at(0),"petsshelter");
+    EXPECT_EQ(p.getSpecies().at(0),"dog");
+    EXPECT_EQ(p.getGoodWith().at(0),"kids");
+    EXPECT_EQ(p.getGender().at(0),"male");
+}
 
+TEST(general, REMMOVEPREF){
+    Adopter *a = new Adopter();
+    a->fillPreference("dog", "species");
+    a->fillPreference("beagle", "breed");
+    a->fillPreference("medium", "size");
+    a->fillPreference("friendly", "temperament");
+    a->fillPreference("male","gender");
+    a->fillPreference("kids","goodWith");
+    a->fillPreference("petsshelter","shelter");
+    a->fillPreference("young","age");
+
+    a->removePreference("male","gender");
+    a->removePreference("petsshelter","shelter");
+    //Case sensitive issues:
+    //Everything lowercase except for username, password and bio
+
+    Preferences p = a->getPreferences();
+    EXPECT_EQ(p.getGender().size(),0);
+    EXPECT_EQ(p.getShelter().size(),0);
+}
+
+TEST(general, ADDPREF){
+    Adopter *a = new Adopter();
+    a->fillPreference("dog", "species");
+    a->fillPreference("beagle", "breed");
+    a->fillPreference("medium", "size");
+    a->fillPreference("friendly", "temperament");
+    a->fillPreference("male","gender");
+    a->fillPreference("kids","goodWith");
+    a->fillPreference("PetsShelter","shelter");
+    a->fillPreference("young","age");
+
+    a->addPreference("female","gender");
+    a->addPreference("PetsShelter","shelter");
+
+    Preferences p = a->getPreferences();
+    EXPECT_EQ(p.getGender().size(),2);
+    EXPECT_EQ(p.getShelter().size(),2);
+}
 
     int main(int argc, char **argv) {
 
