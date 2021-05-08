@@ -126,6 +126,7 @@ vector<pair<Adopter, int>> Matchmaking::fillAdopterResults(string name, int scor
     Adopter adopter = Adopter();
     adopter.setUsername(name);
 
+    //creating an inner db connection, in order to not clash with the one already opened
     QSqlDatabase dbInner = QSqlDatabase::addDatabase("QSQLITE", "matchmakingInnerCxn");
     string fullName = dbName;
     dbInner.setDatabaseName(QString::fromStdString(fullName));
@@ -188,12 +189,12 @@ vector<pair<Adopter, int>> Matchmaking::findBestMatchForPet(Pet p){
         QString s = "SELECT adopterUsername, attribute, attributeType FROM preferences";
         query.exec(s);
         string userName = "";
-        //need to handle score change and userName change
         int currScore = 0;
         while(query.next()){
             string newUserName = query.value(0).toString().toStdString();
             //cout << "Current user in query: " << newUserName << endl;
 
+            //when a new user is encountered, the previous one is stored with their score
             if(userName != newUserName){
                 if(userName != ""){
                     tempAdopterResults = fillAdopterResults(userName, (int)((double)currScore * 100 / 8), tempAdopterResults);
@@ -289,11 +290,11 @@ vector<pair<Adopter, int>> Matchmaking::findMatchesForPet(Pet p){
         QString s = "SELECT * FROM preferences";
         query.exec(s);
         string userName = "";
-        //need to handle score change and userName change
         int currScore = 0;
         while(query.next()){
             string newUserName = query.value(0).toString().toStdString();
 
+            //when a new user is encountered, the previous one is stored with their score
             if(userName != newUserName){
                 if(userName != ""){
                     adopterResults = fillAdopterResults(userName, (int)((double)currScore * 100 / 8), adopterResults);

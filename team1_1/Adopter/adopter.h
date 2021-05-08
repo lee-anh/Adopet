@@ -120,10 +120,6 @@ public:
      */
     void setZipCode(int zip);
 
-
-
-
-
     /*!
      * \brief fillPreference fills the passed preference
      *  onto the adopter's preference list

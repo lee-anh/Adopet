@@ -4,7 +4,7 @@
 
 using namespace std;
 
-
+//Printing out each preference
 void printPreference(vector<string> v){
     for(int i = 0; i < (int) v.size(); i++){
         cout << i << ": " << v.at(i) << endl;
@@ -12,6 +12,7 @@ void printPreference(vector<string> v){
     cout << endl;
 }
 
+//Printing out the preference list
 void printPreferences(Preferences p){
     cout << "Age: " << endl;
     printPreference(p.getAge());
@@ -38,6 +39,7 @@ void printPreferences(Preferences p){
 }
 
 int main(){
+    //testing with an arbitrarily chosen Adopter: user1
     Adopter adopter = Adopter();
     adopter.setUsername("user1");
     adopter.fillPreferences();

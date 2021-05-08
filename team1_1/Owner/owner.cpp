@@ -236,6 +236,7 @@ void Owner::updatePet(Pet p){
 void Owner::uploadPet(Pet p){
     p.setID(lastPetID + 1);
 
+    //using given pet information in the query
     QString s1 = "INSERT INTO pets(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio) VALUES(";
     s1 += QString::number(p.getID()) + ", \"";
     s1 += QString::fromStdString(p.getName()) + "\", \"";
@@ -277,10 +278,12 @@ void Owner::uploadPet(Pet p){
  * @param p Pet to be removed
 */
 void Owner::removePet(Pet p){
+    //removing from pets
     QString s1 = "DELETE FROM pets WHERE id = ";
     s1 += QString::number(p.getID()) + "";
     //cout << "query is: " << s1.toStdString() << endl;
 
+    //removing from media
     QString s2 = "DELETE FROM media WHERE petID = ";
     s2 += QString::number(p.getID()) + "";
     //cout << "query is: " << s2.toStdString() << endl;
@@ -303,6 +306,7 @@ void Owner::removePet(Pet p){
 */
 
 Pet Owner::makePet(QStringList petData){
+    //checking if the passed qstringlist contains the correct amount of fields
     if(petData.size() != 10) {
         cout << "File content is not formatted correctly! A certain pet field is missing" << endl;
         return Pet();

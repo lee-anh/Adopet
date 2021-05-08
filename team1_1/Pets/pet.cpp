@@ -59,107 +59,200 @@ Pet::Pet(int petId, string petName, string petSpecies, string petBreed,
 
 Pet::~Pet(){
     //temperament.clear();
-
 }
 
-//imaters and setters
+/*
+ * Accessor method for pet id
+ * @return pet id
+*/
 int Pet::getID(){
     return id;
 }
 
+/*
+ * Setter method for pet id
+ * @param pet id
+*/
 void Pet::setID(int petID){
     id = petID;
 }
 
+/*
+ * Accessor method for pet name
+ * @return pet name
+*/
 string Pet::getName(){
     return name;
 }
 
+/*
+ * Setter method for pet name
+ * @param pet name
+*/
 void Pet::setName(string n){
     name = n;
 }
 
+/*
+ * Accessor method for pet species
+ * @return pet species
+*/
 string Pet::getSpecies(){
     return species;
 }
 
+/*
+ * Setter method for pet species
+ * @param pet species
+*/
 void Pet::setSpecies(string sp){
     species = sp;
 }
 
+/*
+ * Accessor method for pet breed
+ * @return pet breed
+*/
 string Pet::getBreed(){
     return breed;
 }
 
+/*
+ * Setter method for pet breed
+ * @param pet breed
+*/
 void Pet::setBreed(string b){
     breed = b;
 }
 
+/*
+ * Accessor method for pet age
+ * @return pet age
+*/
 string Pet::getAge(){
     return age;
 }
 
+/*
+ * Setter method for pet age
+ * @param pet age
+*/
 void Pet::setAge(string a){
     age = a;
 }
 
+/*
+ * Accessor method for pet size
+ * @return pet size
+*/
 string Pet::getSize(){
     return size;
 }
 
+/*
+ * Setter method for pet size
+ * @param pet size
+*/
 void Pet::setSize(string sz){
     size = sz;
 }
 
+/*
+ * Accessor method for pet temperament
+ * @return pet temperament
+*/
 string Pet::getTemperament(){
     return temperament;
 }
 
+/*
+ * Setter method for pet temperament
+ * @param pet temperament
+*/
 void Pet::setTemperament(string t){
     temperament = t;
 }
 
-
+/*
+ * Accessor method for pet gender
+ * @return pet gender
+*/
 string Pet::getGender(){
     return gender;
 }
 
+/*
+ * Setter method for pet gender
+ * @param pet gender
+*/
 void Pet::setGender(string g){
     gender = g;
 }
 
-
+/*
+ * Accessor method for pet's goodWith attribute
+ * @return who the pet is good with
+*/
 string Pet::getGoodWith(){
     return goodWith;
 }
+
+/*
+ * Setter method for pet good with
+ * @param pet good with
+*/
 void Pet::setGoodWith(string gw){
     goodWith = gw;
 }
 
+/*
+ * Accessor method for pet's current shelter (owner)
+ * @return pet's current shelter
+*/
 string Pet::getShelter(){
     return shelter;
 }
 
+/*
+ * Setter method for pet shelter
+ * @param pet shelter
+*/
 void Pet::setShelter(string sh){
     shelter = sh;
 }
 
+/*
+ * Accessor method for pet's bio
+ * @return pet's bio
+*/
 string Pet::getBio(){
     return bio;
 }
 
+/*
+ * Setter method for pet bio
+ * @param pet bio
+*/
 void Pet::setBio(string bi){
     bio = bi;
 }
 
 
-int Pet::getPetID(){
-    return id;
-}
+/*
+ * Accessor method for pet id
+ * @return pet id
+*/
+//int Pet::getPetID(){
+  //  return id;
+//}
 
-void Pet::setPetID(int id){
-    this->id = id;
-}
+/*
+ * Setter method for pet id
+ * @param pet id
+*/
+//void Pet::setPetID(int id){
+  //  this->id = id;
+//}
 
 /*
  * Loops through the database and sets the pets media files

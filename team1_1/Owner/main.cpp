@@ -3,6 +3,10 @@
 
 using namespace std;
 
+/*
+ * Prints out the pets with their information given a pet list
+ * @param p List of pets
+*/
 void printPets(vector<Pet> p){
     for(int i = 0; i < (int) p.size(); i++){
         cout << p.at(i).getID() << ": " << p.at(i).getName() << endl;
