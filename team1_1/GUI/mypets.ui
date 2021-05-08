@@ -34,7 +34,7 @@
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="gallery">
       <layout class="QGridLayout" name="gridLayout_5">
@@ -744,7 +744,7 @@
           <property name="geometry">
            <rect>
             <x>0</x>
-            <y>-65</y>
+            <y>0</y>
             <width>859</width>
             <height>434</height>
            </rect>
@@ -1361,6 +1361,13 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
         </layout>
        </item>
        <item>
+        <widget class="QLabel" name="label_19">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://docs.google.com/spreadsheets/d/1C7GgwQls9a7Rxzte0Iz9U1Ei3gRmg5iuxAwXiLrIYPc/edit?usp=sharing &quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0068da;&quot;&gt;Bulk Upload Template &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QTableWidget" name="tableWidget">
          <row>
           <property name="text">
@@ -1596,6 +1603,21 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
             </spacer>
            </item>
           </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="uploadMessage">
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_13">

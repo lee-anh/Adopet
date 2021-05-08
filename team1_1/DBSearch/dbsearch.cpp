@@ -284,7 +284,7 @@ string DBSearch::getConstraints(){
     for(int i = 0; i < (int) constraints.size(); i++){
         vector<string> temp = constraints[i];
         for(int j = 0; j < (int) temp.size(); j++){
-            s += temp[j] + "-";
+            s += temp[j] + ", ";
         }
     }
     return s.substr(0, s.size() - 1);

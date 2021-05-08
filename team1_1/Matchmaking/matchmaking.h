@@ -26,6 +26,10 @@ public:
     Preferences fillPreferences(string adopterName);                                    //searches the DB and gets the preference of the passed user
     Preferences fillPreference(Preferences p, string attribute, string attributeType);         //sets a specific preference based on attribute type and attribute
     vector<pair<Pet, int>> findMatchesForAdopter(string adopterName);                                      //finds the matching pets based on an adopter user
+
+
+
+    vector<pair<Pet, int>> findMatchesForAdopterDistance(string adopterName);
     vector<pair<Adopter, int>> fillAdopterResults(string name, int score, vector<pair<Adopter, int>> res);    //adds in an adopter with the given information to the adopter results vector
     void showPetResults();                                                               //prints out the list of matching pets based on score
     void showPetResults(int amount);                                                     //prints out the list of matching pets based on score in the amount shown
@@ -45,6 +49,8 @@ private:
     vector<Pet> allPets;
     QSqlDatabase db;
 
+
+    vector<string> parseFile();
     string username;
     string dbName;
 };

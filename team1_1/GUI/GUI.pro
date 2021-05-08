@@ -44,7 +44,8 @@ SOURCES += \
     userinfo.cpp \
     ../Authentication/authentication.cpp \
     ../Owner/owner.cpp \
-    videoplayer.cpp
+    videoplayer.cpp \
+    zip.cpp
 
 
 HEADERS += \
@@ -72,7 +73,8 @@ HEADERS += \
     userinfo.h \
     ../Authentication/authentication.h \
     ../Owner/owner.h \
-    videoplayer.h
+    videoplayer.h \
+    zip.h
 
 
 
@@ -92,7 +94,8 @@ FORMS += \
     takequiz.ui \
     unsavepet.ui \
     userinfo.ui \
-    videoplayer.ui
+    videoplayer.ui \
+    zip.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

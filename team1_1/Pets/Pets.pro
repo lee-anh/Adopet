@@ -6,6 +6,7 @@ QT += core
 QT += sql
 QT += network
 
+
 SOURCES += \
         main.cpp \
         pet.cpp \

@@ -604,6 +604,8 @@ void MyPets::on_videoFile_textChanged(const QString &arg1)
 void MyPets::on_toBulkUpload_clicked()
 {
     ui->stackedWidget->setCurrentIndex(3);
+    ui->fileName->clear();
+    ui->uploadMessage->clear();
 }
 
 void MyPets::on_pushButton_3_clicked()
@@ -625,7 +627,13 @@ void MyPets::on_bulkUpload_2_clicked()
         filename = "../../csvs/" + ui->fileName->text().toStdString();
 
     }
-    owner->uploadPets(filename);
+    bool b = owner->uploadPets(filename);
+
+    if(b == true){
+        ui->uploadMessage->setText("Pets were successfully uploaded!");
+    } else {
+        ui->uploadMessage->setText("Oops, there was an error. Please make sure the file format was correct");
+    }
 }
 
 void MyPets::on_prev1_clicked()
