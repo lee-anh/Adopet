@@ -3,16 +3,17 @@
 #include "../Matchmaking/matchmaking.h"
 
 // The fixture for testing class Foo.
-class FooTest : public ::testing::Test{
+class MatchmakingTest : public ::testing::Test{
 
 protected:
 
     Matchmaking m;
+    Matchmaking* mk = new Matchmaking("../../testDB.sqlite", "user1");
 
-    FooTest(){
+    MatchmakingTest(){
     // You can do set-up work for each test here.
     }
-    virtual ~FooTest(){
+    virtual ~MatchmakingTest(){
 
         // You can do clean-up work that doesn't throw exceptions here.
     }
@@ -37,14 +38,14 @@ protected:
 
 
 //Testing if the pets vector is fille correctly with pets in the database
-TEST_F(FooTest, fillPets){
-    ASSERT_EQ(m.getAllPets().size(), 0) << "The vector is empty in the beginning";
+TEST_F(MatchmakingTest, fillPets){
+    EXPECT_EQ(m.getAllPets().size(), 0) << "The vector is empty in the beginning";
     m.fillPets();
-    ASSERT_NE(m.getAllPets().size(), 0) << "The vector is no longer empty after fillPets()";
+    EXPECT_NE(m.getAllPets().size(), 0) << "The vector is no longer empty after fillPets()";
 }
 
 //Testing if the <Pet, integer> pair sorter algorithm works properly
-TEST_F(FooTest, PetSorting){
+TEST_F(MatchmakingTest, PetSorting){
     vector<pair<Pet, int>> list1;
     vector<pair<Pet, int>> sortedList1;
 
@@ -62,18 +63,18 @@ TEST_F(FooTest, PetSorting){
     sortedList1.push_back(make_pair(p3, i3));
     sortedList1.push_back(make_pair(p1, i1));
 
-    ASSERT_EQ(list1.size(), sortedList1.size()) << "The vectors have the same size";
-    ASSERT_NE(list1.at(0).second, sortedList1.at(0).second) << "The first element of the vectors is differnt";
+    EXPECT_EQ(list1.size(), sortedList1.size()) << "The vectors have the same size";
+    EXPECT_NE(list1.at(0).second, sortedList1.at(0).second) << "The first element of the vectors is differnt";
 
     sort(list1.begin(), list1.end(), m.customPetResultSort);
 
     for (int i = 0; i < (int)list1.size(); i++) {
-       ASSERT_EQ(list1.at(i).second, sortedList1.at(i).second) << "Both vectors have the same element at index " << i;
+       EXPECT_EQ(list1.at(i).second, sortedList1.at(i).second) << "Both vectors have the same element at index " << i;
     }
 }
 
 //Testing if the <Adopter, integer> pair sorter algorithm works properly
-TEST_F(FooTest, AdopterSorting){
+TEST_F(MatchmakingTest, AdopterSorting){
     vector<pair<Adopter, int>> list2;
     vector<pair<Adopter, int>> sortedList2;
 
@@ -92,20 +93,20 @@ TEST_F(FooTest, AdopterSorting){
     sortedList2.push_back(make_pair(a3, i3));
     sortedList2.push_back(make_pair(a2, i2));
 
-    ASSERT_EQ(list2.size(), sortedList2.size()) << "The vectors have the same size";
-    ASSERT_NE(list2.at(2).second, sortedList2.at(2).second) << "The first element of the vectors is differnt";
+    EXPECT_EQ(list2.size(), sortedList2.size()) << "The vectors have the same size";
+    EXPECT_NE(list2.at(2).second, sortedList2.at(2).second) << "The first element of the vectors is differnt";
 
     sort(list2.begin(), list2.end(), m.customAdopterResultSort);
 
     for(int i = 0; i < (int)list2.size(); i++) {
-       ASSERT_EQ(list2.at(i).second, sortedList2.at(i).second) << "Both vectors have the same element at index " << i;
+       EXPECT_EQ(list2.at(i).second, sortedList2.at(i).second) << "Both vectors have the same element at index " << i;
     }
 }
 
 //Testing if makePet() works properly
-TEST_F(FooTest, makePet){
+TEST_F(MatchmakingTest, makePet){
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "matchmakingTestCxn");
-    string fullName = "../../projectDB.sqlite";
+    string fullName = "../../testDB.sqlite";
     db.setDatabaseName(QString::fromStdString(fullName));
     if(db.open()){
         QSqlQuery query = QSqlQuery(db);
@@ -125,16 +126,16 @@ TEST_F(FooTest, makePet){
 
         Pet pet = m.makePet(query);
 
-        ASSERT_EQ(name, pet.getName()) << "Checking the pet name is correct";
-        ASSERT_EQ(species, pet.getSpecies()) << "Checking the pet species is correct";
-        ASSERT_EQ(breed, pet.getBreed()) << "Checking the pet breed is correct";
-        ASSERT_EQ(age, pet.getAge()) << "Checking the pet age is correct";
-        ASSERT_EQ(size, pet.getSize()) << "Checking the pet size is correct";
-        ASSERT_EQ(temperament, pet.getTemperament()) << "Checking the pet temperament is correct";
-        ASSERT_EQ(gender, pet.getGender()) << "Checking the pet gender is correct";
-        ASSERT_EQ(goodWith, pet.getGoodWith()) << "Checking the pet goodWith is correct";
-        ASSERT_EQ(shelter, pet.getShelter()) << "Checking the pet shelter is correct";
-        ASSERT_EQ(bio, pet.getBio()) << "Checking the pet bio is correct";
+        EXPECT_EQ(name, pet.getName()) << "Checking the pet name is correct";
+        EXPECT_EQ(species, pet.getSpecies()) << "Checking the pet species is correct";
+        EXPECT_EQ(breed, pet.getBreed()) << "Checking the pet breed is correct";
+        EXPECT_EQ(age, pet.getAge()) << "Checking the pet age is correct";
+        EXPECT_EQ(size, pet.getSize()) << "Checking the pet size is correct";
+        EXPECT_EQ(temperament, pet.getTemperament()) << "Checking the pet temperament is correct";
+        EXPECT_EQ(gender, pet.getGender()) << "Checking the pet gender is correct";
+        EXPECT_EQ(goodWith, pet.getGoodWith()) << "Checking the pet goodWith is correct";
+        EXPECT_EQ(shelter, pet.getShelter()) << "Checking the pet shelter is correct";
+        EXPECT_EQ(bio, pet.getBio()) << "Checking the pet bio is correct";
 
 
         db.removeDatabase(db.connectionName());
@@ -143,16 +144,54 @@ TEST_F(FooTest, makePet){
 }
 
 //Testing if fillPreference() works properly
-TEST_F(FooTest, fillPreference){
+TEST_F(MatchmakingTest, fillPreference){
     Preferences p = Preferences();
 
     p = m.fillPreference(p, "dog", "species");
     p = m.fillPreference(p, "fish", "species");
     p = m.fillPreference(p, "cat", "species");
     p = m.fillPreference(p, "male", "gender");
+    p = m.fillPreference(p, "humane society", "shelter");
 
-    ASSERT_EQ(p.getGender().at(0), "male") << "Checking that the gender preference is set correctly";
-    ASSERT_EQ(p.getSpecies().size(), 3) << "Checking that the size of the species preference is set correctly";
+    EXPECT_EQ(p.getGender().at(0), "male") << "Checking that the gender preference is set correctly";
+    EXPECT_EQ(p.getSpecies().size(), 3) << "Checking that the size of the species preference is set correctly";
+}
+
+TEST_F(MatchmakingTest, fillPreferenceAdpt){
+    Preferences p = Preferences();
+
+    p = m.fillPreferences("user2");
+
+    EXPECT_EQ(p.getGender().at(0), "male") << "Checking that the gender preference is set correctly";
+    EXPECT_EQ(p.getGoodWith().at(0), "animals") << "Checking that the size of the species preference is set correctly";
+}
+
+TEST_F(MatchmakingTest, petMatches){
+    mk->openDB();
+    mk->fillPets();
+    vector<pair<Adopter,int>> result = mk->findMatchesForPet(1);
+    EXPECT_EQ(result.at(0).first.getUsername(),"user2") << "Should be user 2";
+}
+
+TEST_F(MatchmakingTest, petBestMatch){
+    mk->openDB();
+    mk->fillPets();
+    vector<pair<Adopter,int>> result = mk->findBestMatchForPet(mk->getAllPets().at(0));
+    EXPECT_EQ(result.at(0).first.getUsername(),"user2") << "Should be user 2";
+}
+
+TEST_F(MatchmakingTest, petShelterMatch){
+    mk->openDB();
+    mk->fillPets();
+    vector<pair<Pet, pair<Adopter, int>>> result = mk->findMatchesForPets("humane society");
+    EXPECT_EQ(result.at(0).second.first.getUsername(), "user2") << "Should be user 2";
+}
+
+TEST_F(MatchmakingTest, adopterMatch){
+    mk->openDB();
+    mk->fillPets();
+    vector<pair<Pet, int>> result = mk->findMatchesForAdopter("user2");
+    EXPECT_EQ(result.at(0).first.getID(), 47) << "Should be petID 47";
 }
 
 int main(int argc, char **argv){

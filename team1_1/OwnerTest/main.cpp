@@ -5,14 +5,16 @@
 
 
 // The fixture for testing class Foo.
-class FooTest : public ::testing::Test{
+class OwnerTests : public ::testing::Test{
 
 protected:
-    /*
-    FooTest(){
+    Owner* owner;
+    Pet* pet;
+
+    OwnerTests(){
         // You can do set-up work for each test here.
     }
-    virtual ~FooTest(){
+    virtual ~OwnerTests(){
         // You can do clean-up work that doesn't throw exceptions here.
     }
     // If the constructor and destructor are not enough for setting up
@@ -21,6 +23,8 @@ protected:
     virtual void SetUp(){
         // Code here will be called immediately after the constructor (right
         // before each test).
+        owner = new Owner("../../testDB.sqlite", "generic_owner", "111 Quad Drive", 18042, 123, "abc@xyz");
+        pet = new Pet("name1", "species1", "breed1", "age1", "size1", "temp1", "gender1", "gw1", "sh1", "bio1");
     }
 
     virtual void TearDown(){
@@ -29,7 +33,7 @@ protected:
     }
     // Objects declared here can be used by all tests in the test case for Foo.
 
-    */
+
 };
 
 //Testing object setters and getters
@@ -63,36 +67,27 @@ TEST(unitTest, fillPets){
     ASSERT_NE(after.size(), 0) << after.size() << " should not be 0";
 }
 
-/*
+
 //Testing the function of uploading a single pet onto the database
-TEST(unitTest, uploadPet){
-    Owner o1;
-    o1.setName("best friends");
-
-    o1.fillPets();
-    int petAmountBefore = o1.getPets().size();
-
-    Owner o2;
-    o2.setName("best friends");
-    Pet p = Pet("qwerty", "dog", "newBreed", "adult", "large", "happy", "male", "kids", "best friends", "loren ipsum");
-    o2.uploadPet(p);
-
-    o2.fillPets();
-    int petAmountAfter = o2.getPets().size();
-
-    ASSERT_EQ(petAmountAfter, petAmountBefore + 1) << "Pet amount should increase after uploading a pet";
-    cout << "Pet amount before: " << petAmountBefore << endl;
-    cout << "Pet amount after: " << petAmountAfter << endl;
+TEST_F(OwnerTests, uploadPet){
+    owner->uploadPet(*pet);
 }
-*/
 
+TEST_F(OwnerTests, constructors){
+    Owner* o1 = new Owner("John Doe", "111 Quad Drive", 12345, 1234567890, "example@gmail.com");
+    EXPECT_EQ(o1->getAddress(), "111 Quad Drive") << o1->getAddress() << " should be 111 Quad Drive";
+    EXPECT_EQ(o1->getEmail(), "example@gmail.com") << o1->getEmail() << " should be example@gmail.com";
+    EXPECT_EQ(o1->getName(), "John Doe") << o1->getName() << " should be John Doe";
+    EXPECT_EQ(o1->getPhoneNumber(), 1234567890) << o1->getPhoneNumber() << " should be 1234567890";
+    EXPECT_EQ(o1->getZipCode(), 12345) << o1->getZipCode() << " should be 12345";
 
-//Testing the function of uploading a single pet onto the database
-TEST(unitTest, uploadPets){
-    Owner o1;
-    o1.setName("best friends");
-
-   // o1.uploadPets();
+    Owner* o2 = new Owner("../../testDB.sqlite", "John Doe", "111 Quad Drive", 12345, 1234567890, "example@gmail.com");
+    EXPECT_EQ(o2->getAddress(), "111 Quad Drive") << o1->getAddress() << " should be 111 Quad Drive";
+    EXPECT_EQ(o2->getEmail(), "example@gmail.com") << o1->getEmail() << " should be example@gmail.com";
+    EXPECT_EQ(o2->getName(), "John Doe") << o1->getName() << " should be John Doe";
+    EXPECT_EQ(o2->getPhoneNumber(), 1234567890) << o1->getPhoneNumber() << " should be 1234567890";
+    EXPECT_EQ(o2->getZipCode(), 12345) << o1->getZipCode() << " should be 12345";
+    delete o1;
 }
 
 

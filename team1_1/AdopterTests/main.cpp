@@ -8,19 +8,19 @@
 
 // The fixture for testing class Foo.
 
-class FooTest : public ::testing::Test {
+class AdopterTest : public ::testing::Test {
 
  protected:
 
 
 
-    FooTest() {
+    AdopterTest() {
 
 
 
      }
 
-     virtual ~FooTest() {
+     virtual ~AdopterTest() {
 
      // You can do clean-up work that doesn't throw exceptions here.
 
@@ -45,7 +45,30 @@ class FooTest : public ::testing::Test {
      // Code here will be called immediately after each test (right
 
      // before the destructor).
+        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE","adopterTestCxn");
+        string fullName = "../../testDB.sqlite";
+        db.setDatabaseName(QString::fromStdString(fullName));
+        if(!db.open()){
+            std::cerr << "Database does not open -- "
+                      << db.lastError().text().toStdString()
+                      << std::endl;
 
+            std::cerr << "  File -- " << fullName << std::endl;
+            exit(0);
+        } else {
+            std::cerr << "Opened database successfully (from Authentication class)\n";
+        }
+
+        if(db.open()){
+            QSqlQuery qry = QSqlQuery(db);
+            QString qs = "DELETE FROM accounts WHERE username=\"user11\";" ;
+            qry.exec(qs);
+            qs = "DELETE FROM adopter WHERE username=\"user11\";" ;
+            qry.exec(qs);
+            qs = "DELETE FROM preferences WHERE username=\"user11\";" ;
+            qry.exec(qs);
+            cout << "Deleted user 11" << endl;
+        }
      }
 
      // Objects declared here can be used by all tests in the test case for Foo.
@@ -289,7 +312,7 @@ TEST(general, ADOPTERSETTERS) {
 }
 
 TEST(general, FILLPREF){
-    Adopter *a = new Adopter();
+    Adopter *a = new Adopter("../../testDB.sqlite", "user11", "password11", "Evan", "Vu", "vuc@laf",18042);
     a->fillPreference("dog", "species");
     a->fillPreference("beagle", "breed");
     a->fillPreference("medium", "size");
@@ -309,8 +332,8 @@ TEST(general, FILLPREF){
     EXPECT_EQ(p.getGender().at(0),"male");
 }
 
-TEST(general, REMMOVEPREF){
-    Adopter *a = new Adopter();
+TEST(general, REMOVEPREF){
+    Adopter *a = new Adopter("../../testDB.sqlite", "user11", "password11", "Evan", "Vu", "vuc@laf",18042);
     a->fillPreference("dog", "species");
     a->fillPreference("beagle", "breed");
     a->fillPreference("medium", "size");
@@ -331,7 +354,7 @@ TEST(general, REMMOVEPREF){
 }
 
 TEST(general, ADDPREF){
-    Adopter *a = new Adopter();
+    Adopter *a = new Adopter("../../testDB.sqlite", "user11", "password11", "Evan", "Vu", "vuc@laf",18042);
     a->fillPreference("dog", "species");
     a->fillPreference("beagle", "breed");
     a->fillPreference("medium", "size");
@@ -348,6 +371,16 @@ TEST(general, ADDPREF){
     EXPECT_EQ(p.getGender().size(),2);
     EXPECT_EQ(p.getShelter().size(),2);
 }
+
+TEST_F(AdopterTest, fillpref){
+    Adopter *a = new Adopter("../../testDB.sqlite", "user11", "password11", "Evan", "Vu", "vuc@laf",18042);
+    a->fillPreferences();
+    Preferences pf = a->getPreferences();
+
+    EXPECT_EQ(pf.getAge().size(), 0);
+}
+
+
 
     int main(int argc, char **argv) {
 

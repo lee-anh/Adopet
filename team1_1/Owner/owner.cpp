@@ -325,7 +325,7 @@ Pet Owner::makePet(QStringList petData){
         string bio = petData.at(9).toStdString();
 
         Pet p = Pet( name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
-        p.setPetID(lastPetID + 1);
+        p.setID(lastPetID + 1);
         lastPetID += 1;
 
         return p;
