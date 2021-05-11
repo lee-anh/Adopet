@@ -745,7 +745,7 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>859</width>
+            <width>785</width>
             <height>434</height>
            </rect>
           </property>
@@ -1361,9 +1361,9 @@ Use your shelter name as it appears in My Info so the pets will be linked to you
         </layout>
        </item>
        <item>
-        <widget class="QLabel" name="label_19">
+        <widget class="QLabel" name="linkToTemplate">
          <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://docs.google.com/spreadsheets/d/1C7GgwQls9a7Rxzte0Iz9U1Ei3gRmg5iuxAwXiLrIYPc/edit?usp=sharing &quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0068da;&quot;&gt;Bulk Upload Template &lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          <string>TextLabel</string>
          </property>
         </widget>
        </item>

@@ -71,7 +71,6 @@ GUI::GUI(QWidget *parent)
     connect(&unsave, SIGNAL(unsavePet()), this, SLOT(unheartPet()));
     connect(&myPets, SIGNAL(goToMeetPet(Pet)), this, SLOT(goToMeetMe(Pet)));
     connect(&qz, SIGNAL(backToPreference(Preferences)), this, SLOT(quizToPreference(Preferences)));
-    //connect(&zp, SIGNAL(finishedCall()), this, SLOT(finishedAPICall()));
 
 }
 
@@ -94,6 +93,11 @@ GUI::~GUI()
 }
 
 
+/*!
+ * \brief meetPet displays more info about a pet, bio info
+ * allows users to get to know pet more
+ * \param p pet to meet
+ */
 void GUI::meetPet(Pet p){
     petToMeet = p;
 
@@ -174,6 +178,11 @@ void GUI::meetPet(Pet p){
     ui->shelterInfo->setText(shelInfo);
 }
 
+/*!
+ * \brief displayPicture, displays the pictures for a pet
+ * in the pet's meet me page
+ * \param i which pet
+ */
 void GUI::displayPicture(int i){
     QString os = QSysInfo::productVersion();
     string photo;
@@ -187,6 +196,10 @@ void GUI::displayPicture(int i){
     QPixmap pix(QString::fromStdString(photo));
     ui->petPic->setPixmap(pix.scaled(300, 300, Qt::KeepAspectRatio));
 }
+
+/*!
+ * \brief on_right_clicked advance media carousel
+ */
 void GUI::on_right_clicked()
 {
     if(mediaCarosel+1 < (int) petToMeet.getImageFiles().size()){
@@ -194,6 +207,10 @@ void GUI::on_right_clicked()
         displayPicture(mediaCarosel);
     }
 }
+
+/*!
+ * \brief on_left_clicked go back on media carousel
+ */
 void GUI::on_left_clicked()
 {
     if(petToMeet.getImageFiles().size() > 0){
@@ -206,7 +223,9 @@ void GUI::on_left_clicked()
 
 
 
-
+/*!
+ * \brief hideNavAdopter hide adopter's navigation bar
+ */
 void GUI::hideNavAdopter(){
     ui->logoAdopter->setVisible(false);
     ui->titleAdopter->setVisible(false);
@@ -220,6 +239,9 @@ void GUI::hideNavAdopter(){
     ui->navMyInfoButton->setVisible(false);
 }
 
+/*!
+ * \brief showNavAdopter show adopter's navigation bar
+ */
 void GUI::showNavAdopter(){
     ui->logoAdopter->setVisible(true);
     ui->titleAdopter->setVisible(true);
@@ -242,6 +264,9 @@ void GUI::showNavAdopter(){
     ui->label4->setText("View your favorite pets");
 }
 
+/*!
+ * \brief hideNavOwner hide the owner's navigation bar
+ */
 void GUI::hideNavOwner(){
     ui->titleOwner->setVisible(false);
     ui->logoOwner->setVisible(false);
@@ -257,6 +282,9 @@ void GUI::hideNavOwner(){
 
 }
 
+/*!
+ * \brief showNavOwner shows the owner's navigation bar
+ */
 void GUI::showNavOwner(){
     ui->titleOwner->setVisible(true);
     ui->logoOwner->setVisible(true);
@@ -279,6 +307,142 @@ void GUI::showNavOwner(){
     ui->label4->setText("Use our advanced matchmaking algorithm to adopters that are perfect for your pets");
 }
 
+/*!
+ * \brief on_exit_clicked displays a warning before logging out of system
+ */
+void GUI::on_exit_clicked()
+{
+
+    //QDialog
+    lg.setModal(true);
+    lg.exec();
+
+
+
+}
+
+
+
+//slots for signals
+
+/*!
+ * \brief moveToMeetMe send user to meet me page
+ * \param sendPet pet to display
+ * \param b if the pet is saved or not
+ */
+void GUI::moveToMeetMe(Pet sendPet, bool b){
+    ui->stackedWidget->setCurrentIndex(1);
+
+    if(b == true){
+        savedList.unsavePet(sendPet); //prevents dupliates
+        savedList.savePet(sendPet);
+    } else {
+        savedList.unsavePet(sendPet);
+    }
+    meetPet(sendPet);
+}
+
+/*!
+ * \brief heartPet heart info for a pet to meet
+ * \param p pet
+ * \param b if the pet is saved or not
+ */
+void GUI::heartPet(Pet p, bool b){
+    if(b == true){
+        savedList.unsavePet(p); //prevents dupliates
+        savedList.savePet(p);
+    } else {
+        savedList.unsavePet(p);
+    }
+
+}
+
+/*!
+ * \brief backToLogin bring user back to login page
+ */
+void GUI::backToLogin(){
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+/*!
+ * \brief updateAdopter object
+ * \param a new adopter
+ */
+void GUI::updateAdopter(Adopter *a){
+    adopter = a;
+}
+
+/*!
+ * \brief toListMyFavorites to my favorites, list mode
+ */
+void GUI::toListMyFavorites(){
+
+    myFavsList.setSavedList(savedList);
+    myFavsList.showGal();
+    //navigate to my favorites list screen
+    ui->stackedWidget->setCurrentIndex(9);
+    previousPage = 9;
+}
+
+/*!
+ * \brief toGalleryMyFavorites to my favorites, gallery mode
+ */
+void GUI::toGalleryMyFavorites(){
+    on_navMyFavoritesButton_clicked();
+}
+/*!
+ * \brief logOut of system
+ */
+void GUI::logOut(){
+    //back to login page
+    hideNavAdopter();
+    hideNavOwner();
+    ui->stackedWidget->setCurrentIndex(0);
+    previousPage = 0;
+    uinfo.setFirstTime(true);
+}
+
+/*!
+ * \brief goToQuiz (preference quiz)
+ */
+void GUI::goToQuiz(){
+    ui->stackedWidget->setCurrentIndex(10);
+    qz.startQuiz();
+}
+
+/*!
+ * \brief unheartPet unsave a pet, updates the database
+ * and updates the buttons
+ */
+void GUI::unheartPet(){
+    savedList.unsavePet(petToMeet); //update database
+    ui->saveButton->setText("♡");
+    ui->saveButton->setStyleSheet("color: black");
+}
+/*!
+ * \brief goToMeetMe for owners, owner preview
+ * \param p pet to meet
+ */
+void GUI::goToMeetMe(Pet p){
+    ui->stackedWidget->setCurrentIndex(1);
+    meetPet(p);
+    previousPage = 8;
+}
+
+/*!
+ * \brief quizToPreference back to preference from quiz
+ * updates the preferences object
+ * \param pf
+ */
+void GUI::quizToPreference(Preferences pf){
+    adopter->setPreference(pf);
+    ui->stackedWidget->setCurrentIndex(7);
+    on_navMyPreferences_clicked();
+}
+
+/*!
+ * \brief on_saveButton_clicked save a pet
+ */
 void GUI::on_saveButton_clicked()
 {
     if(ui->saveButton->isChecked() == false){
@@ -296,103 +460,20 @@ void GUI::on_saveButton_clicked()
     }
 }
 
-void GUI::on_exit_clicked()
-{
-
-    //QDialog
-    lg.setModal(true);
-    lg.exec();
-
-
-
-}
-
-
-
-//slots for signals
-
-void GUI::moveToMeetMe(Pet sendPet, bool b){
-    ui->stackedWidget->setCurrentIndex(1);
-
-    if(b == true){
-        savedList.unsavePet(sendPet); //prevents dupliates
-        savedList.savePet(sendPet);
-    } else {
-        savedList.unsavePet(sendPet);
-    }
-
-    meetPet(sendPet);
-}
-
-void GUI::heartPet(Pet p, bool b){
-    if(b == true){
-        savedList.unsavePet(p); //prevents dupliates
-        savedList.savePet(p);
-    } else {
-        savedList.unsavePet(p);
-    }
-
-}
-
-void GUI::backToLogin(){
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
-
-void GUI::toListMyFavorites(){
-
-    myFavsList.setSavedList(savedList);
-    myFavsList.showGal();
-    //navigate to my favorites list screen
-    ui->stackedWidget->setCurrentIndex(9);
-    previousPage = 9;
-}
-
-void GUI::toGalleryMyFavorites(){
-    on_navMyFavoritesButton_clicked();
-}
-
-void GUI::logOut(){
-    //back to login page
-    hideNavAdopter();
-    hideNavOwner();
-    ui->stackedWidget->setCurrentIndex(0);
-    previousPage = 0;
-    uinfo.setFirstTime(true);
-}
-
-
-void GUI::goToQuiz(){
-    ui->stackedWidget->setCurrentIndex(10);
-    qz.startQuiz();
-}
-
-
-void GUI::unheartPet(){
-    savedList.unsavePet(petToMeet); //update database
-    ui->saveButton->setText("♡");
-    ui->saveButton->setStyleSheet("color: black");
-}
-
-void GUI::goToMeetMe(Pet p){
-    ui->stackedWidget->setCurrentIndex(1);
-    meetPet(p);
-    previousPage = 8;
-}
-
-void GUI::quizToPreference(Preferences pf){
-    adopter->setPreference(pf);
-    ui->stackedWidget->setCurrentIndex(7);
-    on_navMyPreferences_clicked();
-}
-
+/*!
+ * \brief on_navHomeButton_clicked back to home page
+ * for Adopters
+ */
 void GUI::on_navHomeButton_clicked()
 {
     //navigate to home screen
     ui->stackedWidget->setCurrentIndex(2);
 }
 
-
+/*!
+ * \brief on_navFindMatchButton_clicked to Find Match page
+ * for Adopters
+ */
 void GUI::on_navFindMatchButton_clicked()
 {
     //navigate to find match screen
@@ -402,6 +483,10 @@ void GUI::on_navFindMatchButton_clicked()
     previousPage = 5;
 }
 
+/*!
+ * \brief on_navMyFavoritesButton_clicked to My Favorites page
+ * for Adopters
+ */
 void GUI::on_navMyFavoritesButton_clicked()
 {
     //pass vital information to myFavs
@@ -414,6 +499,10 @@ void GUI::on_navMyFavoritesButton_clicked()
 
 }
 
+/*!
+ * \brief on_navManualSearchButton_clicked to Manual Search page
+ * for Adopters
+ */
 void GUI::on_navManualSearchButton_clicked()
 {
     //pass vital information to manSearch
@@ -425,12 +514,20 @@ void GUI::on_navManualSearchButton_clicked()
 
 }
 
+/*!
+ * \brief on_navMyInfoButton_clicked to My Info page
+ * for Adopters
+ */
 void GUI::on_navMyInfoButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(6);
     uinfo.adopterMyInfoClicked();
 }
 
+/*!
+ * \brief on_navMyPreferences_clicked to My Preferences page
+ * for Adopters
+ */
 void GUI::on_navMyPreferences_clicked()
 {
     //to preferences form
@@ -452,6 +549,10 @@ void GUI::on_preferenceFromHome_clicked()
 
 }
 
+/*!
+ * \brief on_preferenceFromHome_clicked to my preferences page
+ * for Adopters
+ */
 void GUI::on_findMatchFromHome_clicked()
 {
     if(userType == "adopter"){
@@ -560,9 +661,6 @@ void GUI::on_createAccountButton_clicked()
     uinfo.setAuth(&auth, true);
 }
 
-void GUI::updateAdopter(Adopter *a){
-    adopter = a;
-}
 
 
 void GUI::on_ownerMyPets_clicked()
@@ -622,10 +720,4 @@ void GUI::on_password_returnPressed()
     on_loginButton_clicked();
 }
 
-void GUI::on_pushButton_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(12);
-    zp.zip("01721", "20");
-    zp.getZipCodes();
 
-}

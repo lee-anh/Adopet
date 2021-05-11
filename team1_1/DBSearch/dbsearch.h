@@ -125,6 +125,7 @@ public:
 private:
     //database stuff
     string filepath;
+    bool distance;
     /*!
      * \brief openDB
      */

@@ -9,6 +9,10 @@ MyPets::MyPets(QWidget *parent) :
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
     previousPage = 0;
+    ui->linkToTemplate->setText("<a href = \"https://docs.google.com/spreadsheets/d/1C7GgwQls9a7Rxzte0Iz9U1Ei3gRmg5iuxAwXiLrIYPc/edit?usp=sharing\">Link to Adopet upload template</a>");
+    ui->linkToTemplate->setTextFormat(Qt::RichText);
+    ui->linkToTemplate->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    ui->linkToTemplate->setOpenExternalLinks(true);
 
     connect(&petAdopted, SIGNAL(yesAdopted()), this, SLOT(backToMyPets()));
 

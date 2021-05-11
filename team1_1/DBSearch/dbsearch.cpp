@@ -176,7 +176,7 @@ void DBSearch::search(string s){
         //add to attributes to search for
         addToAttributes(s, attributeToSearch);
    }
-   // return true; //TODO
+
 }
 
 
@@ -272,8 +272,8 @@ string DBSearch::createQuery(){
             }
         }
     }
-    cout << getConstraints() << endl;
-    cout << query << endl;
+    //cout << getConstraints() << endl;
+    //cout << query << endl;
 
     return query;
 }
@@ -335,7 +335,10 @@ int DBSearch::queryDB(string qry){
 
             //creating a pet with the information above
             Pet p = Pet(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+
             matchingPets.push_back(p);
+
+
             count++;
         }
 

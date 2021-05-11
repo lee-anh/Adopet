@@ -58,8 +58,7 @@ private:
     string currentViewMode;
     string zip;
 
-    void stateChange(int viewMode, int location);
-    void APICall(string distance);
+
 
     /*!
      * \brief galleryMode for pet display
@@ -87,9 +86,25 @@ private:
      */
     void saveButton(QPushButton* saveButton, int index);
 
+    /*!
+     * \brief stateChange of view mode or location
+     * \param viewMode
+     * \param location
+     */
+    void stateChange(int viewMode, int location);
+
+    /*!
+     * \brief APICall call the zipcode api
+     * \param distance
+     */
+    void APICall(string distance);
+
 
 private slots:
 
+    /*!
+     * \brief finishedAPICall, display results using info from api call
+     */
     void finishedAPICall();
 
     //GALLERY SLOTS
@@ -234,8 +249,17 @@ private slots:
 
 
 
+    /*!
+     * \brief on_location_currentIndexChanged
+     * \param index
+     */
     void on_location_currentIndexChanged(int index);
 
+
+    /*!
+     * \brief on_locationa_currentIndexChanged
+     * \param index
+     */
     void on_locationa_currentIndexChanged(int index);
 
 signals:
