@@ -38,7 +38,8 @@ Zip::Zip(QWidget *parent) :
         //now the problem is how to get this information to a different class
         //ideas: using the file to pass information back and forth, emit a signal
         writeToFile();
-        parseResults();
+        //parseResults();
+
 
 
 
@@ -85,6 +86,8 @@ void Zip::writeToFile(){
     csv.open(fname, ios_base::app);
     csv << results;
     csv.close();
+
+    emit finishedCall();
 
 }
 

@@ -6,6 +6,8 @@ ManualSearch::ManualSearch(QWidget *parent) :
     ui(new Ui::ManualSearch)
 {
     ui->setupUi(this);
+
+    connect(&zp, SIGNAL(finishedCall()), this, SLOT(finishedAPICall()));
       
     QString os = QSysInfo::productVersion();
     cout << os.toStdString() << endl;
@@ -68,8 +70,9 @@ void ManualSearch::listMode(){
 
 }
 
-void ManualSearch::setSavedList(SavedList s){
+void ManualSearch::setSavedList(SavedList s, string zipcode){
     sl = s;
+    zip = zipcode;
     if(mode == "gallery"){
         loadSaveButtons({ui->save1, ui->save2, ui->save3});
     } else {
@@ -96,11 +99,61 @@ void ManualSearch::checkBoxSearch(string wordToSearch, string category, int arg1
     search->runNewQuery();
 
     //update the gallery and display
-    petgal.updatePetVec(search->getPetVec());
+    if(ui->location->currentIndex() == 0){
+        petgal.updatePetVec(search->getPetVec());
+    } else {
+        petgal.updatePetVec(search->distanceMatters());
+    }
     petgal.setPageNum(1);
     petgal.displayPets(0);
 
     //reload save buttons
+    if(mode == "gallery"){
+        loadSaveButtons({ui->save1, ui->save2, ui->save3});
+    } else {
+        loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
+    }
+
+}
+
+void ManualSearch::stateChanged(int viewMode, int distance){
+    ui->searchingFor->clear();
+    if(viewMode == 1){ //gallery mode
+        if(distance == 0){
+            galleryMode();
+        } else if (distance == 1){
+            // 20
+            APICall("20");
+        } else if (distance == 2){
+            //50
+            APICall("50");
+        }
+
+    } else if (viewMode == 2){ //list mode
+        if(distance == 0){
+            listMode();
+        } else if (distance == 1){
+            // 20
+            APICall("20");
+        } else if (distance == 2){
+            //50
+            APICall("50");
+        }
+    }
+}
+void ManualSearch::APICall(string distance){
+    if(zip.size() == 4){
+        zip = "0" + zip;
+    }
+
+    zp.zip(zip, distance);
+}
+
+void ManualSearch::finishedAPICall(){
+
+    petgal.updatePetVec(search->distanceMatters());
+    petgal.displayPets(0);
+    petgal.setPageNum(1);
     if(mode == "gallery"){
         loadSaveButtons({ui->save1, ui->save2, ui->save3});
     } else {
@@ -224,23 +277,12 @@ void ManualSearch::on_searchButton_clicked()
     ui->searchingFor->setText("Searching for: " + QString::fromStdString(search->getConstraints()));
 
 
-
-    /*
-    string s = "";
-    if(search->searchingFor().size() > 0){
-        s = "Searching for: ";
-    }
-    for(int i = 0; i < (int) search->searchingFor().size(); i++){
-        s = s + search->searchingFor()[i] + "\n";
-
-    }
-
-
-    ui->searchingForLabel->setText(QString::fromStdString(s));
-*/
-
     //update the pet gallery
-    petgal.updatePetVec(search->getPetVec());
+    if(ui->location->currentIndex() == 0){
+        petgal.updatePetVec(search->getPetVec());
+    } else {
+        petgal.updatePetVec(search->distanceMatters());
+    }
     petgal.displayPets(0);
     petgal.setPageNum(1);
     if(mode == "gallery"){
@@ -361,15 +403,23 @@ void ManualSearch::on_surpriseMe_clicked()
 
 void ManualSearch::on_viewModeComboBox_currentIndexChanged(int index)
 {
+    stateChanged(index, ui->location->currentIndex());
 
-    if(index == 1){
+    /*
+
+    if(index == 1){ //gallery mode
         ui->searchingFor->clear();
         galleryMode();
-    } else if (index == 2){
+    } else if (index == 2){ //list mode
         ui->searchingFor->clear();
         listMode();
 
     }
+    */
+}
+
+void ManualSearch::on_location_currentIndexChanged(int index){
+    stateChanged(ui->viewModeComboBox->currentIndex(), index);
 }
 
 void ManualSearch::on_nexta_clicked()

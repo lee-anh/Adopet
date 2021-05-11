@@ -114,6 +114,8 @@ public:
      */
     string getConstraints();
 
+    vector<Pet> distanceMatters();
+
 
 
 
@@ -148,6 +150,7 @@ private:
     int getIndex(string category);
 
 
+    vector<string> parseFile();
 
 
     //vectors of keywords

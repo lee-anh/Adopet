@@ -40,6 +40,8 @@ private:
     vector<string> parseResults();
 
     QString filename;
+signals:
+    void finishedCall();
 
 
 };

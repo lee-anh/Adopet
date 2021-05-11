@@ -6,6 +6,8 @@
 #include "../Matchmaking/matchmaking.h"
 #include "../SavedList/savedlist.h"
 #include "petgallery.h"
+#include "zip.h"
+#include <chrono>
 
 
 namespace Ui {
@@ -40,7 +42,7 @@ public:
      * \brief setUser
      * \param username
      */
-    void setUser(string username);
+    void setUser(string username, string zipCode);
 
 
 private:
@@ -51,6 +53,13 @@ private:
     PetGallery petgal;
     SavedList sl;
     string user;
+    Zip zp;
+
+    string currentViewMode;
+    string zip;
+
+    void stateChange(int viewMode, int location);
+    void APICall(string distance);
 
     /*!
      * \brief galleryMode for pet display
@@ -80,6 +89,8 @@ private:
 
 
 private slots:
+
+    void finishedAPICall();
 
     //GALLERY SLOTS
 
@@ -223,6 +234,9 @@ private slots:
 
 
 
+    void on_location_currentIndexChanged(int index);
+
+    void on_locationa_currentIndexChanged(int index);
 
 signals:
 

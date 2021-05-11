@@ -15,7 +15,7 @@ Owner::Owner(string n, string a, int zip, int pN, string e){
     zipCode = zip;
     phoneNumber = pN;
     email = e;
-    cout << "simple constructor called (owner)" << endl;
+    //cout << "simple constructor called (owner)" << endl;
     //openDB();
     //lastPetID = getLastPetID();
 }
@@ -325,7 +325,7 @@ Pet Owner::makePet(QStringList petData){
         string bio = petData.at(9).toStdString();
 
         Pet p = Pet( name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
-        p.setPetID(lastPetID + 1);
+        p.setID(lastPetID + 1);
         lastPetID += 1;
 
         return p;

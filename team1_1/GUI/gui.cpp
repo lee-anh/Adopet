@@ -71,7 +71,7 @@ GUI::GUI(QWidget *parent)
     connect(&unsave, SIGNAL(unsavePet()), this, SLOT(unheartPet()));
     connect(&myPets, SIGNAL(goToMeetPet(Pet)), this, SLOT(goToMeetMe(Pet)));
     connect(&qz, SIGNAL(backToPreference(Preferences)), this, SLOT(quizToPreference(Preferences)));
-
+    //connect(&zp, SIGNAL(finishedCall()), this, SLOT(finishedAPICall()));
 
 }
 
@@ -139,7 +139,7 @@ void GUI::meetPet(Pet p){
 
      /*
      //video
-     /*
+
      if(petToMeet.getVideoFiles().size() > 0){
          //default picture
          vp = new VideoPlayer;
@@ -398,7 +398,7 @@ void GUI::on_navFindMatchButton_clicked()
     //navigate to find match screen
     ui->stackedWidget->setCurrentIndex(5);
     fmForAdopters.setSavedList(savedList);
-    fmForAdopters.setUser(username);
+    fmForAdopters.setUser(username, to_string(adopter->getZipCode()));
     previousPage = 5;
 }
 
@@ -417,7 +417,7 @@ void GUI::on_navMyFavoritesButton_clicked()
 void GUI::on_navManualSearchButton_clicked()
 {
     //pass vital information to manSearch
-    manSearch.setSavedList(savedList);
+    manSearch.setSavedList(savedList, to_string(adopter->getZipCode()));
 
     //navigate to manual search
     ui->stackedWidget->setCurrentIndex(3);
@@ -500,7 +500,7 @@ void GUI::on_backButton_clicked()
         myFavs.setSavedList(savedList);
         myFavs.showGal();
     } else if (previousPage == 3){
-        manSearch.setSavedList(savedList);
+        manSearch.setSavedList(savedList, to_string(adopter->getZipCode()));
     }
 
     //back to last page
