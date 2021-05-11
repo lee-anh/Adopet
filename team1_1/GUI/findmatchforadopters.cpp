@@ -12,7 +12,7 @@ FindMatchForAdopters::FindMatchForAdopters(QWidget *parent) :
     ui->setupUi(this);
     ui->pageLine->setText("Press on the generate matches button!");
 
-
+    connect(&zp, SIGNAL(finishedCall()), this, SLOT(finishedAPICall()));
 
 }
 
@@ -40,8 +40,9 @@ void FindMatchForAdopters::setSavedList(SavedList s){
  * \brief setUser, must be set when class is used
  * \param username
  */
-void FindMatchForAdopters::setUser(string username){
+void FindMatchForAdopters::setUser(string username, string zipCode){
     user = username;
+    zip = zipCode;
 
     //causes database cxn error b/c this matchmaking is called again
     //but should be fine because it's just reopened right after
@@ -65,6 +66,7 @@ void FindMatchForAdopters::setUser(string username){
  * \brief galleryMode for pet display, initalize the pet gallery
  */
 void FindMatchForAdopters::galleryMode(){
+    currentViewMode = "gallery";
     ui->viewMode->setCurrentIndex(1);
     petgal = PetGallery(4, ui->previous, ui->next, ui->pageLine,
                         {ui->name1, ui->name2, ui->name3, ui->name4},
@@ -88,6 +90,7 @@ void FindMatchForAdopters::galleryMode(){
  * \brief listMode for pet display, intialize the pet gallery
  */
 void FindMatchForAdopters::listMode(){
+    currentViewMode = "list";
     ui->viewModea->setCurrentIndex(2);
     petgal = PetGallery(true, 6, ui->previousa, ui->nexta, ui->pageLinea,
                         {ui->name1a, ui->name2a, ui->name3a, ui->name4a, ui->name5a, ui->name6a},
@@ -152,6 +155,95 @@ void FindMatchForAdopters::loadSaveButtons(vector<QPushButton *> saveButtons){
     }
 }
 
+/*!
+ * \brief stateChange of view mode or location
+ * \param viewMode 1 for gallery, 2 for list
+ * \param location 0 for anywhere, 1 for 20 miles, 2 for 50 miles
+ */
+void FindMatchForAdopters::stateChange(int viewMode, int location){
+     if(viewMode == 1){
+         currentViewMode = "gallery";
+        if(location == 0){
+            ui->stackedWidget->setCurrentIndex(0);
+            galleryMode();
+        } else if (location == 1){
+            //20 miles, gallery mode
+           APICall("20");
+           ui->location->setCurrentIndex(1);
+        } else if (location == 2){
+           APICall("50");
+           ui->location->setCurrentIndex(2);
+        }
+
+    } else if (viewMode == 2){
+         currentViewMode = "list";
+        if(location == 0){
+            ui->stackedWidget->setCurrentIndex(1);
+            listMode();
+        } else if (location == 1){
+            // 20 miles, list mode
+            APICall("20");
+            ui->locationa->setCurrentIndex(1);
+        } else if (location == 2){
+            //50 miles, list mode
+            APICall("50");
+            ui->locationa->setCurrentIndex(1);
+        }
+
+    }
+}
+
+/*!
+ * \brief APICall call the zipcode api
+ * \param distance in miles, a string
+ */
+void FindMatchForAdopters::APICall(string distance){
+    if(zip.size() == 4){
+        zip = "0" + zip;
+    }
+
+    zp.zip(zip, distance);
+}
+
+void FindMatchForAdopters::finishedAPICall(){
+
+    if(currentViewMode == "gallery"){
+        ui->viewMode->setCurrentIndex(1);
+        petgal = PetGallery(4, ui->previous, ui->next, ui->pageLine,
+                            {ui->name1, ui->name2, ui->name3, ui->name4},
+                            {ui->pic1, ui->pic2, ui->pic3, ui->pic4},
+                            {ui->score1, ui->score2, ui->score3, ui->score4},
+                            {ui->link1, ui->link2, ui->link3, ui->link4},
+                            {ui->save1, ui->save2, ui->save3, ui->save4},
+                            mat.findMatchesForAdopterDistance(user));
+
+        ui->stackedWidget->setCurrentIndex(0); //gallery mode
+
+        petgal.setPageNum(1);
+        petgal.displayPets(0);
+
+        loadSaveButtons({ui->save1, ui->save2, ui->save3, ui->save4});
+    } else if (currentViewMode == "list"){
+        currentViewMode = "list";
+        ui->viewModea->setCurrentIndex(2);
+        petgal = PetGallery(true, 6, ui->previousa, ui->nexta, ui->pageLinea,
+                            {ui->name1a, ui->name2a, ui->name3a, ui->name4a, ui->name5a, ui->name6a},
+                            {ui->info1a, ui->info2a, ui->info3a, ui->info4a, ui->info5a, ui->info6a},
+                            {ui->match1, ui->match2, ui->match3, ui->match4, ui->match5, ui->match6},
+                            {ui->link1a, ui->link2a, ui->link3a, ui->link4a, ui->link5a, ui->link6a},
+                            {ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a},
+                            mat.findMatchesForAdopterDistance(user));
+
+        ui->stackedWidget->setCurrentIndex(1); //list mode
+
+        petgal.setPageNum(1);
+        petgal.displayPets(0);
+
+        loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
+
+    }
+
+}
 
 /*!
  * \brief on_previous_clicked, advances the 
@@ -382,8 +474,7 @@ void FindMatchForAdopters::on_viewMode_currentIndexChanged(int index)
 {
     //go to list mode
     if(index == 2){
-        ui->stackedWidget->setCurrentIndex(1);
-        listMode();
+        stateChange(index, ui->location->currentIndex());
 
     }
 }
@@ -396,8 +487,29 @@ void FindMatchForAdopters::on_viewModea_currentIndexChanged(int index)
 {
     //go to gallery mode
     if(index == 1){
-        ui->stackedWidget->setCurrentIndex(0);
-        galleryMode();
+        stateChange(index, ui->locationa->currentIndex());
     }
 }
 
+
+
+
+
+
+/*!
+ * \brief on_location_currentIndexChanged
+ * \param index
+ */
+void FindMatchForAdopters::on_location_currentIndexChanged(int index)
+{
+    stateChange(ui->viewMode->currentIndex(), index);
+}
+
+/*!
+ * \brief on_locationa_currentIndexChanged
+ * \param index
+ */
+void FindMatchForAdopters::on_locationa_currentIndexChanged(int index)
+{
+    stateChange(ui->viewMode->currentIndex(), index);
+}

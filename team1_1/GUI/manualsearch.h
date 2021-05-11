@@ -10,6 +10,7 @@
 #include "../SavedList/savedlist.h"
 
 #include "petgallery.h"
+#include "zip.h"
 
 
 namespace Ui {
@@ -24,24 +25,30 @@ public:
     explicit ManualSearch(QWidget *parent = nullptr);
     ~ManualSearch();
 
-    void setSavedList(SavedList s);
+    void setSavedList(SavedList s, string zipcode);
 
 private:
     Ui::ManualSearch *ui;
     DBSearch *search;
     PetGallery petgal;
     SavedList sl;
+    Zip zp;
     void galleryMode();
     void listMode();
 
     string mode;
+    string zip;
 
     void checkBoxSearch(string wordToSearch, string category, int arg1);
     void clearCheckBoxes();
     void loadSaveButtons(vector<QPushButton *> saveButtons);
     void saveButton(QPushButton* saveButton, int index);
+    void stateChanged(int viewMode, int distance);
+    void APICall(string distance);
 
 private slots:
+
+    void finishedAPICall();
     //CHECKBOXES
     //species
     void on_dogCheckBox_stateChanged(int arg1);
@@ -105,7 +112,7 @@ private slots:
     void on_surpriseMe_clicked();
 
     void on_viewModeComboBox_currentIndexChanged(int index);
-
+    void on_location_currentIndexChanged(int index);
     void on_nexta_clicked();
 
     void on_previousa_clicked();

@@ -176,7 +176,7 @@ void DBSearch::search(string s){
         //add to attributes to search for
         addToAttributes(s, attributeToSearch);
    }
-   // return true; //TODO
+
 }
 
 
@@ -272,8 +272,8 @@ string DBSearch::createQuery(){
             }
         }
     }
-    cout << getConstraints() << endl;
-    cout << query << endl;
+    //cout << getConstraints() << endl;
+    //cout << query << endl;
 
     return query;
 }
@@ -291,6 +291,21 @@ string DBSearch::getConstraints(){
         }
     }
     return s.substr(0, s.size() - 1);
+}
+
+vector<Pet> DBSearch::distanceMatters(){
+    vector<Pet> newMatchingPets;
+    vector<string> zips = parseFile();
+    for(int i = 0; i < (int) matchingPets.size(); i++){
+        for(int j = 0; j < (int) zips.size(); j++){
+            if(matchingPets.at(i).getOwner(filepath).getZipCode() == stoi(zips.at(j))){
+                newMatchingPets.push_back(matchingPets.at(i));
+            }
+        }
+    }
+
+    matchingPets = newMatchingPets;
+    return matchingPets;
 }
 
 /*!
@@ -320,7 +335,10 @@ int DBSearch::queryDB(string qry){
 
             //creating a pet with the information above
             Pet p = Pet(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+
             matchingPets.push_back(p);
+
+
             count++;
         }
 
@@ -495,3 +513,50 @@ int DBSearch::getIndex(string category){
         return -1;
     }
 }
+
+
+vector<string> DBSearch::parseFile(){
+
+    vector<string> zips;
+
+
+    QString os = QSysInfo::productVersion();
+
+    QString filename;
+    if(os == "10.16"){
+        filename = "../../../../../csvs/zip.txt";
+
+    } else {
+        //default picture
+        filename = "../../csvs/zip.txt";
+
+    }
+    QFile file(filename);
+    if(!file.open(QIODevice::ReadOnly)){
+        cerr << "Error: file not opened" << endl;
+    }
+    QTextStream in(&file);
+
+    int lineNumber = 0;
+    while(!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList zipOutput = line.split(",");
+        if(lineNumber != 0){
+            string zip = zipOutput.at(0).toStdString();
+            zips.push_back(zip);
+        }
+        lineNumber++;
+
+    }
+
+    file.close();
+    for(int i = 0; i < (int) zips.size(); i++){
+        cout << "From zips" << zips.at(i) << endl;
+    }
+
+
+
+    return zips;
+
+}
+

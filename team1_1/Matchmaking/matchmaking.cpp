@@ -419,7 +419,8 @@ vector<pair<Pet, int>> Matchmaking::findMatchesForAdopterDistance(string adopter
         while(query.next()){
             int currScore = 0;
             Pet pet = makePet(query);
-            int zip = pet.getOwner("../../../../../projectDB.sqlite").getZipCode();
+
+            int zip = pet.getOwner(dbName).getZipCode();
             string zipString = to_string(zip);
             for(int i = 0; i < (int) zips.size(); i++){
                 if(zips.at(i) == zipString){

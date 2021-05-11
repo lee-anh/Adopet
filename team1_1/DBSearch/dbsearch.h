@@ -114,6 +114,8 @@ public:
      */
     string getConstraints();
 
+    vector<Pet> distanceMatters();
+
 
 
 
@@ -123,6 +125,7 @@ public:
 private:
     //database stuff
     string filepath;
+    bool distance;
     /*!
      * \brief openDB
      */
@@ -148,6 +151,7 @@ private:
     int getIndex(string category);
 
 
+    vector<string> parseFile();
 
 
     //vectors of keywords

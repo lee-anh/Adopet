@@ -1,6 +1,10 @@
 #include "findmatchforpets.h"
 #include "ui_findmatchforpets.h"
 
+/*!
+ * \brief FindMatchForPets constructor
+ * \param parent
+ */
 FindMatchForPets::FindMatchForPets(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FindMatchForPets)
@@ -8,17 +12,29 @@ FindMatchForPets::FindMatchForPets(QWidget *parent) :
     ui->setupUi(this);
 }
 
+/*!
+ * \brief ~FindMatchForPets destructor
+ */
 FindMatchForPets::~FindMatchForPets()
 {
     delete ui;
 }
 
+
+/*!
+ * \brief toMainPage brings users to the main page for Find Match
+ * where users can choose to search for one pet or all pets
+ * \param owner object, used to find pets
+ */
 void FindMatchForPets::toMainPage(Owner *owner){
     ui->stackedWidget->setCurrentIndex(0);
     currentOwner = owner;
 }
 
-
+/*!
+ * \brief setup for both modes, fill matchmaking class,
+ * add database capabilites
+ */
 void FindMatchForPets::setup(){
 
 
@@ -35,21 +51,21 @@ void FindMatchForPets::setup(){
     mat.fillPets();
 
 }
+
+/*!
+ * \brief forOnePet setup for find match for one pet
+ * \param owner used to find the pets
+ */
 void FindMatchForPets::forOnePet(Owner* owner){
 
     ui->stackedWidget->setCurrentIndex(1);
     mode = "one";
 
     setup();
-    //load all the choices into the combo box
+
     owner->fillPets();
 
-    /*
-    for(int i = 0; i < (int) owner->getPets().size(); i++){
-        ui->petComboBox->addItem(QString::fromStdString(owner->getPets().at(i).getName()).toUpper(), owner->getPets().at(i).getID());
-    }
-    */
-
+    //put all the pets with their ids into the completeter
     QStringList wordList;
     for(int i = 0; i < (int) owner->getPets().size(); i++){
        QString s =  QString::fromStdString(owner->getPets().at(i).getName()).toUpper() + ",  ID:" + QString::number(owner->getPets().at(i).getID());
@@ -58,7 +74,7 @@ void FindMatchForPets::forOnePet(Owner* owner){
        wordList << sPlus;
     }
 
-
+    //completer setup
     QCompleter* completer = new QCompleter(wordList, ui->petName);
     completer->setCaseSensitivity(Qt::CaseInsensitive);
     ui->petName->setCompleter(completer);
@@ -67,7 +83,7 @@ void FindMatchForPets::forOnePet(Owner* owner){
 
 
 
-    //load all the labels (like a constructor)
+    //load all the labels
     nameLabels = {ui->name1, ui->name2, ui->name3, ui->name4, ui->name5};
     infoLabels = {ui->email1, ui->email2, ui->email3, ui->email4, ui->email5};
     scoreLabels = {ui->match1, ui->match2, ui->match3, ui->match4, ui->match5};
@@ -79,11 +95,16 @@ void FindMatchForPets::forOnePet(Owner* owner){
 
 }
 
+/*!
+ * \brief forMultiPets setup for all pets in a given shelter
+ * \param owner used to find the pets
+ */
 void FindMatchForPets::forMultiPets(Owner *owner){
     ui->stackedWidget->setCurrentIndex(2);
     mode = "all";
     setup();
 
+    //load all the labels
     nameLabels = {ui->name1a, ui->name2a, ui->name3a, ui->name4a, ui->name5a, ui->name6a, ui->name7a, ui->name8a};
     infoLabels = {ui->email1a, ui->email2a, ui->email3a, ui->email4a, ui->email5a, ui->email6a, ui->email7a, ui->email8a};
     scoreLabels = {ui->match1a, ui->match2a, ui->match3a, ui->match4a, ui->match5a, ui->match6a, ui->match7a, ui->match8a};
@@ -96,7 +117,10 @@ void FindMatchForPets::forMultiPets(Owner *owner){
     displayPeopleMulti(0);
 }
 
-
+/*!
+ * \brief displayPeople on list for one pet, driver method for display
+ * \param start index
+ */
 void FindMatchForPets::displayPeople(int start){
 
     int counter = 0;
@@ -114,8 +138,8 @@ void FindMatchForPets::displayPeople(int start){
 
 
         if(start < (int) matResults.size()){
-            //TODO: first name
-            nameLabels[i]->setText(QString::fromStdString(matResults.at(start).first.getUsername()));
+            //display the match's details
+            nameLabels[i]->setText(QString::fromStdString(matResults.at(start).first.getFirstName()));
             infoLabels[i]->setText(QString::fromStdString(matResults.at(start).first.getEmailAddress()));
             scoreLabels[i]->setText(QString::number(matResults.at(start).second) + "% match");
         }
@@ -130,12 +154,16 @@ void FindMatchForPets::displayPeople(int start){
     if(counter == 0){
         ui->pageLine->setText("No adopter match your search");
     } else {
-        ui->pageLine->setText("Showing page " + QString::number(displayPageNumber) + " out of "
-             + QString::number(numOfPages));
+        ui->pageLine->setText("Showing page " + QString::number(displayPageNumber)
+                              + " out of " + QString::number(numOfPages));
     }
 
 }
 
+/*!
+ * \brief displayPeopleMulti on list for all pets in a given shelter
+ * \param start index
+ */
 void FindMatchForPets::displayPeopleMulti(int start){
     int counter = 0;
     ui->previousAll->setVisible(true);
@@ -149,7 +177,10 @@ void FindMatchForPets::displayPeopleMulti(int start){
         petNameLabels[i]->clear();
 
         if(start < (int) multiMat.size()){
+            //display pet info
             petNameLabels[i]->setText(QString::fromStdString(multiMat.at(start).first.getName()).toUpper());
+
+            //display match's info
             nameLabels[i]->setText(QString::fromStdString(multiMat.at(start).second.first.getFirstName()));
             infoLabels[i]->setText(QString::fromStdString(multiMat.at(start).second.first.getEmailAddress()));
             scoreLabels[i]->setText(QString::number(multiMat.at(start).second.second) + "% match");
@@ -171,6 +202,9 @@ void FindMatchForPets::displayPeopleMulti(int start){
     }
 }
 
+/*!
+ * \brief next, go forward on list
+ */
 void FindMatchForPets::next(){
     if(mode == "one"){
         if(nextStartIndex + 1 < (int) matResults.size()){
@@ -188,6 +222,9 @@ void FindMatchForPets::next(){
     }
 }
 
+/*!
+ * \brief previous, go backward on list
+ */
 void FindMatchForPets::previous(){
     int startMod =  nextStartIndex % numToDisplay;
 
@@ -225,10 +262,16 @@ void FindMatchForPets::previous(){
     }
 }
 
+/*!
+ * \brief setPageNum set page number for the display of matches
+ * \param p page number
+ */
 void FindMatchForPets::setPageNum(int p){
     displayPageNumber = p;
 }
-
+/*!
+ * \brief clearAll clear all relavent labels
+ */
 void FindMatchForPets::clearAll(){
     for(int i = 0; i < (int) nameLabels.size(); i++){
         nameLabels.at(i)->clear();
@@ -258,7 +301,9 @@ void FindMatchForPets::clearAll(){
 }
 
 
-
+/*!
+ * \brief on_searchOne_clicked searches for matches for pet selected
+ */
 void FindMatchForPets::on_searchOne_clicked()
 {
 
@@ -290,36 +335,58 @@ void FindMatchForPets::on_searchOne_clicked()
 
 }
 
+/*!
+ * \brief on_previousOne_clicked go back on owner list, one pet
+ */
 void FindMatchForPets::on_previousOne_clicked()
 {
     previous();
 }
 
+/*!
+ * \brief on_nextOne_clicked go forward on owner list, one pet
+ */
 void FindMatchForPets::on_nextOne_clicked()
 {
     next();
 }
 
+/*!
+ * \brief on_previousAll_clicked go back on owner list, all pets
+ */
 void FindMatchForPets::on_previousAll_clicked()
 {
     previous();
 }
 
+/*!
+ * \brief on_nextAll_clicked go forward on owner list, all pets
+ */
 void FindMatchForPets::on_nextAll_clicked()
 {
     next();
 }
 
+/*!
+ * \brief on_toAllPets_clicked brings user to all Pets page
+ */
 void FindMatchForPets::on_toAllPets_clicked()
 {
     forMultiPets(currentOwner);
 }
 
+/*!
+ * \brief on_toOnePet_clicked brings user to One pet page
+ */
 void FindMatchForPets::on_toOnePet_clicked()
 {
     forOnePet(currentOwner);
 }
 
+/*!
+ * \brief on_petName_returnPressed search for one pet, acts the
+ * same as clicking on searchOne buttons
+ */
 void FindMatchForPets::on_petName_returnPressed()
 {
     on_searchOne_clicked();

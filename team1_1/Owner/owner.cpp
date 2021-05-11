@@ -15,7 +15,7 @@ Owner::Owner(string n, string a, int zip, int pN, string e){
     zipCode = zip;
     phoneNumber = pN;
     email = e;
-    cout << "simple constructor called (owner)" << endl;
+    //cout << "simple constructor called (owner)" << endl;
     //openDB();
     //lastPetID = getLastPetID();
 }
@@ -345,17 +345,20 @@ bool Owner::uploadPets(string filename){
     }
 
     QTextStream in(&file);
-
+    int counter = 0;
     while(!in.atEnd()) {
+
         QString line = in.readLine();
         QStringList petData = line.split(","); //loren ipsum, bird1.jpeg bird2.jpeg
         Pet p = makePet(petData);
         if(p.getName() != "") {
-            uploadPet(makePet(petData));
+            if(counter != 0){ //skip the first line
+                uploadPet(makePet(petData));
+            }
         } else {
             return false;
         }
-
+        counter++;
     }
     return true;
 
