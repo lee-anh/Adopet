@@ -10,6 +10,7 @@ class OwnerTests : public ::testing::Test{
 protected:
     Owner* owner;
     Pet* pet;
+    QSqlDatabase petsDB;
 
     OwnerTests(){
         // You can do set-up work for each test here.
@@ -25,6 +26,19 @@ protected:
         // before each test).
         owner = new Owner("../../testDB.sqlite", "generic_owner", "111 Quad Drive", 18042, 123, "abc@xyz");
         pet = new Pet("name1", "species1", "breed1", "age1", "size1", "temp1", "gender1", "gw1", "sh1", "bio1");
+        petsDB = QSqlDatabase::addDatabase("QSQLITE", "ownterTestCxn");
+        string fullName = "../../testDB.sqlite";
+        petsDB.setDatabaseName(QString::fromStdString(fullName));
+        if(!petsDB.open()){
+            std::cerr << "Database does not open -- "
+                      << petsDB.lastError().text().toStdString()
+                      << std::endl;
+
+            std::cerr << "  File -- " << fullName << std::endl;
+            exit(0);
+        } else {
+            std::cerr << "Opened database successfully (from Owner class)\n";
+        }
     }
 
     virtual void TearDown(){
@@ -71,6 +85,8 @@ TEST(unitTest, fillPets){
 //Testing the function of uploading a single pet onto the database
 TEST_F(OwnerTests, uploadPet){
     owner->uploadPet(*pet);
+    QSqlQuery qry = QSqlQuery(petsDB);
+
 }
 
 TEST_F(OwnerTests, constructors){
