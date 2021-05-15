@@ -44,6 +44,11 @@ protected:
     virtual void TearDown(){
         // Code here will be called immediately after each test (right
         // before the destructor).
+        QSqlQuery qry = QSqlQuery(petsDB);
+        QString qrstring = "DELETE FROM pets WHERE id=101";
+        if(petsDB.open()){
+            qry.exec(qrstring);
+        }
     }
     // Objects declared here can be used by all tests in the test case for Foo.
 
@@ -86,7 +91,14 @@ TEST(unitTest, fillPets){
 TEST_F(OwnerTests, uploadPet){
     owner->uploadPet(*pet);
     QSqlQuery qry = QSqlQuery(petsDB);
-
+    QString qrstring = "SELECT * FROM pets WHERE id = 101;";
+    if(petsDB.open()){
+        qry.exec(qrstring);
+        while(qry.next()){
+            QString res = qry.value(1).toString();
+            if(res == "name1") SUCCEED();
+        }
+    }
 }
 
 TEST_F(OwnerTests, constructors){
