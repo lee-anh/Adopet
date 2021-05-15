@@ -148,7 +148,7 @@ void GUI::meetPet(Pet p){
 
 
      //video
-
+/*
      if(petToMeet.getVideoFiles().size() > 0){
          //default picture
          vp = new VideoPlayer;
@@ -160,7 +160,7 @@ void GUI::meetPet(Pet p){
 
 
      }
-
+*/
     //set attributes
     string sep = " - ";
     string attributes = p.getSpecies() + sep +  p.getBreed() +

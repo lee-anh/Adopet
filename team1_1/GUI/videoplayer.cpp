@@ -48,7 +48,7 @@
 **
 ****************************************************************************/
 
-
+/*
 #include "videoplayer.h"
 
 #include <QtWidgets>
@@ -180,3 +180,4 @@ void VideoPlayer::handleError()
     errorLabel->setText(message);
 }
 
+*/
