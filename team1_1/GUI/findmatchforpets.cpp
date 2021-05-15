@@ -122,7 +122,6 @@ void FindMatchForPets::forMultiPets(Owner *owner){
  * \param start index
  */
 void FindMatchForPets::displayPeople(int start){
-
     int counter = 0;
     ui->previousOne->setVisible(true);
     ui->nextOne->setVisible(true);
@@ -178,7 +177,8 @@ void FindMatchForPets::displayPeopleMulti(int start){
 
         if(start < (int) multiMat.size()){
             //display pet info
-            petNameLabels[i]->setText(QString::fromStdString(multiMat.at(start).first.getName()).toUpper());
+            string petInfo = multiMat.at(start).first.getName() + ", ID: " + to_string(multiMat.at(start).first.getID());
+            petNameLabels[i]->setText(QString::fromStdString(petInfo).toUpper());
 
             //display match's info
             nameLabels[i]->setText(QString::fromStdString(multiMat.at(start).second.first.getFirstName()));

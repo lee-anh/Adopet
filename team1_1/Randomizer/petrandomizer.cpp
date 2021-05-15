@@ -256,7 +256,7 @@ void PetRandomizer::writeToCSV(){
 
         writePetsCsv << i << ",";
         writePetsCsv << petName << "," << petSpecies << "," << petBreed << "," << petAge << "," << petSize << "," << petTemp
-                 << "," << petGen << "," << petGoodWith << "," << petShelter << "," << "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+                 << "," << petGen << "," << petGoodWith << "," << petShelter << "," << "This fantastic buddy is always ready to play. He loves to spend time with his owners and loves eating raisins. He is very healthy and is fully vaccinated. Take him outside for a walk anytime! He loves the outdoors. He also loves treats and hugs. ";
         writePetsCsv << "\n";
 
         //randomizing images

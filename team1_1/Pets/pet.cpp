@@ -311,7 +311,7 @@ void Pet::addImageFile(string file){
         query.exec(s);
 
         petsDB = QSqlDatabase();
-        QSqlDatabase::removeDatabase("mediaCxn");
+        QSqlDatabase::removeDatabase("shelterCxn");
 
 
     }

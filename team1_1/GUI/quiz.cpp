@@ -1,6 +1,10 @@
 #include "quiz.h"
 #include "ui_quiz.h"
 
+/*!
+ * \brief Quiz Constructor
+ * \param parent
+ */
 Quiz::Quiz(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Quiz)
@@ -17,13 +21,17 @@ Quiz::~Quiz()
     delete ui;
 }
 
+/*!
+ * \brief startQuiz gui setup for quiz elements,
+ * sets up pictures, database elements
+ */
 void Quiz::startQuiz(){
     ui->finishquiz->setVisible(false);
     ui->previouspage->setVisible(false);
     ui->nextpage->setVisible(true);
 
 
-    //CURRENTLY OMITTIN DIRECT BREED QUESTIONS
+    //CURRENTLY OMITTING DIRECT BREED QUESTIONS
 
     ui->dogs->setVisible(false);
     ui->cats->setVisible(false);
@@ -73,34 +81,18 @@ void Quiz::startQuiz(){
     QPixmap birdPix(path + "bird1.jpeg");
     ui->birdsPic->setPixmap(birdPix.scaled(100, 100, Qt::KeepAspectRatio));
 
+    QPixmap angora(path + "angora.jpeg");
+    ui->angoraPic->setPixmap(angora.scaled(100, 100, Qt::KeepAspectRatio));
+
+    QPixmap sf(path + "silverFox.jpeg");
+    ui->silverFoxPic->setPixmap(sf.scaled(100, 100, Qt::KeepAspectRatio));
+
 }
 
-
-void Quiz::on_nextpage_clicked()
-{
-    if(currentPageNum==lastPage){
-        return;
-    }
-    if(currentPageNum == 1){
-        ui->previouspage->setVisible(true);
-    }
-    currentPageNum++;
-    displayQuiz();
-}
-
-void Quiz::on_previouspage_clicked()
-{
-    if(currentPageNum==0){
-        emit backToPreference(*pref); // should never get here, but just in case
-        return;
-    }
-    currentPageNum--;
-    displayQuiz();
-}
-
-
-
-
+/*!
+ * \brief displayQuiz manages the buttons for quiz navigation
+ * determines which should be displayed and which should be hidden
+ */
 void Quiz::displayQuiz(){
     ui->stackedWidget->setCurrentIndex(currentPageNum);
 
@@ -116,7 +108,71 @@ void Quiz::displayQuiz(){
     }
 }
 
+/*!
+ * \brief breedsCheckbox handles state changes for breed checkboxes
+ * \param s the breed name
+ * \param arg1 0 = unchecked, 2 = checked
+ */
+void Quiz::breedsCheckbox(string s, int arg1){
+    if(arg1 == 2){
+        pref->removeBreed(s);
+        pref->addBreed(s);
+    } else if(arg1 == 0){
+        pref->removeBreed(s);
+    }
+}
+/*!
+ * \brief breedRadio handles state changes for radio buttons
+ * \param s breed
+ * \param b
+ */
+void Quiz::breedRadio(string s, bool b){
+    if(b == true){
+        pref->removeBreed(s);
+        pref->addBreed(s);
+    } else {
+        pref->removeBreed(s);
+    }
+}
 
+/*!
+ * \brief on_nextpage_clicked advance the quiz
+ */
+void Quiz::on_nextpage_clicked()
+{
+    if(currentPageNum==lastPage){
+        return;
+    }
+    if(currentPageNum == 1){
+        ui->previouspage->setVisible(true);
+    }
+    currentPageNum++;
+    displayQuiz();
+}
+
+/*!
+ * \brief on_previouspage_clicked go back on the quiz
+ */
+void Quiz::on_previouspage_clicked()
+{
+    if(currentPageNum==0){
+        emit backToPreference(*pref); // should never get here, but just in case
+        return;
+    }
+    currentPageNum--;
+    displayQuiz();
+}
+
+
+
+
+
+/*!
+ * \brief speciesCheckbox handels state changes of all the species checkboxes,
+ * determines which additional pages to add.
+ * \param s the species name
+ * \param arg1 0 = unchecked, 2 = checked
+ */
 void Quiz::speciesCheckbox(string s, int arg1){
     // 0 unchecked
     // 1 partially checked
@@ -206,23 +262,6 @@ void Quiz::speciesCheckbox(string s, int arg1){
 }
 
 
-void Quiz::breedsCheckbox(string s, int arg1){
-    if(arg1 == 2){
-        pref->removeBreed(s);
-        pref->addBreed(s);
-    } else if(arg1 == 0){
-        pref->removeBreed(s);
-    }
-}
-
-void Quiz::breedRadio(string s, bool b){
-    if(b == true){
-        pref->removeBreed(s);
-        pref->addBreed(s);
-    } else {
-        pref->removeBreed(s);
-    }
-}
 void Quiz::on_finishquiz_clicked()
 {
     currentPageNum=0;

@@ -1,6 +1,11 @@
 #include "gui.h"
 #include "ui_gui.h"
 
+
+/*!
+ * \brief GUI constructor
+ * \param parent
+ */
 GUI::GUI(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::GUI)
@@ -141,7 +146,7 @@ void GUI::meetPet(Pet p){
      }
 
 
-     /*
+
      //video
 
      if(petToMeet.getVideoFiles().size() > 0){
@@ -155,7 +160,7 @@ void GUI::meetPet(Pet p){
 
 
      }
-*/
+
     //set attributes
     string sep = " - ";
     string attributes = p.getSpecies() + sep +  p.getBreed() +
@@ -538,7 +543,10 @@ void GUI::on_navMyPreferences_clicked()
     pform.loadPreferences(); //reload
 }
 
-
+/*!
+ * \brief on_preferenceFromHome_clicked to my preferences page
+ * for Adopters
+ */
 void GUI::on_preferenceFromHome_clicked()
 {
     if(userType == "adopter"){
@@ -548,9 +556,18 @@ void GUI::on_preferenceFromHome_clicked()
     }
 
 }
+/*!
+ * \brief on_navHelpButton_clicked to help page
+ * for Adopters
+ */
+void GUI::on_navHelpButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(6);
+    uinfo.helpAdopter();
+}
 
 /*!
- * \brief on_preferenceFromHome_clicked to my preferences page
+ * \brief on_findMatchFromHome_clicked to find Match page
  * for Adopters
  */
 void GUI::on_findMatchFromHome_clicked()
@@ -563,6 +580,10 @@ void GUI::on_findMatchFromHome_clicked()
 
 }
 
+/*!
+ * \brief on_manualSearchFromHome_clicked to manual search page
+ * for Adopters
+ */
 void GUI::on_manualSearchFromHome_clicked()
 {
     if(userType == "adopter"){
@@ -573,6 +594,10 @@ void GUI::on_manualSearchFromHome_clicked()
 
 }
 
+/*!
+ * \brief on_myFavoritesFromHome_clicked to my favorites page
+ * for Adopters
+ */
 void GUI::on_myFavoritesFromHome_clicked()
 {
     if(userType == "adopter"){
@@ -583,6 +608,10 @@ void GUI::on_myFavoritesFromHome_clicked()
 
 }
 
+/*!
+ * \brief on_backButton_clicked go back to previous page
+ * back button is on the meetMe page
+ */
 void GUI::on_backButton_clicked()
 {
   
@@ -608,6 +637,9 @@ void GUI::on_backButton_clicked()
     ui->stackedWidget->setCurrentIndex(previousPage);
 }
 
+/*!
+ * \brief on_loginButton_clicked login to system
+ */
 void GUI::on_loginButton_clicked()
 {
 
@@ -653,6 +685,18 @@ void GUI::on_loginButton_clicked()
     ui->password->clear();
 }
 
+/*!
+ * \brief on_password_returnPressed login to system,
+ * same functionality as login button, just with enter/return key instead
+ */
+void GUI::on_password_returnPressed()
+{
+    on_loginButton_clicked();
+}
+
+/*!
+ * \brief on_createAccountButton_clicked to create account page
+ */
 void GUI::on_createAccountButton_clicked()
 {
     //to create account page (userinfo.ui)
@@ -662,7 +706,10 @@ void GUI::on_createAccountButton_clicked()
 }
 
 
-
+/*!
+ * \brief on_ownerMyPets_clicked to My Pets page
+ * for Owners
+ */
 void GUI::on_ownerMyPets_clicked()
 {
     //go to MyPets Page
@@ -671,53 +718,69 @@ void GUI::on_ownerMyPets_clicked()
     myPets.goToMyPets();
 }
 
+/*!
+ * \brief on_ownerLogout_clicked logout of system
+ * for Owners
+ */
 void GUI::on_ownerLogout_clicked()
 {
     on_exit_clicked();
 }
 
 
-
+/*!
+ * \brief on_ownerUploadPet_clicked to upload pet page
+ * for Owners
+ */
 void GUI::on_ownerUploadPet_clicked()
 {
     ui->stackedWidget->setCurrentIndex(8);
     myPets.setOwner(owner);
     myPets.goToUploadPet();
 }
-
+/*!
+ * \brief on_ownerMyInfo_clicked to my info page
+ * for Owners
+ */
 void GUI::on_ownerMyInfo_clicked()
 {
     ui->stackedWidget->setCurrentIndex(6);
     uinfo.ownerMyInfoClicked();
 }
 
+/*!
+ * \brief on_ownerFindMatch_clicked to find match page
+ * for Owners
+ */
 void GUI::on_ownerFindMatch_clicked()
 {
     ui->stackedWidget->setCurrentIndex(11);
     fmForPets.toMainPage(owner);
 }
 
+/*!
+ * \brief on_ownerHome_clicked to home page
+ * for Owners
+ */
 void GUI::on_ownerHome_clicked()
 {
     on_navHomeButton_clicked();
 }
 
 
-void GUI::on_navHelpButton_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(6);
-    uinfo.helpAdopter();
-}
 
+
+
+/*!
+ * \brief on_ownerHelp_clicked to help page
+ * for Owners
+ */
 void GUI::on_ownerHelp_clicked()
 {
     ui->stackedWidget->setCurrentIndex(6);
     uinfo.helpOwner();
 }
 
-void GUI::on_password_returnPressed()
-{
-    on_loginButton_clicked();
-}
+
 
 

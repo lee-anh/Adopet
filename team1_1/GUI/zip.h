@@ -17,15 +17,28 @@ namespace Ui {
 class Zip;
 }
 
+/*!
+ * \brief The Zip class manages network interaction with zipcode api
+ */
 class Zip : public QWidget
 {
     Q_OBJECT
 
 public:
+    /*!
+     * \brief Zip constructor
+     * \param parent
+     */
     explicit Zip(QWidget *parent = nullptr);
     ~Zip();
+
+    /*!
+     * \brief zip intiates the api call
+     * \param code zipcode
+     * \param distance in miles, string
+     */
     void zip(string code, string distance);
-    vector<string> getZipCodes();
+
 
 
 
@@ -35,8 +48,15 @@ private:
     string results;
     vector<string> zipCodes;
 
+    /*!
+     * \brief writeToFile write api response results to file
+     */
     void writeToFile();
 
+    /*!
+     * \brief parseResults parses the output file
+     * \return vector of zipcodes in strings
+     */
     vector<string> parseResults();
 
     QString filename;

@@ -6,15 +6,15 @@ using namespace std;
 
 int main()
 {
-    /*
-    PeopleRandomizer *test = new PeopleRandomizer(10);
+
+    PeopleRandomizer *test = new PeopleRandomizer(100);
     test->writeToCSV();
     delete test;
-    */
 
-    PetRandomizer* test1 = new PetRandomizer(100);
+
+    //PetRandomizer* test1 = new PetRandomizer(100);
     //test1->getFileNameBySpecies("rabbit");
 
-    test1->writeToCSV();
+    //test1->writeToCSV();
     return 0;
 }

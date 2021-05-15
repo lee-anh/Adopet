@@ -410,11 +410,6 @@
          <string>Within 50 miles</string>
         </property>
        </item>
-       <item>
-        <property name="text">
-         <string/>
-        </property>
-       </item>
       </widget>
      </item>
      <item>
@@ -442,7 +437,7 @@
    <item row="5" column="1">
     <widget class="QStackedWidget" name="stackedWidget_2">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="galleryMode">
       <layout class="QVBoxLayout" name="verticalLayout_2">
