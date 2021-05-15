@@ -54,6 +54,7 @@ DBSearch::~DBSearch()
  * \return
  */
 void DBSearch::search(string s){
+
     //clear vectors in the constraints vector, not constraint vector itself
     for(int i = 0; i < (int) constraints.size(); i++){
         constraints[i].clear();
@@ -230,7 +231,11 @@ bool DBSearch::removeFromAttributes(string attribute, string category){
  * \brief runNewQuery, driver method for running a query to the database
  * \return how many matches in the database for a given query
  */
-int DBSearch::runNewQuery(){
+int DBSearch::runNewQuery(bool dist){
+    distance = dist;
+    if(distance == true){
+        zips = parseFile();
+    }
     //clear the current vector of matchingPets
     matchingPets.clear();
 
@@ -293,20 +298,7 @@ string DBSearch::getConstraints(){
     return s.substr(0, s.size() - 1);
 }
 
-vector<Pet> DBSearch::distanceMatters(){
-    vector<Pet> newMatchingPets;
-    vector<string> zips = parseFile();
-    for(int i = 0; i < (int) matchingPets.size(); i++){
-        for(int j = 0; j < (int) zips.size(); j++){
-            if(matchingPets.at(i).getOwner(filepath).getZipCode() == stoi(zips.at(j))){
-                newMatchingPets.push_back(matchingPets.at(i));
-            }
-        }
-    }
 
-    matchingPets = newMatchingPets;
-    return matchingPets;
-}
 
 /*!
  * \brief queryDB, helper method to runNewQuery()
@@ -335,8 +327,22 @@ int DBSearch::queryDB(string qry){
 
             //creating a pet with the information above
             Pet p = Pet(id, name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+            if(distance == false){
+                matchingPets.push_back(p);
+            } else {
+                //get zipcode and make it into the right format.
+                int zip = p.getOwner(filepath).getZipCode();
+                string zipString = to_string(zip);
+                if(zipString.size() == 4){
+                    zipString = "0" + zipString;
+                }
+                for(int a = 0; a < (int) zips.size(); a++){
+                    if(zips.at(a) == zipString){
+                        matchingPets.push_back(p);
+                    }
+                }
+            }
 
-            matchingPets.push_back(p);
 
 
             count++;
@@ -379,9 +385,10 @@ void DBSearch::printMatchingVec(){
  * \brief randomShuffle the matchingPets vector
  */
 
-void DBSearch::randomShuffle(){
+void DBSearch::randomShuffle(bool dist){
+
     search(""); //step 1
-    runNewQuery(); //step 2
+    runNewQuery(dist); //step 2
 
     //a seed dependant on time
     unsigned seed = chrono::system_clock::now().time_since_epoch().count();

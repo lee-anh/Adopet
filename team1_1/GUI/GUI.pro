@@ -6,10 +6,10 @@ CONFIG += c++11
 QT += core
 QT += sql
 
-macx{
+
 QT += multimedia
 QT += multimediawidgets
-}
+
 
 QT += network
 

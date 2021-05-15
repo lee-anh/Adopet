@@ -1,6 +1,11 @@
 #include "manualsearch.h"
 #include "ui_manualsearch.h"
 
+
+/*!
+ * \brief ManualSearch constructor
+ * \param parent
+ */
 ManualSearch::ManualSearch(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ManualSearch)
@@ -22,15 +27,10 @@ ManualSearch::ManualSearch(QWidget *parent) :
 
 
     //manual search doesn't display any results when the user starts
-    //search->runNewQuery();
+
     petgal.updatePetVec(search->getPetVec());
     ui->pageLine->setText("Search for pets using search bar and checkboxes!");
     ui->searchingFor->clear();
-    //petgal.displayPets(0);
-
-
-
-
 
 }
 
@@ -40,6 +40,31 @@ ManualSearch::~ManualSearch()
     delete ui;
 }
 
+
+/*!
+ * \brief setSavedList sets up instance variables like saved list, zipcode
+ * sets up save buttons and location combo box
+ * basically needs to be called when a constructor is called
+ * \param s
+ * \param zipcode
+ */
+void ManualSearch::setSavedList(SavedList s, string zipcode){
+    clearCheckBoxes();
+    ui->location->setCurrentIndex(0);
+    sl = s;
+    zip = zipcode;
+    if(mode == "gallery"){
+        loadSaveButtons({ui->save1, ui->save2, ui->save3});
+    } else {
+        loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
+    }
+
+}
+
+/*!
+ * \brief galleryMode set up for gallery mode, sets up pet gallery,
+ * navigates to correct page
+ */
 void ManualSearch::galleryMode(){
     ui->viewModeComboBox->setCurrentIndex(1);
     //able to initalize petgal here b/c username doesn't matter
@@ -55,6 +80,10 @@ void ManualSearch::galleryMode(){
 
 }
 
+/*!
+ * \brief listMode set up for list mode, sets up pet gallery,
+ * navigates to correct page
+ */
 void ManualSearch::listMode(){
     ui->viewModeComboBox->setCurrentIndex(2);
     petgal = PetGallery(true, 6, ui->previousa, ui->nexta, ui->pageLinea,
@@ -70,18 +99,14 @@ void ManualSearch::listMode(){
 
 }
 
-void ManualSearch::setSavedList(SavedList s, string zipcode){
-    sl = s;
-    zip = zipcode;
-    if(mode == "gallery"){
-        loadSaveButtons({ui->save1, ui->save2, ui->save3});
-    } else {
-        loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
-    }
 
-}
-
-
+/*!
+ * \brief checkBoxSearch search used by all the checkboxes,
+ * adds and removes attributes
+ * \param wordToSearch attribute
+ * \param category of wordToSearch
+ * \param arg1 0 = remove, 2 = add
+ */
 void ManualSearch::checkBoxSearch(string wordToSearch, string category, int arg1){
     // 0 unchecked
     // 1 partially checked
@@ -96,14 +121,15 @@ void ManualSearch::checkBoxSearch(string wordToSearch, string category, int arg1
 
 
     //rerun the query
-    search->runNewQuery();
+    //search->runNewQuery();
 
     //update the gallery and display
     if(ui->location->currentIndex() == 0){
-        petgal.updatePetVec(search->getPetVec());
+        search->runNewQuery(false);
     } else {
-        petgal.updatePetVec(search->distanceMatters());
+        search->runNewQuery(true);
     }
+    petgal.updatePetVec(search->getPetVec());
     petgal.setPageNum(1);
     petgal.displayPets(0);
 
@@ -116,31 +142,85 @@ void ManualSearch::checkBoxSearch(string wordToSearch, string category, int arg1
 
 }
 
-void ManualSearch::stateChanged(int viewMode, int distance){
-    ui->searchingFor->clear();
-    if(viewMode == 1){ //gallery mode
-        if(distance == 0){
-            galleryMode();
-        } else if (distance == 1){
-            // 20
-            APICall("20");
-        } else if (distance == 2){
-            //50
-            APICall("50");
-        }
+/*!
+ * \brief clearCheckBoxes clear all the checkboxes
+ */
+void ManualSearch::clearCheckBoxes(){
+    //clear all the checkboxes!
+    //could potentially iterate over everything to optimize
 
-    } else if (viewMode == 2){ //list mode
-        if(distance == 0){
-            listMode();
-        } else if (distance == 1){
-            // 20
-            APICall("20");
-        } else if (distance == 2){
-            //50
-            APICall("50");
+
+    ui->dogCheckBox->setChecked(false);
+    ui->catCheckBox->setChecked(false);
+    ui->rabbitCheckBox->setChecked(false);
+    ui->rodentCheckBox->setChecked(false);
+    ui->fishCheckBox->setChecked(false);
+    ui->birdCheckBox->setChecked(false);
+    ui->youngCheckBox->setChecked(false);
+    ui->adultCheckBox->setChecked(false);
+    ui->seniorCheckBox->setChecked(false);
+    ui->maleCheckBox->setChecked(false);
+    ui->femaleCheckBox->setChecked(false);
+    ui->smallCheckBox->setChecked(false);
+    ui->mediumCheckBox->setChecked(false);
+    ui->largeCheckBox->setChecked(false);
+    ui->kidsCheckBox->setChecked(false);
+    ui->happyCheckBox->setChecked(false);
+    ui->friendlyCheckBox->setChecked(false);
+    ui->introvertedCheckBox->setChecked(false);
+    ui->activeCheckBox->setChecked(false);
+    ui->vigilantCheckBox->setChecked(false);
+    ui->bestFriendsCheckBox->setChecked(false);
+    ui->humaneSocietyCheckBox->setChecked(false);
+    ui->animalWelfareLeagueCheckBox->setChecked(false);
+
+}
+
+/*!
+ * \brief loadSaveButtons load the save buttons, determines what kind of heart
+ * to display
+ * \param saveButtons list of saveButtons
+ */
+void ManualSearch::loadSaveButtons(vector<QPushButton *> saveButtons){
+    for(int i = 0; i < (int) saveButtons.size(); i++){
+        if((int) petgal.getPetVec().size() > i){
+        if(sl.isSavedPet(petgal.getPet(i)) == true){
+            saveButtons[i]->setChecked(true);
+            saveButtons[i]->setText("♥");
+            saveButtons[i]->setStyleSheet("color: red; border: none");
+        } else{
+            saveButtons[i]->setChecked(false);
+            saveButtons[i]->setText("♡");
+            saveButtons[i]->setStyleSheet("color: black");
         }
     }
+    }
 }
+
+/*!
+ * \brief saveButton handles different saveButton changes
+ * \param saveButton the button object
+ * \param index which pet
+ */
+void ManualSearch::saveButton(QPushButton* saveButton, int index){
+    if(saveButton->isChecked() == false){
+        sl.unsavePet(petgal.getPet(index));
+        saveButton->setText("♡");
+        saveButton->setStyleSheet("color: black");
+        emit heartClicked(petgal.getPet(index), false);
+
+    } else if (saveButton->isChecked() == true){
+        sl.savePet(petgal.getPet(index));
+        saveButton->setText("♥");
+        saveButton->setStyleSheet("color: red; border: none");
+        emit heartClicked(petgal.getPet(index), true);
+    }
+}
+
+/*!
+ * \brief APICall call the zipcode api
+ * \param distance in miles
+ */
 void ManualSearch::APICall(string distance){
     if(zip.size() == 4){
         zip = "0" + zip;
@@ -149,9 +229,57 @@ void ManualSearch::APICall(string distance){
     zp.zip(zip, distance);
 }
 
+/*!
+ * \brief finishedAPICall process the api's output
+ * update screen info to reflect changes
+ */
 void ManualSearch::finishedAPICall(){
 
-    petgal.updatePetVec(search->distanceMatters());
+    search->runNewQuery(true);
+    petgal.updatePetVec(search->getPetVec());
+    petgal.displayPets(0);
+    petgal.setPageNum(1);
+    if(mode == "gallery"){
+        //galleryMode();
+        loadSaveButtons({ui->save1, ui->save2, ui->save3});
+    } else {
+        //listMode();
+        loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
+    }
+
+
+}
+
+
+/*!
+ * \brief on_searchButton_clicked query the database with a custom string,
+ * processes query and displays results
+ */
+
+void ManualSearch::on_searchButton_clicked()
+{
+    clearCheckBoxes();
+    //ui->searchingForLabel->clear();
+
+    //take string from search bar and run query on it
+    QString searchInput = ui->searchBar->text();
+    string searchString = searchInput.toStdString();
+    search->search(searchString);
+
+    if(ui->location->currentIndex() == 0){
+        search->runNewQuery(false);
+    } else {
+        search->runNewQuery(true);
+    }
+
+    cout << search->getConstraints() << endl;
+
+    ui->searchingFor->setText("Searching for: " + QString::fromStdString(search->getConstraints()));
+
+
+    //update the pet gallery
+    petgal.updatePetVec(search->getPetVec());
+
     petgal.displayPets(0);
     petgal.setPageNum(1);
     if(mode == "gallery"){
@@ -159,7 +287,87 @@ void ManualSearch::finishedAPICall(){
     } else {
         loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
     }
+}
 
+/*!
+ * \brief on_searchBar_returnPressed acts the same as search button clicked,
+ * just uses the return/enter key and not the button
+ */
+void ManualSearch::on_searchBar_returnPressed()
+{
+    on_searchButton_clicked();
+}
+
+/*!
+ * \brief on_surpriseMe_clicked randomizes the results,
+ * no constraints taken into account
+ */
+void ManualSearch::on_surpriseMe_clicked()
+{
+    clearCheckBoxes();
+
+    if(ui->location->currentIndex() == 0){
+        search->randomShuffle(false);
+    } else {
+        search->randomShuffle(true);
+    }
+
+    petgal.updatePetVec(search->getPetVec());
+    petgal.displayPets(0);
+    petgal.setPageNum(1);
+    if(mode == "gallery"){
+        loadSaveButtons({ui->save1, ui->save2, ui->save3});
+    } else {
+        loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
+    }
+}
+
+
+/*!
+ * \brief on_viewModeComboBox_currentIndexChanged
+ * change the view mode
+ * \param index 1 = gallery, 2 = list
+ */
+void ManualSearch::on_viewModeComboBox_currentIndexChanged(int index)
+{
+    //stateChanged(index, ui->location->currentIndex());
+
+    ui->searchingFor->clear();
+    if(index == 1){ //gallery mode
+        mode = "gallery";
+        galleryMode();
+    } else if (index == 2) {
+        mode = "list";
+        listMode();
+    }
+}
+
+/*!
+ * \brief on_location_currentIndexChanged
+ * change the location mode
+ * \param index 1 = 20 miles,  2= 50 miles
+ */
+void ManualSearch::on_location_currentIndexChanged(int index){
+    //stateChanged(ui->viewModeComboBox->currentIndex(), index);
+
+    if (index == 1){
+        // 20
+        APICall("20");
+    } else if (index == 2){
+        //50
+        APICall("50");
+    } else {
+        search->runNewQuery(false);
+        petgal.updatePetVec(search->getPetVec());
+        petgal.displayPets(0);
+        petgal.setPageNum(1);
+
+        if(ui->viewModeComboBox->currentIndex() == 1){
+            loadSaveButtons({ui->save1, ui->save2, ui->save3});
+        } else if (ui->viewModeComboBox->currentIndex() == 2){
+            loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
+        }
+    }
 }
 
 //CHECKBOXES
@@ -261,67 +469,7 @@ void ManualSearch::on_next_clicked()
     loadSaveButtons({ui->save1, ui->save2, ui->save3});
 }
 
-void ManualSearch::on_searchButton_clicked()
-{
-    clearCheckBoxes();
-    //ui->searchingForLabel->clear();
 
-    //take string from search bar and run query on it
-    QString searchInput = ui->searchBar->text();
-    string searchString = searchInput.toStdString();
-    search->search(searchString);
-    search->runNewQuery();
-
-    cout << search->getConstraints() << endl;
-
-    ui->searchingFor->setText("Searching for: " + QString::fromStdString(search->getConstraints()));
-
-
-    //update the pet gallery
-    if(ui->location->currentIndex() == 0){
-        petgal.updatePetVec(search->getPetVec());
-    } else {
-        petgal.updatePetVec(search->distanceMatters());
-    }
-    petgal.displayPets(0);
-    petgal.setPageNum(1);
-    if(mode == "gallery"){
-        loadSaveButtons({ui->save1, ui->save2, ui->save3});
-    } else {
-        loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
-    }
-}
-
-void ManualSearch::clearCheckBoxes(){
-    //clear all the checkboxes!
-    //could potentially iterate over everything to optimize
-
-
-    ui->dogCheckBox->setChecked(false);
-    ui->catCheckBox->setChecked(false);
-    ui->rabbitCheckBox->setChecked(false);
-    ui->rodentCheckBox->setChecked(false);
-    ui->fishCheckBox->setChecked(false);
-    ui->birdCheckBox->setChecked(false);
-    ui->youngCheckBox->setChecked(false);
-    ui->adultCheckBox->setChecked(false);
-    ui->seniorCheckBox->setChecked(false);
-    ui->maleCheckBox->setChecked(false);
-    ui->femaleCheckBox->setChecked(false);
-    ui->smallCheckBox->setChecked(false);
-    ui->mediumCheckBox->setChecked(false);
-    ui->largeCheckBox->setChecked(false);
-    ui->kidsCheckBox->setChecked(false);
-    ui->happyCheckBox->setChecked(false);
-    ui->friendlyCheckBox->setChecked(false);
-    ui->introvertedCheckBox->setChecked(false);
-    ui->activeCheckBox->setChecked(false);
-    ui->vigilantCheckBox->setChecked(false);
-    ui->bestFriendsCheckBox->setChecked(false);
-    ui->humaneSocietyCheckBox->setChecked(false);
-    ui->animalWelfareLeagueCheckBox->setChecked(false);
-
-}
 
 void ManualSearch::on_link1_clicked()
 {
@@ -356,71 +504,9 @@ void ManualSearch::on_save3_clicked()
     saveButton(ui->save3, 2);
 }
 
-void ManualSearch::saveButton(QPushButton* saveButton, int index){
-    if(saveButton->isChecked() == false){
-        sl.unsavePet(petgal.getPet(index));
-        saveButton->setText("♡");
-        saveButton->setStyleSheet("color: black");
-        emit heartClicked(petgal.getPet(index), false);
 
-    } else if (saveButton->isChecked() == true){
-        sl.savePet(petgal.getPet(index));
-        saveButton->setText("♥");
-        saveButton->setStyleSheet("color: red; border: none");
-        emit heartClicked(petgal.getPet(index), true);
-    }
-}
 
-void ManualSearch::loadSaveButtons(vector<QPushButton *> saveButtons){
-    for(int i = 0; i < (int) saveButtons.size(); i++){
-        if((int) petgal.getPetVec().size() > i){
-        if(sl.isSavedPet(petgal.getPet(i)) == true){
-            saveButtons[i]->setChecked(true);
-            saveButtons[i]->setText("♥");
-            saveButtons[i]->setStyleSheet("color: red; border: none");
-        } else{
-            saveButtons[i]->setChecked(false);
-            saveButtons[i]->setText("♡");
-            saveButtons[i]->setStyleSheet("color: black");
-        }
-    }
-    }
-}
 
-void ManualSearch::on_surpriseMe_clicked()
-{
-    clearCheckBoxes();
-    search->randomShuffle();
-    petgal.updatePetVec(search->getPetVec());
-    petgal.displayPets(0);
-    petgal.setPageNum(1);
-    if(mode == "gallery"){
-        loadSaveButtons({ui->save1, ui->save2, ui->save3});
-    } else {
-        loadSaveButtons({ui->save1a, ui->save2a, ui->save3a, ui->save4a, ui->save5a, ui->save6a});
-    }
-}
-
-void ManualSearch::on_viewModeComboBox_currentIndexChanged(int index)
-{
-    stateChanged(index, ui->location->currentIndex());
-
-    /*
-
-    if(index == 1){ //gallery mode
-        ui->searchingFor->clear();
-        galleryMode();
-    } else if (index == 2){ //list mode
-        ui->searchingFor->clear();
-        listMode();
-
-    }
-    */
-}
-
-void ManualSearch::on_location_currentIndexChanged(int index){
-    stateChanged(ui->viewModeComboBox->currentIndex(), index);
-}
 
 void ManualSearch::on_nexta_clicked()
 {
@@ -502,7 +588,3 @@ void ManualSearch::on_save6a_clicked()
 
 
 
-void ManualSearch::on_searchBar_returnPressed()
-{
-    on_searchButton_clicked();
-}

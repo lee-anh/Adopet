@@ -422,6 +422,9 @@ vector<pair<Pet, int>> Matchmaking::findMatchesForAdopterDistance(string adopter
 
             int zip = pet.getOwner(dbName).getZipCode();
             string zipString = to_string(zip);
+            if(zipString.size() == 4){
+                zipString = "0" + zipString;
+            }
             for(int i = 0; i < (int) zips.size(); i++){
                 if(zips.at(i) == zipString){
                     //gathering the scores based on whether it matches user preferences

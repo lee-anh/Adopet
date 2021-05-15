@@ -17,8 +17,8 @@ class Owner{
 
 public:
     Owner();
-    Owner(string n, string a, int zip, int pN, string e);
-    Owner(string database, string n, string a, int zip, int pN, string e);
+    Owner(string n, string a, int zip, long pN, string e);
+    Owner(string database, string n, string a, int zip, long pN, string e);
     ~Owner();
     void setName(string n);         //Mutator function for name
     string getName();               //Accessor function for name
@@ -26,8 +26,8 @@ public:
     string getAddress();            //Accessor function for address
     void setZipCode(int z);         //Mutator function for zip code
     int getZipCode();               //Accessor function for zip code
-    void setPhoneNumber(int p);     //Mutator function for phone number
-    int getPhoneNumber();           //Accessor function for phone number
+    void setPhoneNumber(long p);     //Mutator function for phone number
+    long getPhoneNumber();           //Accessor function for phone number
     void setEmail(string e);        //Mutator function for email
     string getEmail();              //Accessor function for email
     Pet makePet(QSqlQuery query);   //makes and retrieves a Pet by passing the query in a DB. Takes in a query
@@ -47,7 +47,7 @@ private:
     string name;
     string address;
     int zipCode;
-    int phoneNumber;
+    long phoneNumber;
     string email;
 
     vector<Pet> pets;                  //stores the pets of the owner

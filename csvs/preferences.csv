@@ -1,254 +1,2241 @@
-user1,bird,species
-user1,rodent,species
+user1,cat,species
 user1,californian,breed
 user1,freshwater,breed
-user1,gerbil,breed
 user1,guinea pig,breed
-user1,hamster,breed
-user1,hound,breed
-user1,lionhead,breed
-user1,main coon,breed
-user1,parakeet,breed
-user1,persian,breed
-user1,ragdoll,breed
+user1,lovebird,breed
+user1,mouse ,breed
+user1,non-sporting,breed
+user1,parrot,breed
 user1,rat,breed
-user1,saltwater,breed
+user1,rex,breed
 user1,siamese,breed
 user1,silver fox,breed
-user1,senior,age
+user1,sporting,breed
+user1,terrier,breed
+user1,working,breed
+user1,adult,age
 user1,young,age
-user1,large,size
+user1,small,size
 user1,active,temperament
-user1,friendly,temperament
-user1,happy,temperament
+user1,introverted,temperament
+user1,female,gender
 user1,male,gender
 user1,animals,goodWith
+user1,kids,goodWith
 user1,animal welfare league,shelter
 user1,best friends,shelter
-user1,humane society,shelter
-user2,cat,species
-user2,gerbil,breed
-user2,lionhead,breed
+user2,dog,species
+user2,rabbit,species
+user2,herding,breed
 user2,lovebird,breed
-user2,main coon,breed
-user2,parakeet,breed
-user2,rat,breed
-user2,rex,breed
-user2,saltwater,breed
-user2,siamese,breed
-user2,sporting,breed
-user2,terrier,breed
-user2,working,breed
 user2,young,age
 user2,small,size
-user2,active,temperament
 user2,happy,temperament
-user2,vigilant,temperament
 user2,male,gender
-user2,animals,goodWith
+user2,kids,goodWith
 user2,animal welfare league,shelter
+user2,best friends,shelter
 user2,humane society,shelter
-user3,bird,species
-user3,cat,species
-user3,dog,species
 user3,fish,species
 user3,rabbit,species
 user3,californian,breed
-user3,gerbil,breed
-user3,guinea pig,breed
+user3,freshwater,breed
+user3,hamster,breed
 user3,herding,breed
-user3,hound,breed
 user3,lionhead,breed
 user3,lovebird,breed
-user3,mouse,breed
+user3,maine coon,breed
+user3,non-sporting,breed
 user3,parakeet,breed
-user3,parrot,breed
 user3,persian,breed
-user3,ragdoll,breed
+user3,rat,breed
+user3,rex,breed
 user3,saltwater,breed
-user3,siamese,breed
 user3,silver fox,breed
-user3,terrier,breed
+user3,sporting,breed
 user3,toy,breed
-user3,senior,age
-user3,large,size
+user3,working,breed
+user3,young,age
 user3,medium,size
 user3,small,size
-user3,friendly,temperament
-user3,male,gender
-user3,animals,goodWith
-user3,best friends,shelter
+user3,introverted,temperament
+user3,vigilant,temperament
+user3,female,gender
+user3,kids,goodWith
+user3,animal welfare league,shelter
 user3,humane society,shelter
+user4,cat,species
 user4,rabbit,species
-user4,rodent,species
-user4,anogra,breed
-user4,guinea pig,breed
+user4,angora,breed
+user4,californian,breed
+user4,gerbil ,breed
+user4,hamster,breed
+user4,hound,breed
+user4,lionhead,breed
 user4,lovebird,breed
+user4,mouse ,breed
 user4,non-sporting,breed
+user4,parakeet,breed
+user4,parrot,breed
 user4,persian,breed
 user4,rat,breed
-user4,rex,breed
+user4,saltwater,breed
+user4,silver fox,breed
 user4,sporting,breed
+user4,terrier,breed
 user4,toy,breed
 user4,working,breed
-user4,senior,age
-user4,young,age
+user4,adult,age
 user4,large,size
-user4,medium,size
-user4,friendly,temperament
-user4,happy,temperament
+user4,small,size
+user4,active,temperament
 user4,vigilant,temperament
-user4,male,gender
+user4,female,gender
 user4,animals,goodWith
 user4,humane society,shelter
-user5,cat,species
-user5,rabbit,species
+user5,bird,species
+user5,fish,species
 user5,rodent,species
-user5,anogra,breed
 user5,freshwater,breed
-user5,parrot,breed
+user5,gerbil ,breed
+user5,guinea pig,breed
+user5,hamster,breed
+user5,herding,breed
+user5,hound,breed
+user5,lionhead,breed
+user5,maine coon,breed
+user5,non-sporting,breed
 user5,persian,breed
+user5,ragdoll,breed
 user5,rat,breed
 user5,rex,breed
+user5,siamese,breed
 user5,silver fox,breed
+user5,terrier,breed
+user5,toy,breed
 user5,working,breed
 user5,adult,age
-user5,senior,age
-user5,young,age
-user5,large,size
+user5,medium,size
 user5,small,size
 user5,active,temperament
-user5,friendly,temperament
-user5,happy,temperament
-user5,introverted,temperament
+user5,vigilant,temperament
 user5,female,gender
+user5,male,gender
 user5,animals,goodWith
-user5,kids,goodWith
+user5,best friends,shelter
 user5,humane society,shelter
 user6,bird,species
+user6,dog,species
 user6,rodent,species
-user6,californian,breed
-user6,freshwater,breed
-user6,gerbil,breed
-user6,guinea pig,breed
+user6,herding,breed
 user6,hound,breed
-user6,lionhead,breed
-user6,main coon,breed
+user6,lovebird,breed
+user6,mouse ,breed
+user6,non-sporting,breed
 user6,parakeet,breed
-user6,parrot,breed
 user6,rat,breed
-user6,silver fox,breed
-user6,terrier,breed
-user6,toy,breed
+user6,rex,breed
 user6,working,breed
 user6,adult,age
 user6,senior,age
-user6,young,age
-user6,medium,size
+user6,large,size
 user6,small,size
-user6,active,temperament
-user6,happy,temperament
+user6,friendly,temperament
 user6,introverted,temperament
 user6,male,gender
 user6,kids,goodWith
 user6,animal welfare league,shelter
-user6,humane society,shelter
+user6,best friends,shelter
 user7,bird,species
 user7,cat,species
-user7,dog,species
-user7,rodent,species
-user7,californian,breed
-user7,guinea pig,breed
+user7,fish,species
+user7,angora,breed
+user7,gerbil ,breed
 user7,hamster,breed
+user7,herding,breed
 user7,lionhead,breed
 user7,lovebird,breed
-user7,parrot,breed
-user7,rat,breed
+user7,maine coon,breed
+user7,mouse ,breed
+user7,ragdoll,breed
 user7,siamese,breed
-user7,silver fox,breed
-user7,terrier,breed
+user7,adult,age
 user7,young,age
-user7,large,size
+user7,small,size
+user7,active,temperament
 user7,friendly,temperament
-user7,happy,temperament
-user7,introverted,temperament
 user7,vigilant,temperament
 user7,female,gender
+user7,animals,goodWith
 user7,kids,goodWith
 user7,best friends,shelter
-user7,humane society,shelter
-user8,bird,species
-user8,cat,species
-user8,dog,species
 user8,fish,species
-user8,californian,breed
+user8,rabbit,species
+user8,rodent,species
+user8,freshwater,breed
 user8,hamster,breed
-user8,herding,breed
 user8,hound,breed
-user8,lionhead,breed
-user8,non-sporting,breed
-user8,parrot,breed
+user8,maine coon,breed
 user8,rat,breed
-user8,rex,breed
 user8,saltwater,breed
-user8,siamese,breed
-user8,sporting,breed
 user8,toy,breed
 user8,adult,age
 user8,young,age
 user8,large,size
-user8,medium,size
-user8,active,temperament
+user8,friendly,temperament
 user8,happy,temperament
 user8,introverted,temperament
-user8,vigilant,temperament
 user8,female,gender
 user8,animals,goodWith
-user8,kids,goodWith
 user8,best friends,shelter
-user8,humane society,shelter
 user9,cat,species
 user9,dog,species
-user9,herding,breed
-user9,hound,breed
+user9,californian,breed
+user9,hamster,breed
+user9,lionhead,breed
 user9,lovebird,breed
-user9,main coon,breed
 user9,parrot,breed
+user9,persian,breed
+user9,saltwater,breed
+user9,siamese,breed
 user9,terrier,breed
-user9,young,age
+user9,toy,breed
+user9,working,breed
+user9,adult,age
 user9,large,size
 user9,medium,size
 user9,active,temperament
-user9,vigilant,temperament
 user9,female,gender
 user9,kids,goodWith
 user9,animal welfare league,shelter
-user9,humane society,shelter
-user10,fish,species
-user10,californian,breed
-user10,freshwater,breed
-user10,gerbil,breed
-user10,guinea pig,breed
-user10,hamster,breed
-user10,herding,breed
+user10,cat,species
+user10,rodent,species
 user10,lionhead,breed
-user10,lovebird,breed
-user10,main coon,breed
-user10,non-sporting,breed
-user10,ragdoll,breed
-user10,rat,breed
-user10,siamese,breed
-user10,silver fox,breed
-user10,toy,breed
-user10,working,breed
 user10,adult,age
 user10,young,age
-user10,large,size
+user10,medium,size
 user10,small,size
 user10,friendly,temperament
 user10,female,gender
-user10,male,gender
+user10,animals,goodWith
 user10,kids,goodWith
 user10,animal welfare league,shelter
-user10,best friends,shelter
-user10,humane society,shelter
+user11,cat,species
+user11,siamese,breed
+user11,terrier,breed
+user11,senior,age
+user11,large,size
+user11,medium,size
+user11,introverted,temperament
+user11,female,gender
+user11,animals,goodWith
+user11,kids,goodWith
+user11,humane society,shelter
+user12,bird,species
+user12,rodent,species
+user12,hamster,breed
+user12,herding,breed
+user12,lionhead,breed
+user12,lovebird,breed
+user12,senior,age
+user12,large,size
+user12,medium,size
+user12,active,temperament
+user12,introverted,temperament
+user12,vigilant,temperament
+user12,male,gender
+user12,kids,goodWith
+user12,animal welfare league,shelter
+user12,best friends,shelter
+user12,humane society,shelter
+user13,cat,species
+user13,rodent,species
+user13,freshwater,breed
+user13,hamster,breed
+user13,herding,breed
+user13,hound,breed
+user13,lionhead,breed
+user13,lovebird,breed
+user13,non-sporting,breed
+user13,parakeet,breed
+user13,parrot,breed
+user13,persian,breed
+user13,rat,breed
+user13,saltwater,breed
+user13,siamese,breed
+user13,terrier,breed
+user13,toy,breed
+user13,adult,age
+user13,senior,age
+user13,medium,size
+user13,small,size
+user13,active,temperament
+user13,friendly,temperament
+user13,male,gender
+user13,kids,goodWith
+user13,animal welfare league,shelter
+user13,humane society,shelter
+user14,bird,species
+user14,dog,species
+user14,fish,species
+user14,rodent,species
+user14,freshwater,breed
+user14,hamster,breed
+user14,herding,breed
+user14,hound,breed
+user14,mouse ,breed
+user14,non-sporting,breed
+user14,ragdoll,breed
+user14,saltwater,breed
+user14,siamese,breed
+user14,sporting,breed
+user14,terrier,breed
+user14,toy,breed
+user14,working,breed
+user14,senior,age
+user14,large,size
+user14,friendly,temperament
+user14,happy,temperament
+user14,introverted,temperament
+user14,male,gender
+user14,kids,goodWith
+user14,humane society,shelter
+user15,bird,species
+user15,cat,species
+user15,fish,species
+user15,rabbit,species
+user15,angora,breed
+user15,hamster,breed
+user15,lionhead,breed
+user15,lovebird,breed
+user15,maine coon,breed
+user15,parakeet,breed
+user15,ragdoll,breed
+user15,rat,breed
+user15,rex,breed
+user15,saltwater,breed
+user15,siamese,breed
+user15,silver fox,breed
+user15,sporting,breed
+user15,terrier,breed
+user15,toy,breed
+user15,adult,age
+user15,young,age
+user15,large,size
+user15,happy,temperament
+user15,vigilant,temperament
+user15,female,gender
+user15,male,gender
+user15,animals,goodWith
+user15,animal welfare league,shelter
+user15,humane society,shelter
+user16,bird,species
+user16,cat,species
+user16,dog,species
+user16,fish,species
+user16,californian,breed
+user16,lovebird,breed
+user16,non-sporting,breed
+user16,persian,breed
+user16,silver fox,breed
+user16,toy,breed
+user16,young,age
+user16,small,size
+user16,active,temperament
+user16,friendly,temperament
+user16,introverted,temperament
+user16,male,gender
+user16,animals,goodWith
+user16,kids,goodWith
+user16,best friends,shelter
+user17,bird,species
+user17,cat,species
+user17,dog,species
+user17,fish,species
+user17,rabbit,species
+user17,angora,breed
+user17,freshwater,breed
+user17,hamster,breed
+user17,lionhead,breed
+user17,lovebird,breed
+user17,non-sporting,breed
+user17,parakeet,breed
+user17,parrot,breed
+user17,ragdoll,breed
+user17,rat,breed
+user17,rex,breed
+user17,saltwater,breed
+user17,siamese,breed
+user17,silver fox,breed
+user17,working,breed
+user17,adult,age
+user17,senior,age
+user17,young,age
+user17,large,size
+user17,medium,size
+user17,active,temperament
+user17,female,gender
+user17,kids,goodWith
+user17,best friends,shelter
+user18,bird,species
+user18,angora,breed
+user18,californian,breed
+user18,freshwater,breed
+user18,guinea pig,breed
+user18,hamster,breed
+user18,lovebird,breed
+user18,maine coon,breed
+user18,persian,breed
+user18,ragdoll,breed
+user18,siamese,breed
+user18,senior,age
+user18,young,age
+user18,small,size
+user18,active,temperament
+user18,happy,temperament
+user18,introverted,temperament
+user18,female,gender
+user18,animals,goodWith
+user18,animal welfare league,shelter
+user19,dog,species
+user19,rabbit,species
+user19,hound,breed
+user19,parrot,breed
+user19,terrier,breed
+user19,senior,age
+user19,small,size
+user19,active,temperament
+user19,introverted,temperament
+user19,male,gender
+user19,animals,goodWith
+user19,kids,goodWith
+user19,animal welfare league,shelter
+user20,cat,species
+user20,dog,species
+user20,rabbit,species
+user20,angora,breed
+user20,californian,breed
+user20,gerbil ,breed
+user20,hamster,breed
+user20,hound,breed
+user20,lionhead,breed
+user20,lovebird,breed
+user20,mouse ,breed
+user20,non-sporting,breed
+user20,parrot,breed
+user20,persian,breed
+user20,ragdoll,breed
+user20,saltwater,breed
+user20,siamese,breed
+user20,terrier,breed
+user20,toy,breed
+user20,senior,age
+user20,large,size
+user20,introverted,temperament
+user20,vigilant,temperament
+user20,female,gender
+user20,male,gender
+user20,animals,goodWith
+user20,animal welfare league,shelter
+user20,humane society,shelter
+user21,dog,species
+user21,angora,breed
+user21,freshwater,breed
+user21,mouse ,breed
+user21,parakeet,breed
+user21,persian,breed
+user21,siamese,breed
+user21,senior,age
+user21,young,age
+user21,large,size
+user21,small,size
+user21,active,temperament
+user21,friendly,temperament
+user21,happy,temperament
+user21,vigilant,temperament
+user21,female,gender
+user21,male,gender
+user21,animals,goodWith
+user21,best friends,shelter
+user21,humane society,shelter
+user22,bird,species
+user22,cat,species
+user22,rabbit,species
+user22,gerbil ,breed
+user22,lovebird,breed
+user22,persian,breed
+user22,ragdoll,breed
+user22,sporting,breed
+user22,adult,age
+user22,young,age
+user22,small,size
+user22,introverted,temperament
+user22,female,gender
+user22,animals,goodWith
+user22,kids,goodWith
+user22,animal welfare league,shelter
+user22,best friends,shelter
+user23,bird,species
+user23,dog,species
+user23,rodent,species
+user23,gerbil ,breed
+user23,guinea pig,breed
+user23,hamster,breed
+user23,non-sporting,breed
+user23,ragdoll,breed
+user23,adult,age
+user23,medium,size
+user23,small,size
+user23,happy,temperament
+user23,female,gender
+user23,male,gender
+user23,animals,goodWith
+user23,kids,goodWith
+user23,best friends,shelter
+user23,humane society,shelter
+user24,cat,species
+user24,dog,species
+user24,rodent,species
+user24,angora,breed
+user24,californian,breed
+user24,gerbil ,breed
+user24,hound,breed
+user24,lionhead,breed
+user24,maine coon,breed
+user24,non-sporting,breed
+user24,persian,breed
+user24,ragdoll,breed
+user24,rex,breed
+user24,saltwater,breed
+user24,siamese,breed
+user24,terrier,breed
+user24,toy,breed
+user24,young,age
+user24,medium,size
+user24,active,temperament
+user24,friendly,temperament
+user24,happy,temperament
+user24,introverted,temperament
+user24,female,gender
+user24,animals,goodWith
+user24,animal welfare league,shelter
+user24,best friends,shelter
+user24,humane society,shelter
+user25,bird,species
+user25,cat,species
+user25,dog,species
+user25,rodent,species
+user25,angora,breed
+user25,californian,breed
+user25,guinea pig,breed
+user25,hamster,breed
+user25,herding,breed
+user25,lionhead,breed
+user25,maine coon,breed
+user25,mouse ,breed
+user25,parakeet,breed
+user25,ragdoll,breed
+user25,saltwater,breed
+user25,siamese,breed
+user25,sporting,breed
+user25,terrier,breed
+user25,toy,breed
+user25,working,breed
+user25,adult,age
+user25,medium,size
+user25,happy,temperament
+user25,male,gender
+user25,animals,goodWith
+user25,kids,goodWith
+user25,humane society,shelter
+user26,bird,species
+user26,fish,species
+user26,rabbit,species
+user26,californian,breed
+user26,freshwater,breed
+user26,guinea pig,breed
+user26,hamster,breed
+user26,herding,breed
+user26,hound,breed
+user26,lovebird,breed
+user26,maine coon,breed
+user26,ragdoll,breed
+user26,saltwater,breed
+user26,siamese,breed
+user26,silver fox,breed
+user26,sporting,breed
+user26,toy,breed
+user26,senior,age
+user26,young,age
+user26,small,size
+user26,active,temperament
+user26,friendly,temperament
+user26,vigilant,temperament
+user26,female,gender
+user26,animals,goodWith
+user26,animal welfare league,shelter
+user27,cat,species
+user27,dog,species
+user27,fish,species
+user27,rabbit,species
+user27,gerbil ,breed
+user27,guinea pig,breed
+user27,hamster,breed
+user27,herding,breed
+user27,hound,breed
+user27,lionhead,breed
+user27,maine coon,breed
+user27,mouse ,breed
+user27,non-sporting,breed
+user27,parrot,breed
+user27,persian,breed
+user27,ragdoll,breed
+user27,rex,breed
+user27,saltwater,breed
+user27,silver fox,breed
+user27,terrier,breed
+user27,toy,breed
+user27,working,breed
+user27,adult,age
+user27,senior,age
+user27,large,size
+user27,small,size
+user27,introverted,temperament
+user27,vigilant,temperament
+user27,male,gender
+user27,kids,goodWith
+user27,animal welfare league,shelter
+user28,cat,species
+user28,fish,species
+user28,rabbit,species
+user28,rodent,species
+user28,angora,breed
+user28,californian,breed
+user28,gerbil ,breed
+user28,guinea pig,breed
+user28,hamster,breed
+user28,herding,breed
+user28,lionhead,breed
+user28,lovebird,breed
+user28,mouse ,breed
+user28,non-sporting,breed
+user28,parakeet,breed
+user28,parrot,breed
+user28,persian,breed
+user28,ragdoll,breed
+user28,rat,breed
+user28,siamese,breed
+user28,terrier,breed
+user28,working,breed
+user28,adult,age
+user28,young,age
+user28,medium,size
+user28,active,temperament
+user28,female,gender
+user28,male,gender
+user28,kids,goodWith
+user28,animal welfare league,shelter
+user29,bird,species
+user29,dog,species
+user29,rodent,species
+user29,californian,breed
+user29,hamster,breed
+user29,herding,breed
+user29,hound,breed
+user29,lionhead,breed
+user29,lovebird,breed
+user29,mouse ,breed
+user29,parrot,breed
+user29,persian,breed
+user29,rex,breed
+user29,siamese,breed
+user29,sporting,breed
+user29,terrier,breed
+user29,toy,breed
+user29,working,breed
+user29,adult,age
+user29,senior,age
+user29,large,size
+user29,active,temperament
+user29,introverted,temperament
+user29,vigilant,temperament
+user29,female,gender
+user29,male,gender
+user29,animals,goodWith
+user29,animal welfare league,shelter
+user29,best friends,shelter
+user29,humane society,shelter
+user30,cat,species
+user30,dog,species
+user30,rabbit,species
+user30,rodent,species
+user30,guinea pig,breed
+user30,sporting,breed
+user30,young,age
+user30,small,size
+user30,active,temperament
+user30,friendly,temperament
+user30,introverted,temperament
+user30,vigilant,temperament
+user30,female,gender
+user30,animals,goodWith
+user30,humane society,shelter
+user31,bird,species
+user31,dog,species
+user31,fish,species
+user31,hamster,breed
+user31,non-sporting,breed
+user31,rex,breed
+user31,toy,breed
+user31,senior,age
+user31,small,size
+user31,active,temperament
+user31,friendly,temperament
+user31,happy,temperament
+user31,introverted,temperament
+user31,female,gender
+user31,animals,goodWith
+user31,kids,goodWith
+user31,animal welfare league,shelter
+user31,best friends,shelter
+user31,humane society,shelter
+user32,fish,species
+user32,rabbit,species
+user32,californian,breed
+user32,freshwater,breed
+user32,gerbil ,breed
+user32,guinea pig,breed
+user32,hamster,breed
+user32,herding,breed
+user32,mouse ,breed
+user32,parrot,breed
+user32,ragdoll,breed
+user32,rex,breed
+user32,sporting,breed
+user32,working,breed
+user32,adult,age
+user32,young,age
+user32,large,size
+user32,active,temperament
+user32,happy,temperament
+user32,female,gender
+user32,kids,goodWith
+user32,animal welfare league,shelter
+user32,humane society,shelter
+user33,bird,species
+user33,cat,species
+user33,rabbit,species
+user33,rodent,species
+user33,californian,breed
+user33,hamster,breed
+user33,non-sporting,breed
+user33,parakeet,breed
+user33,adult,age
+user33,senior,age
+user33,medium,size
+user33,active,temperament
+user33,happy,temperament
+user33,vigilant,temperament
+user33,male,gender
+user33,animals,goodWith
+user33,kids,goodWith
+user33,humane society,shelter
+user34,bird,species
+user34,cat,species
+user34,rodent,species
+user34,californian,breed
+user34,gerbil ,breed
+user34,guinea pig,breed
+user34,hamster,breed
+user34,herding,breed
+user34,lionhead,breed
+user34,lovebird,breed
+user34,maine coon,breed
+user34,rat,breed
+user34,siamese,breed
+user34,silver fox,breed
+user34,sporting,breed
+user34,working,breed
+user34,senior,age
+user34,young,age
+user34,large,size
+user34,active,temperament
+user34,friendly,temperament
+user34,male,gender
+user34,animals,goodWith
+user34,animal welfare league,shelter
+user34,best friends,shelter
+user34,humane society,shelter
+user35,bird,species
+user35,cat,species
+user35,angora,breed
+user35,californian,breed
+user35,hamster,breed
+user35,herding,breed
+user35,hound,breed
+user35,lionhead,breed
+user35,maine coon,breed
+user35,mouse ,breed
+user35,non-sporting,breed
+user35,parrot,breed
+user35,persian,breed
+user35,rex,breed
+user35,sporting,breed
+user35,terrier,breed
+user35,toy,breed
+user35,young,age
+user35,small,size
+user35,active,temperament
+user35,introverted,temperament
+user35,male,gender
+user35,animals,goodWith
+user35,animal welfare league,shelter
+user36,bird,species
+user36,fish,species
+user36,rodent,species
+user36,californian,breed
+user36,gerbil ,breed
+user36,guinea pig,breed
+user36,herding,breed
+user36,hound,breed
+user36,lionhead,breed
+user36,mouse ,breed
+user36,parrot,breed
+user36,rat,breed
+user36,rex,breed
+user36,saltwater,breed
+user36,sporting,breed
+user36,terrier,breed
+user36,toy,breed
+user36,working,breed
+user36,adult,age
+user36,young,age
+user36,medium,size
+user36,friendly,temperament
+user36,introverted,temperament
+user36,vigilant,temperament
+user36,female,gender
+user36,animals,goodWith
+user36,animal welfare league,shelter
+user37,bird,species
+user37,fish,species
+user37,rabbit,species
+user37,freshwater,breed
+user37,hamster,breed
+user37,herding,breed
+user37,hound,breed
+user37,lovebird,breed
+user37,mouse ,breed
+user37,parakeet,breed
+user37,rat,breed
+user37,rex,breed
+user37,saltwater,breed
+user37,siamese,breed
+user37,silver fox,breed
+user37,toy,breed
+user37,working,breed
+user37,senior,age
+user37,large,size
+user37,active,temperament
+user37,friendly,temperament
+user37,happy,temperament
+user37,male,gender
+user37,kids,goodWith
+user37,animal welfare league,shelter
+user38,cat,species
+user38,fish,species
+user38,rodent,species
+user38,angora,breed
+user38,freshwater,breed
+user38,gerbil ,breed
+user38,herding,breed
+user38,hound,breed
+user38,maine coon,breed
+user38,parakeet,breed
+user38,parrot,breed
+user38,persian,breed
+user38,rat,breed
+user38,siamese,breed
+user38,silver fox,breed
+user38,sporting,breed
+user38,terrier,breed
+user38,toy,breed
+user38,working,breed
+user38,adult,age
+user38,senior,age
+user38,young,age
+user38,large,size
+user38,small,size
+user38,active,temperament
+user38,male,gender
+user38,animals,goodWith
+user38,kids,goodWith
+user38,best friends,shelter
+user38,humane society,shelter
+user39,fish,species
+user39,rabbit,species
+user39,rodent,species
+user39,guinea pig,breed
+user39,ragdoll,breed
+user39,rex,breed
+user39,adult,age
+user39,large,size
+user39,small,size
+user39,active,temperament
+user39,vigilant,temperament
+user39,male,gender
+user39,animals,goodWith
+user39,animal welfare league,shelter
+user39,humane society,shelter
+user40,rabbit,species
+user40,californian,breed
+user40,freshwater,breed
+user40,gerbil ,breed
+user40,guinea pig,breed
+user40,hamster,breed
+user40,herding,breed
+user40,lionhead,breed
+user40,maine coon,breed
+user40,mouse ,breed
+user40,ragdoll,breed
+user40,saltwater,breed
+user40,sporting,breed
+user40,toy,breed
+user40,senior,age
+user40,large,size
+user40,friendly,temperament
+user40,male,gender
+user40,kids,goodWith
+user40,animal welfare league,shelter
+user41,cat,species
+user41,angora,breed
+user41,freshwater,breed
+user41,hamster,breed
+user41,herding,breed
+user41,maine coon,breed
+user41,non-sporting,breed
+user41,siamese,breed
+user41,silver fox,breed
+user41,toy,breed
+user41,senior,age
+user41,young,age
+user41,large,size
+user41,small,size
+user41,friendly,temperament
+user41,vigilant,temperament
+user41,female,gender
+user41,animals,goodWith
+user41,humane society,shelter
+user42,cat,species
+user42,rabbit,species
+user42,rodent,species
+user42,angora,breed
+user42,californian,breed
+user42,freshwater,breed
+user42,gerbil ,breed
+user42,hamster,breed
+user42,herding,breed
+user42,hound,breed
+user42,lionhead,breed
+user42,mouse ,breed
+user42,non-sporting,breed
+user42,parakeet,breed
+user42,ragdoll,breed
+user42,siamese,breed
+user42,sporting,breed
+user42,terrier,breed
+user42,toy,breed
+user42,adult,age
+user42,senior,age
+user42,medium,size
+user42,small,size
+user42,active,temperament
+user42,introverted,temperament
+user42,female,gender
+user42,male,gender
+user42,kids,goodWith
+user42,animal welfare league,shelter
+user42,humane society,shelter
+user43,bird,species
+user43,rodent,species
+user43,angora,breed
+user43,parrot,breed
+user43,persian,breed
+user43,saltwater,breed
+user43,young,age
+user43,large,size
+user43,medium,size
+user43,active,temperament
+user43,friendly,temperament
+user43,happy,temperament
+user43,introverted,temperament
+user43,vigilant,temperament
+user43,female,gender
+user43,male,gender
+user43,kids,goodWith
+user43,best friends,shelter
+user43,humane society,shelter
+user44,cat,species
+user44,dog,species
+user44,gerbil ,breed
+user44,guinea pig,breed
+user44,hamster,breed
+user44,hound,breed
+user44,lovebird,breed
+user44,maine coon,breed
+user44,mouse ,breed
+user44,non-sporting,breed
+user44,parakeet,breed
+user44,parrot,breed
+user44,persian,breed
+user44,rat,breed
+user44,sporting,breed
+user44,senior,age
+user44,young,age
+user44,large,size
+user44,happy,temperament
+user44,female,gender
+user44,animals,goodWith
+user44,animal welfare league,shelter
+user44,humane society,shelter
+user45,bird,species
+user45,cat,species
+user45,rabbit,species
+user45,californian,breed
+user45,gerbil ,breed
+user45,guinea pig,breed
+user45,lovebird,breed
+user45,parrot,breed
+user45,ragdoll,breed
+user45,rat,breed
+user45,rex,breed
+user45,sporting,breed
+user45,toy,breed
+user45,adult,age
+user45,young,age
+user45,medium,size
+user45,active,temperament
+user45,friendly,temperament
+user45,happy,temperament
+user45,female,gender
+user45,animals,goodWith
+user45,animal welfare league,shelter
+user46,bird,species
+user46,rodent,species
+user46,hamster,breed
+user46,herding,breed
+user46,lovebird,breed
+user46,non-sporting,breed
+user46,parakeet,breed
+user46,parrot,breed
+user46,ragdoll,breed
+user46,rat,breed
+user46,silver fox,breed
+user46,terrier,breed
+user46,toy,breed
+user46,adult,age
+user46,young,age
+user46,large,size
+user46,medium,size
+user46,friendly,temperament
+user46,introverted,temperament
+user46,male,gender
+user46,animals,goodWith
+user46,animal welfare league,shelter
+user47,cat,species
+user47,dog,species
+user47,rabbit,species
+user47,freshwater,breed
+user47,hound,breed
+user47,lionhead,breed
+user47,lovebird,breed
+user47,maine coon,breed
+user47,parrot,breed
+user47,persian,breed
+user47,rat,breed
+user47,rex,breed
+user47,saltwater,breed
+user47,silver fox,breed
+user47,working,breed
+user47,senior,age
+user47,medium,size
+user47,small,size
+user47,active,temperament
+user47,female,gender
+user47,animals,goodWith
+user47,animal welfare league,shelter
+user48,bird,species
+user48,cat,species
+user48,gerbil ,breed
+user48,guinea pig,breed
+user48,hamster,breed
+user48,hound,breed
+user48,lovebird,breed
+user48,maine coon,breed
+user48,mouse ,breed
+user48,non-sporting,breed
+user48,parakeet,breed
+user48,parrot,breed
+user48,ragdoll,breed
+user48,rex,breed
+user48,saltwater,breed
+user48,siamese,breed
+user48,silver fox,breed
+user48,sporting,breed
+user48,toy,breed
+user48,working,breed
+user48,senior,age
+user48,medium,size
+user48,small,size
+user48,active,temperament
+user48,happy,temperament
+user48,introverted,temperament
+user48,female,gender
+user48,male,gender
+user48,animals,goodWith
+user48,kids,goodWith
+user48,humane society,shelter
+user49,rodent,species
+user49,freshwater,breed
+user49,gerbil ,breed
+user49,mouse ,breed
+user49,ragdoll,breed
+user49,silver fox,breed
+user49,sporting,breed
+user49,terrier,breed
+user49,toy,breed
+user49,working,breed
+user49,adult,age
+user49,large,size
+user49,friendly,temperament
+user49,vigilant,temperament
+user49,male,gender
+user49,animals,goodWith
+user49,kids,goodWith
+user49,animal welfare league,shelter
+user50,cat,species
+user50,dog,species
+user50,angora,breed
+user50,adult,age
+user50,senior,age
+user50,young,age
+user50,medium,size
+user50,small,size
+user50,active,temperament
+user50,friendly,temperament
+user50,introverted,temperament
+user50,vigilant,temperament
+user50,female,gender
+user50,kids,goodWith
+user50,best friends,shelter
+user50,humane society,shelter
+user51,dog,species
+user51,rabbit,species
+user51,angora,breed
+user51,californian,breed
+user51,parrot,breed
+user51,ragdoll,breed
+user51,rex,breed
+user51,sporting,breed
+user51,toy,breed
+user51,adult,age
+user51,senior,age
+user51,large,size
+user51,small,size
+user51,happy,temperament
+user51,female,gender
+user51,male,gender
+user51,animals,goodWith
+user51,humane society,shelter
+user52,bird,species
+user52,dog,species
+user52,fish,species
+user52,freshwater,breed
+user52,gerbil ,breed
+user52,guinea pig,breed
+user52,hamster,breed
+user52,lovebird,breed
+user52,maine coon,breed
+user52,mouse ,breed
+user52,saltwater,breed
+user52,siamese,breed
+user52,sporting,breed
+user52,adult,age
+user52,large,size
+user52,friendly,temperament
+user52,happy,temperament
+user52,introverted,temperament
+user52,vigilant,temperament
+user52,female,gender
+user52,animals,goodWith
+user52,kids,goodWith
+user52,animal welfare league,shelter
+user53,bird,species
+user53,rabbit,species
+user53,angora,breed
+user53,californian,breed
+user53,freshwater,breed
+user53,gerbil ,breed
+user53,guinea pig,breed
+user53,hamster,breed
+user53,herding,breed
+user53,hound,breed
+user53,lovebird,breed
+user53,maine coon,breed
+user53,non-sporting,breed
+user53,parrot,breed
+user53,persian,breed
+user53,ragdoll,breed
+user53,rat,breed
+user53,silver fox,breed
+user53,toy,breed
+user53,senior,age
+user53,medium,size
+user53,vigilant,temperament
+user53,male,gender
+user53,kids,goodWith
+user53,animal welfare league,shelter
+user54,cat,species
+user54,fish,species
+user54,rabbit,species
+user54,hound,breed
+user54,lovebird,breed
+user54,maine coon,breed
+user54,mouse ,breed
+user54,non-sporting,breed
+user54,parakeet,breed
+user54,silver fox,breed
+user54,adult,age
+user54,senior,age
+user54,large,size
+user54,introverted,temperament
+user54,vigilant,temperament
+user54,female,gender
+user54,animals,goodWith
+user54,animal welfare league,shelter
+user54,humane society,shelter
+user55,bird,species
+user55,dog,species
+user55,fish,species
+user55,gerbil ,breed
+user55,guinea pig,breed
+user55,lionhead,breed
+user55,mouse ,breed
+user55,parakeet,breed
+user55,parrot,breed
+user55,siamese,breed
+user55,silver fox,breed
+user55,sporting,breed
+user55,working,breed
+user55,adult,age
+user55,medium,size
+user55,vigilant,temperament
+user55,female,gender
+user55,kids,goodWith
+user55,animal welfare league,shelter
+user56,dog,species
+user56,rabbit,species
+user56,freshwater,breed
+user56,guinea pig,breed
+user56,hound,breed
+user56,lionhead,breed
+user56,maine coon,breed
+user56,mouse ,breed
+user56,parakeet,breed
+user56,parrot,breed
+user56,saltwater,breed
+user56,siamese,breed
+user56,sporting,breed
+user56,terrier,breed
+user56,toy,breed
+user56,young,age
+user56,medium,size
+user56,small,size
+user56,active,temperament
+user56,introverted,temperament
+user56,vigilant,temperament
+user56,male,gender
+user56,animals,goodWith
+user56,kids,goodWith
+user56,animal welfare league,shelter
+user57,bird,species
+user57,cat,species
+user57,angora,breed
+user57,californian,breed
+user57,freshwater,breed
+user57,gerbil ,breed
+user57,guinea pig,breed
+user57,hound,breed
+user57,lionhead,breed
+user57,ragdoll,breed
+user57,siamese,breed
+user57,sporting,breed
+user57,terrier,breed
+user57,toy,breed
+user57,adult,age
+user57,senior,age
+user57,medium,size
+user57,friendly,temperament
+user57,vigilant,temperament
+user57,female,gender
+user57,male,gender
+user57,kids,goodWith
+user57,humane society,shelter
+user58,bird,species
+user58,angora,breed
+user58,gerbil ,breed
+user58,herding,breed
+user58,lovebird,breed
+user58,mouse ,breed
+user58,parakeet,breed
+user58,persian,breed
+user58,rex,breed
+user58,siamese,breed
+user58,silver fox,breed
+user58,adult,age
+user58,young,age
+user58,large,size
+user58,friendly,temperament
+user58,happy,temperament
+user58,female,gender
+user58,male,gender
+user58,animals,goodWith
+user58,animal welfare league,shelter
+user59,cat,species
+user59,rabbit,species
+user59,persian,breed
+user59,rat,breed
+user59,toy,breed
+user59,senior,age
+user59,large,size
+user59,medium,size
+user59,friendly,temperament
+user59,vigilant,temperament
+user59,male,gender
+user59,kids,goodWith
+user59,animal welfare league,shelter
+user59,best friends,shelter
+user60,dog,species
+user60,silver fox,breed
+user60,young,age
+user60,large,size
+user60,small,size
+user60,active,temperament
+user60,vigilant,temperament
+user60,male,gender
+user60,kids,goodWith
+user60,animal welfare league,shelter
+user60,best friends,shelter
+user61,bird,species
+user61,dog,species
+user61,fish,species
+user61,rabbit,species
+user61,rodent,species
+user61,angora,breed
+user61,gerbil ,breed
+user61,hamster,breed
+user61,hound,breed
+user61,lionhead,breed
+user61,lovebird,breed
+user61,mouse ,breed
+user61,non-sporting,breed
+user61,parrot,breed
+user61,ragdoll,breed
+user61,rex,breed
+user61,saltwater,breed
+user61,siamese,breed
+user61,toy,breed
+user61,adult,age
+user61,young,age
+user61,small,size
+user61,introverted,temperament
+user61,female,gender
+user61,animals,goodWith
+user61,kids,goodWith
+user61,animal welfare league,shelter
+user61,humane society,shelter
+user62,bird,species
+user62,cat,species
+user62,fish,species
+user62,angora,breed
+user62,maine coon,breed
+user62,young,age
+user62,large,size
+user62,medium,size
+user62,friendly,temperament
+user62,happy,temperament
+user62,vigilant,temperament
+user62,female,gender
+user62,animals,goodWith
+user62,kids,goodWith
+user62,humane society,shelter
+user63,rabbit,species
+user63,lovebird,breed
+user63,maine coon,breed
+user63,parrot,breed
+user63,terrier,breed
+user63,adult,age
+user63,senior,age
+user63,medium,size
+user63,vigilant,temperament
+user63,male,gender
+user63,animals,goodWith
+user63,humane society,shelter
+user64,bird,species
+user64,cat,species
+user64,fish,species
+user64,rabbit,species
+user64,rodent,species
+user64,angora,breed
+user64,freshwater,breed
+user64,herding,breed
+user64,lionhead,breed
+user64,mouse ,breed
+user64,non-sporting,breed
+user64,parakeet,breed
+user64,ragdoll,breed
+user64,rat,breed
+user64,rex,breed
+user64,siamese,breed
+user64,silver fox,breed
+user64,sporting,breed
+user64,terrier,breed
+user64,senior,age
+user64,young,age
+user64,medium,size
+user64,active,temperament
+user64,friendly,temperament
+user64,vigilant,temperament
+user64,male,gender
+user64,kids,goodWith
+user64,best friends,shelter
+user65,bird,species
+user65,dog,species
+user65,rodent,species
+user65,angora,breed
+user65,freshwater,breed
+user65,hound,breed
+user65,lovebird,breed
+user65,parrot,breed
+user65,saltwater,breed
+user65,terrier,breed
+user65,toy,breed
+user65,senior,age
+user65,young,age
+user65,large,size
+user65,friendly,temperament
+user65,happy,temperament
+user65,introverted,temperament
+user65,female,gender
+user65,male,gender
+user65,kids,goodWith
+user65,humane society,shelter
+user66,rodent,species
+user66,angora,breed
+user66,californian,breed
+user66,freshwater,breed
+user66,gerbil ,breed
+user66,guinea pig,breed
+user66,hound,breed
+user66,non-sporting,breed
+user66,parakeet,breed
+user66,persian,breed
+user66,ragdoll,breed
+user66,rat,breed
+user66,rex,breed
+user66,saltwater,breed
+user66,silver fox,breed
+user66,sporting,breed
+user66,toy,breed
+user66,working,breed
+user66,senior,age
+user66,young,age
+user66,large,size
+user66,small,size
+user66,active,temperament
+user66,happy,temperament
+user66,introverted,temperament
+user66,vigilant,temperament
+user66,male,gender
+user66,kids,goodWith
+user66,best friends,shelter
+user66,humane society,shelter
+user67,cat,species
+user67,dog,species
+user67,rabbit,species
+user67,angora,breed
+user67,californian,breed
+user67,lovebird,breed
+user67,non-sporting,breed
+user67,parrot,breed
+user67,persian,breed
+user67,rat,breed
+user67,rex,breed
+user67,saltwater,breed
+user67,siamese,breed
+user67,silver fox,breed
+user67,sporting,breed
+user67,terrier,breed
+user67,toy,breed
+user67,adult,age
+user67,large,size
+user67,medium,size
+user67,friendly,temperament
+user67,happy,temperament
+user67,introverted,temperament
+user67,vigilant,temperament
+user67,female,gender
+user67,male,gender
+user67,kids,goodWith
+user67,animal welfare league,shelter
+user68,bird,species
+user68,rabbit,species
+user68,rodent,species
+user68,angora,breed
+user68,californian,breed
+user68,gerbil ,breed
+user68,hound,breed
+user68,lionhead,breed
+user68,maine coon,breed
+user68,parrot,breed
+user68,persian,breed
+user68,rat,breed
+user68,saltwater,breed
+user68,silver fox,breed
+user68,terrier,breed
+user68,adult,age
+user68,senior,age
+user68,young,age
+user68,small,size
+user68,introverted,temperament
+user68,female,gender
+user68,kids,goodWith
+user68,animal welfare league,shelter
+user68,humane society,shelter
+user69,fish,species
+user69,rabbit,species
+user69,rodent,species
+user69,angora,breed
+user69,californian,breed
+user69,freshwater,breed
+user69,gerbil ,breed
+user69,hamster,breed
+user69,herding,breed
+user69,hound,breed
+user69,lionhead,breed
+user69,maine coon,breed
+user69,mouse ,breed
+user69,non-sporting,breed
+user69,parakeet,breed
+user69,persian,breed
+user69,rat,breed
+user69,rex,breed
+user69,siamese,breed
+user69,silver fox,breed
+user69,working,breed
+user69,senior,age
+user69,young,age
+user69,large,size
+user69,friendly,temperament
+user69,happy,temperament
+user69,introverted,temperament
+user69,female,gender
+user69,animals,goodWith
+user69,best friends,shelter
+user69,humane society,shelter
+user70,bird,species
+user70,cat,species
+user70,dog,species
+user70,fish,species
+user70,rodent,species
+user70,freshwater,breed
+user70,gerbil ,breed
+user70,lovebird,breed
+user70,parakeet,breed
+user70,parrot,breed
+user70,saltwater,breed
+user70,siamese,breed
+user70,silver fox,breed
+user70,terrier,breed
+user70,senior,age
+user70,large,size
+user70,medium,size
+user70,happy,temperament
+user70,vigilant,temperament
+user70,female,gender
+user70,male,gender
+user70,kids,goodWith
+user70,animal welfare league,shelter
+user70,best friends,shelter
+user70,humane society,shelter
+user71,bird,species
+user71,fish,species
+user71,rabbit,species
+user71,rodent,species
+user71,gerbil ,breed
+user71,herding,breed
+user71,lovebird,breed
+user71,maine coon,breed
+user71,non-sporting,breed
+user71,persian,breed
+user71,rex,breed
+user71,siamese,breed
+user71,sporting,breed
+user71,terrier,breed
+user71,toy,breed
+user71,working,breed
+user71,senior,age
+user71,young,age
+user71,medium,size
+user71,friendly,temperament
+user71,happy,temperament
+user71,vigilant,temperament
+user71,male,gender
+user71,animals,goodWith
+user71,humane society,shelter
+user72,bird,species
+user72,cat,species
+user72,fish,species
+user72,rodent,species
+user72,freshwater,breed
+user72,gerbil ,breed
+user72,parakeet,breed
+user72,parrot,breed
+user72,ragdoll,breed
+user72,silver fox,breed
+user72,terrier,breed
+user72,working,breed
+user72,senior,age
+user72,young,age
+user72,small,size
+user72,active,temperament
+user72,friendly,temperament
+user72,happy,temperament
+user72,vigilant,temperament
+user72,female,gender
+user72,animals,goodWith
+user72,animal welfare league,shelter
+user72,best friends,shelter
+user72,humane society,shelter
+user73,bird,species
+user73,angora,breed
+user73,californian,breed
+user73,freshwater,breed
+user73,gerbil ,breed
+user73,guinea pig,breed
+user73,herding,breed
+user73,lovebird,breed
+user73,maine coon,breed
+user73,saltwater,breed
+user73,siamese,breed
+user73,sporting,breed
+user73,terrier,breed
+user73,toy,breed
+user73,working,breed
+user73,senior,age
+user73,large,size
+user73,medium,size
+user73,active,temperament
+user73,male,gender
+user73,kids,goodWith
+user73,animal welfare league,shelter
+user74,cat,species
+user74,guinea pig,breed
+user74,lionhead,breed
+user74,lovebird,breed
+user74,mouse ,breed
+user74,parrot,breed
+user74,senior,age
+user74,young,age
+user74,medium,size
+user74,friendly,temperament
+user74,introverted,temperament
+user74,vigilant,temperament
+user74,female,gender
+user74,male,gender
+user74,kids,goodWith
+user74,best friends,shelter
+user74,humane society,shelter
+user75,bird,species
+user75,cat,species
+user75,fish,species
+user75,rabbit,species
+user75,angora,breed
+user75,californian,breed
+user75,freshwater,breed
+user75,gerbil ,breed
+user75,hound,breed
+user75,mouse ,breed
+user75,rex,breed
+user75,saltwater,breed
+user75,siamese,breed
+user75,silver fox,breed
+user75,sporting,breed
+user75,working,breed
+user75,senior,age
+user75,large,size
+user75,medium,size
+user75,active,temperament
+user75,happy,temperament
+user75,vigilant,temperament
+user75,female,gender
+user75,animals,goodWith
+user75,best friends,shelter
+user76,dog,species
+user76,rodent,species
+user76,hamster,breed
+user76,hound,breed
+user76,maine coon,breed
+user76,mouse ,breed
+user76,non-sporting,breed
+user76,ragdoll,breed
+user76,rat,breed
+user76,siamese,breed
+user76,silver fox,breed
+user76,sporting,breed
+user76,terrier,breed
+user76,toy,breed
+user76,working,breed
+user76,adult,age
+user76,small,size
+user76,active,temperament
+user76,introverted,temperament
+user76,vigilant,temperament
+user76,male,gender
+user76,animals,goodWith
+user76,best friends,shelter
+user76,humane society,shelter
+user77,cat,species
+user77,dog,species
+user77,fish,species
+user77,rabbit,species
+user77,angora,breed
+user77,freshwater,breed
+user77,herding,breed
+user77,lovebird,breed
+user77,non-sporting,breed
+user77,parakeet,breed
+user77,parrot,breed
+user77,ragdoll,breed
+user77,siamese,breed
+user77,senior,age
+user77,young,age
+user77,large,size
+user77,happy,temperament
+user77,female,gender
+user77,kids,goodWith
+user77,animal welfare league,shelter
+user77,best friends,shelter
+user77,humane society,shelter
+user78,fish,species
+user78,rodent,species
+user78,angora,breed
+user78,californian,breed
+user78,gerbil ,breed
+user78,herding,breed
+user78,persian,breed
+user78,rat,breed
+user78,silver fox,breed
+user78,sporting,breed
+user78,terrier,breed
+user78,working,breed
+user78,adult,age
+user78,medium,size
+user78,small,size
+user78,active,temperament
+user78,vigilant,temperament
+user78,female,gender
+user78,kids,goodWith
+user78,best friends,shelter
+user79,bird,species
+user79,cat,species
+user79,rabbit,species
+user79,angora,breed
+user79,hamster,breed
+user79,lovebird,breed
+user79,parakeet,breed
+user79,parrot,breed
+user79,persian,breed
+user79,ragdoll,breed
+user79,rex,breed
+user79,saltwater,breed
+user79,silver fox,breed
+user79,sporting,breed
+user79,toy,breed
+user79,adult,age
+user79,young,age
+user79,medium,size
+user79,small,size
+user79,active,temperament
+user79,friendly,temperament
+user79,happy,temperament
+user79,vigilant,temperament
+user79,female,gender
+user79,male,gender
+user79,animals,goodWith
+user79,kids,goodWith
+user79,animal welfare league,shelter
+user80,cat,species
+user80,rodent,species
+user80,californian,breed
+user80,gerbil ,breed
+user80,guinea pig,breed
+user80,herding,breed
+user80,hound,breed
+user80,maine coon,breed
+user80,mouse ,breed
+user80,non-sporting,breed
+user80,rat,breed
+user80,siamese,breed
+user80,silver fox,breed
+user80,terrier,breed
+user80,toy,breed
+user80,working,breed
+user80,adult,age
+user80,young,age
+user80,large,size
+user80,active,temperament
+user80,vigilant,temperament
+user80,female,gender
+user80,male,gender
+user80,kids,goodWith
+user80,humane society,shelter
+user81,bird,species
+user81,rabbit,species
+user81,californian,breed
+user81,freshwater,breed
+user81,gerbil ,breed
+user81,herding,breed
+user81,hound,breed
+user81,lionhead,breed
+user81,mouse ,breed
+user81,parakeet,breed
+user81,persian,breed
+user81,rat,breed
+user81,saltwater,breed
+user81,siamese,breed
+user81,working,breed
+user81,senior,age
+user81,young,age
+user81,medium,size
+user81,friendly,temperament
+user81,happy,temperament
+user81,vigilant,temperament
+user81,male,gender
+user81,kids,goodWith
+user81,animal welfare league,shelter
+user82,dog,species
+user82,fish,species
+user82,angora,breed
+user82,californian,breed
+user82,freshwater,breed
+user82,gerbil ,breed
+user82,guinea pig,breed
+user82,hamster,breed
+user82,herding,breed
+user82,lionhead,breed
+user82,mouse ,breed
+user82,parakeet,breed
+user82,parrot,breed
+user82,persian,breed
+user82,ragdoll,breed
+user82,siamese,breed
+user82,sporting,breed
+user82,toy,breed
+user82,working,breed
+user82,senior,age
+user82,large,size
+user82,active,temperament
+user82,vigilant,temperament
+user82,female,gender
+user82,animals,goodWith
+user82,humane society,shelter
+user83,bird,species
+user83,dog,species
+user83,fish,species
+user83,rodent,species
+user83,californian,breed
+user83,freshwater,breed
+user83,guinea pig,breed
+user83,hamster,breed
+user83,herding,breed
+user83,hound,breed
+user83,parakeet,breed
+user83,parrot,breed
+user83,persian,breed
+user83,rat,breed
+user83,rex,breed
+user83,saltwater,breed
+user83,siamese,breed
+user83,working,breed
+user83,adult,age
+user83,senior,age
+user83,young,age
+user83,large,size
+user83,small,size
+user83,friendly,temperament
+user83,happy,temperament
+user83,introverted,temperament
+user83,male,gender
+user83,kids,goodWith
+user83,best friends,shelter
+user84,bird,species
+user84,dog,species
+user84,rabbit,species
+user84,angora,breed
+user84,freshwater,breed
+user84,guinea pig,breed
+user84,herding,breed
+user84,hound,breed
+user84,mouse ,breed
+user84,non-sporting,breed
+user84,parakeet,breed
+user84,parrot,breed
+user84,persian,breed
+user84,siamese,breed
+user84,silver fox,breed
+user84,sporting,breed
+user84,terrier,breed
+user84,working,breed
+user84,adult,age
+user84,senior,age
+user84,large,size
+user84,friendly,temperament
+user84,happy,temperament
+user84,introverted,temperament
+user84,vigilant,temperament
+user84,female,gender
+user84,male,gender
+user84,animals,goodWith
+user84,kids,goodWith
+user84,animal welfare league,shelter
+user84,humane society,shelter
+user85,cat,species
+user85,fish,species
+user85,toy,breed
+user85,senior,age
+user85,large,size
+user85,small,size
+user85,friendly,temperament
+user85,vigilant,temperament
+user85,female,gender
+user85,kids,goodWith
+user85,best friends,shelter
+user86,bird,species
+user86,fish,species
+user86,rodent,species
+user86,angora,breed
+user86,hamster,breed
+user86,herding,breed
+user86,hound,breed
+user86,lionhead,breed
+user86,maine coon,breed
+user86,mouse ,breed
+user86,non-sporting,breed
+user86,saltwater,breed
+user86,silver fox,breed
+user86,sporting,breed
+user86,adult,age
+user86,medium,size
+user86,active,temperament
+user86,happy,temperament
+user86,introverted,temperament
+user86,vigilant,temperament
+user86,female,gender
+user86,male,gender
+user86,kids,goodWith
+user86,humane society,shelter
+user87,bird,species
+user87,cat,species
+user87,dog,species
+user87,rodent,species
+user87,parakeet,breed
+user87,saltwater,breed
+user87,senior,age
+user87,medium,size
+user87,small,size
+user87,friendly,temperament
+user87,introverted,temperament
+user87,vigilant,temperament
+user87,male,gender
+user87,animals,goodWith
+user87,kids,goodWith
+user87,animal welfare league,shelter
+user87,best friends,shelter
+user87,humane society,shelter
+user88,fish,species
+user88,rabbit,species
+user88,californian,breed
+user88,guinea pig,breed
+user88,lovebird,breed
+user88,mouse ,breed
+user88,parrot,breed
+user88,rat,breed
+user88,saltwater,breed
+user88,sporting,breed
+user88,terrier,breed
+user88,toy,breed
+user88,adult,age
+user88,medium,size
+user88,small,size
+user88,friendly,temperament
+user88,vigilant,temperament
+user88,male,gender
+user88,animals,goodWith
+user88,humane society,shelter
+user89,bird,species
+user89,dog,species
+user89,rabbit,species
+user89,rodent,species
+user89,freshwater,breed
+user89,guinea pig,breed
+user89,lovebird,breed
+user89,maine coon,breed
+user89,persian,breed
+user89,rex,breed
+user89,toy,breed
+user89,senior,age
+user89,young,age
+user89,large,size
+user89,medium,size
+user89,active,temperament
+user89,happy,temperament
+user89,female,gender
+user89,male,gender
+user89,animals,goodWith
+user89,animal welfare league,shelter
+user89,humane society,shelter
+user90,bird,species
+user90,cat,species
+user90,fish,species
+user90,rabbit,species
+user90,rodent,species
+user90,gerbil ,breed
+user90,hound,breed
+user90,lionhead,breed
+user90,lovebird,breed
+user90,maine coon,breed
+user90,non-sporting,breed
+user90,parrot,breed
+user90,saltwater,breed
+user90,sporting,breed
+user90,toy,breed
+user90,adult,age
+user90,senior,age
+user90,young,age
+user90,large,size
+user90,medium,size
+user90,small,size
+user90,friendly,temperament
+user90,happy,temperament
+user90,introverted,temperament
+user90,female,gender
+user90,animals,goodWith
+user90,best friends,shelter
+user91,bird,species
+user91,cat,species
+user91,dog,species
+user91,fish,species
+user91,angora,breed
+user91,freshwater,breed
+user91,gerbil ,breed
+user91,guinea pig,breed
+user91,hamster,breed
+user91,herding,breed
+user91,non-sporting,breed
+user91,parrot,breed
+user91,rat,breed
+user91,siamese,breed
+user91,working,breed
+user91,adult,age
+user91,senior,age
+user91,small,size
+user91,happy,temperament
+user91,vigilant,temperament
+user91,female,gender
+user91,kids,goodWith
+user91,best friends,shelter
+user92,cat,species
+user92,fish,species
+user92,rodent,species
+user92,lovebird,breed
+user92,non-sporting,breed
+user92,ragdoll,breed
+user92,siamese,breed
+user92,silver fox,breed
+user92,working,breed
+user92,senior,age
+user92,young,age
+user92,small,size
+user92,happy,temperament
+user92,introverted,temperament
+user92,male,gender
+user92,animals,goodWith
+user92,animal welfare league,shelter
+user92,best friends,shelter
+user93,bird,species
+user93,cat,species
+user93,rodent,species
+user93,maine coon,breed
+user93,rex,breed
+user93,siamese,breed
+user93,senior,age
+user93,young,age
+user93,large,size
+user93,medium,size
+user93,active,temperament
+user93,female,gender
+user93,male,gender
+user93,animals,goodWith
+user93,best friends,shelter
+user93,humane society,shelter
+user94,dog,species
+user94,freshwater,breed
+user94,guinea pig,breed
+user94,hamster,breed
+user94,herding,breed
+user94,lovebird,breed
+user94,maine coon,breed
+user94,non-sporting,breed
+user94,parakeet,breed
+user94,parrot,breed
+user94,persian,breed
+user94,rat,breed
+user94,saltwater,breed
+user94,siamese,breed
+user94,sporting,breed
+user94,toy,breed
+user94,young,age
+user94,medium,size
+user94,active,temperament
+user94,male,gender
+user94,kids,goodWith
+user94,animal welfare league,shelter
+user94,best friends,shelter
+user94,humane society,shelter
+user95,dog,species
+user95,rodent,species
+user95,gerbil ,breed
+user95,mouse ,breed
+user95,non-sporting,breed
+user95,persian,breed
+user95,ragdoll,breed
+user95,sporting,breed
+user95,adult,age
+user95,young,age
+user95,large,size
+user95,medium,size
+user95,small,size
+user95,active,temperament
+user95,happy,temperament
+user95,introverted,temperament
+user95,male,gender
+user95,animals,goodWith
+user95,kids,goodWith
+user95,humane society,shelter
+user96,cat,species
+user96,rodent,species
+user96,angora,breed
+user96,hound,breed
+user96,mouse ,breed
+user96,parrot,breed
+user96,persian,breed
+user96,rex,breed
+user96,terrier,breed
+user96,adult,age
+user96,small,size
+user96,active,temperament
+user96,happy,temperament
+user96,introverted,temperament
+user96,vigilant,temperament
+user96,female,gender
+user96,kids,goodWith
+user96,best friends,shelter
+user96,humane society,shelter
+user97,cat,species
+user97,fish,species
+user97,rodent,species
+user97,angora,breed
+user97,gerbil ,breed
+user97,guinea pig,breed
+user97,hamster,breed
+user97,lovebird,breed
+user97,mouse ,breed
+user97,parrot,breed
+user97,persian,breed
+user97,ragdoll,breed
+user97,rex,breed
+user97,silver fox,breed
+user97,terrier,breed
+user97,toy,breed
+user97,young,age
+user97,small,size
+user97,active,temperament
+user97,female,gender
+user97,male,gender
+user97,animals,goodWith
+user97,animal welfare league,shelter
+user97,best friends,shelter
+user98,cat,species
+user98,rodent,species
+user98,angora,breed
+user98,guinea pig,breed
+user98,non-sporting,breed
+user98,rat,breed
+user98,rex,breed
+user98,siamese,breed
+user98,sporting,breed
+user98,working,breed
+user98,young,age
+user98,large,size
+user98,happy,temperament
+user98,female,gender
+user98,animals,goodWith
+user98,animal welfare league,shelter
+user98,humane society,shelter
+user99,bird,species
+user99,fish,species
+user99,rabbit,species
+user99,hamster,breed
+user99,maine coon,breed
+user99,persian,breed
+user99,saltwater,breed
+user99,siamese,breed
+user99,sporting,breed
+user99,adult,age
+user99,young,age
+user99,large,size
+user99,friendly,temperament
+user99,happy,temperament
+user99,vigilant,temperament
+user99,male,gender
+user99,animals,goodWith
+user99,kids,goodWith
+user99,animal welfare league,shelter
+user99,best friends,shelter
+user100,bird,species
+user100,fish,species
+user100,rabbit,species
+user100,freshwater,breed
+user100,gerbil ,breed
+user100,hamster,breed
+user100,hound,breed
+user100,lovebird,breed
+user100,mouse ,breed
+user100,non-sporting,breed
+user100,parakeet,breed
+user100,parrot,breed
+user100,rat,breed
+user100,rex,breed
+user100,siamese,breed
+user100,silver fox,breed
+user100,sporting,breed
+user100,terrier,breed
+user100,working,breed
+user100,senior,age
+user100,young,age
+user100,small,size
+user100,introverted,temperament
+user100,female,gender
+user100,kids,goodWith
+user100,humane society,shelter

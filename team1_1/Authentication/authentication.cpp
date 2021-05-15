@@ -382,7 +382,7 @@ Owner Authentication::updateOwner(string username, string name, string phone, st
     //Step 2: update local owner object
     //alternatively... loadOwnerFromDB(username);
         authOwner->setName(name);
-        authOwner->setPhoneNumber(stoi(phone));
+        authOwner->setPhoneNumber(stol(phone));
         authOwner->setEmail(email);
         authOwner->setAddress(address);
         authOwner->setZipCode(zp);

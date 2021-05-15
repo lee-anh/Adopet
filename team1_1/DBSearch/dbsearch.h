@@ -72,7 +72,7 @@ public:
      * \brief runNewQuery
      * \return
      */
-    int runNewQuery();
+    int runNewQuery(bool dist);
 
     /*!
      * \brief createQuery, helper method to runNewQuery()
@@ -107,15 +107,12 @@ public:
     /*!
      * \brief randomShuffle the matchingPets
      */
-    void randomShuffle();
+    void randomShuffle(bool dist);
     /*!
      * \brief getConstraints, accessor method for constrains
      * \return
      */
     string getConstraints();
-
-    vector<Pet> distanceMatters();
-
 
 
 
@@ -152,6 +149,7 @@ private:
 
 
     vector<string> parseFile();
+    vector<string> zips;
 
 
     //vectors of keywords

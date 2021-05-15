@@ -32,7 +32,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page">
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -152,11 +152,6 @@
            <item>
             <property name="text">
              <string>Within 50 miles</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string/>
             </property>
            </item>
           </widget>
@@ -888,6 +883,9 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(161, 212, 255)</string>
+             </property>
              <property name="text">
               <string>Learn More</string>
              </property>
@@ -958,6 +956,9 @@
                <width>100</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(161, 212, 255)</string>
              </property>
              <property name="text">
               <string>Learn More</string>
@@ -1030,6 +1031,9 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(161, 212, 255)</string>
+             </property>
              <property name="text">
               <string>Learn More</string>
              </property>
@@ -1100,6 +1104,9 @@
                <width>100</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(161, 212, 255)</string>
              </property>
              <property name="text">
               <string>Learn More</string>
@@ -1172,6 +1179,9 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(161, 212, 255)</string>
+             </property>
              <property name="text">
               <string>Learn More</string>
              </property>
@@ -1242,6 +1252,9 @@
                <width>100</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(161, 212, 255)</string>
              </property>
              <property name="text">
               <string>Learn More</string>
