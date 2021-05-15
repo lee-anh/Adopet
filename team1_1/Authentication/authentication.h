@@ -108,7 +108,7 @@ public:
      * \param email
      * \return
      */
-    Owner* createOwner( string name, string address, int zip, int phone, string email);
+    Owner* createOwner( string name, string address, int zip, long phone, string email);
 
     /*!
      * \brief insertOwnerToDB, inserts owner to DB
