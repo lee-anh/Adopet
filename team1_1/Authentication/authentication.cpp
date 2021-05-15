@@ -276,14 +276,14 @@ void Authentication::loadOwnerFromDB(string username){
         qry.exec(qs);
 
         string name = "";
-        int num = 0;
+        long num = 0;
         string email = "";
         string address = "";
         int zip = 0;
 
         while(qry.next()){
             name = qry.value(0).toString().toStdString();
-            num = qry.value(1).toInt();
+            num = qry.value(1).toLongLong();
             email = qry.value(2).toString().toStdString();
             address = qry.value(3).toString().toStdString();
             zip = qry.value(4).toInt();
@@ -305,7 +305,7 @@ void Authentication::loadOwnerFromDB(string username){
  * \param email
  * \return
  */
-Owner* Authentication::createOwner(string name, string address, int zip, int phone, string email){
+Owner* Authentication::createOwner(string name, string address, int zip, long phone, string email){
     Owner *o = new Owner(dbName, name, address, zip, phone, email);
     authOwner = o;
     return o;
