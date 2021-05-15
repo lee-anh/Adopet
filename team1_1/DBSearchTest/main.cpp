@@ -49,7 +49,7 @@ class DBSearchTest : public ::testing::Test {
 TEST_F(DBSearchTest, SearchingTwoKeywords) {
     //DBSearch* dbs = new DBSearch("../../testDB.sqlite");
     dbs->search("rodent hamster");
-    dbs->runNewQuery();
+    dbs->runNewQuery(false);
     vector<Pet> result = dbs->getPetVec();
     EXPECT_EQ(dbs->getPetVecSize(), 4) << "Size should be 4";
     EXPECT_EQ(result.at(0).getName(), "Scarlett") << result.at(0).getName() << " should be Scarlett";
@@ -58,7 +58,7 @@ TEST_F(DBSearchTest, SearchingTwoKeywords) {
 TEST_F(DBSearchTest, SearchingOneKeyword) {
     //DBSearch* dbs = new DBSearch("../../testDB.sqlite");
     dbs->search("rodent");
-    dbs->runNewQuery();
+    dbs->runNewQuery(false);
     vector<Pet> result = dbs->getPetVec();
     EXPECT_EQ(dbs->getPetVecSize(), 14) << "Size should be 14";
     EXPECT_EQ(result.at(0).getName(), "Hazel") << result.at(0).getName() << " should be Hazel";
@@ -69,7 +69,7 @@ TEST_F(DBSearchTest, SearchingOneKeyword) {
 TEST_F(DBSearchTest, SearchingThreeKeywords){
     //DBSearch* dbs = new DBSearch("../../testDB.sqlite");
     dbs->search("rodent hamster female");
-    dbs->runNewQuery();
+    dbs->runNewQuery(false);
     vector<Pet> result = dbs->getPetVec();
     EXPECT_EQ(dbs->getPetVecSize(), 2) << "Size should be 2";
     EXPECT_EQ(result.at(0).getName(), "Scarlett") << result.at(0).getName() << " should be Scarlett";
@@ -79,7 +79,7 @@ TEST_F(DBSearchTest, SearchingThreeKeywords){
 TEST_F(DBSearchTest, SearchingNull){
     //DBSearch* dbs = new DBSearch("../../testDB.sqlite");
     dbs->search("dragon");
-    dbs->runNewQuery();
+    dbs->runNewQuery(false);
     vector<Pet> result = dbs->getPetVec();
     cout << "Size of vec: " << dbs->getPetVecSize() << endl;
     cout << "First member: " << result.at(0).getName() << endl;
@@ -89,7 +89,7 @@ TEST_F(DBSearchTest, SearchingNull){
 
 TEST_F(DBSearchTest, Shuffling){
     //DBSearch* dbs = new DBSearch("../../testDB.sqlite");
-    dbs->randomShuffle();
+    dbs->randomShuffle(false);
     vector<Pet> result = dbs->getPetVec();
     EXPECT_EQ(dbs->getPetVecSize(), 100) << "Size should be 100";
     EXPECT_NE(result.at(0).getName(), "Alex") << "First entry is no longer Alex. "

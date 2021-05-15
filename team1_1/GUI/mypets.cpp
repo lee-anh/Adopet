@@ -2,6 +2,10 @@
 #include "mypets.h"
 #include "ui_mypets.h"
 
+/*!
+ * \brief MyPets constructor
+ * \param parent
+ */
 MyPets::MyPets(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MyPets)
@@ -24,10 +28,17 @@ MyPets::~MyPets()
     delete ui;
 }
 
+/*!
+ * \brief setOwner sets the owner object class
+ * \param o owner
+ */
 void MyPets::setOwner(Owner *o){
     owner = o;
 }
 
+/*!
+ * \brief goToUploadPet page, fills the pets from the database
+ */
 void MyPets::goToUploadPet(){
     //go to uploadPet page
     ui->stackedWidget->setCurrentIndex(1);
@@ -37,7 +48,9 @@ void MyPets::goToUploadPet(){
 
 }
 
-
+/*!
+ * \brief goToMyPets page, fills pets from database, preset to gallery mode
+ */
 void MyPets::goToMyPets(){
 
 
@@ -48,6 +61,9 @@ void MyPets::goToMyPets(){
 
 }
 
+/*!
+ * \brief galleryMode set up for gallery mode, sets up page and pet gallery
+ */
 void MyPets::galleryMode(){
     ui->viewMode->setCurrentIndex(1);
     //go to myPets page (gallery)
@@ -63,7 +79,9 @@ void MyPets::galleryMode(){
     petgal.displayPets(0);
 }
 
-
+/*!
+ * \brief listMode set up for list mode, sets up page and pet gallery
+ */
 void MyPets::listMode(){
     ui->viewModea->setCurrentIndex(2);
     //go to myPets page (list)
@@ -79,113 +97,16 @@ void MyPets::listMode(){
     petgal.displayPets(0);
 
 }
-void MyPets::on_markAsAdopted_clicked()
-{
-    //QDialog
-     petAdopted.setModal(true);
-     petAdopted.exec();
 
-}
-
-void MyPets::backToMyPets(){
-
-    owner->removePet(currentPet);
-    goToMyPets();
-}
-
-void MyPets::on_singleUploadButton_clicked()
-{
-    //go to edit/upload pet
-    ui->stackedWidget->setCurrentIndex(2);
-    ui->markAsAdopted->setVisible(false);
-    ui->title->setText("Upload Pet");
-    mode = "upload";
-
-    clearAll();
-}
-
-void MyPets::on_saveChangesButton_clicked()
-{
-    //get user input
-    string petName = ui->name->text().toLower().toStdString();
-    string species = ui->speciesComboBox->currentText().toLower().toStdString();
-    string breed = ui->breedComboBox->currentText().toLower().toStdString();
-    string age = ui->ageComboBox->currentText().toLower().toStdString();
-    string size = ui->sizeComboBox->currentText().toLower().toStdString();
-    string temperament = ui->temperamentComboBox->currentText().toLower().toStdString();
-    string gender = ui->genderComboBox->currentText().toLower().toStdString();
-    string goodWith = ui->goodWithComboBox->currentText().toLower().toStdString();
-    string shelter = owner->getName();
-    string bio = ui->bioBox->toPlainText().toStdString(); //can be empty
-    string media = ui->multimediaBox->toPlainText().toStdString();
-    string vid = ui->videoFile->text().toStdString();
-
-    //TODO NEED TO PROCESS MEDIA
-    currentPet.preventDupMedia();
-    imageProcessor(media);
-    videoProcessor(vid);
-
-
-    if (species == "other"){
-        species = ui->speciesLine->text().toLower().toStdString();
-    }
-    if (breed == "other"){
-        breed = ui->breedLine->text().toLower().toStdString();
-    }
-    if(temperament == "other"){
-        temperament = ui->temperamentLine->text().toLower().toStdString();
-    }
-    if(goodWith == "other"){
-        goodWith = ui->goodWithLine->text().toLower().toStdString();
-    }
-
-
-    if(petName == "" || species == ""|| breed == "" || age == "" || size == "" || temperament== "" ||gender == "" || goodWith == "" ){
-        ui->errorBarUploadPet->setText("Missing field(s)");
-    } else {
-        if(mode == "upload"){
-            int petID = owner->getLastPetID() + 1;
-            Pet p = Pet(petID, petName, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
-            //add pet to the database
-            owner->uploadPet(p);
-            ui->errorBarUploadPet->clear();
-            ui->savedLine->setText("Pet uploaded successfully");
-            currentPet = p;
-            mode = "edit";
-        } else if (mode == "edit"){
-            ui->errorBarUploadPet->clear();
-            ui->savedLine->setText("Your changes have been saved");
-            Pet p = Pet(currentPet.getID(), petName, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
-            //update pet objects
-            petgal.updatePet(p);
-            owner->updatePet(p);
-        }
-    }
-
-
-}
-
-
-void MyPets::on_previous_clicked()
-{
-    petgal.previous();
-}
-
-void MyPets::on_next_clicked()
-{
-    petgal.next();
-}
-
-void MyPets::on_backButton_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(previousPage);
-}
-
-
+/*!
+ * \brief toEditPet, set up for edit pet page, load info for given pet
+ * \param p pet
+ */
 void MyPets::toEditPet(Pet p){
     clearAll();
     currentPet = p;
     ui->stackedWidget->setCurrentIndex(2);
+    ui->markAsAdopted->setVisible(true);
 
     ui->title->setText("Edit Pet");
     string name = p.getName();
@@ -215,6 +136,12 @@ void MyPets::toEditPet(Pet p){
 
 
 //display the pet info
+/*!
+ * \brief getIndex given an attribute, set the correct indexes for
+ * the combo boxes, loading info for edit pet
+ * \param attribute
+ * \param type
+ */
 void MyPets::getIndex(string a, string type){
     if(type == "species"){
         if(a == "dog"){
@@ -352,34 +279,10 @@ void MyPets::getIndex(string a, string type){
 
     }
 }
-void MyPets::on_link1_clicked()
-{
-    whichPet = 0;
-    toEditPet(petgal.getPet(0));
 
-}
-
-void MyPets::on_link2_clicked()
-{
-    whichPet = 1;
-    toEditPet(petgal.getPet(1));
-
-}
-
-void MyPets::on_link3_clicked()
-{
-    whichPet = 2;
-    toEditPet(petgal.getPet(2));
-
-}
-
-void MyPets::on_link4_clicked()
-{
-    whichPet = 3;
-    toEditPet(petgal.getPet(3));
-
-}
-
+/*!
+ * \brief clearAll clear all the relavent labels in the edit pet page
+ */
 void MyPets::clearAll(){
     ui->speciesComboBox->setCurrentIndex(0);
     ui->breedComboBox->setCurrentIndex(0);
@@ -403,6 +306,11 @@ void MyPets::clearAll(){
 
 }
 
+
+/*!
+ * \brief imageProcessor parse image filenames
+ * \param s input string
+ */
 void MyPets::imageProcessor(string s){
 
     vector<string> words = vector<string>();
@@ -437,7 +345,10 @@ void MyPets::imageProcessor(string s){
 
 }
 
-
+/*!
+ * \brief videoProcessor parse video filenames
+ * \param s input string
+ */
 void MyPets::videoProcessor(string s){
     if(s.size() > 3){
         int ext = s.size();
@@ -446,6 +357,160 @@ void MyPets::videoProcessor(string s){
         }
     }
 }
+
+/*!
+ * \brief on_markAsAdopted_clicked remove a pet from the database
+ */
+void MyPets::on_markAsAdopted_clicked()
+{
+    //QDialog
+     petAdopted.setModal(true);
+     petAdopted.exec();
+
+}
+
+/*!
+ * \brief backToMyPets go back to my pets page after removing a pet
+ */
+void MyPets::backToMyPets(){
+
+    owner->removePet(currentPet);
+    goToMyPets();
+}
+
+
+/*!
+ * \brief on_singleUploadButton_clicked got to upload one pet page
+ */
+void MyPets::on_singleUploadButton_clicked()
+{
+    //go to edit/upload pet
+    ui->stackedWidget->setCurrentIndex(2);
+    ui->markAsAdopted->setVisible(false);
+    ui->title->setText("Upload Pet");
+    mode = "upload";
+
+    clearAll();
+}
+
+
+/*!
+ * \brief on_saveChangesButton_clicked uploads changes to pet
+ */
+void MyPets::on_saveChangesButton_clicked()
+{
+    //get user input
+    string petName = ui->name->text().toLower().toStdString();
+    string species = ui->speciesComboBox->currentText().toLower().toStdString();
+    string breed = ui->breedComboBox->currentText().toLower().toStdString();
+    string age = ui->ageComboBox->currentText().toLower().toStdString();
+    string size = ui->sizeComboBox->currentText().toLower().toStdString();
+    string temperament = ui->temperamentComboBox->currentText().toLower().toStdString();
+    string gender = ui->genderComboBox->currentText().toLower().toStdString();
+    string goodWith = ui->goodWithComboBox->currentText().toLower().toStdString();
+    string shelter = owner->getName();
+    string bio = ui->bioBox->toPlainText().toStdString(); //can be empty
+    string media = ui->multimediaBox->toPlainText().toStdString();
+    string vid = ui->videoFile->text().toStdString();
+
+    //media
+    currentPet.preventDupMedia();
+    imageProcessor(media);
+    videoProcessor(vid);
+
+
+    if (species == "other"){
+        species = ui->speciesLine->text().toLower().toStdString();
+    }
+    if (breed == "other"){
+        breed = ui->breedLine->text().toLower().toStdString();
+    }
+    if(temperament == "other"){
+        temperament = ui->temperamentLine->text().toLower().toStdString();
+    }
+    if(goodWith == "other"){
+        goodWith = ui->goodWithLine->text().toLower().toStdString();
+    }
+
+
+    if(petName == "" || species == ""|| breed == "" || age == "" || size == "" || temperament== "" ||gender == "" || goodWith == "" ){
+        ui->errorBarUploadPet->setText("Missing field(s)");
+    } else {
+        if(mode == "upload"){
+            int petID = owner->getLastPetID() + 1;
+            Pet p = Pet(petID, petName, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+            //add pet to the database
+            currentPet = p;
+            currentPet.preventDupMedia();
+            imageProcessor(media);
+            videoProcessor(vid);
+
+            owner->uploadPet(currentPet);
+            ui->errorBarUploadPet->clear();
+            ui->savedLine->setText("Pet uploaded successfully");
+
+
+            mode = "edit";
+        } else if (mode == "edit"){
+            ui->errorBarUploadPet->clear();
+            ui->savedLine->setText("Your changes have been saved");
+            Pet p = Pet(currentPet.getID(), petName, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+            //update pet objects
+            petgal.updatePet(p);
+            owner->updatePet(p);
+        }
+    }
+
+
+}
+
+
+void MyPets::on_previous_clicked()
+{
+    petgal.previous();
+}
+
+void MyPets::on_next_clicked()
+{
+    petgal.next();
+}
+
+void MyPets::on_backButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(previousPage);
+}
+
+
+
+void MyPets::on_link1_clicked()
+{
+    whichPet = 0;
+    toEditPet(petgal.getPet(0));
+
+}
+
+void MyPets::on_link2_clicked()
+{
+    whichPet = 1;
+    toEditPet(petgal.getPet(1));
+
+}
+
+void MyPets::on_link3_clicked()
+{
+    whichPet = 2;
+    toEditPet(petgal.getPet(2));
+
+}
+
+void MyPets::on_link4_clicked()
+{
+    whichPet = 3;
+    toEditPet(petgal.getPet(3));
+
+}
+
+
 void MyPets::on_link1a_clicked()
 {
     clearAll();
@@ -519,7 +584,10 @@ void MyPets::on_nexta_clicked()
     petgal.next();
 }
 
-
+/*!
+ * \brief on_viewMode_currentIndexChanged change view mode, gallery view
+ * \param index
+ */
 void MyPets::on_viewMode_currentIndexChanged(int index)
 {
     //go to list mode
@@ -528,6 +596,11 @@ void MyPets::on_viewMode_currentIndexChanged(int index)
         listMode();
     }
 }
+
+/*!
+ * \brief on_viewModea_currentIndexChanged change view mode, list view
+ * \param index
+ */
 void MyPets::on_viewModea_currentIndexChanged(int index)
 {
     //go to gallery mode
@@ -605,6 +678,10 @@ void MyPets::on_videoFile_textChanged(const QString &arg1)
      ui->errorBarUploadPet->setText("You have unsaved changes");
 }
 
+
+/*!
+ * \brief on_toBulkUpload_clicked navigate to bulk upload page
+ */
 void MyPets::on_toBulkUpload_clicked()
 {
     ui->stackedWidget->setCurrentIndex(3);
@@ -612,6 +689,10 @@ void MyPets::on_toBulkUpload_clicked()
     ui->uploadMessage->clear();
 }
 
+
+/*!
+ * \brief on_pushButton_3_clicked pull up tag guide
+ */
 void MyPets::on_pushButton_3_clicked()
 {
     TagGuide tg;
@@ -619,6 +700,9 @@ void MyPets::on_pushButton_3_clicked()
     tg.exec();
 }
 
+/*!
+ * \brief on_bulkUpload_2_clicked upload the csv and send state message
+ */
 void MyPets::on_bulkUpload_2_clicked()
 {
 

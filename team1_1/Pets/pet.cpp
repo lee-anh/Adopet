@@ -311,7 +311,7 @@ void Pet::addImageFile(string file){
         query.exec(s);
 
         petsDB = QSqlDatabase();
-        QSqlDatabase::removeDatabase("mediaCxn");
+        QSqlDatabase::removeDatabase("shelterCxn");
 
 
     }
@@ -385,7 +385,8 @@ Owner Pet::getOwner(string dbName){
         while(query.next()){
             //string username = query.value(0).toString().toStdString();
             string name = query.value(1).toString().toStdString();
-            int phoneNumber = query.value(2).toInt();
+            long phoneNumber = query.value(2).toLongLong();
+            cout << phoneNumber <<endl;
             string emailAddress = query.value(3).toString().toStdString();
             string ownerAddress = query.value(4).toString().toStdString();
             int zip = query.value(5).toInt();

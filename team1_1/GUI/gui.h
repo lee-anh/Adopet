@@ -6,8 +6,8 @@
 #include <QtSql>
 #include <vector>
 
-//#include <QMediaPlayer>
-//#include <QVideoWidget>
+#include <QMediaPlayer>
+#include <QVideoWidget>
 
 //classes that we need
 #include "../DBSearch/dbsearch.h"
@@ -27,7 +27,7 @@
 #include "mypets.h"
 #include "quiz.h"
 #include "findmatchforpets.h"
-//#include "videoplayer.h"
+#include "videoplayer.h"
 #include "zip.h"
 
 //QDialogs
@@ -78,7 +78,7 @@ private:
     Quiz qz;
     FindMatchForPets fmForPets;
     Zip zp;
-    //VideoPlayer *vp;
+    VideoPlayer *vp;
 
     //QDialogs
     Logout lg;
@@ -258,7 +258,11 @@ private slots:
      */
     void on_navMyPreferences_clicked();
 
-
+    /*!
+     * \brief on_preferenceFromHome_clicked to my preferences page
+     * for Adopters
+     */
+    void on_preferenceFromHome_clicked();
 
     /*!
      * \brief on_navHelpButton_clicked to help page
@@ -285,11 +289,28 @@ private slots:
      */
     void on_myFavoritesFromHome_clicked();
 
+
+    //common navigation elements
     /*!
-     * \brief on_preferenceFromHome_clicked to my preferences page
-     * for Adopters
+     * \brief on_backButton_clicked go back to previous page
      */
-    void on_preferenceFromHome_clicked();
+    void on_backButton_clicked();
+
+    /*!
+     * \brief on_loginButton_clicked login to system
+     */
+    void on_loginButton_clicked();
+
+    /*!
+     * \brief on_password_returnPressed login to system
+     */
+    void on_password_returnPressed();
+
+    /*!
+     * \brief on_createAccountButton_clicked to create account page
+     */
+    void on_createAccountButton_clicked();
+
 
     //owner navigation
         //nav bar
@@ -323,40 +344,21 @@ private slots:
      * for Owners
      */
     void on_ownerFindMatch_clicked();
-
+    /*!
+     * \brief on_ownerHome_clicked to home page
+     * for Owners
+     */
+    void on_ownerHome_clicked();
     /*!
      * \brief on_ownerHelp_clicked to help page
      * for Owners
      */
     void on_ownerHelp_clicked();
 
-    /*!
-     * \brief on_ownerHome_clicked to home page
-     * for Owners
-     */
-    void on_ownerHome_clicked();
 
 
-    //common navigation elements
-    /*!
-     * \brief on_backButton_clicked go back to previous page
-     */
-    void on_backButton_clicked();
 
-    /*!
-     * \brief on_loginButton_clicked login to system
-     */
-    void on_loginButton_clicked();
 
-    /*!
-     * \brief on_password_returnPressed login to system
-     */
-    void on_password_returnPressed();
-
-    /*!
-     * \brief on_createAccountButton_clicked to create account page
-     */
-    void on_createAccountButton_clicked();
 
 
 

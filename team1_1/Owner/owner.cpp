@@ -9,7 +9,7 @@ Owner::Owner(){
     lastPetID = getLastPetID();
 }
 
-Owner::Owner(string n, string a, int zip, int pN, string e){
+Owner::Owner(string n, string a, int zip, long pN, string e){
     name = n;
     address = a;
     zipCode = zip;
@@ -20,7 +20,7 @@ Owner::Owner(string n, string a, int zip, int pN, string e){
     //lastPetID = getLastPetID();
 }
 
-Owner::Owner(string database, string n, string a, int zip, int pN, string e){
+Owner::Owner(string database, string n, string a, int zip, long pN, string e){
     dbName = database;
     name = n;
     address = a;
@@ -111,7 +111,7 @@ int Owner::getZipCode(){
  * Sets the phone number of the owner
  * @param p The phone number of the owner
 */
-void Owner::setPhoneNumber(int p){
+void Owner::setPhoneNumber(long p){
     phoneNumber = p;
 }
 
@@ -119,7 +119,7 @@ void Owner::setPhoneNumber(int p){
  * Gets the phone number of the owner, for contact information
  * @return The phone number of the owner
 */
-int Owner::getPhoneNumber(){
+long Owner::getPhoneNumber(){
     return phoneNumber;
 }
 
@@ -307,7 +307,8 @@ void Owner::removePet(Pet p){
 
 Pet Owner::makePet(QStringList petData){
     //checking if the passed qstringlist contains the correct amount of fields
-    if(petData.size() != 10) {
+
+    if(petData.size() != 11) {
         cout << "File content is not formatted correctly! A certain pet field is missing" << endl;
         return Pet();
     }
@@ -323,8 +324,42 @@ Pet Owner::makePet(QStringList petData){
         string goodWith = petData.at(7).toStdString();
         string shelter = petData.at(8).toStdString();
         string bio = petData.at(9).toStdString();
+        string mediaFiles = petData.at(10).toStdString();
+
 
         Pet p = Pet( name, species, breed, age, size, temperament, gender, goodWith, shelter, bio);
+        vector<string> media = vector<string>();
+        string word = "";
+        for(int i = 0; i < (int)  mediaFiles.size(); i++){
+            if(mediaFiles.at(i) == ' '){
+                if(word.size() > 1){
+                    media.push_back(word);
+                }
+                word = ""; //clear the word
+            } else {
+                word = word + mediaFiles[i];
+            }
+
+        }
+        if(mediaFiles.size() > 1){
+            media.push_back(word);
+        }
+
+        //add photos and vidoes
+        for(int i = 0; i < (int) media.size(); i++){
+            cout << media.at(i) << endl;
+            int ext = media.at(i).size();
+            if(media.at(i).size() > 4){
+                if(media.at(i).at(ext-4) == 'j'&& media.at(i).at(ext-3) == 'p'&& media.at(i).at(ext-2) == 'e'&& media.at(i).at(ext-1) == 'g'){
+                    p.addImageFile(media.at(i));
+                } else if (media.at(i).at(ext-3) == 'm' && media.at(i).at(ext-2) == 'p' && media.at(i).at(ext-1) =='4'){
+                    p.addVideoFile(media.at(i));
+                }
+            }
+
+
+        }
+
         p.setID(lastPetID + 1);
         lastPetID += 1;
 
@@ -349,11 +384,12 @@ bool Owner::uploadPets(string filename){
     while(!in.atEnd()) {
 
         QString line = in.readLine();
-        QStringList petData = line.split(","); //loren ipsum, bird1.jpeg bird2.jpeg
+        QStringList petData = line.split(",");
+
         Pet p = makePet(petData);
         if(p.getName() != "") {
             if(counter != 0){ //skip the first line
-                uploadPet(makePet(petData));
+                uploadPet(p);
             }
         } else {
             return false;

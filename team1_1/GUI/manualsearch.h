@@ -17,14 +17,28 @@ namespace Ui {
 class ManualSearch;
 }
 
+/*!
+ * \brief The ManualSearch class allows adopters to search for pets
+ * using user specified parameters
+ */
 class ManualSearch : public QWidget
 {
     Q_OBJECT
 
 public:
+    /*!
+     * \brief ManualSearch constructor
+     * \param parent
+     */
     explicit ManualSearch(QWidget *parent = nullptr);
     ~ManualSearch();
 
+    /*!
+     * \brief setSavedList sets up instance variables
+     * basically needs to be called when a constructor is called
+     * \param s
+     * \param zipcode
+     */
     void setSavedList(SavedList s, string zipcode);
 
 private:
@@ -33,22 +47,89 @@ private:
     PetGallery petgal;
     SavedList sl;
     Zip zp;
+
+    /*!
+     * \brief galleryMode set up for gallery mode
+     */
     void galleryMode();
+
+    /*!
+     * \brief listMode set up for list mode
+     */
     void listMode();
 
     string mode;
     string zip;
 
+    /*!
+     * \brief checkBoxSearch search used by all the checkboxes
+     * \param wordToSearch attribute
+     * \param category of wordToSearch
+     * \param arg1 0 = remove, 2 = add
+     */
     void checkBoxSearch(string wordToSearch, string category, int arg1);
+
+    /*!
+     * \brief clearCheckBoxes clear all the checkboxes
+     */
     void clearCheckBoxes();
+
+    /*!
+     * \brief loadSaveButtons load the save buttons
+     * \param saveButtons list of saveButtons
+     */
     void loadSaveButtons(vector<QPushButton *> saveButtons);
+
+    /*!
+     * \brief saveButton handles different saveButton changes
+     * \param saveButton the button object
+     * \param index which pet
+     */
     void saveButton(QPushButton* saveButton, int index);
-    void stateChanged(int viewMode, int distance);
+
+    /*!
+     * \brief APICall call the api
+     * \param distance in miles
+     */
     void APICall(string distance);
 
 private slots:
 
+    /*!
+     * \brief finishedAPICall process the api's output
+     */
     void finishedAPICall();
+
+    //search
+    /*!
+     * \brief on_searchButton_clicked query the database with a custom string
+     */
+    void on_searchButton_clicked();
+
+    /*!
+     * \brief on_searchBar_returnPressed acts the same as search button clicked
+     */
+    void on_searchBar_returnPressed();
+
+    /*!
+     * \brief on_surpriseMe_clicked randomizes the results
+     */
+    void on_surpriseMe_clicked();
+
+    /*!
+     * \brief on_viewModeComboBox_currentIndexChanged
+     * change the view mode
+     * \param index 1 = gallery, 2 = list
+     */
+    void on_viewModeComboBox_currentIndexChanged(int index);
+
+    /*!
+     * \brief on_location_currentIndexChanged
+     * change the location mode
+     * \param index 1 = 20 miles,  2= 50 miles
+     */
+    void on_location_currentIndexChanged(int index);
+
     //CHECKBOXES
     //species
     void on_dogCheckBox_stateChanged(int arg1);
@@ -94,9 +175,6 @@ private slots:
     void on_previous_clicked();
     void on_next_clicked();
 
-    //search
-    void on_searchButton_clicked();
-
     //links
     void on_link1_clicked();
     void on_link2_clicked();
@@ -108,16 +186,12 @@ private slots:
 
 
 
+    //list mode
 
-    void on_surpriseMe_clicked();
 
-    void on_viewModeComboBox_currentIndexChanged(int index);
-    void on_location_currentIndexChanged(int index);
     void on_nexta_clicked();
-
     void on_previousa_clicked();
 
-    //list mode
     void on_link1a_clicked();
     void on_link2a_clicked();
     void on_link3a_clicked();
@@ -133,7 +207,7 @@ private slots:
     void on_save6a_clicked();
 
 
-    void on_searchBar_returnPressed();
+
 
 signals:
     void learnMoreClicked(Pet sendPet);

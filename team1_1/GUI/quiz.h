@@ -8,18 +8,73 @@ namespace Ui {
 class Quiz;
 }
 
+/*!
+ * \brief The Quiz class is the gui for the preferences quzi
+ */
 class Quiz : public QWidget
 {
     Q_OBJECT
 
 public:
+    /*!
+     * \brief Quiz Constructor
+     * \param parent
+     */
     explicit Quiz(QWidget *parent = nullptr);
     ~Quiz();
-    void displayQuiz();
+
+    /*!
+     * \brief startQuiz gui setup for quiz elements
+     */
     void startQuiz();
 
+    /*!
+     * \brief displayQuiz manages the buttons for quiz navigation
+     */
+    void displayQuiz();
+
+private:
+    Ui::Quiz *ui;
+    int currentPageNum;
+    int lastPage;
+    Preferences *pref;
+
+    QWidget *dog;
+    QWidget *cat;
+    QWidget *rabbit;
+    QWidget *rodent;
+    QWidget *fish;
+    QWidget *bird;
+
+    /*!
+     * \brief speciesCheckbox
+     * \param s the species name
+     * \param arg1 0 = unchecked, 2 = checked
+     */
+    void speciesCheckbox(string s, int arg1);
+
+    /*!
+     * \brief breedsCheckbox
+     * \param s the breed name
+     * \param arg1 0 = unchecked, 2 = checked
+     */
+    void breedsCheckbox(string s, int arg1);
+
+    /*!
+     * \brief breedRadio
+     * \param s breed
+     * \param b
+     */
+    void breedRadio(string s, bool b);
 private slots:
+    /*!
+     * \brief on_nextpage_clicked advance the quiz
+     */
     void on_nextpage_clicked();
+
+    /*!
+     * \brief on_previouspage_clicked go back on the quiz
+     */
     void on_previouspage_clicked();
 
     void on_finishquiz_clicked();
@@ -142,22 +197,7 @@ private slots:
 signals:
     void backToPreference(Preferences p);
 
-private:
-    Ui::Quiz *ui;
-    int currentPageNum;
-    int lastPage;
-    Preferences *pref;
 
-    QWidget *dog;
-    QWidget *cat;
-    QWidget *rabbit;
-    QWidget *rodent;
-    QWidget *fish;
-    QWidget *bird;
-
-    void speciesCheckbox(string s, int arg1);
-    void breedsCheckbox(string s, int arg1);
-    void breedRadio(string s, bool b);
 };
 
 #endif // QUIZ_H
