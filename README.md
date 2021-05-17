@@ -22,7 +22,7 @@ We also used ZipCodeApi's Zip Codes in Radius API to determine shelters near a c
 Finally, please note that when you are running the program you might get "duplicate connection" warnings from the QSqlPrivateDatabase. These are simply warnings and do not affect the performance of the system in anyway. 
 
 <h2> <b> Testing Adopet </b> </h2>
-We wrote the tests using gtest, Google's test suite for C++. You must have gtest installed on your machine to run the tests. You will also need lcov. 
+We wrote the tests using gtest, Google's test suite for C++. You must have gtest installed on your machine to run the tests. The tests are written in their own subprojects. To run the test coverage, follow this tutorial: https://kelvinsp.medium.com/generating-code-coverage-with-qt-5-and-gcov-on-mac-os-4999857f4676
 
 
 <h2> <b> Key accounts </b> </h2>
