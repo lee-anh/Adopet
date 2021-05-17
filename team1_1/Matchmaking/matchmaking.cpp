@@ -5,11 +5,6 @@ Matchmaking::Matchmaking(){
     dbName = "../../projectDB.sqlite";
 }
 
-Matchmaking::Matchmaking(string n){
-    username = n;
-    dbName = "../../projectDB.sqlite";
-    openDB();
-}
 
 Matchmaking::Matchmaking(string path, string n){
     username = n;
@@ -496,18 +491,19 @@ vector<string> Matchmaking::parseFile(){
 
 /*
  * Prints out the pet result - sorted vector of animals based on score
-*/
+
 void Matchmaking::showPetResults(){
     for(int i = 0; i < (int) petResults.size(); i++){
          cout << "Pet Name: " << petResults[i].first.getName() << ", Score: " << petResults[i].second << endl;
     }
 }
+*/
 
 /*
  * Prints out the result - sorted vector of animals based on score.
  * Takes in a specified amount of results to show each time.
  * @param amount Number of items to show each time
-*/
+
 void Matchmaking::showPetResults(int amount){
     int resultSize = (int) petResults.size();
     int shownAmount = 0;
@@ -522,21 +518,23 @@ void Matchmaking::showPetResults(int amount){
         else break;
     }
 }
+*/
 
 /*
  * Prints out the adopter result - sorted vector of animals based on score
-*/
+
 void Matchmaking::showAdopterResults(){
     for(int i = 0; i < (int) adopterResults.size(); i++){
          cout << "Adopter Name: " << adopterResults[i].first.getUsername() << ", Score: " << adopterResults[i].second << endl;
     }
 }
+*/
 
 /*
  * Prints out the result - sorted vector of adopters based on their score.
  * Takes in a specified amount of results to show each time.
  * @param amount Number of items to show each time
-*/
+
 void Matchmaking::showAdopterResults(int amount){
     int resultSize = (int) adopterResults.size();
     int shownAmount = 0;
@@ -552,3 +550,4 @@ void Matchmaking::showAdopterResults(int amount){
         else break;
     }
 }
+*/

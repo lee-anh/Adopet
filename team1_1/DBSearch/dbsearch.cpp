@@ -30,13 +30,13 @@ DBSearch::DBSearch(string dbFilepath){
 /*!
  * \brief DBSearch experimental constructor, not recommended
  * \param d
- */
+
 DBSearch::DBSearch(QSqlDatabase d){
     dbSearchdb = d;
     fillStaticVecs();
     fillVecsFromDB();
 }
-
+*/
 
 /*!
  * \brief DBSearch destructor, closes database
@@ -373,13 +373,13 @@ int DBSearch::getPetVecSize(){
 
 /*!
  * \brief printMatchingVec, prints matches for testing
- */
+
 void DBSearch::printMatchingVec(){
     for(int i = 0; i < (int) matchingPets.size(); i++){
         cout << matchingPets.at(i).getName() << endl;
     }
 }
-
+ */
 
 /*!
  * \brief randomShuffle the matchingPets vector

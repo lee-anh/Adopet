@@ -25,7 +25,7 @@ protected:
         // Code here will be called immediately after the constructor (right
         // before each test).
         owner = new Owner("../../testDB.sqlite", "generic_owner", "111 Quad Drive", 18042, 123, "abc@xyz");
-        pet = new Pet("name1", "species1", "breed1", "age1", "size1", "temp1", "gender1", "gw1", "sh1", "bio1");
+        pet = new Pet(101,"name1", "species1", "breed1", "age1", "size1", "temp1", "gender1", "gw1", "sh1", "bio1");
         petsDB = QSqlDatabase::addDatabase("QSQLITE", "ownterTestCxn");
         string fullName = "../../testDB.sqlite";
         petsDB.setDatabaseName(QString::fromStdString(fullName));
@@ -100,6 +100,50 @@ TEST_F(OwnerTests, uploadPet){
         }
     }
 }
+
+TEST_F(OwnerTests, removePet){
+    owner->uploadPet(*pet);
+    QSqlQuery qry = QSqlQuery(petsDB);
+    QString qrstring = "SELECT * FROM pets WHERE id = 101;";
+    owner->removePet(*pet);
+    if(petsDB.open()){
+        qry.exec(qrstring);
+        while(qry.next()){
+            QString res = qry.value(1).toString();
+            if(res == "name1") FAIL();
+        }
+    }
+}
+
+TEST_F(OwnerTests, updatePet){
+    owner->uploadPet(*pet);
+    pet->setName("Booyah");
+    QSqlQuery qry = QSqlQuery(petsDB);
+    QString qrstring = "SELECT * FROM pets WHERE id = 101;";
+    owner->updatePet(*pet);
+    if(petsDB.open()){
+        qry.exec(qrstring);
+        while(qry.next()){
+            QString res = qry.value(1).toString();
+            if(res == "Booyah") SUCCEED();
+        }
+    }
+}
+
+TEST_F(OwnerTests, uploadBulk){
+    owner->uploadPets("../../testUpload.txt");
+    QSqlQuery qry = QSqlQuery(petsDB);
+    QString qrstring = "SELECT * FROM pets WHERE id = 101;";
+    if(petsDB.open()){
+        qry.exec(qrstring);
+        while(qry.next()){
+            QString res = qry.value(1).toString();
+            if(res != "Booyah") FAIL();
+        }
+    }
+}
+
+
 
 TEST_F(OwnerTests, constructors){
     Owner* o1 = new Owner("John Doe", "111 Quad Drive", 12345, 1234567890, "example@gmail.com");
