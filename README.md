@@ -56,18 +56,19 @@ All of these adopter accounts have the same functionalities, they are just in di
 
 <h3>Key Owner Accounts:</h3>
 
-*San Jose Shelter:*
+
+*Easton Shelters:*
 
 username: shelter1
 
 password: pwd1
 
-
-*Easton Shelters:*
-
 username: shelter2
 
 password: pwd2
+
+
+*San Jose Shelter:*
 
 username: shelter3
 
