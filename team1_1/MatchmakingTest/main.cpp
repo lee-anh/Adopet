@@ -194,9 +194,8 @@ TEST_F(MatchmakingTest, adopterMatch){
     EXPECT_EQ(result.at(0).first.getID(), 47) << "Should be petID 47";
 }
 
+
 int main(int argc, char **argv){
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
-
-

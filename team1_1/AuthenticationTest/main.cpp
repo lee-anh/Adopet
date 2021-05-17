@@ -66,6 +66,9 @@ class AuthTest : public ::testing::Test {
             qs = "DELETE FROM accounts WHERE username=\"user12\";" ;
             qry.exec(qs);
             cout << "Deleted user 12" << endl;
+            qs = "DELETE FROM adopters WHERE username=\"user11\";" ;
+            qry.exec(qs);
+            qs = "DELETE FROM owners WHERE username=\"user12\";" ;
         }
      }
 
@@ -139,6 +142,59 @@ TEST_F(AuthTest, updateOwner){
     Owner* adptr = auth.getAuthenticatedOwner();
     EXPECT_EQ(adptr->getName(),"Cuong");
 }
+
+TEST_F(AuthTest, insertOwner){
+    auth.insertOwnerToDB("user12","Evan","123","abc@xyz","111 Quad","18042");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE","authTestConnection");
+    string fullName = "../../testDB.sqlite";
+    db.setDatabaseName(QString::fromStdString(fullName));
+    if(!db.open()){
+        std::cerr << "Database does not open -- "
+                  << db.lastError().text().toStdString()
+                  << std::endl;
+
+        std::cerr << "  File -- " << fullName << std::endl;
+        exit(0);
+    } else {
+        std::cerr << "Opened database successfully (from Authentication class)\n";
+    }
+
+    if(db.open()){
+        QSqlQuery qry = QSqlQuery(db);
+        QString qs = "SELECT FROM owner WHERE username=\"user12\";" ;
+        qry.exec(qs);
+        while(qry.next()){
+            EXPECT_EQ(qry.value(1).toString(), "Evan");
+        }
+    }
+}
+
+TEST_F(AuthTest, insertAdpt){
+    auth.insertAdopterToDB("user11","Eve","Vu","abc@xyz","18042");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE","authTestConnection");
+    string fullName = "../../testDB.sqlite";
+    db.setDatabaseName(QString::fromStdString(fullName));
+    if(!db.open()){
+        std::cerr << "Database does not open -- "
+                  << db.lastError().text().toStdString()
+                  << std::endl;
+
+        std::cerr << "  File -- " << fullName << std::endl;
+        exit(0);
+    } else {
+        std::cerr << "Opened database successfully (from Authentication class)\n";
+    }
+
+    if(db.open()){
+        QSqlQuery qry = QSqlQuery(db);
+        QString qs = "SELECT FROM owner WHERE username=\"user11\";" ;
+        qry.exec(qs);
+        while(qry.next()){
+            EXPECT_EQ(qry.value(1).toString(), "Eve");
+        }
+    }
+}
+
 
 
 int main(int argc, char **argv){

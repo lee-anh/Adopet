@@ -38,6 +38,7 @@ class DBSearchTest : public ::testing::Test {
      }
 
      virtual void TearDown() override{
+        delete dbs;
      }
 
      // Objects declared here can be used by all tests in the test case for Foo.
@@ -94,6 +95,17 @@ TEST_F(DBSearchTest, Shuffling){
     EXPECT_EQ(dbs->getPetVecSize(), 100) << "Size should be 100";
     EXPECT_NE(result.at(0).getName(), "Alex") << "First entry is no longer Alex. "
                                                  "If fail runs again since there is a 1% chance shuffling keeps Alex at top.";
+}
+
+TEST_F(DBSearchTest, RemoveFrmAtt){
+    dbs->search("rodent hamster female");
+    dbs->removeFromAttributes("female","gender");
+    string cons = dbs->getConstraints();
+    EXPECT_EQ(cons, "rodent, hamster,") << endl;
+    dbs->runNewQuery(false);
+    vector<Pet> result = dbs->getPetVec();
+    EXPECT_EQ(dbs->getPetVecSize(), 4) << "Size should be 4" << endl;
+    EXPECT_EQ(result.at(0).getName(), "Scarlett") << result.at(0).getName() << " should be Scarlett";
 }
 
 
