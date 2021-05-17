@@ -8,9 +8,9 @@ This project runs on QT Creator and is coded primarily in C++. To run the progra
 
 <h3>Operating System</h3>
 
-If you are running Adopet on Linux (ie. lab server) or Windows, Adopet won't have video playing capabilities. Please use the latest version of Adopet that is tagged as Adopet for Linux and Windows. Please note that the GUI formatting may look a little bit off because the GUI was designed on a Mac. 
+If you are running Adopet on Linux or Windows, Adopet won't have video playing capabilities. Please use the latest version of Adopet that is tagged as Adopet for Linux and Windows. Please note that the GUI formatting may look a little bit off because the GUI was designed on a Mac. 
 
-If you are running Adopet on Mac with the latest version of QT, then you'll be able to play the videos. Please use the latest version of Adopet that is tagged as Adopet for Mac. Adopet's GUI actually looks the best on Mac as it was designed on a Mac. 
+If you are running Adopet on Mac with the latest version of QT, then you'll be able to play the videos. Because of a bug in QT, you will have to give an absolute filepath for the videos. Change the string called videoFile to fit your system (it should be around line 156 of gui.cpp in the GUI subproject). Please use the latest version of Adopet that is tagged as Adopet for Mac. Adopet's GUI actually looks the best on Mac as it was designed on a Mac. 
 
 <h3>Database Setup</h3>
 
@@ -75,6 +75,11 @@ password: pwd3
 
 All of these owner accounts have the same functionalities, they are just in different locations. Feel free to change their zipcodes to other valid zipcodes (my info)  
 
+*IMPORTANT*
+
+When uploading pets by bulk, make sure you place the csv in the csv folder of this project before trying to upload it. For a demo bulk upload csv, use demo.csv.
+
+When media (pictures and videos for pets) make sure to only use jpeg or mp4. Any pictures you intend to use should be placed in the pictures folder of this project, and any videos should be placed in the vidoes folder. For test pictures, use any animal from bird, cat, dog, fish, rabbit, or rodent + any number 1 - 8 (inclusive) + jpeg. Ex. dog7.jpeg, rodent3.jpeg. For test videos use any animal from bird, cat, dog, fish, rabbit, or rodent + either 1 or 2 + mp4. Ex. bird1.mp4, cat2.mp4. The test picture and video files are already in their respective folders.
 
 
 
