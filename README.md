@@ -1,6 +1,6 @@
 # Adopet
 
-Adopet is a pet searching desktop application that helps adopters find a pet and helps owners find adopters for their pets.
+Adopet is a fantastic pet searching desktop application that helps adopters find a pet and helps owners find adopters for their pets.
 
 <h2> <b> Running Adopet </b> </h2>
 
