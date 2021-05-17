@@ -26,45 +26,55 @@ We wrote the tests using gtest, Google's test suite for C++. You must have gtest
 
 
 <h2> <b> Key accounts </b> </h2>
-Currently, Adopet is filled with dummy data. We have 3 dummy owners (shelters). One is located in San Jose, CA and two are located in Easton, PA. 
+Currently, Adopet is filled with dummy data. We have 100 pets and 100 adopters loaded into the system. We have 3 dummy owners (shelters). One is located in San Jose, CA and two are located in Easton, PA.
 
-Feel free to make other owner (don't forget to upload some pets) and adopter accounts!
-  
-<h3>Key Owner Accounts:</h3>
-
-*San Jose Shelter:*
-
-username: shelter1
-password: pwd1
-
-*Easton Shelters:*
-
-username: shelter2
-password: pwd2
-
-username:shelter3
-password:pwd3
-
-All of these owner accounts have the same functionalities, they are just in different locations. Feel free to change their zipcodes to other valid zipcodes (my info)  
+Feel free to make other adopter and owner (don't forget to upload some pets)!
 
 <h3>Key Adopter Accounts:</h3>
 
 *Adopter from San Jose:*
 
 username: user1
+
 password: password1
+
 
 *Adopter from Bethlehem: *
 
 username:user2
+
 password: password2
+
 
 *Adopter from Easton:*
 
 username: user3
+
 password: password3
 
 All of these adopter accounts have the same functionalities, they are just in different locations. Feel free to change their zipcodes to to other valid zipcodes (my info)
+
+<h3>Key Owner Accounts:</h3>
+
+*San Jose Shelter:*
+
+username: shelter1
+
+password: pwd1
+
+
+*Easton Shelters:*
+
+username: shelter2
+
+password: pwd2
+
+username:shelter3
+
+password:pwd3
+
+All of these owner accounts have the same functionalities, they are just in different locations. Feel free to change their zipcodes to other valid zipcodes (my info)  
+
 
 
 
