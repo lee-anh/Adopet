@@ -1,2 +1,0 @@
-Genos,dog,working,adult,large,friendly,male,kids,best friends,Genos is really powerful!,dog1.jpeg
-Gillian,cat,maine coon,young,small,happy,female,animals,best friends,Gillian is a really happy puppy who loves to run!,cat1.jpeg cat2.jpeg cat1.mp4
