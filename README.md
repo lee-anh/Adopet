@@ -10,7 +10,7 @@ This project runs on QT Creator and is coded primarily in C++. To run the progra
 
 If you are running Adopet on Linux or Windows, Adopet won't have video playing capabilities. Please use the latest version of Adopet that is tagged as Adopet for Linux and Windows. Please note that the GUI formatting may look a little bit off because the GUI was designed on a Mac. 
 
-If you are running Adopet on Mac with the latest version of QT, then you'll be able to play the videos. Because of a bug in QT, you will have to give an absolute filepath for the videos. Change the string called videoFile to fit your system (it should be around line 156 of gui.cpp in the GUI subproject). Please use the latest version of Adopet that is tagged as Adopet for Mac. Adopet's GUI actually looks the best on Mac as it was designed on a Mac. 
+If you are running Adopet on Mac with the latest version of QT, then you'll be able to play the videos. You will have to uncomment videoplayer.cpp, videoplayer.h, lines 151 to 163 in gui.cpp, and lines 10 and 11 in gui.pro. Because of a bug in QT, you will have to give an absolute filepath for the videos. Change the string called videoFile to fit your system (it should be around line 156 of gui.cpp in the GUI subproject). Please use the latest version of Adopet that is tagged as Adopet for Mac. Adopet's GUI actually looks the best on Mac as it was designed on a Mac. 
 
 <h3>Database Setup</h3>
 
