@@ -39,7 +39,7 @@ username: user1
 password: password1
 
 
-*Adopter from Bethlehem: *
+*Adopter from Bethlehem:*
 
 username:user2
 
@@ -69,9 +69,9 @@ username: shelter2
 
 password: pwd2
 
-username:shelter3
+username: shelter3
 
-password:pwd3
+password: pwd3
 
 All of these owner accounts have the same functionalities, they are just in different locations. Feel free to change their zipcodes to other valid zipcodes (my info)  
 
